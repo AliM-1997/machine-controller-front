@@ -1,8 +1,15 @@
-.header {
+.header-container {
   padding: 30px;
-  gap: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .h-icon {
   gap: 30px;
+}
+
+.header-left {
+  gap: 70px;
 }

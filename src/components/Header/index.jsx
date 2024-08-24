@@ -9,16 +9,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../../base/Icon";
 
-const Header = ({ pagename }) => {
+const Header = ({ pageName }) => {
   return (
-    <div className="flex center header white-bg">
+    <div className=" header-container white-bg">
       <div>
-        <Input width="300px" leftIcon={faSearch} rightIcon={faList} />
+        <h1>{pageName}</h1>
       </div>
-
-      <div className="flex center h-icon">
-        <Icon icon={faBell} />
-        <Icon icon={faUser} />
+      <div className="flex header-left">
+        <Input width="300px" leftIcon={faSearch} rightIcon={faList} />
+        <div className="flex center h-icon">
+          <Icon icon={faBell} />
+          <Icon icon={faUser} />
+        </div>
       </div>
     </div>
   );
