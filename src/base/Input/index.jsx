@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Icon from "../Icon";
 
 const Input = ({
   placeHolder = "search ...",
@@ -22,7 +23,7 @@ const Input = ({
       style={{ width: width }}
       onClick={onClick}
     >
-      {leftIcon && <FontAwesomeIcon icon={leftIcon} />}
+      <Icon icon={leftIcon} />
       <input
         type={type}
         className={` input-field ${textColorClass}`}
@@ -30,7 +31,7 @@ const Input = ({
         value={value}
         onChange={onChange}
       />
-      {rightIcon && <FontAwesomeIcon icon={rightIcon} />}
+      <Icon icon={rightIcon} />
     </div>
   );
 };
