@@ -1,7 +1,11 @@
 import React from "react";
 import "./style.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Input = ({
   placeHolder = "search ...",
+  leftIcon = null,
+  rightIcon = null,
   backgroundColor = "white",
   textColor = "black",
   type = "text",
@@ -18,6 +22,7 @@ const Input = ({
       style={{ width: width }}
       onClick={onClick}
     >
+      {leftIcon && <FontAwesomeIcon icon={leftIcon} />}
       <input
         type={type}
         className={` input-field ${textColorClass}`}
@@ -25,6 +30,7 @@ const Input = ({
         value={value}
         onChange={onChange}
       />
+      {rightIcon && <FontAwesomeIcon icon={rightIcon} />}
     </div>
   );
 };
