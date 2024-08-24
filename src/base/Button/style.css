@@ -3,4 +3,8 @@
   padding: 12px;
   border-radius: 12px;
   font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
