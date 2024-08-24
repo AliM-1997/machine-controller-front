@@ -5,13 +5,13 @@ import "./style.css";
 import { Outlet } from "react-router-dom";
 const Layout = () => {
   return (
-    <div>
-      <div className="flex row page ">
+    <div className="flex row page">
+      <div className="container-1">
         <NavBar />
-        <div className="flex column">
-          <Header />
-          <Outlet />
-        </div>
+      </div>
+      <div className="flex column container-2">
+        <Header />
+        <Outlet />
       </div>
     </div>
   );
