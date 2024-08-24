@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
-const index = () => {
+const Button = () => {
   return <div>hello from button</div>;
 };
 
-export default index;
+export default Button;
