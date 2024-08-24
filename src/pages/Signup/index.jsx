@@ -5,28 +5,44 @@ import Button from "../../base/Button";
 const Signup = () => {
   return (
     <div className="flex column center page gap">
-      <div>
-        <h1>
-          <span className="highlight">D</span>ustry
-        </h1>
-      </div>
-      <div className="flex column signup-input ">
-        <Input placeHolder="name" width="400px" name="Name" />
-        <Input placeHolder="example@gamil.com" width="400px" name="Email" />
-        <Input placeHolder="password" width="400px" name="Password" />
-        <Input
-          placeHolder="confirmed-password"
-          width="400px"
-          name="Confirmed Passowrd"
-        />
-      </div>
-      <div className="flex column gap">
-        <Button
-          backgroundColor="primary"
-          width="400px"
-          textColor="white"
-          placeHolder="Signup"
-        />
+      <div className="flex column center white-bg gap signup-container">
+        <div className="flex column center gap">
+          <h1>
+            <span className="highlight">D</span>ustry
+          </h1>
+          <div className="flex  black-bg switch">
+            <Button
+              placeHolder="Login"
+              width="125px"
+              backgroundColor="black"
+              textColor="white"
+            />
+            <Button
+              placeHolder="Signup"
+              backgroundColor="primary"
+              width="125px"
+              textColor="white"
+            />
+          </div>
+        </div>
+        <div className="flex column signup-input ">
+          <Input placeHolder="name" width="400px" name="Name" />
+          <Input placeHolder="example@gamil.com" width="400px" name="Email" />
+          <Input placeHolder="password" width="400px" name="Password" />
+          <Input
+            placeHolder="confirmed-password"
+            width="400px"
+            name="Confirmed Passowrd"
+          />
+        </div>
+        <div className="flex column gap">
+          <Button
+            backgroundColor="primary"
+            width="400px"
+            textColor="white"
+            placeHolder="Signup"
+          />
+        </div>
       </div>
     </div>
   );

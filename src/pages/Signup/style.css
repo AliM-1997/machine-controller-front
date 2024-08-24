@@ -1,3 +1,8 @@
 .signup-input {
   gap: 10px;
 }
+.signup-container {
+  padding: 30px;
+  border-radius: 24px;
+  border: 1px solid #878787;
+}
