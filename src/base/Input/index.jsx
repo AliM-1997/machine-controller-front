@@ -13,24 +13,32 @@ const Input = ({
   width = "",
   onChange,
   onClick,
+  name = "",
 }) => {
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
   return (
-    <div
-      className={`input-container ${backgroundColorClass}`}
-      style={{ width: width }}
-      onClick={onClick}
-    >
-      <Icon icon={leftIcon} />
-      <input
-        type={type}
-        className={` input-field ${textColorClass}`}
-        placeholder={placeHolder}
-        value={value}
-        onChange={onChange}
-      />
-      <Icon icon={rightIcon} />
+    <div>
+      <div>
+        <label className="bold black-txt " style={{ width: width }}>
+          {name}
+        </label>
+      </div>
+      <div
+        className={`input-container ${backgroundColorClass}`}
+        style={{ width: width }}
+        onClick={onClick}
+      >
+        <Icon icon={leftIcon} />
+        <input
+          type={type}
+          className={` input-field ${textColorClass}`}
+          placeholder={placeHolder}
+          value={value}
+          onChange={onChange}
+        />
+        <Icon icon={rightIcon} />
+      </div>
     </div>
   );
 };
