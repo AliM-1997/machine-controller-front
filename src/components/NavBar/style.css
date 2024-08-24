@@ -3,6 +3,7 @@
 }
 .nav-container {
   padding: 30px;
+  gap: 100px;
 }
 
 .top-nav {

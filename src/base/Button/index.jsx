@@ -10,6 +10,7 @@ const Button = ({
   type = "button",
   width = "",
   onClick,
+  iconColor = "black",
 }) => {
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
@@ -21,7 +22,7 @@ const Button = ({
         onClick={onClick}
         className={`btn ${backgroundColorClass} ${textColorClass}`}
       >
-        <Icon icon={leftIcon} />
+        <Icon icon={leftIcon} color={iconColor} />
         {placeHolder}
         <Icon icon={rightIcon} />
       </button>
