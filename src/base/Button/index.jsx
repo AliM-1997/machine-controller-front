@@ -11,16 +11,19 @@ const Button = ({
   width = "",
   onClick,
   iconColor = "black",
+  border = false,
 }) => {
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
+  const borderClass = border ? "border" : "";
+
   return (
     <div>
       <button
         type={type}
         style={{ width: width }}
         onClick={onClick}
-        className={`btn ${backgroundColorClass} ${textColorClass}`}
+        className={`btn ${backgroundColorClass} ${textColorClass} ${borderClass}`}
       >
         <Icon icon={leftIcon} color={iconColor} />
         {placeHolder}
