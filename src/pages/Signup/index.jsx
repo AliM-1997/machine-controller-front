@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 const Signup = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmedPassword, setConfirmedPassword] = useState("");
+
   return (
     <div className="flex column center page gap">
       <div className="flex column center white-bg gap signup-container">
@@ -26,13 +31,37 @@ const Signup = () => {
           </div>
         </div>
         <div className="flex column signup-input ">
-          <Input placeHolder="name" width="400px" name="Name" />
-          <Input placeHolder="example@gamil.com" width="400px" name="Email" />
-          <Input placeHolder="password" width="400px" name="Password" />
           <Input
-            placeHolder="confirmed-password"
+            placeHolder="name"
             width="400px"
-            name="Confirmed Passowrd"
+            name="name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Input
+            placeHolder="example@gamil.com"
+            width="400px"
+            name="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            placeHolder="password"
+            width="400px"
+            name="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Input
+            placeHolder="password"
+            type="password"
+            width="400px"
+            name="Confirmed Password"
+            value={confirmedPassword}
+            onChange={(e) => setConfirmedPassword(e.target.value)}
           />
         </div>
         <div className="flex column gap">
