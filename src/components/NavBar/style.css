@@ -4,3 +4,9 @@
 .nav-container {
   padding: 30px;
 }
+
+.top-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 90px;
+}
