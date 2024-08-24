@@ -1,9 +1,18 @@
 import "./styles/colors.css";
 import "./styles/utilities.css";
 import "./styles/index.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route></Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
