@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import "./style.css";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
 
+  const navigate = useNavigate();
+
+  const handleswitch = () => {
+    navigate("/login");
+  };
   return (
     <div className="flex column center page gap">
       <div className="flex column center white-bg gap signup-container">
@@ -21,6 +27,7 @@ const Signup = () => {
               width="125px"
               backgroundColor="black"
               textColor="white"
+              onClick={handleswitch}
             />
             <Button
               placeHolder="Signup"
@@ -34,7 +41,7 @@ const Signup = () => {
           <Input
             placeHolder="name"
             width="400px"
-            name="name"
+            name="Name"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
