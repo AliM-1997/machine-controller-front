@@ -1,0 +1,45 @@
+.primary-bg {
+  background-color: #00b7eb;
+}
+.secondary-bg {
+  background-color: #f1f1f1;
+}
+
+.white-bg {
+  background-color: white;
+}
+
+.black-bg {
+  background-color: black;
+}
+.Lgreen-bg {
+  background-color: #d0ffbf;
+}
+.Lred.bg {
+  background-color: #fec9c2;
+}
+.Lyellow-bg {
+  background-color: #fffdbf;
+}
+.Lblue-bg {
+  background-color: #ccd2ff;
+}
+
+.white-txt {
+  color: white;
+}
+.black-txt {
+  color: black;
+}
+.red-txt {
+  color: #fb4128ed;
+}
+.green-txt {
+  color: #34c600;
+}
+.yellow-txt {
+  background-color: #fff620;
+}
+.blue-txt {
+  background-color: #4d61fd;
+}
