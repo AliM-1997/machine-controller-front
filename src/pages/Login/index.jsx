@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+  const handleSwitch = () => {
+    navigate("/signup");
+  };
   return (
     <div className="page flex center column ">
       <div className=" flex column center login-container white-bg gap ">
@@ -23,22 +31,30 @@ const Login = () => {
               backgroundColor="black"
               textColor="white"
               width="125px"
+              onClick={handleSwitch}
             />
           </div>
         </div>
         <div className="flex column gap ">
           <Input
-            className=""
             name="Email"
             width="400px"
-            type="email"
+            type="text"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             placeHolder="examle@gmail.com"
           />
           <Input
             name="Password"
-            width="full-width"
+            width="400px"
             type="password"
             placeHolder="password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
           <p className="underline">forgetPassword?</p>
           <Button
