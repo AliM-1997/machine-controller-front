@@ -51,13 +51,8 @@ const NavBar = () => {
           <Button {...navButton("Machines", faGear, "/machines")} />
           <Button {...navButton("Tasks", faClipboard, "/tasks")} />
           <Button {...navButton("Predictions", faChartLine, "/predictions")} />
+          <Button {...navButton("Alerts", faBell, "/alerts")} />
 
-          <Button
-            placeHolder="Alerts"
-            width="250px"
-            leftIcon={faBell}
-            iconColor="#00b7eb"
-          />
           <Button
             placeHolder="User Management"
             width="250px"
