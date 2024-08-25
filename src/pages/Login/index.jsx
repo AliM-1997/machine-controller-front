@@ -14,9 +14,21 @@ const Login = () => {
   const handleSwitch = () => {
     navigate("/signup");
   };
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
   const LoginHandler = async () => {
-    const data2 = await authRemote.login(email, password);
-    authLocal.saveToken(data2.authorisation.token);
+    if (!email || !password) {
+      alert("All fields are required.");
+      return;
+    }
+    if (!validateEmail(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    const data = await authRemote.login(email, password);
+    authLocal.saveToken(data.authorisation.token);
     navigate("/dashboard");
   };
 
