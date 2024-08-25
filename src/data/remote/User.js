@@ -14,7 +14,17 @@ export const Users = {
       throw error;
     }
   },
-  //   DeleteUser,
+  DeleteUser: async (id) => {
+    try {
+      const data = await requestApi({
+        route: `/users/${id}`,
+        requestMethod: RequestMethods.DELETE,
+      });
+      console.log(data);
+    } catch (error) {
+      throw error;
+    }
+  },
   //   EditeUser,
   //   CreateUser,
 };
