@@ -10,10 +10,14 @@ export const requestApi = async ({
   navigationFunction = () => {},
 }) => {
   try {
+    const token = localStorage.getItem("token");
+    const headers = includeToken ? { Authorization: `Bearer ${token}` } : {};
     const { data } = await axios.request({
       url: route,
       method: requestMethod,
       data: body,
+      headers: headers,
     });
+    console.log(data);
   } catch (error) {}
 };
