@@ -1,7 +1,13 @@
 import React from "react";
 import "./style.css";
-const Lable = () => {
-  return <div>hello from lable</div>;
+const Lable = ({
+  placeholder,
+  textColor = "black",
+  width,
+  backgroundColor = "secondary",
+  fontWeight,
+}) => {
+  return <div></div>;
 };
 
 export default Lable;
