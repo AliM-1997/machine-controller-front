@@ -1,5 +1,6 @@
 import axios from "axios";
 import { RequestMethods } from "./request_methods";
+import { authLocal } from "../data/local/Auth_local";
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 export const requestApi = async ({
@@ -10,7 +11,7 @@ export const requestApi = async ({
   navigationFunction = () => {},
 }) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = authLocal.getToken();
     const headers = includeToken ? { Authorization: `Bearer ${token}` } : {};
     const { data } = await axios.request({
       url: route,
@@ -19,5 +20,14 @@ export const requestApi = async ({
       headers: headers,
     });
     console.log(data);
-  } catch (error) {}
+    return data;
+  } catch (error) {
+    if (
+      (error.response && error.response.status === 401) ||
+      error.response.status === 403
+    ) {
+      authLocal.saveToken(null);
+    } else {
+    }
+  }
 };
