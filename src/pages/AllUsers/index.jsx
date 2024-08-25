@@ -22,6 +22,11 @@ const AllUsers = () => {
     };
     handleGetAll();
   }, []);
+
+  const DeleteUser = async (user) => {
+    const data = await Users.DeleteUser(user);
+    setAllUsers(allUsers.filter((user) => user.id !== user));
+  };
   return (
     <div className="flex column users-container gap">
       <div>
@@ -71,7 +76,11 @@ const AllUsers = () => {
                   <td>{user.pendingTask}</td>
                   <td className="flex  gap">
                     <Icon icon={faPenToSquare} color="#00b7eb" />
-                    <Icon icon={faTrash} color="#00b7eb" />
+                    <Icon
+                      icon={faTrash}
+                      color="#00b7eb"
+                      onClick={() => DeleteUser(user.id)}
+                    />
                   </td>
                 </tr>
               ))

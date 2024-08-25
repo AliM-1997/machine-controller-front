@@ -14,10 +14,10 @@ export const Users = {
       throw error;
     }
   },
-  DeleteUser: async (id) => {
+  DeleteUser: async (user) => {
     try {
       const data = await requestApi({
-        route: `/users/${id}`,
+        route: `/user/${user}`,
         requestMethod: RequestMethods.DELETE,
       });
       console.log(data);
