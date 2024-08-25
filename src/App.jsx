@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Machines from "./pages/Machines";
 import Tasks from "./pages/Tasks";
 import Predictions from "./pages/Predictions";
+import Alerts from "./pages/Alerts";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="machines" element={<Machines />} />
             <Route path="tasks" element={<Tasks />} />
             <Route path="Predictions" element={<Predictions />} />
+            <Route path="alerts" element={<Alerts />} />
           </Route>
         </Routes>
       </BrowserRouter>
