@@ -2,7 +2,7 @@ import { requestApi } from "../../utils/request";
 import { RequestMethods } from "../../utils/request_methods";
 import { authLocal } from "../local/Auth_local";
 export const authRemote = {
-  login: async (email, password) => {
+  Login: async (email, password) => {
     const data = await requestApi({
       route: "/login",
       requestMethod: RequestMethods.POST,
