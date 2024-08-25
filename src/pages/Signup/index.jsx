@@ -3,6 +3,7 @@ import "./style.css";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 import { useNavigate } from "react-router-dom";
+import { authRemote } from "../../data/remote/Auth_user";
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ const Signup = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-  const handelSignup = () => {
+  const handelSignup = async () => {
     if (!name || !email || !password || !confirmedPassword) {
       alert("All fields are required.");
       return;
@@ -31,6 +32,10 @@ const Signup = () => {
       alert("Passwords do not match.");
       return;
     }
+
+    const data = await authRemote.Signup(email, password, name);
+    console.log(data);
+    navigate("/login");
   };
   return (
     <div className="flex column center page gap">
@@ -95,6 +100,7 @@ const Signup = () => {
             width="400px"
             textColor="white"
             placeHolder="Signup"
+            onClick={handelSignup}
           />
         </div>
       </div>
