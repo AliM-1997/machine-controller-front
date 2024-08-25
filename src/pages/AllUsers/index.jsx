@@ -2,8 +2,16 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDeleteLeft,
+  faEdit,
+  faEraser,
+  faPenToSquare,
+  faSearch,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { Users } from "../../data/remote/User";
+import Icon from "../../base/Icon";
 const AllUsers = () => {
   const [allUsers, setAllUsers] = useState([]);
 
@@ -61,6 +69,10 @@ const AllUsers = () => {
                   <td>{user.role}</td>
                   <td>{user.doneTask}</td>
                   <td>{user.pendingTask}</td>
+                  <td className="flex  gap">
+                    <Icon icon={faPenToSquare} color="#00b7eb" />
+                    <Icon icon={faTrash} color="#00b7eb" />
+                  </td>
                 </tr>
               ))
             ) : (
