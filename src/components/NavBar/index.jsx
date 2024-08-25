@@ -49,13 +49,7 @@ const NavBar = () => {
         <div className="flex column center gap">
           <Button {...navButton("Dashboard", faTh, "/dashboard")} />
           <Button {...navButton("Machines", faGear, "/machines")} />
-
-          <Button
-            placeHolder="Tasks"
-            width="250px"
-            leftIcon={faClipboard}
-            iconColor="#00b7eb"
-          />
+          <Button {...navButton("Tasks", faClipboard, "/tasks")} />
           <Button
             placeHolder="Predictions"
             width="250px"
