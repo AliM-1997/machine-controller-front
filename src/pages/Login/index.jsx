@@ -3,6 +3,8 @@ import "./style.css";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 import { useNavigate } from "react-router-dom";
+import { authRemote } from "../../data/remote/Auth_user";
+import { authLocal } from "../../data/local/Auth_local";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +14,12 @@ const Login = () => {
   const handleSwitch = () => {
     navigate("/signup");
   };
+  const LoginHandler = async () => {
+    const data2 = await authRemote.login(email, password);
+    authLocal.saveToken(data2.authorisation.token);
+    navigate("/dashboard");
+  };
+
   return (
     <div className="page flex center column ">
       <div className=" flex column center login-container white-bg gap ">
@@ -62,6 +70,7 @@ const Login = () => {
             width="400px"
             textColor="White"
             placeHolder="Login"
+            onClick={LoginHandler}
           />
           <Button
             className="employee"

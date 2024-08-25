@@ -1,6 +1,5 @@
 import { requestApi } from "../../utils/request";
 import { RequestMethods } from "../../utils/request_methods";
-import Signup from "../../pages/Signup";
 import { authLocal } from "../local/Auth_local";
 export const authRemote = {
   login: async (email, password) => {
@@ -34,6 +33,8 @@ export const authRemote = {
       });
       authLocal.saveToken(null);
       console.log("Logout successful:", data);
-    } catch (error) {}
+    } catch (error) {
+      throw error;
+    }
   },
 };
