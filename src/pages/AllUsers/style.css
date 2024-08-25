@@ -1,0 +1,7 @@
+.users-container {
+  padding: 30px;
+}
+
+.user-input-container {
+  justify-content: space-between;
+}
