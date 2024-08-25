@@ -13,4 +13,16 @@ export const authRemote = {
     });
     return data;
   },
+  Signup: async (email, password, name) => {
+    const data = await requestApi({
+      route: "/register",
+      requestMethod: RequestMethods.POST,
+      body: {
+        name,
+        email,
+        password,
+      },
+    });
+    return data;
+  },
 };
