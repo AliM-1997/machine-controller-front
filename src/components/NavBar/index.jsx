@@ -11,15 +11,30 @@ import {
   faChartLine,
   faRightFromBracket,
   faMoon,
+  faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 const NavBar = () => {
   const [isClick, setIsClicked] = useState(null);
   const navigate = useNavigate();
-  const handleClickedButton = (buttonName) => {
+
+  const handleClickedButton = (buttonName, path) => {
     setIsClicked(buttonName);
-    navigate(buttonName);
+    navigate(path);
   };
+  const navButton = (name, icon, path) => ({
+    placeHolder: name,
+    width: "250px",
+    leftIcon: icon,
+    backgroundColor: isClick === name ? "primary" : "secondary",
+    iconColor: isClick === name ? "white" : "#00b7eb",
+    rightIcon: isClick === name ? faChevronRight : null,
+    textColor: isClick === name ? "white" : "black",
+    onClick: () => {
+      handleClickedButton(name, path);
+    },
+  });
 
   return (
     <div className="flex column nav-container white-bg full-width full-height ">
@@ -32,12 +47,16 @@ const NavBar = () => {
         </div>
 
         <div className="flex column center gap">
-          <Button
+          <Button {...navButton("Dashboard", faTh, "/dashboard")} />
+          {/* <Button
             placeHolder="DashBoard"
             width="250px"
             leftIcon={faTh}
             iconColor="#00b7eb"
-          />
+            onClick={() => {
+              handleClickedButton("dashboard");
+            }} */}
+          {/* /> */}
           <Button
             placeHolder="Machines"
             width="250px"
