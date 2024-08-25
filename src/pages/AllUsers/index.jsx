@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
-const UserManagement = () => {
+const AllUsers = () => {
   return <div>hello from users</div>;
 };
 
-export default UserManagement;
+export default AllUsers;
