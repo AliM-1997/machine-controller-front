@@ -7,7 +7,18 @@ const Lable = ({
   backgroundColor = "secondary",
   fontWeight,
 }) => {
-  return <div></div>;
+  const backgroundColorClass = `${backgroundColor}-bg`;
+  const textColorClass = `${textColor}-txt`;
+  return (
+    <div>
+      <label
+        className={`${backgroundColorClass} ${textColorClass}`}
+        style={{ width: width, fontWeight: fontWeight }}
+      >
+        {placeholder}
+      </label>
+    </div>
+  );
 };
 
 export default Lable;
