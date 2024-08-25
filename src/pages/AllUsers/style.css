@@ -5,3 +5,17 @@
 .user-input-container {
   justify-content: space-between;
 }
+
+table {
+  width: 100%;
+}
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #f4f4f4;
+  color: red;
+  font-weight: bold;
+}

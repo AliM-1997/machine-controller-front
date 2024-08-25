@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
-const Lable = ({
+
+const Label = ({
   placeholder,
   textColor = "black",
   width,
@@ -12,8 +13,10 @@ const Lable = ({
   return (
     <div>
       <label
-        className={`${backgroundColorClass} ${textColorClass}`}
-        style={{ width: width, fontWeight: fontWeight }}
+        className={`${backgroundColorClass} ${textColorClass} ${
+          fontWeight === "bold" ? "bold" : ""
+        }`}
+        style={{ width: width }}
       >
         {placeholder}
       </label>
@@ -21,4 +24,4 @@ const Lable = ({
   );
 };
 
-export default Lable;
+export default Label;

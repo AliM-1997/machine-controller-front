@@ -2,7 +2,6 @@ import React from "react";
 import "./style.css";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
-import Lable from "../../base/Lable";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Users } from "../../data/remote/User";
 const AllUsers = () => {
@@ -35,8 +34,23 @@ const AllUsers = () => {
           />
         </div>
       </div>
-      <div>
-        <Lable />
+      <div className="">
+        <table>
+          <thead>
+            <tr>
+              <th>Employee Name</th>
+              <th>Employee Id</th>
+              <th>Username</th>
+              <th>Role</th>
+              <th>Done Task</th>
+              <th>Pending Task</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
