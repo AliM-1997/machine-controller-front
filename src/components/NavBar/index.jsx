@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../assets/images/logo.png";
 import "./style.css";
 import Button from "../../base/Button";
@@ -12,7 +12,15 @@ import {
   faRightFromBracket,
   faMoon,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 const NavBar = () => {
+  const [isClick, setIsClicked] = useState(null);
+  const navigate = useNavigate();
+  const handleClickedButton = (buttonName) => {
+    setIsClicked(buttonName);
+    navigate(buttonName);
+  };
+
   return (
     <div className="flex column nav-container white-bg full-width full-height ">
       <div className="top-nav">
