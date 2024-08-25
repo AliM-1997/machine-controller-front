@@ -7,7 +7,6 @@ import { Outlet } from "react-router-dom";
 const Layout = () => {
   const [clickedPage, setClickedPage] = useState(null);
   const [showChooseInput, setShowChooseInput] = useState(true);
-
   const handlePageChange = (newPageName) => {
     setClickedPage(newPageName);
 
@@ -26,6 +25,9 @@ const Layout = () => {
         break;
       case "Alerts":
         setShowChooseInput(false);
+        break;
+      case "User Management":
+        setShowChooseInput(true);
         break;
       default:
         setShowChooseInput(true);
