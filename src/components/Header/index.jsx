@@ -6,14 +6,21 @@ import {
   faList,
   faUser,
   faBell,
+  faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../../base/Icon";
 
-const Header = ({ pageName }) => {
+const Header = ({ pageName, showChooseInput }) => {
   return (
     <div className=" header-container white-bg">
-      <div>
+      <div className="flex row gap">
         <h1>{pageName}</h1>
+        <Input
+          width="200px"
+          rightIcon={faAngleDown}
+          placeHolder="choose"
+          hidden={!showChooseInput}
+        />
       </div>
       <div className="flex header-left">
         <Input width="300px" leftIcon={faSearch} rightIcon={faList} />
