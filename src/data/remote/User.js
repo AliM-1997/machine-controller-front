@@ -4,7 +4,7 @@ import { RequestMethods } from "../../utils/request_methods";
 export const Users = {
   GetAllUsers: async () => {
     try {
-      const { data } = await requestApi({
+      const data = await requestApi({
         route: "/user",
         requestMethod: RequestMethods.GET,
       });
