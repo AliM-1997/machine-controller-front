@@ -2,8 +2,15 @@ import React from "react";
 import "./style.css";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
+import Lable from "../../base/Lable";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { Users } from "../../data/remote/User";
 const AllUsers = () => {
+  const handleGetAll = async () => {
+    const data = await Users.GetAllUsers();
+    console.log(data);
+  };
+  handleGetAll();
   return (
     <div className="flex column users-container gap">
       <div>
@@ -28,7 +35,9 @@ const AllUsers = () => {
           />
         </div>
       </div>
-      <div></div>
+      <div>
+        <Lable />
+      </div>
     </div>
   );
 };
