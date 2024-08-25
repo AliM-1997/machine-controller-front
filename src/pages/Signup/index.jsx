@@ -14,6 +14,24 @@ const Signup = () => {
   const handleswitch = () => {
     navigate("/login");
   };
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+  const handelSignup = () => {
+    if (!name || !email || !password || !confirmedPassword) {
+      alert("All fields are required.");
+      return;
+    }
+    if (!validateEmail(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    if (password !== confirmedPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+  };
   return (
     <div className="flex column center page gap">
       <div className="flex column center white-bg gap signup-container">
