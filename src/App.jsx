@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Machines from "./pages/Machines";
+import Tasks from "./pages/Tasks";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="signup" element={<Signup />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="machines" element={<Machines />} />
+            <Route path="tasks" element={<Tasks />} />
           </Route>
         </Routes>
       </BrowserRouter>
