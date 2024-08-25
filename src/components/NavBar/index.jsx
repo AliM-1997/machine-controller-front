@@ -50,12 +50,8 @@ const NavBar = () => {
           <Button {...navButton("Dashboard", faTh, "/dashboard")} />
           <Button {...navButton("Machines", faGear, "/machines")} />
           <Button {...navButton("Tasks", faClipboard, "/tasks")} />
-          <Button
-            placeHolder="Predictions"
-            width="250px"
-            leftIcon={faChartLine}
-            iconColor="#00b7eb"
-          />
+          <Button {...navButton("Predictions", faChartLine, "/predictions")} />
+
           <Button
             placeHolder="Alerts"
             width="250px"
