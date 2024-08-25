@@ -14,9 +14,13 @@ const Input = ({
   onChange,
   onClick,
   name = "",
+  hidden = false,
 }) => {
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
+  if (hidden) {
+    return null;
+  }
   return (
     <div>
       <div>
