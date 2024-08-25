@@ -27,7 +27,25 @@ export const requestApi = async ({
       error.response.status === 403
     ) {
       authLocal.saveToken(null);
-    } else {
+      if (typeof navigationFunction === "function") {
+        navigationFunction();
+      }
     }
+    console.error(
+      error.response?.data?.message ||
+        error?.response?.data ||
+        error?.message ||
+        error.response ||
+        error
+    );
+
+    throw new Error("Failed to fetch data", {
+      cause:
+        error.response?.data?.message ||
+        error?.response?.data ||
+        error?.message ||
+        error.response ||
+        error,
+    });
   }
 };
