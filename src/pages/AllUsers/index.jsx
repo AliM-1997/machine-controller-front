@@ -52,7 +52,16 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            <tr></tr>
+            {allUsers.map((user) => (
+              <tr key={user.id}>
+                <td>{user.name}</td>
+                <td>{user.id}</td>
+                <td>{user.username}</td>
+                <td>{user.role}</td>
+                <td>{user.doneTask}</td>
+                <td>{user.pendingTask}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
