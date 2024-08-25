@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "../../assets/images/logo.png";
 import "./style.css";
 import Button from "../../base/Button";
@@ -14,13 +14,11 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
-const NavBar = () => {
-  const [isClick, setIsClicked] = useState(null);
+const NavBar = ({ onNavigate, isClick }) => {
   const navigate = useNavigate();
 
   const handleClickedButton = (buttonName, path) => {
-    setIsClicked(buttonName);
+    onNavigate(buttonName);
     navigate(path);
   };
   const navButton = (name, icon, path) => ({
@@ -52,12 +50,8 @@ const NavBar = () => {
           <Button {...navButton("Tasks", faClipboard, "/tasks")} />
           <Button {...navButton("Predictions", faChartLine, "/predictions")} />
           <Button {...navButton("Alerts", faBell, "/alerts")} />
-
           <Button
-            placeHolder="User Management"
-            width="250px"
-            leftIcon={faUsers}
-            iconColor="#00b7eb"
+            {...navButton("User Management", faUsers, "/userManagement")}
           />
         </div>
       </div>
