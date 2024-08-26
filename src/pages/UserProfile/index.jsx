@@ -62,7 +62,10 @@ const UserProfile = () => {
           type="text"
           leftIcon={faUser}
           onChange={(e) => {
-            setFormData(e.target.value);
+            setFormData({
+              ...formData,
+              name: e.target.value,
+            });
           }}
         />
         <Input
