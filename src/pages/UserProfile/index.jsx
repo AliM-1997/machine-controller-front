@@ -66,12 +66,7 @@ const UserProfile = () => {
           name="Name"
           type="text"
           leftIcon={faUser}
-          onChange={(e) => {
-            setFormData({
-              ...formData,
-              name: e.target.value,
-            });
-          }}
+          onChange={(e) => handleFormData("name", e.target.value)}
         />
         <Input
           width="37vw"
@@ -89,6 +84,7 @@ const UserProfile = () => {
           name="Role"
           type="text"
           leftIcon={faUser}
+          onChange={(e) => handleFormData("role", e.target.value)}
         />
         <Input
           width="37vw"
@@ -96,6 +92,7 @@ const UserProfile = () => {
           name="Phone Number"
           type="text"
           leftIcon={faPhone}
+          onChange={(e) => handleFormData("phone_number", e.target.value)}
         />
       </div>
       <div className="flex full-width gap column">
@@ -105,6 +102,7 @@ const UserProfile = () => {
             name="Email"
             type="email"
             leftIcon={faEnvelope}
+            onChange={(e) => handleFormData("email", e.target.value)}
           />
         </div>
         <div className="flex full-width row center space-btw ">
@@ -114,6 +112,7 @@ const UserProfile = () => {
             name="Password"
             type="password"
             leftIcon={faKey}
+            onChange={(e) => handleFormData("password", e.target.value)}
           />
           <Input
             width="37vw"
@@ -121,6 +120,9 @@ const UserProfile = () => {
             name="Confirmed-Password"
             type="password"
             leftIcon={faKey}
+            onChange={(e) =>
+              handleFormData("confirmed_password", e.target.value)
+            }
           />
         </div>
       </div>
@@ -130,6 +132,7 @@ const UserProfile = () => {
           name="Location"
           leftIcon={faLocation}
           type="text"
+          onChange={(e) => handleFormData("location", e.target.value)}
         />
       </div>
       <div className="flex end gap">
