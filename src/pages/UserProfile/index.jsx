@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import Label from "../../base/Label";
 import Input from "../../base/Input";
@@ -11,6 +11,18 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 const UserProfile = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    username: "",
+    role: "",
+    phone_number: "",
+    email: "",
+    password: "",
+    confirmed_password: "",
+    location: "",
+  });
+  console.log(formData);
+
   return (
     <div className="flex column userProfile-container gap ">
       <div>
