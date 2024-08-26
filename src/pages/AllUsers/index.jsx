@@ -3,9 +3,6 @@ import "./style.css";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 import {
-  faDeleteLeft,
-  faEdit,
-  faEraser,
   faPenToSquare,
   faSearch,
   faTrash,
