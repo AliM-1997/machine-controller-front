@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
+  id: "",
   name: "",
   email: "",
   username: "",
@@ -13,8 +14,9 @@ const userSlice = createSlice({
   reducers: {
     loadUser: (state, action) => {},
     updateUser: (state, action) => {
-      const { name, email, username, role, location, phone_number } =
+      const { id, name, email, username, role, location, phone_number } =
         action.payload;
+      state.id = id;
       state.name = name;
       state.email = email;
       state.username = username;
