@@ -7,10 +7,15 @@ const DisplayImage = ({
   borderRadius = "50%",
 }) => {
   const baseUrl = process.env.REACT_APP_BASE_URL_IMAGE;
-  console.log("base url", baseUrl);
   const fullurl = `${baseUrl}/storage/${url}`;
-  console.log("full url", fullurl);
-  return <div>hello from image</div>;
+  return (
+    <div>
+      <img
+        src={fullurl}
+        style={{ width: width, height: heigth, borderRadius: borderRadius }}
+      />
+    </div>
+  );
 };
 
 export default DisplayImage;
