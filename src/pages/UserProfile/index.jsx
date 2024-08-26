@@ -16,7 +16,6 @@ import { useSelector } from "react-redux";
 
 const UserProfile = () => {
   const user = useSelector((global) => global.user);
-  console.log(user);
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -38,6 +37,15 @@ const UserProfile = () => {
       ...formData,
       [key]: value,
     });
+  };
+
+  const handleSave = async () => {
+    if (user.id) {
+      const updatedData = await Users.UpdateUser(user.id, user);
+    } else {
+      const createdData = await Users.CreateUser(formData);
+    }
+    navigate("/allUsers");
   };
 
   return (
@@ -156,7 +164,7 @@ const UserProfile = () => {
           onClick={handleCancel}
         />
         <Button
-          placeHolder={user.id ? "save" : "create"}
+          placeHolder={user.name ? "save" : "create"}
           backgroundColor="primary"
           width="10vw"
           textColor="white"

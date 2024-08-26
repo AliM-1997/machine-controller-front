@@ -25,6 +25,7 @@ const AllUsers = () => {
     const user = allUsers.find((user) => user.id === id);
     dispatch(
       updateUser({
+        id: user.id,
         username: user.username,
         name: user.name,
         email: user.email,
