@@ -22,7 +22,12 @@ const UserProfile = () => {
     location: "",
   });
   console.log(formData);
-
+  const handleFormData = (key, value) => {
+    setFormData({
+      ...formData,
+      [key]: value,
+    });
+  };
   return (
     <div className="flex column userProfile-container gap ">
       <div>
@@ -74,6 +79,7 @@ const UserProfile = () => {
           name="username"
           type="text"
           leftIcon={faUser}
+          onChange={(e) => handleFormData("username", e.target.value)}
         />
       </div>
       <div className="flex row center full-width space-btw ">
