@@ -50,5 +50,20 @@ export const Users = {
     }
   },
 
-  //   CreateUser,
+  UpdateUser: async (id, formData) => {
+    console.log("asfhakjsdafs", formData);
+    console.log(id);
+    try {
+      const data = await requestApi({
+        route: `/user/${id}`,
+        requestMethod: RequestMethods.PUT,
+        body: formData,
+      });
+      console.log("formuser apis", data);
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
 };
