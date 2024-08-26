@@ -16,6 +16,8 @@ import { useSelector } from "react-redux";
 import DisplayImage from "../../base/DisplayImage";
 
 const UserProfile = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const user = useSelector((global) => global.user);
   const [formData, setFormData] = useState({
     name: "",
@@ -68,7 +70,17 @@ const UserProfile = () => {
     }
     navigate("/allUsers");
   };
-
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   return (
     <div className="flex column userProfile-container gap ">
       <div>
