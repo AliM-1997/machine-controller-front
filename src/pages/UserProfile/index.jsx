@@ -17,7 +17,6 @@ import DisplayImage from "../../base/DisplayImage";
 
 const UserProfile = () => {
   const user = useSelector((global) => global.user);
-  console.log("12343213432", user);
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -45,11 +44,9 @@ const UserProfile = () => {
     }
   }, [user]);
   const navigate = useNavigate();
-
   const handleCancel = () => {
     navigate("/allUsers");
   };
-
   const handleFormData = (key, value) => {
     setFormData({
       ...formData,
@@ -60,8 +57,14 @@ const UserProfile = () => {
   const handleSave = async () => {
     if (user.id) {
       const updatedData = await Users.UpdateUser(user.id, formData);
+      if (updatedData) {
+        alert("update user successfully");
+      }
     } else {
       const createdData = await Users.CreateUser(formData);
+      if (createdData) {
+        alert("create user successfully");
+      }
     }
     navigate("/allUsers");
   };
@@ -81,6 +84,7 @@ const UserProfile = () => {
               heigth="70px"
               url={user.image_path || "image"}
             />
+            <input type="file" onChange={handleFileChange} />
           </div>
           <div className="flex column">
             <Label placeholder={user.name || "Name"} />
