@@ -9,12 +9,12 @@ const Input = ({
   backgroundColor = "white",
   textColor = "black",
   type = "text",
-  // value,
   width = "",
   onChange,
   onClick,
   name = "",
   hidden = false,
+  error,
 }) => {
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
@@ -43,6 +43,7 @@ const Input = ({
         />
         <Icon icon={rightIcon} />
       </div>
+      {error && <span className="error-message">{error}</span>}
     </div>
   );
 };
