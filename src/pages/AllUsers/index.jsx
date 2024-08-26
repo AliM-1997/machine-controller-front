@@ -9,10 +9,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Users } from "../../data/remote/User";
 import Icon from "../../base/Icon";
+import { useNavigate } from "react-router-dom";
 const AllUsers = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [searchUserId, setUserSearchId] = useState("");
-  console.log(searchUserId);
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/userprofile");
+  };
   useEffect(() => {
     const handleGetAll = async () => {
       const data = await Users.GetAllUsers();
@@ -96,7 +101,11 @@ const AllUsers = () => {
                   <td>{user.doneTask}</td>
                   <td>{user.pendingTask}</td>
                   <td className="flex  gap">
-                    <Icon icon={faPenToSquare} color="#00b7eb" />
+                    <Icon
+                      icon={faPenToSquare}
+                      color="#00b7eb"
+                      onClick={handleNavigate}
+                    />
                     <Icon
                       icon={faTrash}
                       color="#00b7eb"
