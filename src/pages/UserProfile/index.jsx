@@ -10,15 +10,17 @@ import {
   faPhone,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { Users } from "../../data/remote/User";
+
 const UserProfile = () => {
   const [formData, setFormData] = useState({
     name: "",
     username: "",
-    role: "",
+    role: "user",
     phone_number: "",
     email: "",
     password: "",
-    confirmed_password: "",
+    password_confirmation: "",
     location: "",
   });
   console.log(formData);
@@ -28,6 +30,11 @@ const UserProfile = () => {
       [key]: value,
     });
   };
+  const createuser = async () => {
+    const data = await Users.CreateUser(formData);
+    console.log("dataform users alisadksadasd", data);
+  };
+
   return (
     <div className="flex column userProfile-container gap ">
       <div>
@@ -121,7 +128,7 @@ const UserProfile = () => {
             type="password"
             leftIcon={faKey}
             onChange={(e) =>
-              handleFormData("confirmed_password", e.target.value)
+              handleFormData("password_confirmation", e.target.value)
             }
           />
         </div>
@@ -147,6 +154,7 @@ const UserProfile = () => {
           backgroundColor="primary"
           width="10vw"
           textColor="white"
+          onClick={createuser}
         />
       </div>
     </div>
