@@ -10,9 +10,13 @@ import {
   faPhone,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { Users } from "../../data/remote/User";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const UserProfile = () => {
+  const user = useSelector((global) => global.user);
+  console.log(user);
   const [formData, setFormData] = useState({
     name: "",
     username: "",
