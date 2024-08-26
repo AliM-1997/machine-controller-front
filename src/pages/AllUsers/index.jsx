@@ -10,7 +10,10 @@ import {
 import { Users } from "../../data/remote/User";
 import Icon from "../../base/Icon";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../data/redux/userSlice";
 const AllUsers = () => {
+  const dispatch = useDispatch();
   const [allUsers, setAllUsers] = useState([]);
   const [searchUserId, setUserSearchId] = useState("");
   const navigate = useNavigate();
@@ -18,9 +21,20 @@ const AllUsers = () => {
   const handleCreate = () => {
     navigate("/userProfile");
   };
-  const handleEdit = () => {
+  const handleEdit = async (id) => {
+    const user = allUsers.find((user) => user.id === id);
+    dispatch(
+      updateUser({
+        username: user.username,
+        name: user.name,
+        email: user.email,
+        location: user.location,
+        role: user.role,
+      })
+    );
     navigate("/userprofile");
   };
+
   useEffect(() => {
     const handleGetAll = async () => {
       const data = await Users.GetAllUsers();
@@ -109,7 +123,7 @@ const AllUsers = () => {
                     <Icon
                       icon={faPenToSquare}
                       color="#00b7eb"
-                      onClick={handleEdit}
+                      onClick={() => handleEdit(user.id)}
                     />
                     <Icon
                       icon={faTrash}
