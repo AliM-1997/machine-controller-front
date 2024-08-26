@@ -12,25 +12,29 @@ import Predictions from "./pages/Predictions";
 import Alerts from "./pages/Alerts";
 import AllUsers from "./pages/AllUsers";
 import UserProfile from "./pages/UserProfile";
+import { Provider } from "react-redux";
+import store from "./data/redux/store";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="machines" element={<Machines />} />
-            <Route path="tasks" element={<Tasks />} />
-            <Route path="Predictions" element={<Predictions />} />
-            <Route path="alerts" element={<Alerts />} />
-            <Route path="allUsers" element={<AllUsers />} />
-            <Route path="userProfile" element={<UserProfile />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="machines" element={<Machines />} />
+              <Route path="tasks" element={<Tasks />} />
+              <Route path="Predictions" element={<Predictions />} />
+              <Route path="alerts" element={<Alerts />} />
+              <Route path="allUsers" element={<AllUsers />} />
+              <Route path="userProfile" element={<UserProfile />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </div>
   );
 }
