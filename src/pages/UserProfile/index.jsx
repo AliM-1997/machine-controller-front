@@ -65,7 +65,7 @@ const UserProfile = () => {
             backgroundColor="primary"
           />
           <Button
-            placeHolder="Delete"
+            placeHolder="add"
             width="10vw"
             textColor="white"
             backgroundColor="primary"

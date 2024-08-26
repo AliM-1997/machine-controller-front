@@ -15,7 +15,10 @@ const AllUsers = () => {
   const [searchUserId, setUserSearchId] = useState("");
   const navigate = useNavigate();
 
-  const handleNavigate = () => {
+  const handleCreate = () => {
+    navigate("/userProfile");
+  };
+  const handleEdit = () => {
     navigate("/userprofile");
   };
   useEffect(() => {
@@ -55,7 +58,8 @@ const AllUsers = () => {
       </div>
       <div className="flex user-input-container">
         <Input
-          width="300px"
+          width="20vw"
+          placeHolder="search by id"
           leftIcon={faSearch}
           value={searchUserId}
           onChange={(e) => setUserSearchId(e.target.value)}
@@ -63,14 +67,15 @@ const AllUsers = () => {
         <div className="flex center gap">
           <Button
             className="filter-user"
-            width="200px"
+            width="10vw"
             backgroundColor="primary"
             placeHolder="add User"
             textColor="white"
+            onClick={handleCreate}
           />
           <Button
             className="add-user"
-            width="120px"
+            width="8vw"
             backgroundColor="primary"
             textColor="white"
             placeHolder="Filter"
@@ -104,7 +109,7 @@ const AllUsers = () => {
                     <Icon
                       icon={faPenToSquare}
                       color="#00b7eb"
-                      onClick={handleNavigate}
+                      onClick={handleEdit}
                     />
                     <Icon
                       icon={faTrash}
