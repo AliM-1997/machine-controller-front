@@ -12,6 +12,7 @@ import Icon from "../../base/Icon";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../data/redux/userSlice";
+import DisplayImage from "../../base/DisplayImage";
 const AllUsers = () => {
   const dispatch = useDispatch();
   const [allUsers, setAllUsers] = useState([]);
@@ -114,7 +115,12 @@ const AllUsers = () => {
             {allUsers.length > 0 ? (
               allUsers.map((user) => (
                 <tr key={user.id}>
-                  <td>{user.name}</td>
+                  <td>
+                    <div className=" ">
+                      <DisplayImage url={user.image_path} />
+                      {user.name}
+                    </div>
+                  </td>
                   <td>{user.id}</td>
                   <td>{user.username}</td>
                   <td>{user.role}</td>
