@@ -14,7 +14,8 @@ import { Users } from "../../data/remote/User";
 import Icon from "../../base/Icon";
 const AllUsers = () => {
   const [allUsers, setAllUsers] = useState([]);
-
+  const [searchUserId, setUserSearchId] = useState("");
+  console.log(searchUserId);
   useEffect(() => {
     const handleGetAll = async () => {
       const data = await Users.GetAllUsers();
@@ -23,17 +24,40 @@ const AllUsers = () => {
     handleGetAll();
   }, []);
 
-  const DeleteUser = async (user) => {
-    const data = await Users.DeleteUser(user);
-    setAllUsers(allUsers.filter((user) => user.id !== user));
+  const DeleteUser = async (id) => {
+    const data = await Users.DeleteUser(id);
+    setAllUsers(allUsers.filter((user) => user.id !== id));
   };
+
+  useEffect(() => {
+    const handleSearch = async () => {
+      if (searchUserId) {
+        try {
+          const data = await Users.SearchId(searchUserId);
+
+          setAllUsers([data.user]);
+        } catch (error) {
+          setAllUsers([]);
+        }
+      } else {
+        const data = await Users.GetAllUsers();
+        setAllUsers(data.users);
+      }
+    };
+    handleSearch();
+  }, [searchUserId]);
   return (
     <div className="flex column users-container gap">
       <div>
         <h2> All Users</h2>
       </div>
       <div className="flex user-input-container">
-        <Input width="300px" leftIcon={faSearch} />
+        <Input
+          width="300px"
+          leftIcon={faSearch}
+          value={searchUserId}
+          onChange={(e) => setUserSearchId(e.target.value)}
+        />
         <div className="flex center gap">
           <Button
             className="filter-user"

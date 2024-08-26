@@ -1,5 +1,6 @@
 .users-container {
   padding: 30px;
+  overflow: auto;
 }
 
 .user-input-container {
@@ -18,4 +19,8 @@ th {
   background-color: #f4f4f4;
   color: red;
   font-weight: bold;
+}
+
+td {
+  font-size: small;
 }
