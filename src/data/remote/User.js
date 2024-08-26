@@ -10,7 +10,6 @@ export const Users = {
       });
       return data;
     } catch (error) {
-      console.error("Failed to get all users:", error);
       throw error;
     }
   },
@@ -20,7 +19,17 @@ export const Users = {
         route: `/user/${user}`,
         requestMethod: RequestMethods.DELETE,
       });
-      console.log(data);
+    } catch (error) {
+      throw error;
+    }
+  },
+  SearchId: async (id) => {
+    try {
+      const data = await requestApi({
+        route: `/user/${id}`,
+        requestMethod: RequestMethods.GET,
+      });
+      return data;
     } catch (error) {
       throw error;
     }
