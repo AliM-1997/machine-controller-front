@@ -10,7 +10,6 @@ import {
   faPhone,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { Users } from "../../data/remote/User";
 import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
@@ -36,10 +35,6 @@ const UserProfile = () => {
       [key]: value,
     });
   };
-  const createuser = async () => {
-    const data = await Users.CreateUser(formData);
-    console.log("dataform users alisadksadasd", data);
-  };
 
   return (
     <div className="flex column userProfile-container gap ">
@@ -52,9 +47,9 @@ const UserProfile = () => {
         <div className="flex center gap">
           <div>image</div>
           <div className="flex column ">
-            <Label placeholder="name" />
-            <Label placeholder="role" />
-            <Label placeholder="gmail" />
+            <Label placeholder={user.name || "Name"} />
+            <Label placeholder={user.role || "Role"} />
+            <Label placeholder={user.email || "email"} />
           </div>
         </div>
         <div className="flex center gap full-width ">
@@ -75,7 +70,7 @@ const UserProfile = () => {
       <div className="flex row center full-width space-btw ">
         <Input
           width="37vw"
-          placeHolder="name"
+          placeHolder={user.name || "Name"}
           name="Name"
           type="text"
           leftIcon={faUser}
@@ -83,7 +78,7 @@ const UserProfile = () => {
         />
         <Input
           width="37vw"
-          placeHolder="@username"
+          placeHolder={user.username || "@username"}
           name="username"
           type="text"
           leftIcon={faUser}
@@ -93,7 +88,7 @@ const UserProfile = () => {
       <div className="flex row center full-width space-btw ">
         <Input
           width="37vw"
-          placeHolder="user/admin"
+          placeHolder={user.role || "user/admin"}
           name="Role"
           type="text"
           leftIcon={faUser}
@@ -101,7 +96,7 @@ const UserProfile = () => {
         />
         <Input
           width="37vw"
-          placeHolder="961-00-000000"
+          placeHolder={user.phone_number || "961-00-000000"}
           name="Phone Number"
           type="text"
           leftIcon={faPhone}
@@ -111,7 +106,7 @@ const UserProfile = () => {
       <div className="flex full-width gap column">
         <div>
           <Input
-            placeHolder="email@gamil.com"
+            placeHolder={user.email || "example@gamil.com"}
             name="Email"
             type="email"
             leftIcon={faEnvelope}
@@ -121,7 +116,7 @@ const UserProfile = () => {
         <div className="flex full-width row center space-btw ">
           <Input
             width="37vw"
-            placeHolder="password"
+            placeHolder={user.password || "password"}
             name="Password"
             type="password"
             leftIcon={faKey}
@@ -129,7 +124,7 @@ const UserProfile = () => {
           />
           <Input
             width="37vw"
-            placeHolder="password"
+            placeHolder={user.password || "password"}
             name="Confirmed-Password"
             type="password"
             leftIcon={faKey}
@@ -157,11 +152,11 @@ const UserProfile = () => {
           onClick={handleCancel}
         />
         <Button
-          placeHolder="Save"
+          placeHolder={user.id ? "save" : "create"}
           backgroundColor="primary"
           width="10vw"
           textColor="white"
-          onClick={createuser}
+          onClick={handleSave}
         />
       </div>
     </div>
