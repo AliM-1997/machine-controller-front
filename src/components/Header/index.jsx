@@ -16,14 +16,14 @@ const Header = ({ pageName, showChooseInput }) => {
       <div className="flex row gap">
         <h1>{pageName}</h1>
         <Input
-          width="200px"
+          width="15vw"
           rightIcon={faAngleDown}
           placeHolder="choose"
           hidden={!showChooseInput}
         />
       </div>
       <div className="flex header-left">
-        <Input width="300px" leftIcon={faSearch} rightIcon={faList} />
+        <Input width="20vw" leftIcon={faSearch} rightIcon={faList} />
         <div className="flex center h-icon">
           <Icon icon={faBell} />
           <Icon icon={faUser} />
