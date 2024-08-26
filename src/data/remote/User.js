@@ -19,6 +19,7 @@ export const Users = {
         route: `/user/${user}`,
         requestMethod: RequestMethods.DELETE,
       });
+      return data;
     } catch (error) {
       throw error;
     }
@@ -34,6 +35,20 @@ export const Users = {
       throw error;
     }
   },
-  //   EditeUser,
+  CreateUser: async (formData) => {
+    try {
+      const data = await requestApi({
+        route: "/user",
+        requestMethod: RequestMethods.POST,
+        body: formData,
+      });
+      console.log("User created:", data);
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
+
   //   CreateUser,
 };
