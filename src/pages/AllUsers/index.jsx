@@ -116,9 +116,9 @@ const AllUsers = () => {
               allUsers.map((user) => (
                 <tr key={user.id}>
                   <td>
-                    <div className=" ">
+                    <div className=" flex gap">
                       <DisplayImage url={user.image_path} />
-                      {user.name}
+                      <div className=" flex center">{user.name}</div>
                     </div>
                   </td>
                   <td>{user.id}</td>
