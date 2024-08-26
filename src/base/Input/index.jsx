@@ -9,7 +9,7 @@ const Input = ({
   backgroundColor = "white",
   textColor = "black",
   type = "text",
-  value = "",
+  // value,
   width = "",
   onChange,
   onClick,
@@ -38,7 +38,7 @@ const Input = ({
           type={type}
           className={` input-field ${textColorClass}`}
           placeholder={placeHolder}
-          value={value}
+          // value={value}
           onChange={onChange}
         />
         <Icon icon={rightIcon} />
