@@ -74,17 +74,16 @@ const UserProfile = () => {
           leftIcon={faPhone}
         />
       </div>
-      <div className="flex gap column">
+      <div className="flex full-width gap column">
         <div>
           <Input
             placeHolder="email@gamil.com"
             name="Email"
-            width="full-width"
             type="email"
             leftIcon={faEnvelope}
           />
         </div>
-        <div className="flex row center full-width space-btw ">
+        <div className="flex full-width row center space-btw ">
           <Input
             width="37vw"
             placeHolder="password"
@@ -101,13 +100,26 @@ const UserProfile = () => {
           />
         </div>
       </div>
-      <div>
+      <div className="full-width">
         <Input
           placeHolder="location"
           name="Location"
-          width="full-width"
           leftIcon={faLocation}
           type="text"
+        />
+      </div>
+      <div className="flex end gap">
+        <Button
+          placeHolder="Cancel"
+          backgroundColor="primary"
+          width="10vw"
+          textColor="white"
+        />
+        <Button
+          placeHolder="Save"
+          backgroundColor="primary"
+          width="10vw"
+          textColor="white"
         />
       </div>
     </div>
