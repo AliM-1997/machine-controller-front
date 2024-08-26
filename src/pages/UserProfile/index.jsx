@@ -5,7 +5,7 @@ import Input from "../../base/Input";
 import Button from "../../base/Button";
 const UserProfile = () => {
   return (
-    <div className="flex column userProfile-container gap page">
+    <div className="flex column userProfile-container gap ">
       <div>
         <h2>
           <Label placeholder="User Profile" fontWeight="bold" />
@@ -36,12 +36,40 @@ const UserProfile = () => {
         </div>
       </div>
       <div className="flex row center full-width space-btw ">
-        <Input width="35vw" placeHolder="name" name="Name" />
-        <Input width="35vw" placeHolder="@username" name="username" />
+        <Input width="37vw" placeHolder="name" name="Name" />
+        <Input width="37vw" placeHolder="@username" name="username" />
       </div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div className="flex row center full-width space-btw ">
+        <Input width="37vw" placeHolder="user/admin" name="Role" />
+        <Input width="37vw" placeHolder="961-00-000000" name="Phone Number" />
+      </div>
+      <div className="flex gap column">
+        <div>
+          <Input
+            placeHolder="email@gamil.com"
+            name="Email"
+            width="full-width"
+            type="email"
+          />
+        </div>
+        <div className="flex row center full-width space-btw ">
+          <Input
+            width="37vw"
+            placeHolder="password"
+            name="Password"
+            type="password"
+          />
+          <Input
+            width="37vw"
+            placeHolder="password"
+            name="Confirmed-Password"
+            type="password"
+          />
+        </div>
+      </div>
+      <div>
+        <Input placeHolder="location" name="Location" />
+      </div>
     </div>
   );
 };
