@@ -13,9 +13,11 @@ import {
 import { Users } from "../../data/remote/User";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import DisplayImage from "../../base/DisplayImage";
 
 const UserProfile = () => {
   const user = useSelector((global) => global.user);
+  console.log("12343213432", user);
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -25,6 +27,7 @@ const UserProfile = () => {
     password: "",
     password_confirmation: "",
     location: "",
+    image_path: "",
   });
   useEffect(() => {
     if (user) {
@@ -37,6 +40,7 @@ const UserProfile = () => {
         password: "",
         password_confirmation: "",
         location: user.location || "",
+        image_path: user.image_path || "",
       });
     }
   }, [user]);
@@ -52,7 +56,7 @@ const UserProfile = () => {
       [key]: value,
     });
   };
-
+  console.log("from user profile", user.image_path);
   const handleSave = async () => {
     if (user.id) {
       const updatedData = await Users.UpdateUser(user.id, formData);
@@ -70,9 +74,15 @@ const UserProfile = () => {
         </h2>
       </div>
       <div className="flex full-width space-btw">
-        <div className="flex center gap">
-          <div>image</div>
-          <div className="flex column ">
+        <div className="flex  gap">
+          <div clas>
+            <DisplayImage
+              width="70px"
+              heigth="70px"
+              url={user.image_path || "image"}
+            />
+          </div>
+          <div className="flex column">
             <Label placeholder={user.name || "Name"} />
             <Label placeholder={user.role || "Role"} />
             <Label placeholder={user.email || "email"} />

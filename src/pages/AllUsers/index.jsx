@@ -18,12 +18,12 @@ const AllUsers = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [searchUserId, setUserSearchId] = useState("");
   const navigate = useNavigate();
-
   const handleCreate = () => {
     navigate("/userProfile");
   };
   const handleEdit = async (id) => {
     const user = allUsers.find((user) => user.id === id);
+    console.log("alluser->user", user.image_path);
     dispatch(
       updateUser({
         id: user.id,
@@ -32,6 +32,7 @@ const AllUsers = () => {
         email: user.email,
         location: user.location,
         role: user.role,
+        image_path: user.image_path,
       })
     );
     navigate("/userprofile");
