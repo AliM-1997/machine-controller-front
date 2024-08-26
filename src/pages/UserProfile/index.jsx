@@ -3,6 +3,13 @@ import "./style.css";
 import Label from "../../base/Label";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
+import {
+  faEnvelope,
+  faKey,
+  faLocation,
+  faPhone,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 const UserProfile = () => {
   return (
     <div className="flex column userProfile-container gap ">
@@ -36,12 +43,36 @@ const UserProfile = () => {
         </div>
       </div>
       <div className="flex row center full-width space-btw ">
-        <Input width="37vw" placeHolder="name" name="Name" />
-        <Input width="37vw" placeHolder="@username" name="username" />
+        <Input
+          width="37vw"
+          placeHolder="name"
+          name="Name"
+          type="text"
+          leftIcon={faUser}
+        />
+        <Input
+          width="37vw"
+          placeHolder="@username"
+          name="username"
+          type="text"
+          leftIcon={faUser}
+        />
       </div>
       <div className="flex row center full-width space-btw ">
-        <Input width="37vw" placeHolder="user/admin" name="Role" />
-        <Input width="37vw" placeHolder="961-00-000000" name="Phone Number" />
+        <Input
+          width="37vw"
+          placeHolder="user/admin"
+          name="Role"
+          type="text"
+          leftIcon={faUser}
+        />
+        <Input
+          width="37vw"
+          placeHolder="961-00-000000"
+          name="Phone Number"
+          type="text"
+          leftIcon={faPhone}
+        />
       </div>
       <div className="flex gap column">
         <div>
@@ -50,6 +81,7 @@ const UserProfile = () => {
             name="Email"
             width="full-width"
             type="email"
+            leftIcon={faEnvelope}
           />
         </div>
         <div className="flex row center full-width space-btw ">
@@ -58,17 +90,25 @@ const UserProfile = () => {
             placeHolder="password"
             name="Password"
             type="password"
+            leftIcon={faKey}
           />
           <Input
             width="37vw"
             placeHolder="password"
             name="Confirmed-Password"
             type="password"
+            leftIcon={faKey}
           />
         </div>
       </div>
       <div>
-        <Input placeHolder="location" name="Location" />
+        <Input
+          placeHolder="location"
+          name="Location"
+          width="full-width"
+          leftIcon={faLocation}
+          type="text"
+        />
       </div>
     </div>
   );
