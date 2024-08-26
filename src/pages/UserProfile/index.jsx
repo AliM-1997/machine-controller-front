@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
-const index = () => {
+const UserProfile = () => {
   return <div>hello from user profile</div>;
 };
 
-export default index;
+export default UserProfile;

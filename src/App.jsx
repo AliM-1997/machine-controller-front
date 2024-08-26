@@ -11,6 +11,7 @@ import Tasks from "./pages/Tasks";
 import Predictions from "./pages/Predictions";
 import Alerts from "./pages/Alerts";
 import AllUsers from "./pages/AllUsers";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="Predictions" element={<Predictions />} />
             <Route path="alerts" element={<Alerts />} />
             <Route path="allUsers" element={<AllUsers />} />
+            <Route path="userProfile" element={<UserProfile />} />
           </Route>
         </Routes>
       </BrowserRouter>
