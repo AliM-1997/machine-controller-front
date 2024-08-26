@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import Label from "../../base/Label";
 import Input from "../../base/Input";
@@ -26,6 +26,20 @@ const UserProfile = () => {
     password_confirmation: "",
     location: "",
   });
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        name: user.name || "",
+        username: user.username || "",
+        role: user.role || "user",
+        phone_number: user.phone_number || "",
+        email: user.email || "",
+        password: "",
+        password_confirmation: "",
+        location: user.location || "",
+      });
+    }
+  }, [user]);
   const navigate = useNavigate();
 
   const handleCancel = () => {
@@ -41,7 +55,7 @@ const UserProfile = () => {
 
   const handleSave = async () => {
     if (user.id) {
-      const updatedData = await Users.UpdateUser(user.id, user);
+      const updatedData = await Users.UpdateUser(user.id, formData);
     } else {
       const createdData = await Users.CreateUser(formData);
     }
