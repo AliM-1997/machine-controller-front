@@ -11,6 +11,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { Users } from "../../data/remote/User";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,12 @@ const UserProfile = () => {
     password_confirmation: "",
     location: "",
   });
-  console.log(formData);
+  const navigate = useNavigate();
+
+  const handleCancel = () => {
+    navigate("/allUsers");
+  };
+
   const handleFormData = (key, value) => {
     setFormData({
       ...formData,
@@ -148,6 +154,7 @@ const UserProfile = () => {
           backgroundColor="primary"
           width="10vw"
           textColor="white"
+          onClick={handleCancel}
         />
         <Button
           placeHolder="Save"
