@@ -14,6 +14,7 @@ import AllUsers from "./pages/AllUsers";
 import UserProfile from "./pages/UserProfile";
 import { Provider } from "react-redux";
 import store from "./data/redux/store";
+import AddTask from "./pages/AddTask/indefx";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path="alerts" element={<Alerts />} />
               <Route path="allUsers" element={<AllUsers />} />
               <Route path="userProfile" element={<UserProfile />} />
+              <Route path="addTask" element={<AddTask />} />
             </Route>
           </Routes>
         </BrowserRouter>
