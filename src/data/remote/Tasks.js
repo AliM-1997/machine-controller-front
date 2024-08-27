@@ -25,4 +25,17 @@ export const Tasks = {
       throw error;
     }
   },
+  UpdateTask: async (id, formData) => {
+    try {
+      const data = await requestApi({
+        route: `/task/${id}`,
+        requestMethod: RequestMethods.PUT,
+        body: formData,
+      });
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
 };

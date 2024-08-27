@@ -51,8 +51,6 @@ export const Users = {
   },
 
   UpdateUser: async (id, formData) => {
-    console.log("asfhakjsdafs", formData);
-    console.log(id);
     try {
       const data = await requestApi({
         route: `/user/${id}`,
