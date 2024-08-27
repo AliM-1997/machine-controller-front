@@ -2,8 +2,9 @@ import React from "react";
 import "./style.css";
 import Label from "../../base/Label";
 import Button from "../../base/Button";
+import { Tasks } from "../../data/remote/Tasks";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
-const Tasks = () => {
+const AllTasks = () => {
   return (
     <div className="flex column  gap task-container">
       <div>
@@ -80,4 +81,4 @@ const Tasks = () => {
   );
 };
 
-export default Tasks;
+export default AllTasks;
