@@ -1,5 +1,6 @@
 .task-container {
   padding: 30px;
+  overflow: auto;
 }
 
 .alltask {

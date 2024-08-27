@@ -104,7 +104,7 @@ const AllUsers = () => {
           <thead>
             <tr>
               <th>Employee Name</th>
-              <th>Employee Id</th>
+              <th>Id</th>
               <th>Username</th>
               <th>Role</th>
               <th>Done Task</th>

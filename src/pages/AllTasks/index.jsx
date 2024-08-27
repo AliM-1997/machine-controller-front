@@ -10,7 +10,7 @@ const AllTasks = () => {
   useEffect(() => {
     const handleGetAllTasks = async () => {
       const data = await Tasks.GetAllTasks();
-      setAllTasks(data);
+      setAllTasks(data.task);
       console.log("data form handle", data);
     };
     handleGetAllTasks();
@@ -73,14 +73,22 @@ const AllTasks = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>task_id</td>
-                  <td>machine_id</td>
-                  <td>user_id</td>
-                  <td>Assigned_Date</td>
-                  <td>Dute_date</td>
-                  <td>status</td>
-                </tr>
+                {allTasks.length > 0 ? (
+                  allTasks.map((task) => (
+                    <tr key={task.id}>
+                      <td>{task.id}</td>
+                      <td>{task.machine_id}</td>
+                      <td>{task.user_id}</td>
+                      <td>{task.assignedDate}</td>
+                      <td>{task.dueDate}</td>
+                      <td>{task.status}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="7">No tasks found</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
