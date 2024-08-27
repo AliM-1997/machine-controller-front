@@ -19,6 +19,8 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactDate from "../../base/ReactDate";
 import { useNavigate } from "react-router-dom";
 import { clearTask } from "../../data/redux/taskSlice";
+import { Tasks } from "../../data/remote/Tasks";
+
 const AddTask = () => {
   const task = useSelector((global) => global.task);
   const [formData, setFormData] = useState({
@@ -26,21 +28,21 @@ const AddTask = () => {
     machine_id: "",
     spare_part_id: "",
     jobDescription: "",
-    assignedDate: "",
-    dueDate: "",
+    assignedDate: null,
+    dueDate: null,
     status: "",
     location: "",
   });
-  console.log("formdata:", formData);
   useEffect(() => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       ...task,
+      assignedDate: task.assignedDate ? new Date(task.assignedDate) : null,
+      dueDate: task.dueDate ? new Date(task.dueDate) : null,
     }));
   }, [task]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log("formdata", formData);
   const ChangingFormIput = (key, value) => {
     setFormData({
       ...formData,
@@ -51,6 +53,29 @@ const AddTask = () => {
     dispatch(clearTask());
     navigate("/tasks");
   };
+
+  const convertToDatabaseFormat = (date) => {
+    if (date instanceof Date && !isNaN(date.getTime())) {
+      return date.toISOString().slice(0, 19).replace("T", " ");
+    } else {
+      console.error("Invalid date:", date);
+      return "";
+    }
+  };
+  const handleCreateTask = async () => {
+    const dataToSend = {
+      ...formData,
+      assignedDate: convertToDatabaseFormat(formData.assignedDate),
+      dueDate: convertToDatabaseFormat(formData.dueDate),
+    };
+    try {
+      const response = await Tasks.CreateTask(dataToSend);
+      console.log("Task created:", response);
+    } catch (error) {
+      console.error("Error creating task:", error);
+    }
+  };
+
   return (
     <div className="flex column gap addTask-container">
       <div className="flex space-btw">
@@ -105,14 +130,22 @@ const AddTask = () => {
           leftIcon={faCalendarDays}
           width="37vw"
           name="Assigned Date"
-          placeHolder={task.assignedDate || "dd/MM/yyyy"}
+          placeHolder={
+            formData.assignedDate
+              ? formData.assignedDate.toISOString().slice(0, 10)
+              : "dd/MM/yyyy"
+          }
           onChange={(e) => ChangingFormIput("assignedDate", e)}
         />
         <ReactDate
           leftIcon={faCalendarDays}
           width="37vw"
           name="Due Date"
-          placeHolder={task.dueDate || "dd/MM/yyyy"}
+          placeHolder={
+            formData.dueDate
+              ? formData.dueDate.toISOString().slice(0, 10)
+              : "dd/MM/yyyy"
+          }
           onChange={(e) => ChangingFormIput("dueDate", e)}
         />
       </div>
@@ -142,10 +175,11 @@ const AddTask = () => {
           textColor="white"
         />
         <Button
-          placeHolder="save"
+          placeHolder="Save"
           backgroundColor="primary"
           width="10vw"
           textColor="white"
+          onClick={handleCreateTask}
         />
       </div>
     </div>
