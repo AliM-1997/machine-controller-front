@@ -20,10 +20,16 @@ const Header = ({ pageName, showChooseInput }) => {
           rightIcon={faAngleDown}
           placeHolder="choose"
           hidden={!showChooseInput}
+          required={false}
         />
       </div>
       <div className="flex header-left">
-        <Input width="20vw" leftIcon={faSearch} rightIcon={faList} />
+        <Input
+          width="20vw"
+          leftIcon={faSearch}
+          rightIcon={faList}
+          required={false}
+        />
         <div className="flex center h-icon">
           <Icon icon={faBell} />
           <Icon icon={faUser} />
