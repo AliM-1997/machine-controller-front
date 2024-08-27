@@ -18,8 +18,8 @@ import Date from "../../base/ReactDate";
 import Button from "../../base/Button";
 import { useSelector } from "react-redux";
 const AddTask = () => {
-  const state = useSelector((global) => global);
-  console.log(" from add task", state);
+  const task = useSelector((global) => global.task);
+  console.log(" from add task", task);
   return (
     <div className="flex column gap addTask-container">
       <div className="flex space-btw">
@@ -30,16 +30,16 @@ const AddTask = () => {
       </div>
       <div className="flex row center space-btw full-width">
         <Input
-          name="Machine"
-          placeHolder="choose machine "
+          name="Machine_id"
+          placeHolder={task.machine_id || "choose machine "}
           leftIcon={faGear}
           rightIcon={faAngleDown}
           width="37vw"
           type="text"
         />
         <Input
-          name="user"
-          placeHolder="choose user"
+          name="user_id"
+          placeHolder={task.user_id || "choose user"}
           leftIcon={faUser}
           rightIcon={faAngleDown}
           width="37vw"
@@ -49,15 +49,16 @@ const AddTask = () => {
       <div className="flex row center space-btw full-width">
         <Input
           name="Spare Part"
-          placeHolder="choose sparePart "
+          placeHolder={task.spare_part_id || "choose sparePart "}
           leftIcon={faTools}
           rightIcon={faAngleDown}
           width="37vw"
           type="text"
+          required={false}
         />
         <Input
           name="status"
-          placeHolder="pending"
+          placeHolder={task.status || "pending"}
           leftIcon={faInfoCircle}
           rightIcon={faAngleDown}
           width="37vw"
@@ -65,12 +66,22 @@ const AddTask = () => {
         />
       </div>
       <div className="flex row center space-btw full-width">
-        <Date leftIcon={faCalendarDays} width="37vw" name="Assigned Date" />
-        <Date leftIcon={faCalendarDays} width="37vw" name="Due Date" />
+        <Date
+          leftIcon={faCalendarDays}
+          width="37vw"
+          name="Assigned Date"
+          placeHolder={task.assignedDate || "dd/MM/yyyy}"}
+        />
+        <Date
+          leftIcon={faCalendarDays}
+          width="37vw"
+          name="Due Date"
+          placeHolder={task.dueDate || "dd/MM/yyyy"}
+        />
       </div>
       <div className="full-width">
         <Input
-          placeHolder="location"
+          placeHolder={task.location || "location"}
           name="Location"
           leftIcon={faLocation}
           type="text"
@@ -78,7 +89,7 @@ const AddTask = () => {
       </div>
       <div className="full-width">
         <Input
-          placeHolder="task"
+          placeHolder={task.jobDescription || "task"}
           name="Job Description"
           leftIcon={faClipboard}
           type="text"
