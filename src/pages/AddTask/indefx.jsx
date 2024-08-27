@@ -16,7 +16,10 @@ import {
 import Input from "../../base/Input";
 import Date from "../../base/ReactDate";
 import Button from "../../base/Button";
+import { useSelector } from "react-redux";
 const AddTask = () => {
+  const state = useSelector((global) => global);
+  console.log(" from add task", state);
   return (
     <div className="flex column gap addTask-container">
       <div className="flex space-btw">
