@@ -6,11 +6,16 @@ import { Tasks } from "../../data/remote/Tasks";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import HighlightLabel from "../../base/HighlightLable";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loadTask } from "../../data/redux/taskSlice";
+
 const AllTasks = () => {
+  const dispatch = useDispatch();
   const [allTasks, setAllTasks] = useState([]);
   const navigate = useNavigate();
   const handleEditNavigate = async (id) => {
     const task = allTasks.find((task) => task.id === id);
+    dispatch(loadTask(task));
     navigate("/addTask");
   };
   useEffect(() => {
