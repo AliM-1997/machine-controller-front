@@ -19,7 +19,24 @@ import Button from "../../base/Button";
 import { useSelector } from "react-redux";
 const AddTask = () => {
   const task = useSelector((global) => global.task);
-  console.log(" from add task", task);
+  // console.log(" from add task", task);
+  const [formData, setFormData] = useState({
+    user_id: "",
+    machine_id: "",
+    spare_part_id: "",
+    jobDescription: "",
+    assignedDate: "",
+    dueDate: "",
+    status: "",
+    location: "",
+  });
+  console.log("formdata", formData);
+  const ChangingFormIput = (key, value) => {
+    setFormData({
+      ...formData,
+      [key]: value,
+    });
+  };
   return (
     <div className="flex column gap addTask-container">
       <div className="flex space-btw">
@@ -36,6 +53,7 @@ const AddTask = () => {
           rightIcon={faAngleDown}
           width="37vw"
           type="text"
+          onChange={(e) => ChangingFormIput("machine_id", e.target.value)}
         />
         <Input
           name="user_id"
