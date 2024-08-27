@@ -29,8 +29,8 @@ const AllTasks = () => {
         </h2>
       </div>
       <div></div>
-      <div className="flex column white-bg alltask">
-        <div>
+      <div className="flex column white-bg alltask ">
+        <div className="flex column gap">
           <div className="flex space-btw white-bg center ">
             <div>
               <Label
@@ -75,7 +75,7 @@ const AllTasks = () => {
                   <th>Employee</th>
                   <th>Assigned Date</th>
                   <th>Due Date</th>
-                  <th>Status</th>
+                  <th className="center-text">Status</th>
                 </tr>
               </thead>
               <tbody>
