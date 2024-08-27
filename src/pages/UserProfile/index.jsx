@@ -81,6 +81,18 @@ const UserProfile = () => {
       reader.readAsDataURL(file);
     }
   };
+
+  const handleUploadImage = async () => {
+    if (selectedImage) {
+      try {
+        await Users.UploadImage(selectedImage, user.id);
+        alert("Image uploaded successfully!");
+      } catch (error) {
+        console.error("Error uploading image:", error.message);
+        alert("Failed to upload image.");
+      }
+    }
+  };
   return (
     <div className="flex column userProfile-container gap ">
       <div>
@@ -90,13 +102,21 @@ const UserProfile = () => {
       </div>
       <div className="flex full-width space-btw">
         <div className="flex  gap">
-          <div clas>
-            <DisplayImage
-              width="70px"
-              heigth="70px"
-              url={user.image_path || "image"}
+          <div className="image">
+            {user.image_path !== "" && imagePreview == null ? (
+              <DisplayImage url={user.image_path} width="70px" heigth="70px" />
+            ) : (
+              <img
+                src={imagePreview || "path-to-default-image.jpg"}
+                className="image"
+                alt="user"
+              />
+            )}
+            <input
+              type="file"
+              onChange={handleFileChange}
+              style={{ display: "" }}
             />
-            <input type="file" onChange={handleFileChange} />
           </div>
           <div className="flex column">
             <Label placeholder={user.name || "Name"} />
@@ -110,6 +130,7 @@ const UserProfile = () => {
             width="15vw"
             textColor="white"
             backgroundColor="primary"
+            onClick={handleUploadImage}
           />
           <Button
             placeHolder="add"
