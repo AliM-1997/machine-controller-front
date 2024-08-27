@@ -55,7 +55,6 @@ const UserProfile = () => {
       [key]: value,
     });
   };
-  console.log("from user profile", user.image_path);
   const handleSave = async () => {
     if (user.id) {
       const updatedData = await Users.UpdateUser(user.id, formData);
@@ -91,6 +90,19 @@ const UserProfile = () => {
         console.error("Error uploading image:", error.message);
         alert("Failed to upload image.");
       }
+    }
+  };
+  const handleDeleteImage = async () => {
+    try {
+      await Users.DeleteImage(user.id);
+      setFormData({ ...formData, image_path: "" });
+      setImagePreview(null);
+      console.log("formdata after rendering", formData.image_path);
+
+      alert("Image deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting image:", error.message);
+      alert("Failed to delete image.");
     }
   };
   return (
@@ -133,10 +145,11 @@ const UserProfile = () => {
             onClick={handleUploadImage}
           />
           <Button
-            placeHolder="add"
+            placeHolder="delete"
             width="10vw"
             textColor="white"
             backgroundColor="primary"
+            onClick={handleDeleteImage}
           />
         </div>
       </div>
