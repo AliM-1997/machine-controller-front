@@ -104,7 +104,7 @@ const AllUsers = () => {
           <thead>
             <tr>
               <th>Employee Name</th>
-              <th>Id</th>
+              <th>Employee Id</th>
               <th>Username</th>
               <th>Role</th>
               <th>Done Task</th>
@@ -127,7 +127,7 @@ const AllUsers = () => {
                   <td>{user.role}</td>
                   <td>{user.doneTask}</td>
                   <td>{user.pendingTask}</td>
-                  <td className="flex  gap">
+                  <td className="flex  gap icons-de">
                     <Icon
                       icon={faPenToSquare}
                       color="#00b7eb"

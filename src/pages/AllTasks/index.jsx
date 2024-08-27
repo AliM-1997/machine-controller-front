@@ -5,9 +5,14 @@ import Button from "../../base/Button";
 import { Tasks } from "../../data/remote/Tasks";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import HighlightLabel from "../../base/HighlightLable";
+import { useNavigate } from "react-router-dom";
 const AllTasks = () => {
   const [allTasks, setAllTasks] = useState([]);
-  console.log("alltasks", allTasks);
+  const navigate = useNavigate();
+  const handleEditNavigate = async (id) => {
+    const task = allTasks.find((task) => task.id === id);
+    navigate("/addTask");
+  };
   useEffect(() => {
     const handleGetAllTasks = async () => {
       const data = await Tasks.GetAllTasks();
@@ -77,7 +82,9 @@ const AllTasks = () => {
                 {allTasks.length > 0 ? (
                   allTasks.map((task) => (
                     <tr key={task.id}>
-                      <td>{task.id}</td>
+                      <td onClick={() => handleEditNavigate(task.id)}>
+                        {task.id}
+                      </td>
                       <td>{task.machine_id}</td>
                       <td>{task.user_id}</td>
                       <td>{task.assignedDate}</td>
