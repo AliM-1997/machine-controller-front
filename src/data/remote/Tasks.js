@@ -1,3 +1,4 @@
+import { de } from "date-fns/locale";
 import { requestApi } from "../../utils/request";
 import { RequestMethods } from "../../utils/request_methods";
 
@@ -31,6 +32,18 @@ export const Tasks = {
         route: `/task/${id}`,
         requestMethod: RequestMethods.PUT,
         body: formData,
+      });
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
+  DeleteTask: async (id) => {
+    try {
+      const data = await requestApi({
+        route: `/task/${id}`,
+        requestMethod: RequestMethods.DELETE,
       });
       return data;
     } catch (error) {
