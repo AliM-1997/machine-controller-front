@@ -6,6 +6,7 @@ import {
   faAngleDown,
   faAngleLeft,
   faCalendarDays,
+  faClipboard,
   faGear,
   faLocation,
   faUser,
@@ -51,7 +52,14 @@ const AddTask = () => {
           type="text"
         />
       </div>
-      <div></div>
+      <div className="full-width">
+        <Input
+          placeHolder="task"
+          name="Job Description"
+          leftIcon={faClipboard}
+          type="text"
+        />
+      </div>
     </div>
   );
 };
