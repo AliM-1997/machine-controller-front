@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Input from "../../base/Input";
 import Date from "../../base/ReactDate";
+import Button from "../../base/Button";
 const AddTask = () => {
   return (
     <div className="flex column gap addTask-container">
@@ -58,6 +59,20 @@ const AddTask = () => {
           name="Job Description"
           leftIcon={faClipboard}
           type="text"
+        />
+      </div>
+      <div className="flex end gap">
+        <Button
+          placeHolder="Delete"
+          width="10vw"
+          backgroundColor="primary"
+          textColor="white"
+        />
+        <Button
+          placeHolder="save"
+          backgroundColor="primary"
+          width="10vw"
+          textColor="white"
         />
       </div>
     </div>
