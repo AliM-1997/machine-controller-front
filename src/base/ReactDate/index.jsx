@@ -1,6 +1,6 @@
 import React from "react";
 ("./style.css");
-const Date = ({
+const ReactDate = ({
   placeHolder = "Select a date",
   leftIcon = null,
   rightIcon = null,
@@ -11,7 +11,36 @@ const Date = ({
   name = "",
   border = true,
 }) => {
-  return <div></div>;
+  const backgroundColorClass = `${backgroundColor}-bg`;
+  const textColorClass = `${textColor}-txt`;
+  const borderClass = border ? "border" : "";
+  return (
+    <div>
+      {name && (
+        <div>
+          <label className={`bold ${textColorClass}`} style={{ width: width }}>
+            {name}
+          </label>
+        </div>
+      )}
+      <div
+        className={`input-container ${backgroundColorClass} ${borderClass}`}
+        style={{ width: width }}
+      >
+        <DatePicker
+          className={`input-field ${textColorClass}`}
+          selected={date}
+          onChange={(date) => {
+            setDate(date);
+            if (onChange) onChange(date);
+          }}
+          dateFormat="dd/MM/yyyy"
+          placeholderText={placeHolder}
+          minDate={new Date()}
+        />
+      </div>
+    </div>
+  );
 };
 
-export default Date;
+export default ReactDate;
