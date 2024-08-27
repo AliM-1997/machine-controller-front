@@ -12,9 +12,9 @@ const Tasks = () => {
         </h2>
       </div>
       <div></div>
-      <div>
+      <div className="flex column white-bg alltask">
         <div>
-          <div className="flex space-btw white-bg center alltask">
+          <div className="flex space-btw white-bg center ">
             <div>
               <Label
                 placeholder="status"
@@ -49,7 +49,20 @@ const Tasks = () => {
               />
             </div>
           </div>
-          <div></div>
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Ticket ID</th>
+                  <th>Machine ID</th>
+                  <th>Employee</th>
+                  <th>Assigned Date</th>
+                  <th>Due Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
         </div>
         <div></div>
       </div>
