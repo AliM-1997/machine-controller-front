@@ -14,6 +14,7 @@ const ReactDate = ({
   onChange,
   name = "",
   border = true,
+  required = true,
 }) => {
   const [date, setDate] = useState(null);
 
@@ -27,6 +28,7 @@ const ReactDate = ({
         <div>
           <label className={`bold ${textColorClass}`} style={{ width: width }}>
             {name}
+            {required && <span className="required">*</span>}
           </label>
         </div>
       )}

@@ -13,3 +13,7 @@
   width: 100%;
   color: inherit;
 }
+.required {
+  color: red;
+  margin-left: 4px;
+}

@@ -15,6 +15,7 @@ const Input = ({
   name = "",
   hidden = false,
   error,
+  required = true,
 }) => {
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
@@ -26,6 +27,7 @@ const Input = ({
       <div>
         <label className="bold black-txt " style={{ width: width }}>
           {name}
+          {required && <span className="required">*</span>}
         </label>
       </div>
       <div
