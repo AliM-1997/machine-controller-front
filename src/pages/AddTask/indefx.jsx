@@ -76,9 +76,17 @@ const AddTask = () => {
     } else {
       const createData = await Tasks.CreateTask(dataToSend);
       if (createData) {
-        alert("Task created Successfully");
+        alert("Task Created Successfully");
       }
     }
+  };
+  const handleDeleteTask = async () => {
+    const data = await Tasks.DeleteTask(task.id);
+    dispatch(clearTask());
+    if (data === "") {
+      alert("Task Deleted Successfully");
+    }
+    navigate("/tasks");
   };
 
   return (
@@ -178,6 +186,7 @@ const AddTask = () => {
           width="10vw"
           backgroundColor="primary"
           textColor="white"
+          onClick={handleDeleteTask}
         />
         <Button
           placeHolder="Save"
