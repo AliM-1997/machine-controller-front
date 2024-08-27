@@ -61,6 +61,16 @@ const Tasks = () => {
                   <th>Status</th>
                 </tr>
               </thead>
+              <tbody>
+                <tr>
+                  <td>task_id</td>
+                  <td>machine_id</td>
+                  <td>user_id</td>
+                  <td>Assigned_Date</td>
+                  <td>Dute_date</td>
+                  <td>status</td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
