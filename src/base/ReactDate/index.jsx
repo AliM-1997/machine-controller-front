@@ -1,5 +1,9 @@
-import React from "react";
-("./style.css");
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "./style.css";
+import Icon from "../Icon";
+
 const ReactDate = ({
   placeHolder = "Select a date",
   leftIcon = null,
@@ -11,9 +15,12 @@ const ReactDate = ({
   name = "",
   border = true,
 }) => {
+  const [date, setDate] = useState(null);
+
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
   const borderClass = border ? "border" : "";
+
   return (
     <div>
       {name && (
@@ -27,6 +34,7 @@ const ReactDate = ({
         className={`input-container ${backgroundColorClass} ${borderClass}`}
         style={{ width: width }}
       >
+        <Icon icon={leftIcon} />
         <DatePicker
           className={`input-field ${textColorClass}`}
           selected={date}
@@ -38,6 +46,7 @@ const ReactDate = ({
           placeholderText={placeHolder}
           minDate={new Date()}
         />
+        <Icon icon={rightIcon} />
       </div>
     </div>
   );
