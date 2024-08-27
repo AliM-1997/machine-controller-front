@@ -7,6 +7,7 @@ import {
   faAngleLeft,
   faCalendarDays,
   faGear,
+  faLocation,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import Input from "../../base/Input";
@@ -20,8 +21,9 @@ const AddTask = () => {
         </h2>
         <Icon icon={faAngleLeft} />
       </div>
-      <div className="flex center gap full-width">
+      <div className="flex row center space-btw full-width">
         <Input
+          name="Machine"
           placeHolder="choose machine "
           leftIcon={faGear}
           rightIcon={faAngleDown}
@@ -29,6 +31,7 @@ const AddTask = () => {
           type="text"
         />
         <Input
+          name="user"
           placeHolder="choose user"
           leftIcon={faUser}
           rightIcon={faAngleDown}
@@ -36,21 +39,18 @@ const AddTask = () => {
           type="text"
         />
       </div>
-      <div className=" flex gap full-width center">
-        <Date
-          leftIcon={faCalendarDays}
-          width="37vw"
-          placeHolder=""
-          name="Assigned Date"
-        />
-        <Date
-          leftIcon={faCalendarDays}
-          width="37vw"
-          placeHolder=""
-          name="Due Date"
+      <div className="flex row center space-btw full-width">
+        <Date leftIcon={faCalendarDays} width="37vw" name="Assigned Date" />
+        <Date leftIcon={faCalendarDays} width="37vw" name="Due Date" />
+      </div>
+      <div className="full-width">
+        <Input
+          placeHolder="location"
+          name="Location"
+          leftIcon={faLocation}
+          type="text"
         />
       </div>
-      <div></div>
       <div></div>
     </div>
   );

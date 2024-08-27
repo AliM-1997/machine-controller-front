@@ -5,7 +5,7 @@ import "./style.css";
 import Icon from "../Icon";
 
 const ReactDate = ({
-  placeHolder = "Select a date",
+  placeHolder = "dd/MM/yyyy",
   leftIcon = null,
   rightIcon = null,
   backgroundColor = "white",
