@@ -24,6 +24,9 @@
 .Lblue-bg {
   background-color: #ccd2ff;
 }
+.Lorange-bg {
+  background-color: rgb(248, 217, 160);
+}
 
 .white-txt {
   color: white;
@@ -38,10 +41,13 @@
   color: #34c600;
 }
 .yellow-txt {
-  background-color: #fff620;
+  color: #fff620;
 }
 .blue-txt {
-  background-color: #4d61fd;
+  color: #4d61fd;
+}
+.orange-txt {
+  color: rgb(255, 166, 0);
 }
 
 .primary-color {

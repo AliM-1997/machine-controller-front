@@ -4,6 +4,7 @@ import Label from "../../base/Label";
 import Button from "../../base/Button";
 import { Tasks } from "../../data/remote/Tasks";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import HighlightLabel from "../../base/HighlightLable";
 const AllTasks = () => {
   const [allTasks, setAllTasks] = useState([]);
   console.log("alltasks", allTasks);
@@ -81,7 +82,7 @@ const AllTasks = () => {
                       <td>{task.user_id}</td>
                       <td>{task.assignedDate}</td>
                       <td>{task.dueDate}</td>
-                      <td>{task.status}</td>
+                      <td>{<HighlightLabel placeHolder={task.status} />}</td>
                     </tr>
                   ))
                 ) : (
