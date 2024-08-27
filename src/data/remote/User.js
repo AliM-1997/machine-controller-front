@@ -75,7 +75,18 @@ export const Users = {
         requestMethod: RequestMethods.POST,
         body: formData,
       });
-      console.log("Image uploaded", data);
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
+  DeleteImage: async (id) => {
+    try {
+      const data = await requestApi({
+        route: `/user/deleteImage/${id}`,
+        requestMethod: RequestMethods.DELETE,
+      });
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
