@@ -68,11 +68,16 @@ const AddTask = () => {
       assignedDate: convertToDatabaseFormat(formData.assignedDate),
       dueDate: convertToDatabaseFormat(formData.dueDate),
     };
-    try {
-      const response = await Tasks.CreateTask(dataToSend);
-      console.log("Task created:", response);
-    } catch (error) {
-      console.error("Error creating task:", error);
+    if (task.id) {
+      const updateDate = await Tasks.UpdateTask(task.id, dataToSend);
+      if (updateDate) {
+        alert("Task Updated Successfully");
+      }
+    } else {
+      const createData = await Tasks.CreateTask(dataToSend);
+      if (createData) {
+        alert("Task created Successfully");
+      }
     }
   };
 
