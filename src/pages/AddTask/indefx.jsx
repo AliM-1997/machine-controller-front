@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import Label from "../../base/Label";
 import Icon from "../../base/Icon";
@@ -14,13 +14,13 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import Input from "../../base/Input";
-import Date from "../../base/ReactDate";
 import Button from "../../base/Button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ReactDate from "../../base/ReactDate";
+import { useNavigate } from "react-router-dom";
+import { clearTask } from "../../data/redux/taskSlice";
 const AddTask = () => {
   const task = useSelector((global) => global.task);
-  // console.log(" from add task", task);
   const [formData, setFormData] = useState({
     user_id: "",
     machine_id: "",
@@ -31,6 +31,15 @@ const AddTask = () => {
     status: "",
     location: "",
   });
+  console.log("formdata:", formData);
+  useEffect(() => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      ...task,
+    }));
+  }, [task]);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   console.log("formdata", formData);
   const ChangingFormIput = (key, value) => {
     setFormData({
@@ -38,13 +47,17 @@ const AddTask = () => {
       [key]: value,
     });
   };
+  const navigateBack = () => {
+    dispatch(clearTask());
+    navigate("/tasks");
+  };
   return (
     <div className="flex column gap addTask-container">
       <div className="flex space-btw">
         <h2>
           <Label placeholder="Add/Edit Task" fontWeight="bold" />
         </h2>
-        <Icon icon={faAngleLeft} />
+        <Icon icon={faAngleLeft} onClick={navigateBack} />
       </div>
       <div className="flex row center space-btw full-width">
         <Input
