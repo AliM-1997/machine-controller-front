@@ -17,6 +17,7 @@ import Input from "../../base/Input";
 import Date from "../../base/ReactDate";
 import Button from "../../base/Button";
 import { useSelector } from "react-redux";
+import ReactDate from "../../base/ReactDate";
 const AddTask = () => {
   const task = useSelector((global) => global.task);
   // console.log(" from add task", task);
@@ -62,6 +63,7 @@ const AddTask = () => {
           rightIcon={faAngleDown}
           width="37vw"
           type="text"
+          onChange={(e) => ChangingFormIput("user_id", e.target.value)}
         />
       </div>
       <div className="flex row center space-btw full-width">
@@ -73,6 +75,7 @@ const AddTask = () => {
           width="37vw"
           type="text"
           required={false}
+          onChange={(e) => ChangingFormIput("spare_part_id", e.target.value)}
         />
         <Input
           name="status"
@@ -81,20 +84,23 @@ const AddTask = () => {
           rightIcon={faAngleDown}
           width="37vw"
           type="text"
+          onChange={(e) => ChangingFormIput("status", e.target.value)}
         />
       </div>
       <div className="flex row center space-btw full-width">
-        <Date
+        <ReactDate
           leftIcon={faCalendarDays}
           width="37vw"
           name="Assigned Date"
-          placeHolder={task.assignedDate || "dd/MM/yyyy}"}
+          placeHolder={task.assignedDate || "dd/MM/yyyy"}
+          onChange={(e) => ChangingFormIput("assignedDate", e)}
         />
-        <Date
+        <ReactDate
           leftIcon={faCalendarDays}
           width="37vw"
           name="Due Date"
           placeHolder={task.dueDate || "dd/MM/yyyy"}
+          onChange={(e) => ChangingFormIput("dueDate", e)}
         />
       </div>
       <div className="full-width">
@@ -103,6 +109,7 @@ const AddTask = () => {
           name="Location"
           leftIcon={faLocation}
           type="text"
+          onChange={(e) => ChangingFormIput("location", e.target.value)}
         />
       </div>
       <div className="full-width">
@@ -111,6 +118,7 @@ const AddTask = () => {
           name="Job Description"
           leftIcon={faClipboard}
           type="text"
+          onChange={(e) => ChangingFormIput("jobDescription", e.target.value)}
         />
       </div>
       <div className="flex end gap">
