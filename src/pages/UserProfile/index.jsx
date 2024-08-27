@@ -168,6 +168,7 @@ const UserProfile = () => {
           name="username"
           type="text"
           leftIcon={faUser}
+          required={false}
           onChange={(e) => handleFormData("username", e.target.value)}
         />
       </div>
@@ -178,6 +179,7 @@ const UserProfile = () => {
           name="Role"
           type="text"
           leftIcon={faUser}
+          required={false}
           onChange={(e) => handleFormData("role", e.target.value)}
         />
         <Input
@@ -186,6 +188,7 @@ const UserProfile = () => {
           name="Phone Number"
           type="text"
           leftIcon={faPhone}
+          required={false}
           onChange={(e) => handleFormData("phone_number", e.target.value)}
         />
       </div>
@@ -226,6 +229,7 @@ const UserProfile = () => {
           name="Location"
           leftIcon={faLocation}
           type="text"
+          required={false}
           onChange={(e) => handleFormData("location", e.target.value)}
         />
       </div>
