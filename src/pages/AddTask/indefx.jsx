@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import Label from "../../base/Label";
 import Icon from "../../base/Icon";
@@ -8,7 +8,9 @@ import {
   faCalendarDays,
   faClipboard,
   faGear,
+  faInfoCircle,
   faLocation,
+  faTools,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import Input from "../../base/Input";
@@ -36,6 +38,24 @@ const AddTask = () => {
           name="user"
           placeHolder="choose user"
           leftIcon={faUser}
+          rightIcon={faAngleDown}
+          width="37vw"
+          type="text"
+        />
+      </div>
+      <div className="flex row center space-btw full-width">
+        <Input
+          name="Spare Part"
+          placeHolder="choose sparePart "
+          leftIcon={faTools}
+          rightIcon={faAngleDown}
+          width="37vw"
+          type="text"
+        />
+        <Input
+          name="status"
+          placeHolder="pending"
+          leftIcon={faInfoCircle}
           rightIcon={faAngleDown}
           width="37vw"
           type="text"
