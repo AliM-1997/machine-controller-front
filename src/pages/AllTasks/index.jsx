@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import Label from "../../base/Label";
 import Button from "../../base/Button";
 import { Tasks } from "../../data/remote/Tasks";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 const AllTasks = () => {
+  const [allTasks, setAllTasks] = useState([]);
+  console.log("alltasks", allTasks);
+  useEffect(() => {
+    const handleGetAllTasks = async () => {
+      const data = await Tasks.GetAllTasks();
+      setAllTasks(data);
+      console.log("data form handle", data);
+    };
+    handleGetAllTasks();
+  }, []);
   return (
     <div className="flex column  gap task-container">
       <div>
