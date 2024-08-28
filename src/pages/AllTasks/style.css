@@ -10,3 +10,7 @@
 .center-text {
   text-align: center;
 }
+
+.ticket-input {
+  padding: 8px;
+}

@@ -3,12 +3,13 @@ import "./style.css";
 import Label from "../../base/Label";
 import Button from "../../base/Button";
 import { Tasks } from "../../data/remote/Tasks";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import HighlightLabel from "../../base/HighlightLable";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadTask } from "../../data/redux/taskSlice";
 import DropButton from "../../base/DropButton";
+import Input from "../../base/Input";
 
 const AllTasks = () => {
   const dispatch = useDispatch();
@@ -49,16 +50,16 @@ const AllTasks = () => {
               />
             </div>
             <div className="flex center gap">
-              <Button
-                placeHolder="Date"
-                backgroundColor="primary"
-                width="10vw"
-                textColor="white"
-                leftIcon={faAngleDown}
+              <Input
+                placeHolder="Ticket ID"
+                backgroundColor="white"
+                width="12vw"
+                leftIcon={faSearch}
                 iconColor="white"
+                required={false}
               />
               <Button
-                placeHolder="Ticket"
+                placeHolder="Date"
                 backgroundColor="primary"
                 width="10vw"
                 textColor="white"
