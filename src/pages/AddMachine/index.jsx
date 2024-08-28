@@ -5,7 +5,14 @@ import Label from "../../base/Label";
 import Button from "../../base/Button";
 import DisplayImage from "../../base/DisplayImage";
 import Input from "../../base/Input";
-import { faHashtag, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown,
+  faAt,
+  faHashtag,
+  faN,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import DropButton from "../../base/DropButton";
 const AddMachine = () => {
   const options = [
     {
@@ -48,10 +55,26 @@ const AddMachine = () => {
             type="text"
           />
           <Input
-            leftIcon={faHashtag}
+            leftIcon={faAt}
             placeHolder="serial number"
             name="Serial Number"
             width="37vw"
+            type="text"
+          />
+        </div>
+        <div className="flex space-btw full-width">
+          <Input
+            name="Units Per Hour"
+            width="37vw"
+            leftIcon={faHashtag}
+            type="text"
+          />
+          <Input
+            textColor="white"
+            leftIcon={faAngleDown}
+            iconColor="black"
+            width="37vw"
+            name="Status"
             type="text"
           />
         </div>
