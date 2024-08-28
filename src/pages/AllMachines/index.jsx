@@ -7,9 +7,11 @@ import Button from "../../base/Button";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import MachineCard from "../../components/MachineCard";
 import { Machines } from "../../data/remote/Machine";
+import { useNavigate } from "react-router-dom";
 const AllMachines = () => {
   const [allMachines, setAllMachines] = useState([]);
   const [searchMachine, setSearchMachine] = useState("");
+  const navigate = useNavigate();
   const handleAllMachines = async () => {
     const data = await Machines.GetAllMachines();
     setAllMachines(data.machineInputs);
@@ -28,7 +30,9 @@ const AllMachines = () => {
       handleAllMachines();
     }
   };
-
+  const navigateToAddMachine = () => {
+    navigate("/addmachine");
+  };
   useEffect(() => {
     handleAllMachines();
   }, []);
@@ -63,6 +67,7 @@ const AllMachines = () => {
             width="8vw"
             placeHolder="add machine"
             backgroundColor="primary"
+            onClick={navigateToAddMachine}
           />
         </div>
         <div className="flex column gap scrollable-machine-table">
