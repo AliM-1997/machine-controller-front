@@ -8,7 +8,10 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import MachineCard from "../../components/MachineCard";
 import { Machines } from "../../data/remote/Machine";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { UpdateMachine } from "../../data/redux/machineSlice";
 const AllMachines = () => {
+  const dispatch = useDispatch();
   const [allMachines, setAllMachines] = useState([]);
   const [searchMachine, setSearchMachine] = useState("");
   const navigate = useNavigate();
@@ -33,6 +36,13 @@ const AllMachines = () => {
   const navigateToAddMachine = () => {
     navigate("/addmachine");
   };
+
+  const editMachine = (id) => {
+    const machine = allMachines.find((machine) => machine.id === id);
+    dispatch(UpdateMachine(machine));
+    navigate("/addtask");
+  };
+
   useEffect(() => {
     handleAllMachines();
   }, []);
@@ -73,7 +83,11 @@ const AllMachines = () => {
         <div className="flex column gap scrollable-machine-table">
           {allMachines.length > 0 ? (
             allMachines.map((machine) => (
-              <MachineCard key={machine.id} machineData={machine} />
+              <MachineCard
+                key={machine.id}
+                machineData={machine}
+                onEdit={editMachine}
+              />
             ))
           ) : (
             <td colSpan="7">No tasks found</td>
