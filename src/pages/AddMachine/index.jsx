@@ -98,6 +98,20 @@ const AddMachine = () => {
           />
         </div>
       </div>
+      <div className="flex end gap">
+        <Button
+          placeHolder="Delete"
+          width="10vw"
+          backgroundColor="primary"
+          textColor="white"
+        />
+        <Button
+          placeHolder="Save"
+          backgroundColor="primary"
+          width="10vw"
+          textColor="white"
+        />
+      </div>
     </div>
   );
 };
