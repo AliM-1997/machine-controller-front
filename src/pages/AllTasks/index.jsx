@@ -14,8 +14,9 @@ import Input from "../../base/Input";
 const AllTasks = () => {
   const dispatch = useDispatch();
   const [allTasks, setAllTasks] = useState([]);
+  const [filteredTask, setFilteredTask] = useState([]);
   const navigate = useNavigate();
-
+  console.log("filter task", filteredTask);
   const handleEditNavigate = async (id) => {
     const task = allTasks.find((task) => task.id === id);
     dispatch(loadTask(task));
@@ -25,6 +26,7 @@ const AllTasks = () => {
     const handleGetAllTasks = async () => {
       const data = await Tasks.GetAllTasks();
       setAllTasks(data.task);
+      setFilteredTask(data.task);
       // console.log("data form handle", data);
     };
     handleGetAllTasks();
@@ -33,8 +35,13 @@ const AllTasks = () => {
     console.log("Selected option:", option);
   };
   const handleGetTaskById = async (id) => {
+    if (!id) {
+      setFilteredTask(allTasks);
+      return;
+    }
     const data = await Tasks.GetTaskByID(id);
     console.log("from handlebyid", data);
+    setFilteredTask(data.task ? data.task : []);
   };
   return (
     <div className="flex column  gap task-container">
