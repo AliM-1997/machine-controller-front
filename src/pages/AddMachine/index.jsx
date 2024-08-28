@@ -13,6 +13,7 @@ import {
   faLocation,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { Machines } from "../../data/remote/Machine";
 const AddMachine = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -30,6 +31,9 @@ const AddMachine = () => {
       ...formData,
       [key]: value,
     });
+  };
+  const handleCreateMachine = async () => {
+    const data = await Machines.CreateMachine(formData);
   };
   const options = [
     {
@@ -128,6 +132,7 @@ const AddMachine = () => {
           backgroundColor="primary"
           width="10vw"
           textColor="white"
+          onClick={handleCreateMachine}
         />
       </div>
     </div>
