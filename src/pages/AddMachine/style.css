@@ -11,3 +11,9 @@
   max-height: 55vh;
   overflow-y: scroll;
 }
+
+.machineImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 12px;
+}

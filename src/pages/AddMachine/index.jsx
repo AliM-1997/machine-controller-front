@@ -36,7 +36,7 @@ const AddMachine = () => {
     unit_per_hour: "",
     last_maintenance: "",
   });
-
+  console.log("12354412", machine.image_path);
   useEffect(() => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -92,7 +92,6 @@ const AddMachine = () => {
     if (machine.image_path !== null) {
       try {
         await Machines.DeleteImage(machine.id);
-        dispatch(LoadMachine(machine));
         alert("Image deleted successfully!");
       } catch (error) {
         console.error("Error deleting image:", error.message);
@@ -116,7 +115,8 @@ const AddMachine = () => {
   const handleUploadImage = async () => {
     if (selectedImage) {
       try {
-        await Machines.UploadImage(selectedImage, machine.id);
+        const image = await Machines.UploadImage(selectedImage, machine.id);
+        dispatch(LoadMachine({ ...machine, image_path: image }));
         alert("Image uploaded successfully!");
       } catch (error) {
         console.error("Error uploading image:", error.message);
@@ -137,14 +137,35 @@ const AddMachine = () => {
             <Label placeholder="Add/Edit Machine" />
           </h2>
           <div className="flex space-btw image-container">
-            <div>
+            {/* {machine.image_path !== "" && imagePreview == null ? (
               <DisplayImage
+                url={machine.image_path}
                 width="150px"
-                height="150px"
+                heigth="150px"
                 borderRadius="12px"
-                url={imagePreview || machine.image_path || "path to image"}
               />
-            </div>
+            ) : (
+              <img
+                url={imagePreview || machine.image_path || "path to image"}
+                className="machineimage"
+                alt="user"
+              />
+            )} */}
+            {imagePreview == null && machine.image_path !== "" ? (
+              <div>
+                <DisplayImage
+                  width="150px"
+                  height="150px"
+                  borderRadius="12px"
+                  url={machine.image_path || "path to image"}
+                />
+              </div>
+            ) : (
+              <div>
+                <img src={imagePreview} className="machineImage" />
+              </div>
+            )}
+
             <div className="flex gap">
               <input type="file" onChange={handleFileChange} />
             </div>
