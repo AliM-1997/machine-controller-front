@@ -14,35 +14,26 @@ import Input from "../../base/Input";
 const AllTasks = () => {
   const dispatch = useDispatch();
   const [allTasks, setAllTasks] = useState([]);
-  const [filteredTask, setFilteredTask] = useState([]);
+  const [searchId, setSearchId] = useState("");
   const navigate = useNavigate();
-  console.log("filter task", filteredTask);
+
   const handleEditNavigate = async (id) => {
     const task = allTasks.find((task) => task.id === id);
     dispatch(loadTask(task));
     navigate("/addTask");
   };
-  useEffect(() => {
-    const handleGetAllTasks = async () => {
-      const data = await Tasks.GetAllTasks();
-      setAllTasks(data.task);
-      setFilteredTask(data.task);
-    };
-    handleGetAllTasks();
-  }, []);
+  const handleGetAllTasks = async () => {
+    const data = await Tasks.GetAllTasks();
+    setAllTasks(data.task);
+  };
+
   const handleSelect = (option) => {
     console.log("Selected option:", option);
   };
-  const handleGetTaskById = async (id) => {
-    if (!id) {
-      setFilteredTask(allTasks);
-      return;
-    }
-    const data = await Tasks.GetTaskByID(id);
-    console.log("from handlebyid", data);
-    setFilteredTask(data.task ? [data.task] : []);
-  };
 
+  useEffect(() => {
+    handleGetAllTasks();
+  }, []);
   return (
     <div className="flex column  gap task-container">
       <div>
@@ -69,9 +60,11 @@ const AllTasks = () => {
                 leftIcon={faSearch}
                 iconColor="white"
                 required={false}
-                onChange={(e) => {
-                  handleGetTaskById(e.target.value);
-                }}
+                // onChange={(e) => {
+                //   handleGetTaskById(e.target.value);
+                // }}
+                value={searchId}
+                onChange={(e) => setSearchId(e.target.value)}
               />
               <Button
                 placeHolder="Date"
@@ -112,8 +105,8 @@ const AllTasks = () => {
                 </tr>
               </thead>
               <tbody>
-                {filteredTask.length > 0 ? (
-                  filteredTask.map((task) => (
+                {allTasks.length > 0 ? (
+                  allTasks.map((task) => (
                     <tr key={task.id}>
                       <td onClick={() => handleEditNavigate(task.id)}>
                         {task.id}
