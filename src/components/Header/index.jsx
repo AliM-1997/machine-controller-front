@@ -9,13 +9,15 @@ import {
   faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../../base/Icon";
+import DropButton from "../../base/DropButton";
 
-const Header = ({ pageName, showChooseInput }) => {
+const Header = ({ pageName, showChooseInput, options }) => {
   return (
     <div className=" header-container white-bg">
       <div className="flex row gap">
         <h1>{pageName}</h1>
-        <Input
+        <DropButton
+          options={options}
           width="15vw"
           rightIcon={faAngleDown}
           placeHolder="choose"
@@ -31,8 +33,8 @@ const Header = ({ pageName, showChooseInput }) => {
           required={false}
         />
         <div className="flex center h-icon">
-          <Icon icon={faBell} />
-          <Icon icon={faUser} />
+          <Icon icon={faBell} color="primary" />
+          <Icon icon={faUser} color="primary" />
         </div>
       </div>
     </div>

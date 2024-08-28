@@ -16,7 +16,6 @@ const AllTasks = () => {
   const [allTasks, setAllTasks] = useState([]);
   const [searchId, setSearchId] = useState("");
   const navigate = useNavigate();
-
   const handleEditNavigate = async (id) => {
     const task = allTasks.find((task) => task.id === id);
     dispatch(loadTask(task));
@@ -36,10 +35,12 @@ const AllTasks = () => {
       try {
         const data = await Tasks.GetTaskByID(id);
         setAllTasks([data.task]);
-        console.log("1234321", data);
+        setSearchId(id);
       } catch (error) {
         setAllTasks([]);
       }
+    } else {
+      handleGetAllTasks();
     }
   };
 
