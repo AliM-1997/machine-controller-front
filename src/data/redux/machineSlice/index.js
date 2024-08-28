@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-initialState = {
+const initialState = {
   id: "",
   name: "",
   serial_number: "",
@@ -18,13 +18,14 @@ const machineSlice = createSlice({
     LoadMachine: (state, action) => {
       return { ...state, ...action.payload };
     },
-    updateMachine: (state, action) => {
+    UpdateMachine: (state, action) => {
       return { ...state, ...action.payload };
     },
-    clearMachine: (state, action) => {
+    ClearMachine: (state, action) => {
       return initialState;
     },
   },
 });
-export const {} = machineSlice.actions;
-export const machineReducr = machineSlice.reducer;
+export const { LoadMachine, UpdateMachine, ClearMachine } =
+  machineSlice.actions;
+export const machineReducre = machineSlice.reducer;
