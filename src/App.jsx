@@ -15,6 +15,7 @@ import store from "./data/redux/store";
 import AddTask from "./pages/AddTask/indefx";
 import AllTasks from "./pages/AllTasks";
 import AddMachine from "./pages/AddMachine";
+import AllMachines from "./pages/AllMachines";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               <Route path="signup" element={<Signup />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="addmachine" element={<AddMachine />} />
+              <Route path="allmachines" element={<AllMachines />} />
               <Route path="tasks" element={<AllTasks />} />
               <Route path="Predictions" element={<Predictions />} />
               <Route path="alerts" element={<Alerts />} />
