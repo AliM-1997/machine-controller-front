@@ -49,10 +49,8 @@ const AddMachine = () => {
     }
   };
   const options = [
-    {
-      label: "Add Machine",
-      url: "/addmachine",
-    },
+    { label: "Add Machine", url: "addmachine" },
+    { label: "All Machines", url: "allmachines" },
   ];
   return (
     <div>
