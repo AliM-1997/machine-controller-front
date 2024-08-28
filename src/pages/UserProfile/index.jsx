@@ -14,6 +14,7 @@ import { Users } from "../../data/remote/User";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DisplayImage from "../../base/DisplayImage";
+import Header from "../../components/Header";
 
 const UserProfile = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -105,149 +106,160 @@ const UserProfile = () => {
       alert("Failed to delete image.");
     }
   };
+  const options = [
+    { label: "User Profile", url: "userProfile" },
+    { label: "All Users", url: "allusers" },
+  ];
   return (
-    <div className="flex column userProfile-container gap ">
-      <div>
-        <h2>
-          <Label placeholder="User Profile" fontWeight="bold" />
-        </h2>
-      </div>
-      <div className="flex full-width space-btw">
-        <div className="flex  gap">
-          <div className="image">
-            {user.image_path !== "" && imagePreview == null ? (
-              <DisplayImage url={user.image_path} width="70px" heigth="70px" />
-            ) : (
-              <img
-                src={imagePreview || "path-to-default-image.jpg"}
-                className="image"
-                alt="user"
+    <div>
+      <Header pageName={"User Management"} options={options} />
+      <div className="flex column userProfile-container gap ">
+        <div>
+          <h2>
+            <Label placeholder="User Profile" fontWeight="bold" />
+          </h2>
+        </div>
+        <div className="flex full-width space-btw">
+          <div className="flex  gap">
+            <div className="image">
+              {user.image_path !== "" && imagePreview == null ? (
+                <DisplayImage
+                  url={user.image_path}
+                  width="70px"
+                  heigth="70px"
+                />
+              ) : (
+                <img
+                  src={imagePreview || "path-to-default-image.jpg"}
+                  className="image"
+                  alt="user"
+                />
+              )}
+              <input
+                type="file"
+                onChange={handleFileChange}
+                style={{ display: "" }}
               />
-            )}
-            <input
-              type="file"
-              onChange={handleFileChange}
-              style={{ display: "" }}
+            </div>
+            <div className="flex column">
+              <Label placeholder={user.name || "Name"} />
+              <Label placeholder={user.role || "Role"} />
+              <Label placeholder={user.email || "email"} />
+            </div>
+          </div>
+          <div className="flex center gap full-width ">
+            <Button
+              placeHolder="Upload image"
+              width="15vw"
+              textColor="white"
+              backgroundColor="primary"
+              onClick={handleUploadImage}
+            />
+            <Button
+              placeHolder="delete"
+              width="10vw"
+              textColor="white"
+              backgroundColor="primary"
+              onClick={handleDeleteImage}
             />
           </div>
-          <div className="flex column">
-            <Label placeholder={user.name || "Name"} />
-            <Label placeholder={user.role || "Role"} />
-            <Label placeholder={user.email || "email"} />
+        </div>
+        <div className="flex row center full-width space-btw ">
+          <Input
+            width="37vw"
+            placeHolder={user.name || "Name"}
+            name="Name"
+            type="text"
+            leftIcon={faUser}
+            onChange={(e) => handleFormData("name", e.target.value)}
+          />
+          <Input
+            width="37vw"
+            placeHolder={user.username || "@username"}
+            name="username"
+            type="text"
+            leftIcon={faUser}
+            required={false}
+            onChange={(e) => handleFormData("username", e.target.value)}
+          />
+        </div>
+        <div className="flex row center full-width space-btw ">
+          <Input
+            width="37vw"
+            placeHolder={user.role || "user/admin"}
+            name="Role"
+            type="text"
+            leftIcon={faUser}
+            required={false}
+            onChange={(e) => handleFormData("role", e.target.value)}
+          />
+          <Input
+            width="37vw"
+            placeHolder={user.phone_number || "961-00-000000"}
+            name="Phone Number"
+            type="text"
+            leftIcon={faPhone}
+            required={false}
+            onChange={(e) => handleFormData("phone_number", e.target.value)}
+          />
+        </div>
+        <div className="flex full-width gap column">
+          <div>
+            <Input
+              placeHolder={user.email || "example@gamil.com"}
+              name="Email"
+              type="email"
+              leftIcon={faEnvelope}
+              onChange={(e) => handleFormData("email", e.target.value)}
+            />
+          </div>
+          <div className="flex full-width row center space-btw ">
+            <Input
+              width="37vw"
+              placeHolder={user.password || "password"}
+              name="Password"
+              type="password"
+              leftIcon={faKey}
+              onChange={(e) => handleFormData("password", e.target.value)}
+            />
+            <Input
+              width="37vw"
+              placeHolder={user.password || "password"}
+              name="Confirmed-Password"
+              type="password"
+              leftIcon={faKey}
+              onChange={(e) =>
+                handleFormData("password_confirmation", e.target.value)
+              }
+            />
           </div>
         </div>
-        <div className="flex center gap full-width ">
-          <Button
-            placeHolder="Upload image"
-            width="15vw"
-            textColor="white"
-            backgroundColor="primary"
-            onClick={handleUploadImage}
+        <div className="full-width">
+          <Input
+            placeHolder="location"
+            name="Location"
+            leftIcon={faLocation}
+            type="text"
+            required={false}
+            onChange={(e) => handleFormData("location", e.target.value)}
           />
+        </div>
+        <div className="flex end gap">
           <Button
-            placeHolder="delete"
+            placeHolder="Cancel"
+            backgroundColor="primary"
             width="10vw"
             textColor="white"
+            onClick={handleCancel}
+          />
+          <Button
+            placeHolder={user.name ? "save" : "create"}
             backgroundColor="primary"
-            onClick={handleDeleteImage}
+            width="10vw"
+            textColor="white"
+            onClick={handleSave}
           />
         </div>
-      </div>
-      <div className="flex row center full-width space-btw ">
-        <Input
-          width="37vw"
-          placeHolder={user.name || "Name"}
-          name="Name"
-          type="text"
-          leftIcon={faUser}
-          onChange={(e) => handleFormData("name", e.target.value)}
-        />
-        <Input
-          width="37vw"
-          placeHolder={user.username || "@username"}
-          name="username"
-          type="text"
-          leftIcon={faUser}
-          required={false}
-          onChange={(e) => handleFormData("username", e.target.value)}
-        />
-      </div>
-      <div className="flex row center full-width space-btw ">
-        <Input
-          width="37vw"
-          placeHolder={user.role || "user/admin"}
-          name="Role"
-          type="text"
-          leftIcon={faUser}
-          required={false}
-          onChange={(e) => handleFormData("role", e.target.value)}
-        />
-        <Input
-          width="37vw"
-          placeHolder={user.phone_number || "961-00-000000"}
-          name="Phone Number"
-          type="text"
-          leftIcon={faPhone}
-          required={false}
-          onChange={(e) => handleFormData("phone_number", e.target.value)}
-        />
-      </div>
-      <div className="flex full-width gap column">
-        <div>
-          <Input
-            placeHolder={user.email || "example@gamil.com"}
-            name="Email"
-            type="email"
-            leftIcon={faEnvelope}
-            onChange={(e) => handleFormData("email", e.target.value)}
-          />
-        </div>
-        <div className="flex full-width row center space-btw ">
-          <Input
-            width="37vw"
-            placeHolder={user.password || "password"}
-            name="Password"
-            type="password"
-            leftIcon={faKey}
-            onChange={(e) => handleFormData("password", e.target.value)}
-          />
-          <Input
-            width="37vw"
-            placeHolder={user.password || "password"}
-            name="Confirmed-Password"
-            type="password"
-            leftIcon={faKey}
-            onChange={(e) =>
-              handleFormData("password_confirmation", e.target.value)
-            }
-          />
-        </div>
-      </div>
-      <div className="full-width">
-        <Input
-          placeHolder="location"
-          name="Location"
-          leftIcon={faLocation}
-          type="text"
-          required={false}
-          onChange={(e) => handleFormData("location", e.target.value)}
-        />
-      </div>
-      <div className="flex end gap">
-        <Button
-          placeHolder="Cancel"
-          backgroundColor="primary"
-          width="10vw"
-          textColor="white"
-          onClick={handleCancel}
-        />
-        <Button
-          placeHolder={user.name ? "save" : "create"}
-          backgroundColor="primary"
-          width="10vw"
-          textColor="white"
-          onClick={handleSave}
-        />
       </div>
     </div>
   );

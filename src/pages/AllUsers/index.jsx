@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../data/redux/userSlice";
 import DisplayImage from "../../base/DisplayImage";
+import Header from "../../components/Header";
 const AllUsers = () => {
   const dispatch = useDispatch();
   const [allUsers, setAllUsers] = useState([]);
@@ -68,86 +69,97 @@ const AllUsers = () => {
     };
     handleSearch();
   }, [searchUserId]);
+  const options = [
+    { label: "All Users", url: "allusers" },
+    { label: "User Profile", url: "userProfile" },
+  ];
   return (
-    <div className="flex column users-container gap">
-      <div>
-        <h2> All Users</h2>
-      </div>
-      <div className="flex user-input-container">
-        <Input
-          width="20vw"
-          placeHolder="search by id"
-          leftIcon={faSearch}
-          value={searchUserId}
-          onChange={(e) => setUserSearchId(e.target.value)}
-        />
-        <div className="flex center gap">
-          <Button
-            className="filter-user"
-            width="10vw"
-            backgroundColor="primary"
-            placeHolder="add User"
-            textColor="white"
-            onClick={handleCreate}
-          />
-          <Button
-            className="add-user"
-            width="8vw"
-            backgroundColor="primary"
-            textColor="white"
-            placeHolder="Filter"
-          />
+    <div>
+      <Header pageName="User Management" options={options} />
+      <div className="flex column users-container gap">
+        <div>
+          <h2> All Users</h2>
         </div>
-      </div>
-      <div className="">
-        <table>
-          <thead>
-            <tr>
-              <th>Employee Name</th>
-              <th>Employee Id</th>
-              <th>Username</th>
-              <th>Role</th>
-              <th>Done Task</th>
-              <th>Pending Task</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allUsers.length > 0 ? (
-              allUsers.map((user) => (
-                <tr key={user.id}>
-                  <td>
-                    <div className=" flex gap">
-                      <DisplayImage url={user.image_path} />
-                      <div className=" flex center">{user.name}</div>
-                    </div>
-                  </td>
-                  <td>{user.id}</td>
-                  <td>{user.username}</td>
-                  <td>{user.role}</td>
-                  <td>{user.doneTask}</td>
-                  <td>{user.pendingTask}</td>
-                  <td className="flex  gap icons-de">
-                    <Icon
-                      icon={faPenToSquare}
-                      color="#00b7eb"
-                      onClick={() => handleEdit(user.id)}
-                    />
-                    <Icon
-                      icon={faTrash}
-                      color="#00b7eb"
-                      onClick={() => DeleteUser(user.id)}
-                    />
-                  </td>
-                </tr>
-              ))
-            ) : (
+        <div className="flex user-input-container">
+          <Input
+            width="20vw"
+            placeHolder="search by id"
+            leftIcon={faSearch}
+            value={searchUserId}
+            onChange={(e) => setUserSearchId(e.target.value)}
+          />
+          <div className="flex center gap">
+            <Button
+              className="filter-user"
+              width="10vw"
+              backgroundColor="primary"
+              placeHolder="add User"
+              textColor="white"
+              onClick={handleCreate}
+            />
+            <Button
+              className="add-user"
+              width="8vw"
+              backgroundColor="primary"
+              textColor="white"
+              placeHolder="Filter"
+            />
+          </div>
+        </div>
+        <div className="">
+          <table>
+            <thead>
               <tr>
-                <td colSpan="7">No users found</td>
+                <th>Employee Name</th>
+                <th>Employee Id</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Done Task</th>
+                <th>Pending Task</th>
+                <th>Action</th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {allUsers.length > 0 ? (
+                allUsers.map((user) => (
+                  <tr key={user.id}>
+                    <td>
+                      <div className=" flex gap">
+                        <DisplayImage
+                          url={user.image_path}
+                          width="50px"
+                          height="50px"
+                        />
+                        <div className=" flex center">{user.name}</div>
+                      </div>
+                    </td>
+                    <td>{user.id}</td>
+                    <td>{user.username}</td>
+                    <td>{user.role}</td>
+                    <td>{user.doneTask}</td>
+                    <td>{user.pendingTask}</td>
+                    <td className="flex  gap icons-de">
+                      <Icon
+                        icon={faPenToSquare}
+                        color="#00b7eb"
+                        onClick={() => handleEdit(user.id)}
+                      />
+                      <Icon
+                        icon={faTrash}
+                        color="#00b7eb"
+                        onClick={() => DeleteUser(user.id)}
+                      />
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="7">No users found</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
