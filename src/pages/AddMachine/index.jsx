@@ -22,6 +22,7 @@ import { ClearMachine, LoadMachine } from "../../data/redux/machineSlice";
 const AddMachine = () => {
   const dispatch = useDispatch();
   const machine = useSelector((global) => global.machine);
+  const [imagePreview, setImagePreview] = useState("");
   console.log("from slice", machine);
   const [formData, setFormData] = useState({
     name: "",
@@ -100,6 +101,17 @@ const AddMachine = () => {
       alert("No Image Found!");
     }
   };
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const options = [
     { label: "Add Machine", url: "addmachine" },
@@ -119,10 +131,11 @@ const AddMachine = () => {
                 width="150px"
                 height="150px"
                 borderRadius="12px"
-                url={
-                  formData.image_path ? formData.image_path : "path to image"
-                }
+                url={imagePreview || machine.image_path || "path to image"}
               />
+            </div>
+            <div className="flex gap">
+              <input type="file" onChange={handleFileChange} />
             </div>
             <div className="flex gap">
               <Button
