@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 import Header from "../../components/Header";
 import Label from "../../base/Label";
@@ -11,11 +11,19 @@ import {
   faClipboard,
   faHashtag,
   faLocation,
-  faN,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import DropButton from "../../base/DropButton";
 const AddMachine = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    serial_number: "",
+    status: "active",
+    location: "",
+    image_path: "",
+    description: "",
+    last_maintenance: "",
+    unit_per_hour: "",
+  });
   const options = [
     {
       label: "Add Machine",
