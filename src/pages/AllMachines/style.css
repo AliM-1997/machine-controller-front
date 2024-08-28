@@ -1,3 +1,6 @@
 .machines-container {
   padding: 30px;
 }
+.search-bar {
+  align-items: center;
+}
