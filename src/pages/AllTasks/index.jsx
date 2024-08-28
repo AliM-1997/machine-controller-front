@@ -31,9 +31,25 @@ const AllTasks = () => {
     console.log("Selected option:", option);
   };
 
+  const handleGetTaskbyID = async (id) => {
+    if (id) {
+      try {
+        const data = await Tasks.GetTaskByID(id);
+        setAllTasks([data.task]);
+        console.log("1234321", data);
+      } catch (error) {
+        setAllTasks([]);
+      }
+    }
+  };
+
   useEffect(() => {
     handleGetAllTasks();
   }, []);
+
+  useEffect(() => {
+    handleGetTaskbyID();
+  }, [searchId]);
   return (
     <div className="flex column  gap task-container">
       <div>
@@ -60,11 +76,7 @@ const AllTasks = () => {
                 leftIcon={faSearch}
                 iconColor="white"
                 required={false}
-                // onChange={(e) => {
-                //   handleGetTaskById(e.target.value);
-                // }}
-                value={searchId}
-                onChange={(e) => setSearchId(e.target.value)}
+                onChange={(e) => handleGetTaskbyID(e.target.value)}
               />
               <Button
                 placeHolder="Date"
