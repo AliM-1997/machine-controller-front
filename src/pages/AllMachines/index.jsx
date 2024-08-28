@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import Header from "../../components/Header";
 import Label from "../../base/Label";
@@ -6,7 +6,17 @@ import Input from "../../base/Input";
 import Button from "../../base/Button";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import MachineCard from "../../components/MachineCard";
+import { Machines } from "../../data/remote/Machine";
 const AllMachines = () => {
+  const [AllMachines, setAllMachines] = useState([]);
+  console.log("all machines from allpage", AllMachines);
+  const handleAllMachines = async () => {
+    const data = await Machines.GetAllMachines();
+    setAllMachines(data);
+  };
+  useEffect(() => {
+    handleAllMachines();
+  }, []);
   const options = [
     { label: "All Machines", url: "allmachines" },
     { label: "Add Machine", url: "addmachine" },
@@ -20,6 +30,7 @@ const AllMachines = () => {
     last_maintenance: "00-00-0000",
     image_path: "",
   };
+
   return (
     <div className="flex column gap">
       <Header pageName="All Machines" options={options} />
