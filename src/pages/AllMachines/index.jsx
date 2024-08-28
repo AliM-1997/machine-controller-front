@@ -9,14 +9,34 @@ import MachineCard from "../../components/MachineCard";
 import { Machines } from "../../data/remote/Machine";
 const AllMachines = () => {
   const [allMachines, setAllMachines] = useState([]);
-  console.log("all machines from allpage", allMachines.machineInputs);
+  const [searchMachine, setSearchMachine] = useState("");
   const handleAllMachines = async () => {
     const data = await Machines.GetAllMachines();
     setAllMachines(data.machineInputs);
   };
+
+  const handleMachineByID = async () => {
+    console.log("search_id", searchMachine);
+    if (searchMachine) {
+      try {
+        const data = await Machines.GetMachineById(searchMachine);
+        setAllMachines([data.machine_input]);
+      } catch (error) {
+        setAllMachines([]);
+      }
+    } else {
+      handleAllMachines();
+    }
+  };
+
   useEffect(() => {
     handleAllMachines();
   }, []);
+
+  useEffect(() => {
+    handleMachineByID();
+  }, [searchMachine]);
+
   const options = [
     { label: "All Machines", url: "allmachines" },
     { label: "Add Machine", url: "addmachine" },
@@ -37,6 +57,7 @@ const AllMachines = () => {
             leftIcon={faSearch}
             width="20vw"
             required={false}
+            onChange={(e) => setSearchMachine(e.target.value)}
           />
           <Button
             width="8vw"
