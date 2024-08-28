@@ -8,6 +8,7 @@ import HighlightLabel from "../../base/HighlightLable";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loadTask } from "../../data/redux/taskSlice";
+import DropButton from "../../base/DropButton";
 
 const AllTasks = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ const AllTasks = () => {
     };
     handleGetAllTasks();
   }, []);
+  const handleSelect = (option) => {
+    console.log("Selected option:", option);
+  };
   return (
     <div className="flex column  gap task-container">
       <div>
@@ -61,7 +65,15 @@ const AllTasks = () => {
                 leftIcon={faAngleDown}
                 iconColor="white"
               />
-              <Button
+              <DropButton
+                options={[
+                  "Pending",
+                  "In Progress",
+                  "Delayed",
+                  "Risked",
+                  "Completed",
+                ]}
+                onSelect={handleSelect}
                 placeHolder="Status"
                 backgroundColor="primary"
                 width="10vw"
