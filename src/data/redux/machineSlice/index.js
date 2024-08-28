@@ -15,9 +15,15 @@ const machineSlice = createSlice({
   initialState,
   name: "machine",
   reducers: {
-    LoadMachine,
-    updateMachine,
-    clearMachine,
+    LoadMachine: (state, action) => {
+      return { ...state, ...action.payload };
+    },
+    updateMachine: (state, action) => {
+      return { ...state, ...action.payload };
+    },
+    clearMachine: (state, action) => {
+      return initialState;
+    },
   },
 });
 export const {} = machineSlice.actions;
