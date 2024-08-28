@@ -106,7 +106,7 @@ const AllUsers = () => {
             />
           </div>
         </div>
-        <div className="">
+        <div className=" user-table">
           <table>
             <thead>
               <tr>

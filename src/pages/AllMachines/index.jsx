@@ -37,10 +37,10 @@ const AllMachines = () => {
     navigate("/addmachine");
   };
 
-  const editMachine = (id) => {
+  const editMachine = async (id) => {
     const machine = allMachines.find((machine) => machine.id === id);
     dispatch(UpdateMachine(machine));
-    navigate("/addtask");
+    navigate("/addmachine");
   };
 
   useEffect(() => {
@@ -86,7 +86,7 @@ const AllMachines = () => {
               <MachineCard
                 key={machine.id}
                 machineData={machine}
-                onEdit={editMachine}
+                onEdit={() => editMachine(machine.id)}
               />
             ))
           ) : (
