@@ -63,4 +63,16 @@ export const Machines = {
       throw error;
     }
   },
+  DeleteImage: async (id) => {
+    try {
+      const data = await requestApi({
+        route: `/machine/deleteImage/${id}`,
+        requestMethod: RequestMethods.DELETE,
+      });
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
 };
