@@ -8,7 +8,9 @@ import Input from "../../base/Input";
 import {
   faAngleDown,
   faAt,
+  faClipboard,
   faHashtag,
+  faLocation,
   faN,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -75,6 +77,23 @@ const AddMachine = () => {
             iconColor="black"
             width="37vw"
             name="Status"
+            type="text"
+          />
+        </div>
+
+        <div className="full-width">
+          <Input
+            placeHolder={"location"}
+            name="Location"
+            leftIcon={faLocation}
+            type="text"
+          />
+        </div>
+        <div className="full-width">
+          <Input
+            placeHolder={"task"}
+            name="machine Description"
+            leftIcon={faClipboard}
             type="text"
           />
         </div>
