@@ -1,8 +1,21 @@
 import React from "react";
 import "./style.css";
 import DisplayImage from "../../base/DisplayImage";
+import Icon from "../../base/Icon";
+import {
+  faAngleRight,
+  faEdit,
+  faTrashCan,
+} from "@fortawesome/free-solid-svg-icons";
 
-const MachineCard = ({ machineData, width = "23vw", height = "36vh" }) => {
+const MachineCard = ({
+  machineData,
+  width = "23vw",
+  height = "36vh",
+  onEdit,
+  onDelete,
+  onPreview,
+}) => {
   return (
     <div className="machine-card flex row white-bg">
       <div>
@@ -14,8 +27,15 @@ const MachineCard = ({ machineData, width = "23vw", height = "36vh" }) => {
         />
       </div>
       <div className="flex column machine-info">
-        <div>
-          <h2>{machineData.name}</h2>
+        <div className=" flex space-btw">
+          <div>
+            <h2>{machineData.name}</h2>
+          </div>
+          <div className="flex gap">
+            <Icon icon={faEdit} color={"primary"} onClick={onEdit} />
+            <Icon icon={faTrashCan} color={"primary"} onClick={onDelete} />
+            <Icon icon={faAngleRight} onClick={onPreview} />
+          </div>
         </div>
         <div className="info-table">
           <div className="info-row">
