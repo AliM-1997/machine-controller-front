@@ -26,7 +26,7 @@ function App() {
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<Signup />} />
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="addmachines" element={<AddMachine />} />
+              <Route path="addmachine" element={<AddMachine />} />
               <Route path="tasks" element={<AllTasks />} />
               <Route path="Predictions" element={<Predictions />} />
               <Route path="alerts" element={<Alerts />} />
