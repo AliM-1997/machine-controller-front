@@ -15,6 +15,7 @@ const AllTasks = () => {
   const dispatch = useDispatch();
   const [allTasks, setAllTasks] = useState([]);
   const navigate = useNavigate();
+
   const handleEditNavigate = async (id) => {
     const task = allTasks.find((task) => task.id === id);
     dispatch(loadTask(task));
@@ -24,12 +25,16 @@ const AllTasks = () => {
     const handleGetAllTasks = async () => {
       const data = await Tasks.GetAllTasks();
       setAllTasks(data.task);
-      console.log("data form handle", data);
+      // console.log("data form handle", data);
     };
     handleGetAllTasks();
   }, []);
   const handleSelect = (option) => {
     console.log("Selected option:", option);
+  };
+  const handleGetTaskById = async (id) => {
+    const data = await Tasks.GetTaskByID(id);
+    console.log("from handlebyid", data);
   };
   return (
     <div className="flex column  gap task-container">
@@ -57,6 +62,9 @@ const AllTasks = () => {
                 leftIcon={faSearch}
                 iconColor="white"
                 required={false}
+                onChange={(e) => {
+                  handleGetTaskById(e.target.value);
+                }}
               />
               <Button
                 placeHolder="Date"
