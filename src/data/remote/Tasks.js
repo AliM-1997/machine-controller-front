@@ -51,4 +51,17 @@ export const Tasks = {
       throw error;
     }
   },
+  GetTaskByID: async (id) => {
+    try {
+      const data = await requestApi({
+        route: `/task/${id}`,
+        requestMethod: RequestMethods.GET,
+      });
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
 };
