@@ -80,7 +80,7 @@ export const Machines = {
       const formData = new FormData();
       formData.append("image", file);
       const data = await requestApi({
-        route: `/machine/updateImage/${id}`,
+        route: `/machine/uploadImage/${id}`,
         requestMethod: RequestMethods.POST,
         body: formData,
       });

@@ -22,6 +22,7 @@ import { ClearMachine, LoadMachine } from "../../data/redux/machineSlice";
 const AddMachine = () => {
   const dispatch = useDispatch();
   const machine = useSelector((global) => global.machine);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
   console.log("from slice", machine);
   const [formData, setFormData] = useState({
@@ -112,7 +113,17 @@ const AddMachine = () => {
       reader.readAsDataURL(file);
     }
   };
-
+  const handleUploadImage = async () => {
+    if (selectedImage) {
+      try {
+        await Machines.UploadImage(selectedImage, machine.id);
+        alert("Image uploaded successfully!");
+      } catch (error) {
+        console.error("Error uploading image:", error.message);
+        alert("Failed to upload image.");
+      }
+    }
+  };
   const options = [
     { label: "Add Machine", url: "addmachine" },
     { label: "All Machines", url: "allmachines" },
@@ -143,6 +154,7 @@ const AddMachine = () => {
                 width="10vw"
                 backgroundColor="primary"
                 textColor="white"
+                onClick={handleUploadImage}
               />
               <Button
                 placeHolder="Delete"
