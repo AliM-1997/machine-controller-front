@@ -17,7 +17,19 @@ export const Machines = {
     }
   },
   //   UpadateMachine,
-  //   DeleteMachine,
+  DeleteMachine: async (id) => {
+    try {
+      const data = await requestApi({
+        route: `/machine/${id}`,
+        requestMethod: RequestMethods.DeleteMachine,
+      });
+      console.log("data when delete from remote", data);
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
   GetMachineById: async (id) => {
     try {
       const data = await requestApi({ route: `machine/${id}` });
