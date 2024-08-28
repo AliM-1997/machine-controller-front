@@ -1,5 +1,28 @@
 .machine-card {
   width: 77 vw;
-  height: 25vh;
+  height: 36vh;
   border-radius: 24px;
+}
+
+.machine-info {
+  gap: 5px;
+  padding: 24px;
+}
+
+.info-table {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 20px;
+}
+
+.info-row {
+  display: contents;
+}
+
+.info-label {
+  font-weight: bold;
+}
+
+.info-value {
+  text-align: left;
 }
