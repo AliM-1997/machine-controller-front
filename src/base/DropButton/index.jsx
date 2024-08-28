@@ -15,6 +15,8 @@ const DropButton = ({
 }) => {
   const [isopen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+  const placeholder =
+    options.length > 0 ? options[0].label : "Select an option";
 
   const toggleDropdown = () => {
     setIsOpen(!isopen);
@@ -37,7 +39,7 @@ const DropButton = ({
         onClick={toggleDropdown}
       >
         <Icon icon={leftIcon} color={iconColor} />
-        {selectedOption || placeHolder}
+        {placeholder}
         <Icon icon={rightIcon} color={iconColor} />
       </button>
       {isopen && (

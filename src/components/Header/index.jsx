@@ -32,7 +32,6 @@ const Header = ({ pageName, showChooseInput, options = [] }) => {
           onSelect={handleSelect}
           width="15vw"
           rightIcon={faAngleDown}
-          placeHolder="Choose"
           hidden={!showChooseInput}
           backgroundColor="primary"
           textColor="white"

@@ -90,9 +90,8 @@ const AddTask = () => {
     navigate("/tasks");
   };
   const options = [
+    { label: "Add/Edit Task", url: "addTask" },
     { label: "All Tasks", url: "tasks" },
-    { label: "Completed Tasks", url: "completed-tasks" },
-    { label: "Pending Tasks", url: "pending-tasks" },
   ];
   return (
     <div>
