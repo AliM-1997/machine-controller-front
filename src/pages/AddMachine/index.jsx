@@ -86,6 +86,20 @@ const AddMachine = () => {
       alert("Machine Not Created!");
     }
   };
+  const handleDeleteImage = async () => {
+    if (machine.image_path !== null) {
+      try {
+        await Machines.DeleteImage(machine.id);
+        dispatch(LoadMachine(machine));
+        alert("Image deleted successfully!");
+      } catch (error) {
+        console.error("Error deleting image:", error.message);
+        alert("Failed To Delete Image.");
+      }
+    } else {
+      alert("No Image Found!");
+    }
+  };
 
   const options = [
     { label: "Add Machine", url: "addmachine" },
@@ -122,6 +136,7 @@ const AddMachine = () => {
                 width="8vw"
                 backgroundColor="primary"
                 textColor=" white"
+                onClick={handleDeleteImage}
               />
             </div>
           </div>
