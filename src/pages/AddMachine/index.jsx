@@ -53,13 +53,19 @@ const AddMachine = () => {
       last_maintenance: Functions.ToDateformat(formData.last_maintenance),
     };
 
-    try {
-      const data = await Machines.CreateMachine(dataToSend);
-      console.log(data);
-    } catch (error) {
-      console.error("Error creating machine:", error);
+    if (machine.id) {
+      const updateDate = await Machines.UpadateMachine(machine.id, dataToSend);
+      if (updateDate) {
+        alert("Machine Updated Successfully");
+      }
+    } else {
+      const createData = await Machines.CreateMachine(dataToSend);
+      if (createData) {
+        alert("Machine Created Successfullty");
+      }
     }
   };
+
   const options = [
     { label: "Add Machine", url: "addmachine" },
     { label: "All Machines", url: "allmachines" },
@@ -74,7 +80,14 @@ const AddMachine = () => {
           </h2>
           <div className="flex space-btw image-container">
             <div>
-              <DisplayImage width="150px" height="150px" borderRadius="12px" />
+              <DisplayImage
+                width="150px"
+                height="150px"
+                borderRadius="12px"
+                url={
+                  formData.image_path ? formData.image_path : "path to image"
+                }
+              />
             </div>
             <div className="flex gap">
               <Button
@@ -173,7 +186,9 @@ const AddMachine = () => {
                       .slice(0, 10)
                   : "dd/MM/yyyy"
               }
-              onChange={(e) => ChangingFormData("last_maintenance", e)}
+              onChange={(e) =>
+                ChangingFormData("last_maintenance", new Date(e))
+              }
             />
           </div>
 
