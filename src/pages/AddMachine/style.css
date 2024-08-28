@@ -1,3 +1,6 @@
+.container {
+  overflow: auto;
+}
 .addMachine-container {
   padding: 30px;
 }

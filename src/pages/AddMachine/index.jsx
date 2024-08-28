@@ -5,9 +5,11 @@ import Label from "../../base/Label";
 import Button from "../../base/Button";
 import DisplayImage from "../../base/DisplayImage";
 import Input from "../../base/Input";
+import ReactDate from "../../base/ReactDate";
 import {
   faAngleDown,
   faAt,
+  faCalendarDays,
   faClipboard,
   faHashtag,
   faLocation,
@@ -24,6 +26,7 @@ const AddMachine = () => {
     description: "",
     last_maintenance: "",
     unit_per_hour: "",
+    last_maintenance: "",
   });
   console.log(formData);
   const handleFormData = (key, value) => {
@@ -43,7 +46,7 @@ const AddMachine = () => {
   ];
   return (
     <div>
-      <Header pageName="Machines" options={options} />
+      <Header pageName="Machines" options={options} className="container" />
       <div className="flex column full-width addMachine-container gap">
         <h2>
           <Label placeholder="Add/Edit Machine" />
@@ -132,6 +135,18 @@ const AddMachine = () => {
             onChange={(e) => {
               handleFormData("description", e.target.value);
             }}
+          />
+        </div>
+        <div className="full-width">
+          <ReactDate
+            leftIcon={faCalendarDays}
+            name="Last Maintenace"
+            placeHolder={
+              formData.assignedDate
+                ? formData.assignedDate.toISOString().slice(0, 10)
+                : "dd/MM/yyyy"
+            }
+            onChange={(e) => handleFormData("last_maintenance", e)}
           />
         </div>
       </div>
