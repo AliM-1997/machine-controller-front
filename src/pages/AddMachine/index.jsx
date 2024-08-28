@@ -30,7 +30,7 @@ const AddMachine = () => {
     location: "",
     image_path: "",
     description: "",
-    last_maintenance: "",
+    last_maintenance: null,
     unit_per_hour: "",
     last_maintenance: "",
   });
@@ -39,7 +39,9 @@ const AddMachine = () => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       ...machine,
-      last_maintenance: Functions.ToDateformat(formData.last_maintenance),
+      last_maintenance: machine.last_maintenance
+        ? new Date(machine.last_maintenance)
+        : null,
     }));
   }, [machine]);
 
@@ -200,14 +202,10 @@ const AddMachine = () => {
               name="Last Maintenance"
               placeHolder={
                 formData.last_maintenance
-                  ? new Date(formData.last_maintenance)
-                      .toISOString()
-                      .slice(0, 10)
+                  ? formData.last_maintenance.toISOString().slice(0, 10)
                   : "dd/MM/yyyy"
               }
-              onChange={(e) =>
-                ChangingFormData("last_maintenance", new Date(e))
-              }
+              onChange={(e) => ChangingFormData("last_maintenance", e)}
             />
           </div>
 
