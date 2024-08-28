@@ -33,3 +33,7 @@ tr:not(:last-child) td {
   height: 9vh;
   align-items: center;
 }
+.user-table {
+  max-height: 70vw;
+  overflow-y: scroll;
+}

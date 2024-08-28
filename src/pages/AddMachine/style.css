@@ -1,5 +1,4 @@
 .container {
-  overflow: auto;
 }
 .addMachine-container {
   padding: 30px;
@@ -7,4 +6,8 @@
 
 .image-container {
   align-items: center;
+}
+.machine-inputs {
+  max-height: 55vh;
+  overflow-y: scroll;
 }
