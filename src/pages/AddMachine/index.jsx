@@ -24,6 +24,13 @@ const AddMachine = () => {
     last_maintenance: "",
     unit_per_hour: "",
   });
+  console.log(formData);
+  const handleFormData = (key, value) => {
+    setFormData({
+      ...formData,
+      [key]: value,
+    });
+  };
   const options = [
     {
       label: "Add Machine",
@@ -63,6 +70,9 @@ const AddMachine = () => {
             width="37vw"
             leftIcon={faUser}
             type="text"
+            onChange={(e) => {
+              handleFormData("name", e.target.value);
+            }}
           />
           <Input
             leftIcon={faAt}
