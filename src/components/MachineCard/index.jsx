@@ -44,7 +44,9 @@ const MachineCard = ({ machineData, width = "23vw", height = "36vh" }) => {
           </div>
           <div className="info-row">
             <div className="info-label">Description</div>
-            <div className="info-value">{machineData.description}</div>
+            <div className="info-value scrollable-description">
+              {machineData.description}
+            </div>
           </div>
         </div>
       </div>
