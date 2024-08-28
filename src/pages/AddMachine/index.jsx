@@ -84,6 +84,9 @@ const AddMachine = () => {
             name="Serial Number"
             width="37vw"
             type="text"
+            onChange={(e) => {
+              handleFormData("serial_number", e.target.value);
+            }}
           />
         </div>
         <div className="flex space-btw full-width">
@@ -92,6 +95,9 @@ const AddMachine = () => {
             width="37vw"
             leftIcon={faHashtag}
             type="text"
+            onChange={(e) => {
+              handleFormData("unit_per_hour", e.target.value);
+            }}
           />
           <Input
             textColor="white"
@@ -100,6 +106,9 @@ const AddMachine = () => {
             width="37vw"
             name="Status"
             type="text"
+            onChange={(e) => {
+              handleFormData("status", e.target.value);
+            }}
           />
         </div>
 
@@ -109,6 +118,9 @@ const AddMachine = () => {
             name="Location"
             leftIcon={faLocation}
             type="text"
+            onChange={(e) => {
+              handleFormData("location", e.target.value);
+            }}
           />
         </div>
         <div className="full-width">
@@ -117,6 +129,9 @@ const AddMachine = () => {
             name="machine Description"
             leftIcon={faClipboard}
             type="text"
+            onChange={(e) => {
+              handleFormData("description", e.target.value);
+            }}
           />
         </div>
       </div>
