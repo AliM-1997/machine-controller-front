@@ -5,11 +5,21 @@ import Label from "../../base/Label";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import MachineCard from "../../components/MachineCard";
 const AllMachines = () => {
   const options = [
     { label: "All Machines", url: "allmachines" },
     { label: "Add Machine", url: "addmachine" },
   ];
+  const machineData = {
+    name: "Milling Machine",
+    serial_number: "1101",
+    location: "A44",
+    unit_per_hour: 100,
+    status: "active",
+    last_maintenance: "00-00-0000",
+    image_path: "",
+  };
   return (
     <div className="flex column gap">
       <Header pageName="All Machines" options={options} />
@@ -31,6 +41,9 @@ const AllMachines = () => {
             placeHolder="add machine"
             backgroundColor="primary"
           />
+        </div>
+        <div>
+          <MachineCard machineData={machineData} />
         </div>
       </div>
     </div>
