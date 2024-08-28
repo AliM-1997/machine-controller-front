@@ -6,7 +6,6 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Machines from "./pages/Machines";
 import Predictions from "./pages/Predictions";
 import Alerts from "./pages/Alerts";
 import AllUsers from "./pages/AllUsers";
@@ -15,6 +14,7 @@ import { Provider } from "react-redux";
 import store from "./data/redux/store";
 import AddTask from "./pages/AddTask/indefx";
 import AllTasks from "./pages/AllTasks";
+import AddMachine from "./pages/AddMachine";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<Signup />} />
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="machines" element={<Machines />} />
+              <Route path="addmachines" element={<AddMachine />} />
               <Route path="tasks" element={<AllTasks />} />
               <Route path="Predictions" element={<Predictions />} />
               <Route path="alerts" element={<Alerts />} />
