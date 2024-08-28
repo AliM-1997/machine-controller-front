@@ -92,6 +92,7 @@ const AddMachine = () => {
     if (machine.image_path !== null) {
       try {
         await Machines.DeleteImage(machine.id);
+        setImagePreview(null);
         alert("Image deleted successfully!");
       } catch (error) {
         console.error("Error deleting image:", error.message);
@@ -137,20 +138,6 @@ const AddMachine = () => {
             <Label placeholder="Add/Edit Machine" />
           </h2>
           <div className="flex space-btw image-container">
-            {/* {machine.image_path !== "" && imagePreview == null ? (
-              <DisplayImage
-                url={machine.image_path}
-                width="150px"
-                heigth="150px"
-                borderRadius="12px"
-              />
-            ) : (
-              <img
-                url={imagePreview || machine.image_path || "path to image"}
-                className="machineimage"
-                alt="user"
-              />
-            )} */}
             {imagePreview == null && machine.image_path !== "" ? (
               <div>
                 <DisplayImage
