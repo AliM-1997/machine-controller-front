@@ -27,7 +27,6 @@ const AllTasks = () => {
       const data = await Tasks.GetAllTasks();
       setAllTasks(data.task);
       setFilteredTask(data.task);
-      // console.log("data form handle", data);
     };
     handleGetAllTasks();
   }, []);
@@ -41,8 +40,9 @@ const AllTasks = () => {
     }
     const data = await Tasks.GetTaskByID(id);
     console.log("from handlebyid", data);
-    setFilteredTask(data.task ? data.task : []);
+    setFilteredTask(data.task ? [data.task] : []);
   };
+
   return (
     <div className="flex column  gap task-container">
       <div>
@@ -112,8 +112,8 @@ const AllTasks = () => {
                 </tr>
               </thead>
               <tbody>
-                {allTasks.length > 0 ? (
-                  allTasks.map((task) => (
+                {filteredTask.length > 0 ? (
+                  filteredTask.map((task) => (
                     <tr key={task.id}>
                       <td onClick={() => handleEditNavigate(task.id)}>
                         {task.id}
