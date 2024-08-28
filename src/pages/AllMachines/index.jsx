@@ -44,7 +44,7 @@ const AllMachines = () => {
             backgroundColor="primary"
           />
         </div>
-        <div className="flex column gap">
+        <div className="flex column gap scrollable-machine-table">
           {allMachines.length > 0 ? (
             allMachines.map((machine) => (
               <MachineCard key={machine.id} machineData={machine} />

@@ -4,3 +4,8 @@
 .search-bar {
   align-items: center;
 }
+
+.scrollable-machine-table {
+  max-height: 60vh;
+  overflow-y: auto;
+}
