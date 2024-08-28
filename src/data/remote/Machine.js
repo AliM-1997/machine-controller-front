@@ -75,4 +75,19 @@ export const Machines = {
       throw error;
     }
   },
+  UploadImage: async (file, id) => {
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+      const data = await requestApi({
+        route: `/machine/updateImage/${id}`,
+        requestMethod: RequestMethods.POST,
+        body: formData,
+      });
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
 };
