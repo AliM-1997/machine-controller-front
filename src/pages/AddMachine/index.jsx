@@ -17,8 +17,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Machines } from "../../data/remote/Machine";
 import { Functions } from "../../utils/reusableFunctions";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { ClearMachine, LoadMachine } from "../../data/redux/machineSlice";
 const AddMachine = () => {
+  const dispatch = useDispatch();
   const machine = useSelector((global) => global.machine);
   console.log("from slice", machine);
   const [formData, setFormData] = useState({
@@ -37,6 +39,7 @@ const AddMachine = () => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       ...machine,
+      last_maintenance: Functions.ToDateformat(formData.last_maintenance),
     }));
   }, [machine]);
 
@@ -56,13 +59,29 @@ const AddMachine = () => {
     if (machine.id) {
       const updateDate = await Machines.UpadateMachine(machine.id, dataToSend);
       if (updateDate) {
+        dispatch(LoadMachine(updateDate));
         alert("Machine Updated Successfully");
       }
     } else {
       const createData = await Machines.CreateMachine(dataToSend);
       if (createData) {
+        dispatch(LoadMachine(createData));
         alert("Machine Created Successfullty");
       }
+    }
+  };
+
+  const handleDeleteMachine = async () => {
+    if (machine.id) {
+      const deleteData = await Machines.DeleteMachine(machine.id);
+      if (deleteData) {
+        alert("Machine Deleted Successfully");
+        dispatch(ClearMachine());
+      } else {
+        alert("Failed to delete machine. Please try again.");
+      }
+    } else {
+      alert("Machine Not Created!");
     }
   };
 
@@ -198,6 +217,7 @@ const AddMachine = () => {
               width="10vw"
               backgroundColor="primary"
               textColor="white"
+              onClick={handleDeleteMachine}
             />
             <Button
               placeHolder="Save"
