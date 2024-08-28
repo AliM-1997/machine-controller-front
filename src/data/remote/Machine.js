@@ -16,7 +16,20 @@ export const Machines = {
       throw error;
     }
   },
-  //   UpadateMachine,
+  UpadateMachine: async (id, formData) => {
+    try {
+      const data = await requestApi({
+        route: `/machine/${id}`,
+        requestMethod: RequestMethods.PUT,
+        body: formData,
+      });
+      console.log("data from edite remote", data);
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
   DeleteMachine: async (id) => {
     try {
       const data = await requestApi({
