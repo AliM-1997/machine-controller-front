@@ -89,10 +89,14 @@ const AddTask = () => {
     }
     navigate("/tasks");
   };
-
+  const options = [
+    { label: "All Tasks", url: "tasks" },
+    { label: "Completed Tasks", url: "completed-tasks" },
+    { label: "Pending Tasks", url: "pending-tasks" },
+  ];
   return (
     <div>
-      <Header pageName={"Tasks"} showChooseInput={true} />
+      <Header pageName="Tasks" showChooseInput={true} options={options} />
       <div className="flex column gap addTask-container">
         <div className="flex space-btw">
           <h2>

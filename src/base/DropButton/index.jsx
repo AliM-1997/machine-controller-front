@@ -20,7 +20,7 @@ const DropButton = ({
     setIsOpen(!isopen);
   };
   const optionClick = (option) => {
-    setSelectedOption(option);
+    setSelectedOption(option.label);
     onSelect(option);
     setIsOpen(false);
   };
@@ -63,7 +63,7 @@ const DropButton = ({
                 backgroundColor: selectedOption === option ? "#f1f1f1" : "#fff",
               }}
             >
-              {option}
+              {option.label}
             </div>
           ))}
         </div>
