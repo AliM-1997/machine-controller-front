@@ -19,5 +19,14 @@ export const Machines = {
   //   UpadateMachine,
   //   DeleteMachine,
   //   GetMachineById,
-  //   GetAllMachines,
+  GetAllMachines: async () => {
+    try {
+      const data = await requestApi({ route: "/machine" });
+      console.log("get all machine from  remote", data);
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
 };
