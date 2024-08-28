@@ -4,6 +4,8 @@ import Header from "../../components/Header";
 import Label from "../../base/Label";
 import Button from "../../base/Button";
 import DisplayImage from "../../base/DisplayImage";
+import Input from "../../base/Input";
+import { faHashtag, faUser } from "@fortawesome/free-solid-svg-icons";
 const AddMachine = () => {
   const options = [
     {
@@ -36,6 +38,22 @@ const AddMachine = () => {
               textColor=" white"
             />
           </div>
+        </div>
+        <div className="flex space-btw full-width">
+          <Input
+            placeHolder="name"
+            name="Name"
+            width="37vw"
+            leftIcon={faUser}
+            type="text"
+          />
+          <Input
+            leftIcon={faHashtag}
+            placeHolder="serial number"
+            name="Serial Number"
+            width="37vw"
+            type="text"
+          />
         </div>
       </div>
     </div>
