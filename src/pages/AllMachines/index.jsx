@@ -8,11 +8,11 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import MachineCard from "../../components/MachineCard";
 import { Machines } from "../../data/remote/Machine";
 const AllMachines = () => {
-  const [AllMachines, setAllMachines] = useState([]);
-  console.log("all machines from allpage", AllMachines);
+  const [allMachines, setAllMachines] = useState([]);
+  console.log("all machines from allpage", allMachines.machineInputs);
   const handleAllMachines = async () => {
     const data = await Machines.GetAllMachines();
-    setAllMachines(data);
+    setAllMachines(data.machineInputs);
   };
   useEffect(() => {
     handleAllMachines();
@@ -21,15 +21,6 @@ const AllMachines = () => {
     { label: "All Machines", url: "allmachines" },
     { label: "Add Machine", url: "addmachine" },
   ];
-  const machineData = {
-    name: "Milling Machine",
-    serial_number: "1101",
-    location: "A44",
-    unit_per_hour: 100,
-    status: "active",
-    last_maintenance: "00-00-0000",
-    image_path: "",
-  };
 
   return (
     <div className="flex column gap">
@@ -53,8 +44,14 @@ const AllMachines = () => {
             backgroundColor="primary"
           />
         </div>
-        <div>
-          <MachineCard machineData={machineData} />
+        <div className="flex column gap">
+          {allMachines.length > 0 ? (
+            allMachines.map((machine) => (
+              <MachineCard key={machine.id} machineData={machine} />
+            ))
+          ) : (
+            <td colSpan="7">No tasks found</td>
+          )}
         </div>
       </div>
     </div>
