@@ -16,6 +16,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { Machines } from "../../data/remote/Machine";
+import { DateFormat } from "../../utils/timeformat";
 const AddMachine = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -36,7 +37,16 @@ const AddMachine = () => {
     });
   };
   const handleCreateMachine = async () => {
-    const data = await Machines.CreateMachine(formData);
+    const dataToSend = {
+      ...formData,
+      last_maintenance: DateFormat.ToDate(formData.last_maintenance),
+    };
+    try {
+      const data = await Machines.CreateMachine(dataToSend);
+      console.log(data);
+    } catch (error) {
+      console.error("Error creating machine:", error);
+    }
   };
   const options = [
     {
