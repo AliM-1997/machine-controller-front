@@ -15,6 +15,7 @@ const ReactDate = ({
   name = "",
   border = true,
   required = true,
+  mindata = true,
 }) => {
   const [date, setDate] = useState(null);
 
@@ -46,7 +47,7 @@ const ReactDate = ({
           }}
           dateFormat="dd/MM/yyyy"
           placeholderText={placeHolder}
-          minDate={new Date()}
+          minDate={mindata ? new Date() : null}
         />
         <Icon icon={rightIcon} />
       </div>
