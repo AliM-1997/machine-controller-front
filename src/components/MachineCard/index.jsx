@@ -10,6 +10,7 @@ import {
 import HighlightLabel from "../../base/HighlightLable";
 
 const MachineCard = ({
+  label = null,
   machineData,
   width = "23vw",
   height = "36vh",
@@ -28,6 +29,9 @@ const MachineCard = ({
         />
       </div>
       <div className="flex column machine-info">
+        <div>
+          <h1>{label}</h1>
+        </div>
         <div className=" flex space-btw">
           <div>
             <h2>{machineData.name}</h2>

@@ -46,12 +46,17 @@ const SelectedMachine = () => {
           />
         </div>
         <div>
-          <MachineCard
-            machineData={selectedMachine}
-            width="0"
-            height="0"
-            className="info"
-          />
+          <div>
+            <div>
+              <MachineCard
+                label={"Machine Info"}
+                machineData={selectedMachine}
+                width="0"
+                height="0"
+                className="info"
+              />
+            </div>
+          </div>
         </div>
         <div></div>
       </div>
