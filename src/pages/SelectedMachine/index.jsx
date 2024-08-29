@@ -8,7 +8,7 @@ import { Machines } from "../../data/remote/Machine";
 
 const SelectedMachine = () => {
   const { id } = useParams();
-
+  const [selectedMachine, setSelectedMachine] = useState([]);
   const options = [
     { label: "Selected Machine", url: "selectedmachine" },
     { label: "Add Machine", url: "addmachine" },
@@ -17,7 +17,7 @@ const SelectedMachine = () => {
   const handleMachineById = async () => {
     try {
       const data = await Machines.GetMachineById(id);
-      console.log("asdfsadfdsdfds", data);
+      setSelectedMachine(data.machine_input);
     } catch (error) {
       console.error("Error fetching machine data:", error);
     }
