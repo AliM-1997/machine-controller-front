@@ -7,7 +7,12 @@ import Input from "../../base/Input";
 import "./style.css";
 import ReactDate from "../../base/ReactDate";
 import { faCalendarAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { Machines } from "../../data/remote/Machine";
 const Dashboard = () => {
+  const [formData, setFormData] = useState({
+    machine_name: "",
+  });
+
   const [statistics, setStatistics] = useState([]);
 
   const handleAllStatistics = async () => {
@@ -17,6 +22,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     handleAllStatistics();
+  }, []);
+  const handleStatByMachineName = async () => {
+    const data = await MachineStatistics.GetStatisticByMachineName("magnam");
+    console.log("fromnew  wqqewqweqwe", data);
+  };
+  useEffect(() => {
+    handleStatByMachineName();
   }, []);
 
   return (
@@ -29,7 +41,7 @@ const Dashboard = () => {
         <div className="flex row space-btw stat-input">
           <div className=" flex gap">
             <Input
-              placeHolder="search machine"
+              placeHolder="search machine name"
               leftIcon={faSearch}
               type="text"
               required={false}

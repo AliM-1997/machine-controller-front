@@ -1,4 +1,5 @@
 import { requestApi } from "../../utils/request";
+import { RequestMethods } from "../../utils/request_methods";
 
 export const MachineStatistics = {
   GetALLStatistics: async () => {
@@ -14,7 +15,7 @@ export const MachineStatistics = {
   GetStatisticByMachineName: async (machineName) => {
     try {
       const data = await requestApi({
-        route: `/machineStatistic/${machineName}`,
+        route: `/machineStatistics/${machineName}`,
       });
       console.log("all statistics form remote", data);
       return data;
