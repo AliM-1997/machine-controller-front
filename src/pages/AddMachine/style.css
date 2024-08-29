@@ -4,7 +4,7 @@
   padding: 30px;
 }
 
-.image-container {
+.machine-image-container {
   align-items: center;
 }
 .machine-inputs {
@@ -16,4 +16,16 @@
   width: 150px;
   height: 150px;
   border-radius: 12px;
+  position: relative;
+  display: inline-block;
+}
+.machine-upload {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+  top: 21vh;
+  left: 23.5vw;
 }

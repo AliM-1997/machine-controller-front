@@ -139,28 +139,35 @@ const AddMachine = () => {
           <h2>
             <Label placeholder="Add/Edit Machine" />
           </h2>
-          <div className="flex space-btw image-container">
-            {imagePreview === null && machine.image_path === "" ? (
+          <div className="flex space-btw machine-image-container">
+            <div>
+              <div className="machine-image">
+                {imagePreview === null && machine.image_path === "" ? (
+                  <div>
+                    <DisplayImage
+                      width="150px"
+                      height="150px"
+                      borderRadius="12px"
+                      url={machine.image_path || whiteImge}
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <img
+                      src={imagePreview || whiteImge}
+                      className="machineImage"
+                      alt="user"
+                    />
+                  </div>
+                )}
+              </div>
               <div>
-                <DisplayImage
-                  width="150px"
-                  height="150px"
-                  borderRadius="12px"
-                  url={machine.image_path || whiteImge}
+                <input
+                  type="file"
+                  onChange={handleFileChange}
+                  className="machine-upload"
                 />
               </div>
-            ) : (
-              <div>
-                <img
-                  src={imagePreview || whiteImge}
-                  className="machineImage"
-                  alt="user"
-                />
-              </div>
-            )}
-
-            <div className="flex gap">
-              <input type="file" onChange={handleFileChange} />
             </div>
             <div className="flex gap">
               <Button
