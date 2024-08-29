@@ -11,4 +11,16 @@ export const MachineStatistics = {
       throw error;
     }
   },
+  GetStatisticByMachineName: async (machineName) => {
+    try {
+      const data = await requestApi({
+        route: `/machineStatistic/${machineName}`,
+      });
+      console.log("all statistics form remote", data);
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
 };
