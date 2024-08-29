@@ -43,9 +43,18 @@ const BarGraph = ({ data, type }) => {
         }
       );
       break;
+    case "operationalTime":
+      datasets.push({
+        label: "Operational Time",
+        data: data.map((item) => parseFloat(item.operationalTime)),
+        backgroundColor: "rgba(0, 0, 255, 1)",
+        borderWidth: 6,
+      });
+      break;
     default:
       break;
   }
+  case
 
   const chartData = {
     labels: labels,
