@@ -9,7 +9,7 @@ import MachineCard from "../../components/MachineCard";
 import { Machines } from "../../data/remote/Machine";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { UpdateMachine } from "../../data/redux/machineSlice";
+import { LoadMachine, UpdateMachine } from "../../data/redux/machineSlice";
 const AllMachines = () => {
   const dispatch = useDispatch();
   const [allMachines, setAllMachines] = useState([]);
@@ -36,8 +36,13 @@ const AllMachines = () => {
   const navigateToAddMachine = () => {
     navigate("/addmachine");
   };
+  const previewMachine = (id) => {
+    const selecedmachine = allMachines.find((machine) => machine.id === id);
+    dispatch(LoadMachine(selecedmachine));
+    navigate("/selectedmachine");
+  };
 
-  const editMachine = async (id) => {
+  const editMachine = (id) => {
     const machine = allMachines.find((machine) => machine.id === id);
     dispatch(UpdateMachine(machine));
     navigate("/addmachine");
@@ -87,6 +92,9 @@ const AllMachines = () => {
                 key={machine.id}
                 machineData={machine}
                 onEdit={() => editMachine(machine.id)}
+                onPreview={() => {
+                  previewMachine(machine.id);
+                }}
               />
             ))
           ) : (
