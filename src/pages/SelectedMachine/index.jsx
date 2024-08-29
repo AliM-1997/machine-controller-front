@@ -30,14 +30,19 @@ const SelectedMachine = () => {
   return (
     <div>
       <Header pageName="Selected Machine" options={options} />
-      <div className=" flex column selectedMachine-container">
+      <div className=" flex column selectedMachine-container gap">
         <div>
           <h2>
             <Label placeholder="Selected Machine" />
           </h2>
         </div>
         <div>
-          <DisplayImage />
+          <DisplayImage
+            url={selectedMachine.image_path}
+            width="77vw"
+            height="80vh"
+            borderRadius="12px"
+          />
         </div>
         <div></div>
         <div></div>
