@@ -74,7 +74,21 @@ const BarGraph = ({ data, type }) => {
         }
       );
       break;
-
+    case "efficiency_availability":
+      datasets.push(
+        {
+          label: "Efficiency",
+          data: data.map((item) => parseFloat(item.efficiency)),
+          backgroundColor: "rgba(255, 0, 0, 1)",
+          borderRadius: 6,
+        },
+        {
+          label: "Availability",
+          data: data.map((item) => parseFloat(item.availability)),
+          backgroundColor: "rgba(0, 255, 0, 1)",
+          borderRadius: 6,
+        }
+      );
     default:
       break;
   }
