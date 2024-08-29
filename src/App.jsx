@@ -16,6 +16,7 @@ import AddTask from "./pages/AddTask/indefx";
 import AllTasks from "./pages/AllTasks";
 import AddMachine from "./pages/AddMachine";
 import AllMachines from "./pages/AllMachines";
+import SelectedMachine from "./pages/SelectedMachine";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="addmachine" element={<AddMachine />} />
               <Route path="allmachines" element={<AllMachines />} />
+              <Route path="selectedmachine" element={<SelectedMachine />} />
               <Route path="tasks" element={<AllTasks />} />
               <Route path="Predictions" element={<Predictions />} />
               <Route path="alerts" element={<Alerts />} />
