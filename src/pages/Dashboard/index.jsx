@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
-import "./style.css";
+import BarGraph from "../../components/BarGraph"; // Reusable BarGraph component
 import { MachineStatistics } from "../../data/remote/machineStatistics";
+
 const Dashboard = () => {
   const [statistics, setStatistics] = useState([]);
-  console.log("statistics", statistics);
+
   const handleAllStatistics = async () => {
     const data = await MachineStatistics.GetALLStatistics();
     setStatistics(data.statistic);
-    console.log("statistic from dashboard", data);
   };
 
   useEffect(() => {
     handleAllStatistics();
   }, []);
-  return <div>hello from Dashboard</div>;
+
+  return (
+    <div className=" flex column ">
+      <h2>Machine Statistics Dashboard</h2>
+      <BarGraph data={statistics} type="uptime" />
+    </div>
+  );
 };
 
 export default Dashboard;
