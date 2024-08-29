@@ -1,9 +1,27 @@
 .userProfile-container {
   padding: 30px;
   overflow: auto;
+  gap: 40px;
 }
 .image {
   width: 70px;
   height: 70px;
   border-radius: 50%;
+  justify-content: center;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.choose-file {
+  position: absolute;
+  top: 16.5vh;
+  left: 21.7vw;
+  width: 70px;
+  height: 100px;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
 }

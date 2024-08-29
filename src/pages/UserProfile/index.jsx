@@ -120,7 +120,7 @@ const UserProfile = () => {
           </h2>
         </div>
         <div className="flex full-width space-btw">
-          <div className="flex  gap">
+          <div className="flex space-btw gap ">
             <div className="image">
               {user.image_path !== "" && imagePreview == null ? (
                 <DisplayImage
@@ -136,6 +136,7 @@ const UserProfile = () => {
                 />
               )}
               <input
+                className="choose-file"
                 type="file"
                 onChange={handleFileChange}
                 style={{ display: "" }}
