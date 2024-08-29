@@ -20,8 +20,8 @@ ChartJS.register(
   Legend
 );
 
-const BarGraph = ({ data, type, title }) => {
-  const labels = data.map((item) => item.date);
+const BarGraph = ({ data = [], type, title }) => {
+  const labels = data.map((item) => item.date || "No Date");
   let datasets = [];
 
   switch (type) {
@@ -29,13 +29,13 @@ const BarGraph = ({ data, type, title }) => {
       datasets.push(
         {
           label: "Uptime",
-          data: data.map((item) => parseFloat(item.uptimeHours)),
+          data: data.map((item) => parseFloat(item.uptimeHours) || 0),
           backgroundColor: "rgba(0, 255, 0, 1)",
           borderRadius: 6,
         },
         {
           label: "Downtime",
-          data: data.map((item) => parseFloat(item.downtime)),
+          data: data.map((item) => parseFloat(item.downtime) || 0),
           backgroundColor: "rgba(255, 0, 0, 1)",
           borderRadius: 6,
         }
@@ -44,7 +44,7 @@ const BarGraph = ({ data, type, title }) => {
     case "operationalTime":
       datasets.push({
         label: "Operational Time",
-        data: data.map((item) => parseFloat(item.operationalTime)),
+        data: data.map((item) => parseFloat(item.operationalTime) || 0),
         backgroundColor: "rgba(0, 0, 255, 1)",
         borderRadius: 6,
       });
@@ -53,19 +53,19 @@ const BarGraph = ({ data, type, title }) => {
       datasets.push(
         {
           label: "MTBF",
-          data: data.map((item) => parseFloat(item.MTBF)),
+          data: data.map((item) => parseFloat(item.MTBF) || 0),
           backgroundColor: "rgba(0, 255, 0, 1)",
           borderRadius: 6,
         },
         {
           label: "MTTR",
-          data: data.map((item) => parseFloat(item.MTTR)),
+          data: data.map((item) => parseFloat(item.MTTR) || 0),
           backgroundColor: "rgba(255, 0, 0, 1)",
           borderRadius: 6,
         },
         {
           label: "MTTD",
-          data: data.map((item) => parseFloat(item.MTTD)),
+          data: data.map((item) => parseFloat(item.MTTD) || 0),
           backgroundColor: "rgba(255, 255, 0, 1)",
           borderRadius: 6,
         }
@@ -75,13 +75,13 @@ const BarGraph = ({ data, type, title }) => {
       datasets.push(
         {
           label: "Efficiency",
-          data: data.map((item) => parseFloat(item.efficiency)),
+          data: data.map((item) => parseFloat(item.efficiency) || 0),
           backgroundColor: "rgba(255, 0, 0, 1)",
           borderRadius: 6,
         },
         {
           label: "Availability",
-          data: data.map((item) => parseFloat(item.availability)),
+          data: data.map((item) => parseFloat(item.availability) || 0),
           backgroundColor: "rgba(0, 255, 0, 1)",
           borderRadius: 6,
         }
@@ -141,5 +141,4 @@ const BarGraph = ({ data, type, title }) => {
     </div>
   );
 };
-
 export default BarGraph;
