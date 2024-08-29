@@ -6,7 +6,8 @@ const HighlightLabel = ({ highlight = true, placeHolder = "text" }) => {
   let backgroundColor = "";
 
   switch (placeHolder) {
-    case "Pending" || " Requiring Attention":
+    case "Pending":
+    case "attention":
       textColor = "yellow";
       backgroundColor = "Lyellow";
       break;
@@ -14,11 +15,13 @@ const HighlightLabel = ({ highlight = true, placeHolder = "text" }) => {
       textColor = "blue";
       backgroundColor = "Lblue";
       break;
-    case "Completed" || "Active":
+    case "Completed":
+    case "active":
       textColor = "green";
       backgroundColor = "Lgreen";
       break;
-    case "Risked" || "Under Maintenace":
+    case "Risked":
+    case "under maintenance":
       textColor = "red";
       backgroundColor = "Lred";
       break;
