@@ -37,7 +37,6 @@ const AddMachine = () => {
     description: "",
     last_maintenance: null,
     unit_per_hour: "",
-    last_maintenance: "",
   });
   useEffect(() => {
     setFormData((prevFormData) => ({
@@ -115,7 +114,7 @@ const AddMachine = () => {
     }
   };
   const handleUploadImage = async () => {
-    if (selectedImage && machine.id == null) {
+    if (selectedImage && machine.id !== null) {
       try {
         const image = await Machines.UploadImage(selectedImage, machine.id);
         dispatch(LoadMachine({ ...machine, image_path: image }));
@@ -141,7 +140,7 @@ const AddMachine = () => {
             <Label placeholder="Add/Edit Machine" />
           </h2>
           <div className="flex space-btw image-container">
-            {imagePreview == null && machine.image_path == "" ? (
+            {imagePreview === null && machine.image_path === "" ? (
               <div>
                 <DisplayImage
                   width="150px"
@@ -152,7 +151,11 @@ const AddMachine = () => {
               </div>
             ) : (
               <div>
-                <img src={imagePreview || whiteImge} className="machineImage" />
+                <img
+                  src={imagePreview || whiteImge}
+                  className="machineImage"
+                  alt="user"
+                />
               </div>
             )}
 

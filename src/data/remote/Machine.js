@@ -34,7 +34,7 @@ export const Machines = {
     try {
       const data = await requestApi({
         route: `/machine/${id}`,
-        requestMethod: RequestMethods.DeleteMachine,
+        requestMethod: RequestMethods.DELETE,
       });
       console.log("data when delete from remote", data);
       return data;

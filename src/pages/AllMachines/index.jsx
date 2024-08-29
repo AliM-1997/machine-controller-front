@@ -47,6 +47,15 @@ const AllMachines = () => {
     dispatch(UpdateMachine(machine));
     navigate("/addmachine");
   };
+  const deleteMachine = async (id) => {
+    console.log("Asdfssda", id);
+    const deleteData = await Machines.DeleteMachine(id);
+    if (deleteData) {
+      alert("Machine Deleted Successfully");
+    } else {
+      alert("Failed to delete machine. Please try again.");
+    }
+  };
 
   useEffect(() => {
     handleAllMachines();
@@ -94,6 +103,9 @@ const AllMachines = () => {
                 onEdit={() => editMachine(machine.id)}
                 onPreview={() => {
                   previewMachine(machine.id);
+                }}
+                onDelete={() => {
+                  deleteMachine(machine.id);
                 }}
               />
             ))
