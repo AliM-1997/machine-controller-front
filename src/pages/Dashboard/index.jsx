@@ -7,23 +7,32 @@ import Input from "../../base/Input";
 import "./style.css";
 import ReactDate from "../../base/ReactDate";
 import { faCalendarAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { Machines } from "../../data/remote/Machine";
 const Dashboard = () => {
   const [formData, setFormData] = useState({
     machine_name: "",
+    date: "",
+    machine_id_1: "",
+    machine_id_2: "",
+    startDate: "",
+    endDate: "",
   });
 
   console.log("formdata", formData);
   const [statistics, setStatistics] = useState([]);
 
-  const handleAllStatistics = async () => {
-    const data = await MachineStatistics.GetALLStatistics();
-    setStatistics(data.statistic);
-  };
+  // const handleAllStatistics = async () => {
+  //   const data = await MachineStatistics.GetALLStatistics();
+  //   setFormData(data.statistics);
+  // };
 
   const handleStatByMachineName = async () => {
-    const data = await MachineStatistics.GetStatisticByMachineName("magnam");
-    console.log("fromnew  wqqewqweqwe", data);
+    try {
+      const data = await MachineStatistics.GetStatisticByMachineName("ea");
+      setStatistics(data.statistics);
+      console.log("fromnew  wqqewqweqwe", data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const ChangingFormat = (key, value) => {
@@ -33,12 +42,14 @@ const Dashboard = () => {
     });
   };
 
+  // useEffect(() => {
+  //   handleAllStatistics();
+  // }, []);
   useEffect(() => {
-    handleAllStatistics();
-  }, []);
-  useEffect(() => {
-    handleStatByMachineName();
-  }, []);
+    if (formData.machine_name) {
+      handleStatByMachineName();
+    }
+  }, [formData.machine_name]);
 
   return (
     <div>
