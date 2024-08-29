@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BarGraph from "../../components/BarGraph"; // Reusable BarGraph component
 import { MachineStatistics } from "../../data/remote/machineStatistics";
+import Header from "../../components/Header";
 
 const Dashboard = () => {
   const [statistics, setStatistics] = useState([]);
@@ -15,9 +16,30 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className=" flex column ">
-      <h2>Machine Statistics Dashboard</h2>
-      <BarGraph data={statistics} type="uptime" />
+    <div>
+      <Header />
+      <div className="flex center column gap">
+        <h2>Machine Statistics Dashboard</h2>
+        <div>
+          <div className="flex space-around gap">
+            <div className="">
+              <BarGraph
+                data={statistics}
+                type="uptime_downtime"
+                title="Uptime and Downtime Hours"
+              />
+            </div>
+            <div className="">
+              <BarGraph
+                data={statistics}
+                type="operationalTime"
+                title="Operation Time"
+              />
+            </div>
+          </div>
+        </div>
+        <div></div>
+      </div>
     </div>
   );
 };

@@ -20,7 +20,7 @@ ChartJS.register(
   Legend
 );
 
-const BarGraph = ({ data, type }) => {
+const BarGraph = ({ data, type, title }) => {
   const labels = data.map((item) => item.date);
   let datasets = [];
 
@@ -104,7 +104,7 @@ const BarGraph = ({ data, type }) => {
       },
       title: {
         display: true,
-        text: "Machine Statistics",
+        text: title,
         padding: {
           top: 10,
           bottom: 30,
