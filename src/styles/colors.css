@@ -55,11 +55,11 @@
 }
 
 .green-stat {
-  color: #289900;
+  color: rgba(0, 255, 0, 1);
 }
 
-.red-star {
-  color: #ff5959;
+.red-stat {
+  color: rgba(255, 0, 0, 1);
 }
 
 .blue-stat {
