@@ -19,25 +19,26 @@ ChartJS.register(
   Legend
 );
 
-const BarGraph = () => {
-  const [chartData, setChartData] = useState(null);
-
-  useEffect(() => {
-    // Simulate fetching data or processing it
-    const data = {
-      labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-      datasets: [
-        {
-          label: "MTTR",
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-          borderColor: "rgba(255, 99, 132, 1)",
-          borderWidth: 1,
-        },
-      ],
-    };
-    setChartData(data);
-  }, []);
+const BarGraph = ({ data, type }) => {
+  const labels = data.map((item) => item.date);
+  let datasets = [];
+  switch (type) {
+    case "uptime":
+      datasets.push({
+        label: "Uptime Hours",
+        data: data.map((item) => parseFloat(item.uptimeHours)),
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        borderColor: "rgba(54, 162, 235, 1)",
+        borderWidth: 1,
+      });
+      break;
+    default:
+      break;
+  }
+  const chartData = {
+    labels: labels,
+    datasets: datasets,
+  };
 
   const options = {
     responsive: true,
