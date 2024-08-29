@@ -30,7 +30,7 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="addmachine" element={<AddMachine />} />
               <Route path="allmachines" element={<AllMachines />} />
-              <Route path="selectedmachine" element={<SelectedMachine />} />
+              <Route path="selectedmachine/:id" element={<SelectedMachine />} />
               <Route path="tasks" element={<AllTasks />} />
               <Route path="Predictions" element={<Predictions />} />
               <Route path="alerts" element={<Alerts />} />
