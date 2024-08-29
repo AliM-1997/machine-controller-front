@@ -6,6 +6,7 @@ import Button from "../../base/Button";
 import DisplayImage from "../../base/DisplayImage";
 import Input from "../../base/Input";
 import ReactDate from "../../base/ReactDate";
+import whiteImge from "../../assets/images/white-bg.png";
 import {
   faAngleDown,
   faAt,
@@ -19,11 +20,13 @@ import { Machines } from "../../data/remote/Machine";
 import { Functions } from "../../utils/reusableFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { ClearMachine, LoadMachine } from "../../data/redux/machineSlice";
+import { useNavigate } from "react-router-dom";
 const AddMachine = () => {
   const dispatch = useDispatch();
   const machine = useSelector((global) => global.machine);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
+  const navigate = useNavigate();
   console.log("from slice", machine);
   const [formData, setFormData] = useState({
     name: "",
@@ -36,7 +39,6 @@ const AddMachine = () => {
     unit_per_hour: "",
     last_maintenance: "",
   });
-  console.log("12354412", machine.image_path);
   useEffect(() => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -59,7 +61,6 @@ const AddMachine = () => {
       ...formData,
       last_maintenance: Functions.ToDateformat(formData.last_maintenance),
     };
-
     if (machine.id) {
       const updateDate = await Machines.UpadateMachine(machine.id, dataToSend);
       if (updateDate) {
@@ -69,8 +70,8 @@ const AddMachine = () => {
     } else {
       const createData = await Machines.CreateMachine(dataToSend);
       if (createData) {
-        dispatch(LoadMachine(createData));
         alert("Machine Created Successfullty");
+        navigate("/allmachines");
       }
     }
   };
@@ -114,7 +115,7 @@ const AddMachine = () => {
     }
   };
   const handleUploadImage = async () => {
-    if (selectedImage) {
+    if (selectedImage && machine.id == null) {
       try {
         const image = await Machines.UploadImage(selectedImage, machine.id);
         dispatch(LoadMachine({ ...machine, image_path: image }));
@@ -123,6 +124,8 @@ const AddMachine = () => {
         console.error("Error uploading image:", error.message);
         alert("Failed to upload image.");
       }
+    } else {
+      alert("No Selected Image/ not created machine ");
     }
   };
   const options = [
@@ -138,18 +141,18 @@ const AddMachine = () => {
             <Label placeholder="Add/Edit Machine" />
           </h2>
           <div className="flex space-btw image-container">
-            {imagePreview == null && machine.image_path !== "" ? (
+            {imagePreview == null && machine.image_path == "" ? (
               <div>
                 <DisplayImage
                   width="150px"
                   height="150px"
                   borderRadius="12px"
-                  url={machine.image_path || "path to image"}
+                  url={machine.image_path || whiteImge}
                 />
               </div>
             ) : (
               <div>
-                <img src={imagePreview} className="machineImage" />
+                <img src={imagePreview || whiteImge} className="machineImage" />
               </div>
             )}
 
