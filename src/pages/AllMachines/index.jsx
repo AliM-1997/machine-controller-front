@@ -10,11 +10,13 @@ import { Machines } from "../../data/remote/Machine";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LoadMachine, UpdateMachine } from "../../data/redux/machineSlice";
+import SelectedMachine from "../SelectedMachine";
 const AllMachines = () => {
   const dispatch = useDispatch();
   const [allMachines, setAllMachines] = useState([]);
   const [searchMachine, setSearchMachine] = useState("");
   const navigate = useNavigate();
+
   const handleAllMachines = async () => {
     const data = await Machines.GetAllMachines();
     setAllMachines(data.machineInputs);
@@ -39,7 +41,7 @@ const AllMachines = () => {
   const previewMachine = (id) => {
     const selecedmachine = allMachines.find((machine) => machine.id === id);
     dispatch(LoadMachine(selecedmachine));
-    navigate("/selectedmachine");
+    navigate(`/selectedmachine/${id}`);
   };
 
   const editMachine = (id) => {
@@ -48,10 +50,10 @@ const AllMachines = () => {
     navigate("/addmachine");
   };
   const deleteMachine = async (id) => {
-    console.log("Asdfssda", id);
     const deleteData = await Machines.DeleteMachine(id);
     if (deleteData) {
       alert("Machine Deleted Successfully");
+      handleAllMachines();
     } else {
       alert("Failed to delete machine. Please try again.");
     }
@@ -105,6 +107,7 @@ const AllMachines = () => {
                   previewMachine(machine.id);
                 }}
                 onDelete={() => {
+                  <SelectedMachine id={machine.id} />;
                   deleteMachine(machine.id);
                 }}
               />
