@@ -109,6 +109,22 @@ const BarGraph = ({ data, type }) => {
         text: "Machine Statistics",
       },
     },
+    scales: {
+      x: {
+        grid: {
+          display: false, // Hide x-axis grid lines
+        },
+        ticks: {
+          display: true,
+        },
+      },
+      y: {
+        grid: {
+          display: true,
+          borderColor: "rgba(0, 0, 0, 0.2)",
+        },
+      },
+    },
   };
 
   return (
