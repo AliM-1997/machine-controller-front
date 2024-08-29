@@ -31,14 +31,12 @@ const BarGraph = ({ data, type }) => {
           label: "Uptime",
           data: data.map((item) => parseFloat(item.uptimeHours)),
           backgroundColor: "rgba(0, 255, 0, 1)",
-          borderWidth: 1,
           borderRadius: 6,
         },
         {
           label: "Downtime",
           data: data.map((item) => parseFloat(item.downtime)),
           backgroundColor: "rgba(255, 0, 0, 1)",
-          borderWidth: 1,
           borderRadius: 6,
         }
       );
@@ -49,7 +47,6 @@ const BarGraph = ({ data, type }) => {
         data: data.map((item) => parseFloat(item.operationalTime)),
         backgroundColor: "rgba(0, 0, 255, 1)",
         borderRadius: 6,
-        innerWidth: 10,
       });
       break;
     case "MTBF_MTTR_MTTD":
@@ -69,7 +66,7 @@ const BarGraph = ({ data, type }) => {
         {
           label: "MTTD",
           data: data.map((item) => parseFloat(item.MTTD)),
-          backgroundColor: "rgba(255, 255, 0)",
+          backgroundColor: "rgba(255, 255, 0, 1)",
           borderRadius: 6,
         }
       );
@@ -89,6 +86,7 @@ const BarGraph = ({ data, type }) => {
           borderRadius: 6,
         }
       );
+      break;
     default:
       break;
   }
@@ -107,12 +105,22 @@ const BarGraph = ({ data, type }) => {
       title: {
         display: true,
         text: "Machine Statistics",
+        padding: {
+          top: 10,
+          bottom: 30,
+        },
+        position: "top",
+        align: "start",
+        font: {
+          weight: "bold",
+          size: 16,
+        },
       },
     },
     scales: {
       x: {
         grid: {
-          display: false, // Hide x-axis grid lines
+          display: false,
         },
         ticks: {
           display: true,
