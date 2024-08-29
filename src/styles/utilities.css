@@ -48,6 +48,11 @@
   width: 100vw;
   height: 100vh;
 }
+.page-oo {
+  background-color: #f1f1f1;
+  width: 80vw;
+  height: 80vh;
+}
 .gap {
   gap: 24px;
 }
