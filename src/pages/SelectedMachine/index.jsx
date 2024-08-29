@@ -5,12 +5,13 @@ import Label from "../../base/Label";
 import DisplayImage from "../../base/DisplayImage";
 import { useParams } from "react-router-dom";
 import { Machines } from "../../data/remote/Machine";
+import MachineCard from "../../components/MachineCard";
 
 const SelectedMachine = () => {
   const { id } = useParams();
   const [selectedMachine, setSelectedMachine] = useState([]);
   const options = [
-    { label: "Selected Machine", url: "selectedmachine" },
+    { label: "Selected Machine", url: "selectedmachine/:id" },
     { label: "Add Machine", url: "addmachine" },
     { label: "All Machines", url: "allmachines" },
   ];
@@ -28,7 +29,7 @@ const SelectedMachine = () => {
     }
   }, []);
   return (
-    <div>
+    <div className="flex column gap">
       <Header pageName="Selected Machine" options={options} />
       <div className=" flex column selectedMachine-container gap">
         <div>
@@ -44,7 +45,14 @@ const SelectedMachine = () => {
             borderRadius="12px"
           />
         </div>
-        <div></div>
+        <div>
+          <MachineCard
+            machineData={selectedMachine}
+            width="0"
+            height="0"
+            className="info"
+          />
+        </div>
         <div></div>
       </div>
     </div>

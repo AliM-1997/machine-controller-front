@@ -1,3 +1,5 @@
 .selectedMachine-container {
-  padding: 30px;
+  padding: 0 30px 0 30px;
+  max-height: 100vh;
+  overflow-y: auto;
 }
