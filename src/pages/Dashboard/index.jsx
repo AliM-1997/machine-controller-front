@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import BarGraph from "../../components/BarGraph"; // Reusable BarGraph component
+import BarGraph from "../../components/BarGraph";
 import { MachineStatistics } from "../../data/remote/machineStatistics";
 import Header from "../../components/Header";
-import Label from "../../base/Label";
-
+import Button from "../../base/Button";
+import Input from "../../base/Input";
+import "./style.css";
+import ReactDate from "../../base/ReactDate";
+import { faCalendarAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
 const Dashboard = () => {
   const [statistics, setStatistics] = useState([]);
 
@@ -20,8 +23,25 @@ const Dashboard = () => {
     <div>
       <Header />
       <div className="flex center column gap dachboard-container">
-        <div className="">
+        <div className="stat-title">
           <h2>Machine Statistics</h2>
+        </div>
+        <div className="flex row space-btw stat-input">
+          <div className=" flex gap">
+            <Input
+              placeHolder="search machine"
+              leftIcon={faSearch}
+              type="text"
+              required={false}
+            />
+            <ReactDate leftIcon={faCalendarAlt} />
+          </div>
+          <Button
+            placeHolder="filter"
+            backgroundColor="primary"
+            width="5vw"
+            textColor="white"
+          />
         </div>
         <div>
           <div className="flex space-around gap">
