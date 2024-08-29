@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DisplayImage from "../../base/DisplayImage";
 import Header from "../../components/Header";
-
+import whiteImage from "../../assets/images/white-bg.png";
 const UserProfile = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -121,19 +121,17 @@ const UserProfile = () => {
         </div>
         <div className="flex full-width space-btw">
           <div className="flex space-btw gap ">
-            <div className="image">
-              {user.image_path !== "" && imagePreview == null ? (
+            <div className="">
+              {imagePreview ? (
+                <img src={imagePreview} className="image" alt="user" />
+              ) : user.image_path ? (
                 <DisplayImage
                   url={user.image_path}
                   width="70px"
                   heigth="70px"
                 />
               ) : (
-                <img
-                  src={imagePreview || "path-to-default-image.jpg"}
-                  className="image"
-                  alt="user"
-                />
+                <img src={whiteImage} className="image" alt="default" />
               )}
               <input
                 className="choose-file"

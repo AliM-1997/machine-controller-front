@@ -27,7 +27,7 @@ const AddMachine = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
   const navigate = useNavigate();
-  console.log("from slice", machine);
+  console.log("from slice", machine.image_path);
   const [formData, setFormData] = useState({
     name: "",
     serial_number: "",
@@ -142,23 +142,21 @@ const AddMachine = () => {
           <div className="flex space-btw machine-image-container">
             <div>
               <div className="machine-image">
-                {imagePreview === null && machine.image_path === "" ? (
-                  <div>
-                    <DisplayImage
-                      width="150px"
-                      height="150px"
-                      borderRadius="12px"
-                      url={machine.image_path || whiteImge}
-                    />
-                  </div>
+                {imagePreview ? (
+                  <img
+                    src={imagePreview}
+                    className="machineImage"
+                    alt="machine"
+                  />
+                ) : machine.image_path ? (
+                  <DisplayImage
+                    width="150px"
+                    height="150px"
+                    borderRadius="12px"
+                    url={machine.image_path}
+                  />
                 ) : (
-                  <div>
-                    <img
-                      src={imagePreview || whiteImge}
-                      className="machineImage"
-                      alt="user"
-                    />
-                  </div>
+                  <img src={whiteImge} className="machineImage" alt="default" />
                 )}
               </div>
               <div>
