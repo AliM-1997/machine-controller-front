@@ -48,13 +48,36 @@ const BarGraph = ({ data, type }) => {
         label: "Operational Time",
         data: data.map((item) => parseFloat(item.operationalTime)),
         backgroundColor: "rgba(0, 0, 255, 1)",
-        borderWidth: 6,
+        borderRadius: 6,
+        innerWidth: 10,
       });
       break;
+    case "MTBF_MTTR_MTTD":
+      datasets.push(
+        {
+          label: "MTBF",
+          data: data.map((item) => parseFloat(item.MTBF)),
+          backgroundColor: "rgba(0, 255, 0, 1)",
+          borderRadius: 6,
+        },
+        {
+          label: "MTTR",
+          data: data.map((item) => parseFloat(item.MTTR)),
+          backgroundColor: "rgba(255, 0, 0, 1)",
+          borderRadius: 6,
+        },
+        {
+          label: "MTTD",
+          data: data.map((item) => parseFloat(item.MTTD)),
+          backgroundColor: "rgba(255, 255, 0)",
+          borderRadius: 6,
+        }
+      );
+      break;
+
     default:
       break;
   }
-  case
 
   const chartData = {
     labels: labels,
