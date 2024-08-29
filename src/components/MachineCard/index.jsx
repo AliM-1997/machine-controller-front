@@ -7,6 +7,7 @@ import {
   faEdit,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
+import HighlightLabel from "../../base/HighlightLable";
 
 const MachineCard = ({
   machineData,
@@ -48,7 +49,8 @@ const MachineCard = ({
           </div>
           <div className="info-row">
             <div className="info-label">Status</div>
-            <div className="info-value">{machineData.status}</div>
+
+            <HighlightLabel placeHolder={machineData.status} />
           </div>
           <div className="info-row">
             <div className="info-label">Last Maintenance</div>
