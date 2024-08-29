@@ -13,6 +13,7 @@ const Dashboard = () => {
     machine_name: "",
   });
 
+  console.log("formdata", formData);
   const [statistics, setStatistics] = useState([]);
 
   const handleAllStatistics = async () => {
@@ -20,13 +21,21 @@ const Dashboard = () => {
     setStatistics(data.statistic);
   };
 
-  useEffect(() => {
-    handleAllStatistics();
-  }, []);
   const handleStatByMachineName = async () => {
     const data = await MachineStatistics.GetStatisticByMachineName("magnam");
     console.log("fromnew  wqqewqweqwe", data);
   };
+
+  const ChangingFormat = (key, value) => {
+    setFormData({
+      ...formData,
+      [key]: value,
+    });
+  };
+
+  useEffect(() => {
+    handleAllStatistics();
+  }, []);
   useEffect(() => {
     handleStatByMachineName();
   }, []);
@@ -45,6 +54,7 @@ const Dashboard = () => {
               leftIcon={faSearch}
               type="text"
               required={false}
+              onChange={(e) => ChangingFormat("machine_name", e.target.value)}
             />
             <ReactDate leftIcon={faCalendarAlt} />
           </div>
