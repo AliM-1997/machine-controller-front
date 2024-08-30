@@ -1,4 +1,3 @@
-import { de } from "date-fns/locale";
 import { requestApi } from "../../utils/request";
 import { RequestMethods } from "../../utils/request_methods";
 
