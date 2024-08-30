@@ -90,4 +90,13 @@ export const Machines = {
       throw error;
     }
   },
+  GetMachineByName: async (name) => {
+    try {
+      const data = await requestApi({ route: `machine/name/${name}` });
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
 };
