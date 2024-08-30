@@ -11,8 +11,12 @@ const Statistics = createSlice({
   initialState: initialState,
   name: "statistic",
   reducers: {
-    LoadStatistics: (state, action) => {},
-    FilterStatistics: (state, action) => {},
+    LoadStatistics: (state, action) => {
+      return { ...state, ...action.payload };
+    },
+    FilterStatistics: (state, action) => {
+      return { ...state, ...action.payload };
+    },
     ClearStatistics: (state, action) => {
       return initialState;
     },
