@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-initialState = {
+const initialState = {
   machine_name: "",
   date: "",
   machine_id_1: "",
@@ -10,8 +10,15 @@ initialState = {
 const Statistics = createSlice({
   initialState: initialState,
   name: "statistic",
-  reducers,
+  reducers: {
+    LoadStatistics: (state, action) => {},
+    FilterStatistics: (state, action) => {},
+    ClearStatistics: (state, action) => {
+      return initialState;
+    },
+  },
 });
 
-export const {} = Statistics.actions;
+export const { LoadStatistics, FilterStatistics, ClearStatistics } =
+  Statistics.actions;
 export const statisticReducer = Statistics.reducer;
