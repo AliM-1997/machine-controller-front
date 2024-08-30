@@ -9,7 +9,6 @@ export const Machines = {
         requestMethod: RequestMethods.POST,
         body: formData,
       });
-      console.log("create from remote", data);
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
@@ -23,7 +22,6 @@ export const Machines = {
         requestMethod: RequestMethods.PUT,
         body: formData,
       });
-      console.log("data from edite remote", data);
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
@@ -36,7 +34,6 @@ export const Machines = {
         route: `/machine/${id}`,
         requestMethod: RequestMethods.DELETE,
       });
-      console.log("data when delete from remote", data);
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
@@ -46,7 +43,6 @@ export const Machines = {
   GetMachineById: async (id) => {
     try {
       const data = await requestApi({ route: `machine/${id}` });
-      console.log("get all machine by id from  remote", data);
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
@@ -56,7 +52,6 @@ export const Machines = {
   GetAllMachines: async () => {
     try {
       const data = await requestApi({ route: "/machine" });
-      console.log("get all machine from  remote", data);
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);

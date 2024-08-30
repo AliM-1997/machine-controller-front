@@ -16,12 +16,12 @@ export const requestApi = async ({
     const headers = includeToken ? { Authorization: `Bearer ${token}` } : {};
 
     // Log request details
-    console.log("Request Details:", {
-      url: route,
-      method: requestMethod,
-      headers,
-      data: body,
-    });
+    // console.log("Request Details:", {
+    //   url: route,
+    //   method: requestMethod,
+    //   headers,
+    //   data: body,
+    // });
 
     const { data } = await axios.request({
       url: route,
@@ -30,7 +30,7 @@ export const requestApi = async ({
       headers: headers,
     });
 
-    console.log("Response Data:", data);
+    // console.log("Response Data:", data);
     return data;
   } catch (error) {
     // Log error details
