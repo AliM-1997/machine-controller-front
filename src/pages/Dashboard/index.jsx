@@ -74,7 +74,18 @@ const Dashboard = () => {
               required={false}
               onChange={(e) => ChangingFormat("machine_name", e.target.value)}
             />
-            <ReactDate leftIcon={faCalendarAlt} mindata={false} />
+            <ReactDate
+              leftIcon={faCalendarAlt}
+              mindata={false}
+              placeHolder={
+                formData.date
+                  ? formData.date.toISOString().slice(0, 10)
+                  : "dd/MM/yyyy"
+              }
+              onChange={(e) => {
+                ChangingFormat("date", e);
+              }}
+            />
           </div>
           <Button
             placeHolder="filter"
