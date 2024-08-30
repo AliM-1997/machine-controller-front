@@ -22,6 +22,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { format } from "date-fns";
+import ChooseOption from "../../base/ChooseOption";
 const AddMachine = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -33,7 +34,7 @@ const AddMachine = () => {
     last_maintenance: null,
     unit_per_hour: "",
   });
-
+  console.log(formData);
   const machine = useSelector((global) => global.machine);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
@@ -134,8 +135,11 @@ const AddMachine = () => {
   };
   const options = [
     { label: "Add Machine", url: "addmachine" },
-    { label: "All Machines", url: "allmachines" },
+    { label: "All Machines", url: "allmachin  es" },
   ];
+  const handleOptionSelect = (option) => {
+    console.log("Selected option:", option);
+  };
   return (
     <div>
       <Header pageName="Machines" options={options} className="container" />
@@ -234,17 +238,13 @@ const AddMachine = () => {
                 ChangingFormData("unit_per_hour", e.target.value);
               }}
             />
-            <Input
-              textColor="white"
-              leftIcon={faAngleDown}
-              placeHolder={machine.status || "pending"}
-              iconColor="black"
+            <ChooseOption
+              options={options}
+              onSelect={handleOptionSelect}
               width="37vw"
+              textColor="black"
+              leftIcon={faAngleDown}
               name="Status"
-              type="text"
-              onChange={(e) => {
-                ChangingFormData("status", e.target.value);
-              }}
             />
           </div>
 
