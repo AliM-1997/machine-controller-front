@@ -1,0 +1,14 @@
+.toggle-option {
+  position: absolute;
+  background-color: #fff;
+  z-index: 1000;
+  border: "1px solid #ddd";
+  max-height: 200px;
+  overflow: auto;
+}
+
+.selected-option {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid black;
+}
