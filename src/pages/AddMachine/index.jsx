@@ -143,13 +143,13 @@ const AddMachine = () => {
   return (
     <div>
       <Header pageName="Machines" options={options} className="container" />
-      <div className="flex column full-width addMachine-container gap">
-        <div className="flex column gap">
+      <div className="flex column full-width addMachine-container gap center">
+        <div className="flex column gap title">
           <h2>
             <Label placeholder="Add/Edit Machine" />
           </h2>
           {machine.id ? (
-            <div className="flex space-btw machine-image-container full-width">
+            <div className="flex space-arr machine-image-container full-width">
               {/* <div> */}
               <div className="machine-image">
                 <>
@@ -205,12 +205,12 @@ const AddMachine = () => {
           )}
         </div>
 
-        <div className="flex column gap full-height machine-inputs">
-          <div className="flex space-btw full-width">
+        <div className="flex column gap full-height machine-inputs white-bg">
+          <div className="flex space-arr full-width">
             <Input
               placeHolder={machine.name || "name"}
               name="Name"
-              width="37vw"
+              width="30vw"
               leftIcon={faUser}
               type="text"
               onChange={(e) => {
@@ -221,17 +221,17 @@ const AddMachine = () => {
               leftIcon={faAt}
               placeHolder={machine.serial_number || "serial number"}
               name="Serial Number"
-              width="37vw"
+              width="30vw"
               type="text"
               onChange={(e) => {
                 ChangingFormData("serial_number", e.target.value);
               }}
             />
           </div>
-          <div className="flex space-btw full-width">
+          <div className="flex space-arr full-width">
             <Input
               name="Units Per Hour"
-              width="37vw"
+              width="30vw"
               leftIcon={faHashtag}
               type="text"
               onChange={(e) => {
@@ -241,39 +241,42 @@ const AddMachine = () => {
             <ChooseOption
               options={options}
               onSelect={handleOptionSelect}
-              width="37vw"
+              width="30vw"
               textColor="black"
               leftIcon={faAngleDown}
               name="Status"
             />
           </div>
 
-          <div className="full-width">
+          <div className="flex center ">
             <Input
               placeHolder={machine.location || "location"}
               name="Location"
               leftIcon={faLocation}
               type="text"
+              width="62vw"
               onChange={(e) => {
                 ChangingFormData("location", e.target.value);
               }}
             />
           </div>
-          <div className="full-width">
+          <div className="flex center space-arr">
             <Input
               placeHolder={machine.description || "description"}
               name="machine Description"
               leftIcon={faClipboard}
+              width="62vw"
               type="text"
               onChange={(e) => {
                 ChangingFormData("description", e.target.value);
               }}
             />
           </div>
-          <div className="full-width">
+          <div className="flex center space-arr">
             <ReactDate
               leftIcon={faCalendarDays}
               name="Last Maintenance"
+              width="62vw"
               placeHolder={
                 formData.last_maintenance
                   ? formData.last_maintenance.toISOString().slice(0, 10)
@@ -282,22 +285,23 @@ const AddMachine = () => {
               onChange={(e) => ChangingFormData("last_maintenance", e)}
             />
           </div>
-
-          <div className="flex end gap">
-            <Button
-              placeHolder="Delete"
-              width="10vw"
-              backgroundColor="primary"
-              textColor="white"
-              onClick={handleDeleteMachine}
-            />
-            <Button
-              placeHolder="Save"
-              backgroundColor="primary"
-              width="10vw"
-              textColor="white"
-              onClick={handleCreateMachine}
-            />
+          <div className="flex center space-arr">
+            <div className="flex end gap btn-con">
+              <Button
+                placeHolder="Delete"
+                width="10vw"
+                backgroundColor="primary"
+                textColor="white"
+                onClick={handleDeleteMachine}
+              />
+              <Button
+                placeHolder="Save"
+                backgroundColor="primary"
+                width="10vw"
+                textColor="white"
+                onClick={handleCreateMachine}
+              />
+            </div>
           </div>
         </div>
       </div>
