@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+initialState = {
+  machine_name: "",
+  date: "",
+  machine_id_1: "",
+  machine_id_2: "",
+  startDate: "",
+  endDate: "",
+};
 const Statistics = createSlice({
-  initialState,
+  initialState: initialState,
   name: "statistic",
   reducers,
 });
