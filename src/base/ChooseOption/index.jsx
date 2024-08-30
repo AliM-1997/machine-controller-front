@@ -58,6 +58,32 @@ const ChooseOption = ({
         />
         <Icon icon={rightIcon} color={iconColor} onClick={toggleDropdown} />
       </div>
+      {isOpen && (
+        <div
+          className="toggle-option"
+          style={{
+            width: width,
+          }}
+        >
+          {filteredOptions.length > 0 ? (
+            filteredOptions.map((option, index) => (
+              <div
+                key={index}
+                onClick={() => handleOptionClick(option)}
+                className="selected-option"
+                style={{
+                  backgroundColor:
+                    searchTerm === option.label ? "black" : "#fff",
+                }}
+              >
+                {option.label}
+              </div>
+            ))
+          ) : (
+            <div style={{ padding: "8px" }}>No options available</div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
