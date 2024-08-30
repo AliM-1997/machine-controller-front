@@ -34,14 +34,21 @@ const Dashboard = () => {
       console.error(error);
     }
   };
+
   const handleGetStatByNameAndDate = async () => {
-    const data = await MachineStatistics.GetStatisticByNameAndDate(
-      "ea",
-      "2003-07-17"
-    );
-    console.log("safdsgfhgfdsfafgdsfsfadfafdsas", data);
+    try {
+      const formattedDate = formData.date.toISOString().slice(0, 10);
+      const data = await MachineStatistics.GetStatisticByNameAndDate(
+        formData.machine_name,
+        formattedDate
+      );
+      setStatistics(data.statistics);
+      console.log("Fetched statistics:", data);
+    } catch (error) {
+      console.error("Error fetching statistics by name and date:", error);
+    }
   };
-  handleGetStatByNameAndDate();
+
   const ChangingFormat = (key, value) => {
     setFormData({
       ...formData,
@@ -57,7 +64,11 @@ const Dashboard = () => {
       handleStatByMachineName();
     }
   }, [formData.machine_name]);
-
+  useEffect(() => {
+    if (formData.machine_name && formData.date) {
+      handleGetStatByNameAndDate();
+    }
+  }, [formData.machine_name, formData.date]);
   return (
     <div>
       <Header />
@@ -79,7 +90,7 @@ const Dashboard = () => {
               mindata={false}
               placeHolder={
                 formData.date
-                  ? formData.date.toISOString().slice(0, 10)
+                  ? formData.date.toLocaleDateString("en-GB")
                   : "dd/MM/yyyy"
               }
               onChange={(e) => {
