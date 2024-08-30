@@ -7,6 +7,11 @@ import DisplayImage from "../../base/DisplayImage";
 import Input from "../../base/Input";
 import ReactDate from "../../base/ReactDate";
 import whiteImge from "../../assets/images/white-bg.png";
+import { Machines } from "../../data/remote/Machine";
+import { Functions } from "../../utils/reusableFunctions";
+import { useDispatch, useSelector } from "react-redux";
+import { ClearMachine, LoadMachine } from "../../data/redux/machineSlice";
+import { useNavigate } from "react-router-dom";
 import {
   faAngleDown,
   faAt,
@@ -16,18 +21,8 @@ import {
   faLocation,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { Machines } from "../../data/remote/Machine";
-import { Functions } from "../../utils/reusableFunctions";
-import { useDispatch, useSelector } from "react-redux";
-import { ClearMachine, LoadMachine } from "../../data/redux/machineSlice";
-import { useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 const AddMachine = () => {
-  const dispatch = useDispatch();
-  const machine = useSelector((global) => global.machine);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState("");
-  const navigate = useNavigate();
-  console.log("from slice", machine.image_path);
   const [formData, setFormData] = useState({
     name: "",
     serial_number: "",
@@ -38,6 +33,21 @@ const AddMachine = () => {
     last_maintenance: null,
     unit_per_hour: "",
   });
+
+  const machine = useSelector((global) => global.machine);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  console.log(selectedImage);
+  const ChangingFormData = (key, value) => {
+    setFormData({
+      ...formData,
+      [key]: value,
+    });
+  };
+
   useEffect(() => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -47,13 +57,6 @@ const AddMachine = () => {
         : null,
     }));
   }, [machine]);
-
-  const ChangingFormData = (key, value) => {
-    setFormData({
-      ...formData,
-      [key]: value,
-    });
-  };
 
   const handleCreateMachine = async () => {
     const dataToSend = {
@@ -88,6 +91,7 @@ const AddMachine = () => {
       alert("Machine Not Created!");
     }
   };
+
   const handleDeleteImage = async () => {
     if (machine.image_path !== null) {
       try {
@@ -102,6 +106,7 @@ const AddMachine = () => {
       alert("No Image Found!");
     }
   };
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -139,51 +144,61 @@ const AddMachine = () => {
           <h2>
             <Label placeholder="Add/Edit Machine" />
           </h2>
-          <div className="flex space-btw machine-image-container">
-            <div>
+          {machine.id ? (
+            <div className="flex space-btw machine-image-container full-width">
+              {/* <div> */}
               <div className="machine-image">
-                {imagePreview ? (
-                  <img
-                    src={imagePreview}
-                    className="machineImage"
-                    alt="machine"
+                <>
+                  {imagePreview ? (
+                    <img
+                      src={imagePreview}
+                      className="machineImage"
+                      alt="machine"
+                    />
+                  ) : machine.image_path ? (
+                    <DisplayImage
+                      width="150px"
+                      height="150px"
+                      borderRadius="12px"
+                      url={machine.image_path}
+                    />
+                  ) : (
+                    <img
+                      src={whiteImge}
+                      className="machineImage"
+                      alt="default"
+                    />
+                  )}
+                </>
+                {/* </div> */}
+                <div>
+                  <input
+                    type="file"
+                    onChange={handleFileChange}
+                    className="machine-upload"
                   />
-                ) : machine.image_path ? (
-                  <DisplayImage
-                    width="150px"
-                    height="150px"
-                    borderRadius="12px"
-                    url={machine.image_path}
-                  />
-                ) : (
-                  <img src={whiteImge} className="machineImage" alt="default" />
-                )}
+                </div>
               </div>
-              <div>
-                <input
-                  type="file"
-                  onChange={handleFileChange}
-                  className="machine-upload"
+              <div className="flex gap">
+                <Button
+                  placeHolder="Upload Image"
+                  width="10vw"
+                  backgroundColor="primary"
+                  textColor="white"
+                  onClick={handleUploadImage}
+                />
+                <Button
+                  placeHolder="Delete"
+                  width="8vw"
+                  backgroundColor="primary"
+                  textColor=" white"
+                  onClick={handleDeleteImage}
                 />
               </div>
             </div>
-            <div className="flex gap">
-              <Button
-                placeHolder="Upload Image"
-                width="10vw"
-                backgroundColor="primary"
-                textColor="white"
-                onClick={handleUploadImage}
-              />
-              <Button
-                placeHolder="Delete"
-                width="8vw"
-                backgroundColor="primary"
-                textColor=" white"
-                onClick={handleDeleteImage}
-              />
-            </div>
-          </div>
+          ) : (
+            <></>
+          )}
         </div>
 
         <div className="flex column gap full-height machine-inputs">
