@@ -34,7 +34,14 @@ const Dashboard = () => {
       console.error(error);
     }
   };
-
+  const handleGetStatByNameAndDate = async () => {
+    const data = await MachineStatistics.GetStatisticByNameAndDate(
+      "ea",
+      "2003-07-17"
+    );
+    console.log("safdsgfhgfdsfafgdsfsfadfafdsas", data);
+  };
+  handleGetStatByNameAndDate();
   const ChangingFormat = (key, value) => {
     setFormData({
       ...formData,
