@@ -12,8 +12,30 @@ const ChooseOption = ({
   iconColor,
   name,
   required = true,
-  s,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const handleOptionClick = (option) => {
+    setSearchTerm(option.label);
+    onSelect(option);
+    setIsOpen(false);
+  };
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+    setIsOpen(true);
+  };
+
+  const filteredOptions = options.filter((option) =>
+    option.label.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const backgroundColorClass = `${backgroundColor}-bg`;
+  const textColorClass = `${textColor}-txt`;
+
   return <div></div>;
 };
 
