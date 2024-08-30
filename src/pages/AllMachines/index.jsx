@@ -22,12 +22,11 @@ const AllMachines = () => {
     setAllMachines(data.machineInputs);
   };
 
-  const handleMachineByID = async () => {
-    console.log("search_id", searchMachine);
+  const handleMachineByname = async () => {
     if (searchMachine) {
       try {
-        const data = await Machines.GetMachineById(searchMachine);
-        setAllMachines([data.machine_input]);
+        const data = await Machines.GetMachineByName(searchMachine);
+        setAllMachines([data.machine]);
       } catch (error) {
         setAllMachines([]);
       }
@@ -64,7 +63,7 @@ const AllMachines = () => {
   }, []);
 
   useEffect(() => {
-    handleMachineByID();
+    handleMachineByname();
   }, [searchMachine]);
 
   const options = [
