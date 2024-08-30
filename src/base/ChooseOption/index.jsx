@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
+import Icon from "../Icon";
 const ChooseOption = ({
   options = [],
   onSelect,
@@ -36,7 +37,29 @@ const ChooseOption = ({
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
 
-  return <div></div>;
+  return (
+    <div>
+      <div>
+        <label className="bold black-txt" style={{ width }}>
+          {name}
+          {required && <span className="required">*</span>}
+        </label>
+      </div>
+      <div
+        className={`input-container ${backgroundColorClass}`}
+        style={{ width, position: "relative" }}
+      >
+        <Icon icon={leftIcon} color={iconColor} />
+        <input
+          className={`input-field ${textColorClass}`}
+          value={searchTerm}
+          onChange={handleInputChange}
+          placeholder={placeholder}
+        />
+        <Icon icon={rightIcon} color={iconColor} onClick={toggleDropdown} />
+      </div>
+    </div>
+  );
 };
 
 export default ChooseOption;
