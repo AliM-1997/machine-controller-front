@@ -1,7 +1,10 @@
 .machine-card {
-  width: 77 vw;
-  height: 36vh;
-  border-radius: 24px;
+  width: 30vw;
+  height: fit-content;
+  border-radius: 24px 24px 0 0;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 }
 
 .machine-info {
@@ -9,6 +12,9 @@
   padding: 24px;
 }
 
+.image-machine {
+  width: fit-content;
+}
 .info-table {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -28,7 +34,7 @@
 }
 
 .scrollable-description {
-  max-height: 40px;
+  max-height: 70px;
   overflow-y: scroll;
   border-radius: 4px;
 }

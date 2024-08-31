@@ -12,23 +12,24 @@ import HighlightLabel from "../../base/HighlightLable";
 const MachineCard = ({
   label = null,
   machineData,
-  width = "23vw",
-  height = "36vh",
+  width = "30vw",
   onEdit,
   onDelete,
   onPreview,
+  height,
 }) => {
   return (
-    <div className="machine-card flex row white-bg">
-      <div>
-        <DisplayImage
-          url={machineData.image_path}
-          width={width}
-          height={height}
-          borderRadius="24px 0 0 24px"
-        />
-      </div>
-      <div className="flex column machine-info">
+    <div
+      className="machine-card flex column white-bg "
+      style={{ width: width }}
+    >
+      <DisplayImage
+        url={machineData.image_path}
+        borderRadius="24px 24px 0 0"
+        width={width}
+        height={height}
+      />
+      <div className="flex column machine-info ">
         <div>
           <h1>{label}</h1>
         </div>
@@ -36,9 +37,9 @@ const MachineCard = ({
           <div>
             <h2>{machineData.name}</h2>
           </div>
-          <div className="flex gap">
-            <Icon icon={faEdit} color={"primary"} onClick={onEdit} />
-            <Icon icon={faTrashCan} color={"primary"} onClick={onDelete} />
+          <div className="flex gap-btn ">
+            <Icon icon={faEdit} color={"black"} onClick={onEdit} />
+            <Icon icon={faTrashCan} color={"black"} onClick={onDelete} />
             <Icon icon={faAngleRight} onClick={onPreview} />
           </div>
         </div>
@@ -48,7 +49,7 @@ const MachineCard = ({
             <div className="info-value">{machineData.name}</div>
           </div>
           <div className="info-row">
-            <div className="info-label">ID</div>
+            <div className="info-label">Serial Number</div>
             <div className="info-value">{machineData.serial_number}</div>
           </div>
           <div className="info-row">
