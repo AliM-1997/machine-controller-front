@@ -8,15 +8,17 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import MachineCard from "../../components/MachineCard";
 import { Machines } from "../../data/remote/Machine";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LoadMachine, UpdateMachine } from "../../data/redux/machineSlice";
 import SelectedMachine from "../SelectedMachine";
+import ChooseOption from "../../base/ChooseOption";
 const AllMachines = () => {
+  const response = useSelector((global) => global);
+  console.log(response);
   const dispatch = useDispatch();
   const [allMachines, setAllMachines] = useState([]);
   const [searchMachine, setSearchMachine] = useState("");
   const navigate = useNavigate();
-
   const handleAllMachines = async () => {
     const data = await Machines.GetAllMachines();
     setAllMachines(data.machineInputs);
@@ -58,9 +60,9 @@ const AllMachines = () => {
     }
   };
 
-  useEffect(() => {
-    handleAllMachines();
-  }, []);
+  const handleOptionChange = (option) => {
+    setSearchMachine(option.label);
+  };
 
   useEffect(() => {
     handleMachineByname();
@@ -74,37 +76,49 @@ const AllMachines = () => {
   return (
     <div className="flex column gap">
       <Header pageName="All Machines" options={options} />
-      <div className="flex column gap machines-container">
+      <div className="flex column gap machines-container ">
         <div>
           <h2>
             <Label placeholder="All Machines" />
           </h2>
         </div>
         <div className=" flex row  full-width space-btw search-bar">
-          <Input
-            placeHolder="search machine"
-            leftIcon={faSearch}
+          <ChooseOption
+            options={response.data.MachineNames}
+            onSelect={handleOptionChange}
+            placeholder="searchMachine"
             width="20vw"
+            leftIcon={faSearch}
             required={false}
-            onChange={(e) => setSearchMachine(e.target.value)}
           />
-          <Button
-            width="8vw"
-            placeHolder="add machine"
-            backgroundColor="primary"
-            onClick={navigateToAddMachine}
-          />
+          <div className="flex gap-btn">
+            <Button
+              width="7vw"
+              placeHolder="add"
+              backgroundColor="primary"
+              onClick={navigateToAddMachine}
+            />
+            <Button
+              width="7vw"
+              placeHolder="all"
+              backgroundColor="primary"
+              onClick={handleAllMachines}
+            />
+          </div>
         </div>
-        <div className="flex column gap scrollable-machine-table">
+        <div className="flex wrap gap scrollable-machine-table">
           {allMachines.length > 0 ? (
             allMachines.map((machine) => (
               <MachineCard
+                className="card-adjust"
+                width="26.2vw"
                 key={machine.id}
                 machineData={machine}
                 onEdit={() => editMachine(machine.id)}
                 onPreview={() => {
                   previewMachine(machine.id);
                 }}
+                height={"full-height"}
                 onDelete={() => {
                   <SelectedMachine id={machine.id} />;
                   deleteMachine(machine.id);
