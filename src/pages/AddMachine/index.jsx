@@ -133,23 +133,32 @@ const AddMachine = () => {
       alert("No Selected Image/ not created machine ");
     }
   };
-  const options = [
+  const HeaderOptions = [
     { label: "Add Machine", url: "addmachine" },
     { label: "All Machines", url: "allmachin  es" },
+  ];
+  const statusOption = [
+    { label: "Active" },
+    { label: "Under Maintenance" },
+    { label: "Attention" },
   ];
   const handleOptionSelect = (option) => {
     console.log("Selected option:", option);
   };
   return (
     <div>
-      <Header pageName="Machines" options={options} className="container" />
+      <Header
+        pageName="Machines"
+        options={HeaderOptions}
+        className="container"
+      />
       <div className="flex column full-width addMachine-container gap center">
         <div className="flex column gap title">
           <h2>
             <Label placeholder="Add/Edit Machine" />
           </h2>
           {machine.id ? (
-            <div className="flex space-arr machine-image-container full-width">
+            <div className="flex space-btw machine-image-container full-width">
               {/* <div> */}
               <div className="machine-image">
                 <>
@@ -186,14 +195,14 @@ const AddMachine = () => {
               <div className="flex gap">
                 <Button
                   placeHolder="Upload Image"
-                  width="10vw"
+                  width="7vw"
                   backgroundColor="primary"
                   textColor="white"
                   onClick={handleUploadImage}
                 />
                 <Button
                   placeHolder="Delete"
-                  width="8vw"
+                  width="7vw"
                   backgroundColor="primary"
                   textColor=" white"
                   onClick={handleDeleteImage}
@@ -239,7 +248,7 @@ const AddMachine = () => {
               }}
             />
             <ChooseOption
-              options={options}
+              options={statusOption}
               onSelect={handleOptionSelect}
               width="30vw"
               textColor="black"
@@ -289,7 +298,7 @@ const AddMachine = () => {
             <div className="flex end gap btn-con">
               <Button
                 placeHolder="Delete"
-                width="10vw"
+                width="7vw"
                 backgroundColor="primary"
                 textColor="white"
                 onClick={handleDeleteMachine}
@@ -297,7 +306,7 @@ const AddMachine = () => {
               <Button
                 placeHolder="Save"
                 backgroundColor="primary"
-                width="10vw"
+                width="7vw"
                 textColor="white"
                 onClick={handleCreateMachine}
               />

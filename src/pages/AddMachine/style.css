@@ -4,6 +4,7 @@
 
 .machine-image-container {
   align-items: center;
+  width: 62vw;
 }
 .machine-inputs {
   max-width: 70vw;
