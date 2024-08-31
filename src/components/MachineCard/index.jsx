@@ -13,10 +13,10 @@ const MachineCard = ({
   label = null,
   machineData,
   width = "30vw",
+  height = "10vw",
   onEdit,
   onDelete,
   onPreview,
-  height,
 }) => {
   return (
     <div
@@ -27,7 +27,7 @@ const MachineCard = ({
         url={machineData.image_path}
         borderRadius="24px 24px 0 0"
         width={width}
-        height={height}
+        className="only-image"
       />
       <div className="flex column machine-info ">
         <div>
@@ -57,7 +57,7 @@ const MachineCard = ({
 
             <HighlightLabel placeHolder={machineData.status} />
           </div>
-          <div className="info-row">
+          {/* <div className="info-row">
             <div className="info-label">Last Maintenance</div>
             <div className="info-value">{machineData.last_maintenance}</div>
           </div>
@@ -74,7 +74,7 @@ const MachineCard = ({
             <div className="info-value scrollable-description">
               {machineData.description}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

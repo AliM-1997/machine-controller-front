@@ -106,28 +106,30 @@ const AllMachines = () => {
             />
           </div>
         </div>
-        <div className="flex wrap gap scrollable-machine-table">
-          {allMachines.length > 0 ? (
-            allMachines.map((machine) => (
-              <MachineCard
-                className="card-adjust"
-                width="26.2vw"
-                key={machine.id}
-                machineData={machine}
-                onEdit={() => editMachine(machine.id)}
-                onPreview={() => {
-                  previewMachine(machine.id);
-                }}
-                height={"full-height"}
-                onDelete={() => {
-                  <SelectedMachine id={machine.id} />;
-                  deleteMachine(machine.id);
-                }}
-              />
-            ))
-          ) : (
-            <td colSpan="7">No tasks found</td>
-          )}
+        <div className=" all-m-t">
+          <div className="flex wrap gap scrollable-machine-table">
+            {allMachines.length > 0 ? (
+              allMachines.map((machine) => (
+                <MachineCard
+                  className="card-adjust"
+                  width="26.2vw"
+                  height="20vw"
+                  key={machine.id}
+                  machineData={machine}
+                  onEdit={() => editMachine(machine.id)}
+                  onPreview={() => {
+                    previewMachine(machine.id);
+                  }}
+                  onDelete={() => {
+                    <SelectedMachine id={machine.id} />;
+                    deleteMachine(machine.id);
+                  }}
+                />
+              ))
+            ) : (
+              <td colSpan="7">No tasks found</td>
+            )}
+          </div>
         </div>
       </div>
     </div>

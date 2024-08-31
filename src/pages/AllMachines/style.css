@@ -1,6 +1,6 @@
-.machines-container {
+/* .machines-container {
   padding: 30px;
-}
+} */
 .search-bar {
   align-items: center;
 }
@@ -8,4 +8,9 @@
 .scrollable-machine-table {
   max-height: 60vh;
   overflow-y: inherit;
+}
+
+.all-m-t {
+  background-color: red;
+  height: inherit;
 }

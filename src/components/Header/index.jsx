@@ -11,7 +11,7 @@ import Icon from "../../base/Icon";
 import DropButton from "../../base/DropButton";
 import "./style.css";
 
-const Header = ({ pageName, showChooseInput, options = [] }) => {
+const Header = ({ pageName, showChooseInput, showIcons, options = [] }) => {
   const navigate = useNavigate();
 
   const handleSelect = (option) => {
@@ -28,19 +28,23 @@ const Header = ({ pageName, showChooseInput, options = [] }) => {
         <h1>{pageName}</h1>
       </div>
       <div className="flex header-left">
-        <DropButton
-          options={options}
-          onSelect={handleSelect}
-          width="15vw"
-          rightIcon={faAngleDown}
-          hidden={!showChooseInput}
-          backgroundColor="white"
-          border={true}
-        />
-        <div className="flex center h-icon">
-          <Icon icon={faBell} color="primary" />
-          <Icon icon={faUser} color="primary" />
-        </div>
+        {showChooseInput && (
+          <DropButton
+            options={options}
+            onSelect={handleSelect}
+            width="15vw"
+            rightIcon={faAngleDown}
+            hidden={!showChooseInput}
+            backgroundColor="white"
+            border={true}
+          />
+        )}
+        {showIcons && (
+          <div className="flex center h-icon">
+            <Icon icon={faBell} color="primary" />
+            <Icon icon={faUser} color="primary" />
+          </div>
+        )}
       </div>
     </div>
   );
