@@ -21,8 +21,8 @@ import {
   faLocation,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { format } from "date-fns";
 import ChooseOption from "../../base/ChooseOption";
+import { Machines01 } from "../../data/remote/Machine01";
 const AddMachine = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -39,7 +39,7 @@ const AddMachine = () => {
   const [imagePreview, setImagePreview] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [allSerailNumber, setSerialNumber] = useState({});
   console.log(selectedImage);
   const ChangingFormData = (key, value) => {
     setFormData({
@@ -47,7 +47,7 @@ const AddMachine = () => {
       [key]: value,
     });
   };
-
+  console.log("asdfsda", allSerailNumber);
   useEffect(() => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -79,10 +79,9 @@ const AddMachine = () => {
   };
 
   const handleMachineSerialNumbers = async () => {
-    const data = await Machines.GetAllMachineSerialNumber();
-    console.log("serialnumbers", data);
+    const data = await Machines01.GetAllMachineSerialNumber();
+    setSerialNumber(data);
   };
-  handleMachineSerialNumbers();
   const handleDeleteMachine = async () => {
     if (machine.id) {
       const deleteData = await Machines.DeleteMachine(machine.id);
@@ -149,6 +148,7 @@ const AddMachine = () => {
   const handleOptionSelect = (option) => {
     ChangingFormData("status", option.label);
   };
+
   return (
     <div>
       <Header
@@ -230,16 +230,29 @@ const AddMachine = () => {
                 ChangingFormData("name", e.target.value);
               }}
             />
-            <Input
-              leftIcon={faAt}
-              placeHolder={machine.serial_number || "serial number"}
-              name="Serial Number"
-              width="30vw"
-              type="text"
-              onChange={(e) => {
-                ChangingFormData("serial_number", e.target.value);
-              }}
-            />
+            {machine.id ? (
+              <ChooseOption
+                options={allSerailNumber}
+                onSelect={handleOptionSelect}
+                placeholder={machine.serial_number}
+                width="30vw"
+                textColor="black"
+                leftIcon={faAngleDown}
+                name="Serial Number"
+                onClick={handleMachineSerialNumbers}
+              />
+            ) : (
+              <Input
+                leftIcon={faAt}
+                placeHolder={machine.serial_number || "serial number"}
+                name="Serial Number"
+                width="30vw"
+                type="text"
+                onChange={(e) => {
+                  ChangingFormData("serial_number", e.target.value);
+                }}
+              />
+            )}
           </div>
           <div className="flex space-arr full-width">
             <Input
