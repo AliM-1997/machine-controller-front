@@ -1,6 +1,7 @@
-.date_1 {
-}
 .filter-cont {
+  position: absolute;
+  top: 19%;
+  left: 65%;
   padding: 24px;
   border-radius: 24px;
   background: linear-gradient(
@@ -12,6 +13,6 @@
 }
 .btn-date {
   display: flex;
-  width: 33vw;
+  width: 20vw;
   justify-content: center;
 }

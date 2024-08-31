@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import DashboardFilter from "../../components/DashboardFilter";
 const Dashboard = () => {
   const response = useSelector((global) => global);
+  const [showFilter, setShowFilter] = useState(false);
 
   const [formData, setFormData] = useState({
     machine_name: "",
@@ -112,7 +113,9 @@ const Dashboard = () => {
             backgroundColor="primary"
             width="5vw"
             textColor="white"
+            onClick={() => setShowFilter(true)}
           />
+          {showFilter && <DashboardFilter />}
         </div>
         <div>
           <div className="flex space-around gap">

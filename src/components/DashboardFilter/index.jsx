@@ -22,7 +22,7 @@ const DashboardFilter = () => {
               mindata={false}
               name="date"
               required={false}
-              width="33vw"
+              width="25vw"
             />
           </div>
           <div className="btn-date">
@@ -50,22 +50,24 @@ const DashboardFilter = () => {
               mindata={false}
               name="date_1"
               required={false}
+              width="12vw"
             />
             <ReactDate
               leftIcon={faCalendarAlt}
               mindata={false}
               name="date_2"
+              width="12vw"
               required={false}
             />
           </div>
-        </div>
-        <div className="btn-date">
-          <Button
-            width="8vw"
-            backgroundColor="primary"
-            placeHolder="submit"
-            textColor="white"
-          />
+          <div className="btn-date">
+            <Button
+              width="8vw"
+              backgroundColor="primary"
+              placeHolder="submit"
+              textColor="white"
+            />
+          </div>
         </div>
       </div>
     </div>
