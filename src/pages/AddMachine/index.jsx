@@ -79,6 +79,11 @@ const AddMachine = () => {
     }
   };
 
+  const handleMachineSerialNumbers = async () => {
+    const data = await Machines.GetAllMachineSerialNumber();
+    console.log("serialnumbers", data);
+  };
+  handleMachineSerialNumbers();
   const handleDeleteMachine = async () => {
     if (machine.id) {
       const deleteData = await Machines.DeleteMachine(machine.id);
