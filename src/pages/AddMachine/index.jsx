@@ -23,6 +23,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ChooseOption from "../../base/ChooseOption";
 const AddMachine = () => {
+  const response = useSelector((global) => global);
+  console.log("response ", response);
   const [formData, setFormData] = useState({
     name: "",
     serial_number: "",
@@ -38,8 +40,8 @@ const AddMachine = () => {
   const [imagePreview, setImagePreview] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [allSerailNumber, setSerialNumber] = useState({});
-  const [allMachineName, setMachineName] = useState({});
+  // const [allSerailNumber, setSerialNumber] = useState({});
+  // const [allMachineName, setMachineName] = useState({});
   const ChangingFormData = (key, value) => {
     setFormData({
       ...formData,
@@ -75,19 +77,19 @@ const AddMachine = () => {
       }
     }
   };
-  console.log(allMachineName);
-  const handleMachineSerialNumbers = async () => {
-    const data = await Machines.GetAllMachineSerialNumber();
-    setSerialNumber(data);
-  };
-  const handleMachineAllName = async () => {
-    const data = await Machines.GetAllMachineAllNames();
-    setMachineName(data);
-  };
-  useEffect(() => {
-    handleMachineSerialNumbers();
-    handleMachineAllName();
-  }, []);
+  // console.log(allMachineName);
+  // const handleMachineSerialNumbers = async () => {
+  //   const data = await Machines.GetAllMachineSerialNumber();
+  //   setSerialNumber(data);
+  // };
+  // const handleMachineAllName = async () => {
+  //   const data = await Machines.GetAllMachineAllNames();
+  //   setMachineName(data);
+  // };
+  // useEffect(() => {
+  //   handleMachineSerialNumbers();
+  //   handleMachineAllName();
+  // }, []);
   const handleDeleteMachine = async () => {
     if (machine.id) {
       const deleteData = await Machines.DeleteMachine(machine.id);
