@@ -4,7 +4,8 @@ import Input from "../../base/Input";
 import Button from "../../base/Button";
 import { useNavigate } from "react-router-dom";
 import { authRemote } from "../../data/remote/Auth_user";
-import Header from "../../components/Header";
+import loginImage from "../../assets/images/Admin-Login.png";
+
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -41,10 +42,10 @@ const Signup = () => {
 
   return (
     <div>
-      <Header />
+      <img src={loginImage} alt="admin" className="Admin-image" />
 
-      <div className="flex column center gap page-oo">
-        <div className="flex column center white-bg gap signup-container gape-oo">
+      <div className="flex column center gap Admin-container">
+        <div className="flex column center  gap signup-container gape-oo">
           <div className="flex column center gap">
             <h1>
               <span className="highlight">D</span>ustry
