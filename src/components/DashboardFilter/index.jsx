@@ -5,7 +5,12 @@ import { faCalendarAlt, faX } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../base/Button";
 import Label from "../../base/Label";
 import Icon from "../../base/Icon";
-const DashboardFilter = ({ onExit }) => {
+const DashboardFilter = ({
+  onExit,
+  dateChange,
+  date_1_Change,
+  date_2_change,
+}) => {
   return (
     <div className="flex column white-bg gap filter-cont">
       <div className="flex end">
@@ -23,6 +28,7 @@ const DashboardFilter = ({ onExit }) => {
               name="date"
               required={false}
               width="25vw"
+              onChange={dateChange}
             />
           </div>
           <div className="btn-date">
@@ -51,6 +57,7 @@ const DashboardFilter = ({ onExit }) => {
               name="date_1"
               required={false}
               width="12vw"
+              onChange={date_1_Change}
             />
             <ReactDate
               leftIcon={faCalendarAlt}
@@ -58,6 +65,7 @@ const DashboardFilter = ({ onExit }) => {
               name="date_2"
               width="12vw"
               required={false}
+              onChange={date_2_change}
             />
           </div>
           <div className="btn-date">

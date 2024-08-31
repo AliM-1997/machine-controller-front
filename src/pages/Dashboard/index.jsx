@@ -69,11 +69,11 @@ const Dashboard = () => {
       handleStatByMachineName();
     }
   }, [formData.machine_name]);
-  useEffect(() => {
-    if (formData.machine_name && formData.date) {
-      handleGetStatByNameAndDate();
-    }
-  }, [formData.machine_name, formData.date]);
+  // useEffect(() => {
+  //   if (formData.machine_name && formData.date) {
+  //     handleGetStatByNameAndDate();
+  //   }
+  // }, [formData.machine_name, formData.date]);
   const handleOptionSelect = (name, option) => {
     ChangingFormat(name, option.label);
   };
@@ -120,6 +120,9 @@ const Dashboard = () => {
               onExit={() => {
                 setShowFilter(false);
               }}
+              dateChange={(e) => ChangingFormat("date", e)}
+              date_1_Change={(e) => ChangingFormat("startDate", e)}
+              date_2_change={(e) => ChangingFormat("endDate", e)}
             />
           )}
         </div>
