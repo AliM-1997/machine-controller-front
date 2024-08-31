@@ -13,6 +13,7 @@ export const MachineStatistics = {
     }
   },
   GetStatisticByMachineName: async (machineName) => {
+    console.log("machine name testing", machineName);
     try {
       const data = await requestApi({
         route: `/machineStatistics/${machineName}`,

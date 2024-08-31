@@ -10,6 +10,8 @@ const DashboardFilter = ({
   dateChange,
   date_1_Change,
   date_2_change,
+  filter1,
+  filter2,
 }) => {
   return (
     <div className="flex column white-bg gap filter-cont">
@@ -37,6 +39,7 @@ const DashboardFilter = ({
               backgroundColor="primary"
               placeHolder="submit"
               textColor="white"
+              onClick={filter1}
             />
           </div>
         </div>
@@ -74,6 +77,7 @@ const DashboardFilter = ({
               backgroundColor="primary"
               placeHolder="submit"
               textColor="white"
+              onClick={filter2}
             />
           </div>
         </div>

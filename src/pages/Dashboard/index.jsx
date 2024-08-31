@@ -32,8 +32,10 @@ const Dashboard = () => {
   // };
   const handleStatByMachineName = async () => {
     try {
-      const data = await MachineStatistics.GetStatisticByMachineName("ea");
-      setStatistics(data.statistics);
+      const data = await MachineStatistics.GetStatisticByMachineName(
+        formData.machine_name
+      );
+      setStatistics(data);
       console.log("fromnew  wqqewqweqwe", data);
     } catch (error) {
       console.error(error);
@@ -43,6 +45,11 @@ const Dashboard = () => {
   const handleGetStatByNameAndDate = async () => {
     try {
       const formattedDate = formData.date.toISOString().slice(0, 10);
+      console.log("formated date form name and date function", formattedDate);
+      console.log(
+        "formated date form name and date function",
+        formData.machine_name
+      );
       const data = await MachineStatistics.GetStatisticByNameAndDate(
         formData.machine_name,
         formattedDate
@@ -121,6 +128,7 @@ const Dashboard = () => {
                 setShowFilter(false);
               }}
               dateChange={(e) => ChangingFormat("date", e)}
+              filter1={handleGetStatByNameAndDate}
               date_1_Change={(e) => ChangingFormat("startDate", e)}
               date_2_change={(e) => ChangingFormat("endDate", e)}
             />
@@ -130,16 +138,18 @@ const Dashboard = () => {
           <div className="flex space-around gap">
             <div className="">
               <BarGraph
-                data={statistics}
+                data={statistics.statistics}
                 type="uptime_downtime"
                 title="Uptime and Downtime Hours"
+                label={formData.machine_name}
               />
             </div>
             <div className="">
               <BarGraph
-                data={statistics}
+                data={statistics.statistics}
                 type="operationalTime"
                 title="Operation Time"
+                label={formData.machine_name}
               />
             </div>
           </div>
@@ -148,16 +158,18 @@ const Dashboard = () => {
           <div className="flex space-around gap">
             <div className="">
               <BarGraph
-                data={statistics}
+                data={statistics.statistics}
                 type="MTBF_MTTR_MTTD"
                 title="MTBF, MTTR, MTTD"
+                label={formData.machine_name}
               />
             </div>
             <div className="">
               <BarGraph
-                data={statistics}
+                data={statistics.statistics}
                 type="efficiency_availability"
                 title="Efficiency and Availability"
+                label={formData.machine_name}
               />
             </div>
           </div>

@@ -20,7 +20,7 @@ ChartJS.register(
   Legend
 );
 
-const BarGraph = ({ data = [], type, title }) => {
+const BarGraph = ({ data = [], type, title, label }) => {
   const labels = data.map((item) => item.date || "No Date");
   let datasets = [];
 
@@ -137,6 +137,7 @@ const BarGraph = ({ data = [], type, title }) => {
 
   return (
     <div className="stat-container">
+      <h3>{label}</h3>
       <Bar data={chartData} options={options} />
     </div>
   );
