@@ -34,7 +34,6 @@ const AddMachine = () => {
     last_maintenance: null,
     unit_per_hour: "",
   });
-  console.log(formData);
   const machine = useSelector((global) => global.machine);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
@@ -143,12 +142,12 @@ const AddMachine = () => {
     { label: "All Machines", url: "allmachin  es" },
   ];
   const statusOption = [
-    { label: "Active" },
-    { label: "Under Maintenance" },
-    { label: "Attention" },
+    { label: "active" },
+    { label: "under maintenance" },
+    { label: "attention" },
   ];
   const handleOptionSelect = (option) => {
-    console.log("Selected option:", option);
+    ChangingFormData("status", option.label);
   };
   return (
     <div>
