@@ -24,7 +24,6 @@ import {
 import ChooseOption from "../../base/ChooseOption";
 const AddMachine = () => {
   const response = useSelector((global) => global);
-  console.log("response ", response);
   const [formData, setFormData] = useState({
     name: "",
     serial_number: "",
@@ -35,13 +34,13 @@ const AddMachine = () => {
     last_maintenance: null,
     unit_per_hour: "",
   });
+  console.log("formdata add machine", formData);
   const machine = useSelector((global) => global.machine);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const [allSerailNumber, setSerialNumber] = useState({});
-  // const [allMachineName, setMachineName] = useState({});
+
   const ChangingFormData = (key, value) => {
     setFormData({
       ...formData,
@@ -77,19 +76,7 @@ const AddMachine = () => {
       }
     }
   };
-  // console.log(allMachineName);
-  // const handleMachineSerialNumbers = async () => {
-  //   const data = await Machines.GetAllMachineSerialNumber();
-  //   setSerialNumber(data);
-  // };
-  // const handleMachineAllName = async () => {
-  //   const data = await Machines.GetAllMachineAllNames();
-  //   setMachineName(data);
-  // };
-  // useEffect(() => {
-  //   handleMachineSerialNumbers();
-  //   handleMachineAllName();
-  // }, []);
+
   const handleDeleteMachine = async () => {
     if (machine.id) {
       const deleteData = await Machines.DeleteMachine(machine.id);
@@ -153,8 +140,8 @@ const AddMachine = () => {
     { label: "under maintenance" },
     { label: "attention" },
   ];
-  const handleOptionSelect = (option) => {
-    ChangingFormData("status", option.label);
+  const handleOptionSelect = (name, option) => {
+    ChangingFormData(name, option.label);
   };
 
   return (
@@ -171,7 +158,6 @@ const AddMachine = () => {
           </h2>
           {machine.id ? (
             <div className="flex space-btw machine-image-container full-width">
-              {/* <div> */}
               <div className="machine-image">
                 <>
                   {imagePreview ? (
@@ -228,50 +214,26 @@ const AddMachine = () => {
 
         <div className="flex column gap full-height machine-inputs white-bg">
           <div className="flex space-arr full-width">
-            {machine.name ? (
-              <ChooseOption
-                options={HeaderOptions}
-                onSelect={handleOptionSelect}
-                placeholder={machine.serial_number}
-                width="30vw"
-                textColor="black"
-                leftIcon={faAngleDown}
-                name="Serial Number"
-              />
-            ) : (
-              <Input
-                placeHolder={machine.name || "name"}
-                name="Name"
-                width="30vw"
-                leftIcon={faUser}
-                type="text"
-                onChange={(e) => {
-                  ChangingFormData("name", e.target.value);
-                }}
-              />
-            )}
-            {machine.serial_number ? (
-              <ChooseOption
-                options={HeaderOptions}
-                onSelect={handleOptionSelect}
-                placeholder={machine.serial_number}
-                width="30vw"
-                textColor="black"
-                leftIcon={faAngleDown}
-                name="Serial Number"
-              />
-            ) : (
-              <Input
-                leftIcon={faAt}
-                placeHolder={machine.serial_number || "serial number"}
-                name="Serial Number"
-                width="30vw"
-                type="text"
-                onChange={(e) => {
-                  ChangingFormData("serial_number", e.target.value);
-                }}
-              />
-            )}
+            <Input
+              placeHolder={machine.name || "name"}
+              name="Name"
+              width="30vw"
+              leftIcon={faUser}
+              type="text"
+              onChange={(e) => {
+                ChangingFormData("name", e.target.value);
+              }}
+            />
+            <Input
+              leftIcon={faAt}
+              placeHolder={machine.serial_number || "serial number"}
+              name="Serial Number"
+              width="30vw"
+              type="text"
+              onChange={(e) => {
+                ChangingFormData("serial_number", e.target.value);
+              }}
+            />
           </div>
           <div className="flex space-arr full-width">
             <Input
@@ -285,7 +247,7 @@ const AddMachine = () => {
             />
             <ChooseOption
               options={statusOption}
-              onSelect={handleOptionSelect}
+              onSelect={(option) => handleOptionSelect("status", option)}
               width="30vw"
               textColor="black"
               leftIcon={faAngleDown}
@@ -303,6 +265,7 @@ const AddMachine = () => {
               onChange={(e) => {
                 ChangingFormData("location", e.target.value);
               }}
+              required={false}
             />
           </div>
           <div className="flex center space-arr">
@@ -315,6 +278,7 @@ const AddMachine = () => {
               onChange={(e) => {
                 ChangingFormData("description", e.target.value);
               }}
+              required={false}
             />
           </div>
           <div className="flex center space-arr">

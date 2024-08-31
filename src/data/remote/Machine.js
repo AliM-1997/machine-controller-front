@@ -107,7 +107,7 @@ export const Machines = {
   GetAllMachineAllNames: async () => {
     try {
       const data = await requestApi({ route: "/machine/all/name" });
-      console.log("data,from remote", data);
+      // console.log("data,from remote", data);
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
