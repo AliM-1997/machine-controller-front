@@ -24,9 +24,9 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
             <Route path="/" element={<Layout />}>
-              <Route path="login" element={<Login />} />
-              <Route path="signup" element={<Signup />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="addmachine" element={<AddMachine />} />
               <Route path="allmachines" element={<AllMachines />} />
