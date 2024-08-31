@@ -49,14 +49,14 @@ const ChooseOption = ({
         className={`input-container ${backgroundColorClass}`}
         style={{ width, position: "relative" }}
       >
-        <Icon icon={leftIcon} color={iconColor} />
+        <Icon icon={leftIcon} color={iconColor} onClick={onClick} />
         <input
           className={`input-field ${textColorClass}`}
           value={searchTerm}
           onChange={handleInputChange}
           placeholder={placeholder}
         />
-        <Icon icon={rightIcon} color={iconColor} onClick={toggleDropdown} />
+        <Icon icon={rightIcon} color={iconColor} />
       </div>
       {isOpen && (
         <div

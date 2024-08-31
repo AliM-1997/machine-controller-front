@@ -27,6 +27,8 @@ const Header = ({ pageName, showChooseInput, options = [] }) => {
     <div className="header-container white-bg">
       <div className="flex row gap">
         <h1>{pageName}</h1>
+      </div>
+      <div className="flex header-left">
         <DropButton
           options={options}
           onSelect={handleSelect}
@@ -35,14 +37,6 @@ const Header = ({ pageName, showChooseInput, options = [] }) => {
           hidden={!showChooseInput}
           backgroundColor="primary"
           textColor="white"
-        />
-      </div>
-      <div className="flex header-left">
-        <Input
-          width="20vw"
-          leftIcon={faSearch}
-          rightIcon={faList}
-          required={false}
         />
         <div className="flex center h-icon">
           <Icon icon={faBell} color="primary" />
