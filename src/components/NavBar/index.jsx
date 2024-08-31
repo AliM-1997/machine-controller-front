@@ -14,8 +14,16 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { authRemote } from "../../data/remote/Auth_user";
+import { authLocal } from "../../data/local/Auth_local";
 const NavBar = ({ onNavigate, isClick }) => {
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const data = await authRemote.Logout();
+    authLocal.clearToken();
+    navigate("/login");
+  };
 
   const handleClickedButton = (buttonName, path) => {
     onNavigate(buttonName);
@@ -59,6 +67,12 @@ const NavBar = ({ onNavigate, isClick }) => {
           width="12vw"
           leftIcon={faMoon}
           iconColor="#00b7eb"
+        />
+        <Button
+          placeHolder="Logout"
+          width="12vw"
+          leftIcon={faRightFromBracket}
+          onClick={handleLogout}
         />
         <Button {...navButton("Logout", faRightFromBracket, "/login")} />
       </div>

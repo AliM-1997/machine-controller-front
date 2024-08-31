@@ -135,7 +135,9 @@ const AllTasks = () => {
                         <td>{task.user_id}</td>
                         <td>{task.assignedDate}</td>
                         <td>{task.dueDate}</td>
-                        <td>{<HighlightLabel placeHolder={task.status} />}</td>
+                        <td className=" flex center">
+                          {<HighlightLabel placeHolder={task.status} />}
+                        </td>
                       </tr>
                     ))
                   ) : (
