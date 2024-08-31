@@ -1,3 +1,5 @@
+import { Machines } from "../data/remote/Machine";
+
 export const Functions = {
   ToDateformat: (date) => {
     if (date instanceof Date && !isNaN(date.getTime())) {
@@ -6,5 +8,18 @@ export const Functions = {
       console.error("Invalid date:", date);
       return "";
     }
+  },
+  HandlingAppRenderFuntions: async () => {
+    const data = {};
+    try {
+      const MachineSerialNumber = await Machines.GetAllMachineSerialNumber();
+      data.MachineSerialNumber = MachineSerialNumber;
+
+      const MachineNames = await Machines.GetAllMachineAllNames();
+      data.MachineNames = MachineNames;
+    } catch (error) {
+      console.error("Error fetching machine data:", error);
+    }
+    return data;
   },
 };
