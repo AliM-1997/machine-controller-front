@@ -20,9 +20,9 @@ const NavBar = ({ onNavigate, isClick }) => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
+    navigate("/login");
     const data = await authRemote.Logout();
     authLocal.clearToken();
-    navigate("/login");
   };
 
   const handleClickedButton = (buttonName, path) => {
@@ -43,7 +43,7 @@ const NavBar = ({ onNavigate, isClick }) => {
   });
 
   return (
-    <div className="flex column nav-container white-bg full-width full-height ">
+    <div className="flex column nav-container white-bg full-width full-height space-btw">
       <div className="top-nav">
         <div className="flex center logo-container">
           <img src={logo} alt="Logo" />
@@ -54,10 +54,9 @@ const NavBar = ({ onNavigate, isClick }) => {
 
         <div className="flex column center gap">
           <Button {...navButton("Dashboard", faTh, "/dashboard")} />
-          <Button {...navButton("Machines", faGear, "/addmachine")} />
+          <Button {...navButton("Machines", faGear, "/allmachines")} />
           <Button {...navButton("Tasks", faClipboard, "/tasks")} />
           <Button {...navButton("Predictions", faChartLine, "/predictions")} />
-          <Button {...navButton("Alerts", faBell, "/alerts")} />
           <Button {...navButton("User Management", faUsers, "/allusers")} />
         </div>
       </div>
@@ -74,7 +73,6 @@ const NavBar = ({ onNavigate, isClick }) => {
           leftIcon={faRightFromBracket}
           onClick={handleLogout}
         />
-        <Button {...navButton("Logout", faRightFromBracket, "/login")} />
       </div>
     </div>
   );

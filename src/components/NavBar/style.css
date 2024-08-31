@@ -3,7 +3,7 @@
 }
 .nav-container {
   padding: 30px;
-  gap: 100px;
+  overflow-y: auto;
 }
 
 .top-nav {
