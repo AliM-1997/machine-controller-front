@@ -28,7 +28,6 @@ const Dashboard = () => {
   //   const data = await MachineStatistics.GetALLStatistics();
   //   setFormData(data.statistics);
   // };
-
   const handleStatByMachineName = async () => {
     try {
       const data = await MachineStatistics.GetStatisticByMachineName("ea");
@@ -77,7 +76,7 @@ const Dashboard = () => {
     ChangingFormat(name, option.label);
   };
   return (
-    <div>
+    <div className="dash-cont">
       <Header />
       <div className="flex center column gap dachboard-container">
         <div className="stat-title">
@@ -87,7 +86,7 @@ const Dashboard = () => {
           <div className=" flex gap">
             <ChooseOption
               options={response.data.MachineNames}
-              onSelect={(option) => handleOptionSelect("name", option)}
+              onSelect={(option) => handleOptionSelect("machine_name", option)}
               placeholder={"search machine"}
               width="20vw"
               textColor="black"
