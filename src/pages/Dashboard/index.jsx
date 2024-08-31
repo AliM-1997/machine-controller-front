@@ -6,8 +6,12 @@ import Button from "../../base/Button";
 import Input from "../../base/Input";
 import "./style.css";
 import ReactDate from "../../base/ReactDate";
-import { faCalendarAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import ChooseOption from "../../base/ChooseOption";
+import { useSelector } from "react-redux";
 const Dashboard = () => {
+  const response = useSelector((global) => global);
+
   const [formData, setFormData] = useState({
     machine_name: "",
     date: "",
@@ -69,6 +73,9 @@ const Dashboard = () => {
       handleGetStatByNameAndDate();
     }
   }, [formData.machine_name, formData.date]);
+  const handleOptionSelect = (name, option) => {
+    ChangingFormat(name, option.label);
+  };
   return (
     <div>
       <Header />
@@ -78,12 +85,14 @@ const Dashboard = () => {
         </div>
         <div className="flex row space-btw stat-input">
           <div className=" flex gap">
-            <Input
-              placeHolder="search machine name"
-              leftIcon={faSearch}
-              type="text"
+            <ChooseOption
+              options={response.data.MachineNames}
+              onSelect={(option) => handleOptionSelect("name", option)}
+              placeholder={"search machine"}
+              width="20vw"
+              textColor="black"
+              leftIcon={faAngleDown}
               required={false}
-              onChange={(e) => ChangingFormat("machine_name", e.target.value)}
             />
             <ReactDate
               leftIcon={faCalendarAlt}
