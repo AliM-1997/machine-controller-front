@@ -5,11 +5,11 @@ import { faCalendarAlt, faX } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../base/Button";
 import Label from "../../base/Label";
 import Icon from "../../base/Icon";
-const DashboardFilter = () => {
+const DashboardFilter = ({ onExit }) => {
   return (
     <div className="flex column white-bg gap filter-cont">
       <div className="flex end">
-        <Icon icon={faX} />
+        <Icon icon={faX} onClick={onExit} />
       </div>
       <div className=" gap">
         <div className=" flex column center gap">

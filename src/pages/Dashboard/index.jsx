@@ -115,7 +115,13 @@ const Dashboard = () => {
             textColor="white"
             onClick={() => setShowFilter(true)}
           />
-          {showFilter && <DashboardFilter />}
+          {showFilter && (
+            <DashboardFilter
+              onExit={() => {
+                setShowFilter(false);
+              }}
+            />
+          )}
         </div>
         <div>
           <div className="flex space-around gap">
@@ -153,9 +159,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div>
-          <DashboardFilter />
-        </div>
+        <div></div>
       </div>
     </div>
   );
