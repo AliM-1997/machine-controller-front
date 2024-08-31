@@ -23,7 +23,7 @@ const NavBar = ({ onNavigate, isClick }) => {
   };
   const navButton = (name, icon, path) => ({
     placeHolder: name,
-    width: "15vw",
+    width: "12vw",
     leftIcon: icon,
     backgroundColor: isClick === name ? "primary" : "secondary",
     iconColor: isClick === name ? "white" : "#00b7eb",
@@ -56,16 +56,11 @@ const NavBar = ({ onNavigate, isClick }) => {
       <div className="flex column center gap">
         <Button
           placeHolder="Dark Mood"
-          width="15vw"
+          width="12vw"
           leftIcon={faMoon}
           iconColor="#00b7eb"
         />
-        <Button
-          placeHolder="Logout"
-          width="15vw"
-          leftIcon={faRightFromBracket}
-          iconColor="#00b7eb"
-        />
+        <Button {...navButton("Logout", faRightFromBracket, "/login")} />
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Input from "../../base/Input";
 import {
   faSearch,
-  faList,
   faUser,
   faBell,
   faAngleDown,
@@ -35,8 +34,8 @@ const Header = ({ pageName, showChooseInput, options = [] }) => {
           width="15vw"
           rightIcon={faAngleDown}
           hidden={!showChooseInput}
-          backgroundColor="primary"
-          textColor="white"
+          backgroundColor="white"
+          border={true}
         />
         <div className="flex center h-icon">
           <Icon icon={faBell} color="primary" />
