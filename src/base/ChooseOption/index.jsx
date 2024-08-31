@@ -49,7 +49,7 @@ const ChooseOption = ({
         className={`input-container ${backgroundColorClass}`}
         style={{ width, position: "relative" }}
       >
-        <Icon icon={leftIcon} color={iconColor} onClick={onClick} />
+        <Icon icon={leftIcon} color={iconColor} />
         <input
           className={`input-field ${textColorClass}`}
           value={searchTerm}

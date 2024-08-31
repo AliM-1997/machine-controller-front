@@ -106,7 +106,7 @@ export const Machines = {
   },
   GetAllMachineAllNames: async () => {
     try {
-      const data = await requestApi({ route: "/machine/all/names" });
+      const data = await requestApi({ route: "/machine/all/name" });
       console.log("data,from remote", data);
       return data;
     } catch (error) {

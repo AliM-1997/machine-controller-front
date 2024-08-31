@@ -226,16 +226,28 @@ const AddMachine = () => {
 
         <div className="flex column gap full-height machine-inputs white-bg">
           <div className="flex space-arr full-width">
-            <Input
-              placeHolder={machine.name || "name"}
-              name="Name"
-              width="30vw"
-              leftIcon={faUser}
-              type="text"
-              onChange={(e) => {
-                ChangingFormData("name", e.target.value);
-              }}
-            />
+            {machine.name ? (
+              <ChooseOption
+                options={HeaderOptions}
+                onSelect={handleOptionSelect}
+                placeholder={machine.serial_number}
+                width="30vw"
+                textColor="black"
+                leftIcon={faAngleDown}
+                name="Serial Number"
+              />
+            ) : (
+              <Input
+                placeHolder={machine.name || "name"}
+                name="Name"
+                width="30vw"
+                leftIcon={faUser}
+                type="text"
+                onChange={(e) => {
+                  ChangingFormData("name", e.target.value);
+                }}
+              />
+            )}
             {machine.serial_number ? (
               <ChooseOption
                 options={HeaderOptions}
