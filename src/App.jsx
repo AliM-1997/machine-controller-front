@@ -19,14 +19,6 @@ import AllMachines from "./pages/AllMachines";
 import SelectedMachine from "./pages/SelectedMachine";
 
 function App() {
-  useEffect(() => {
-    const handledata = async () => {
-      const response = await Functions.HandlingAppRenderFuntions();
-      console.log("data 123", response);
-    };
-    handledata();
-  }, []);
-  console.log(MachineSerialNumber);
   return (
     <div className="App">
       <Provider store={store}>
