@@ -1,4 +1,5 @@
 import { requestApi } from "../../utils/request";
+import { requestApi01 } from "../../utils/request copy";
 import { RequestMethods } from "../../utils/request_methods";
 
 export const Machines = {
@@ -88,6 +89,15 @@ export const Machines = {
   GetMachineByName: async (name) => {
     try {
       const data = await requestApi({ route: `machine/name/${name}` });
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
+  GetAllMachineSerialNumber: async () => {
+    try {
+      const data = await requestApi01({ route: "/machine/serialnumber" });
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
