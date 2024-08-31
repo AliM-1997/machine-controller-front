@@ -1,19 +1,71 @@
 import React from "react";
 import "./style.css";
 import ReactDate from "../../base/ReactDate";
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faX } from "@fortawesome/free-solid-svg-icons";
+import Button from "../../base/Button";
+import Label from "../../base/Label";
+import Icon from "../../base/Icon";
 const DashboardFilter = () => {
   return (
-    <div>
-      <div>
-        <h3>date</h3>
-        <ReactDate leftIcon={faCalendarAlt} mindata={false} />
-        <div>
-          <h3>Between Date</h3>
-          <div>
-            <ReactDate leftIcon={faCalendarAlt} mindata={false} />
-            <ReactDate leftIcon={faCalendarAlt} mindata={false} />
+    <div className="flex column white-bg gap filter-cont">
+      <div className="flex end">
+        <Icon icon={faX} />
+      </div>
+      <div className=" gap">
+        <div className=" flex column center gap">
+          <h3>
+            <Label placeholder="Date" width="20vw" clas />
+          </h3>
+          <div className="date_1">
+            <ReactDate
+              leftIcon={faCalendarAlt}
+              mindata={false}
+              name="date"
+              required={false}
+              width="33vw"
+            />
           </div>
+          <div className="btn-date">
+            <Button
+              width="8vw"
+              backgroundColor="primary"
+              placeHolder="submit"
+              textColor="white"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="flex column gap">
+        <div className=" flex column center gap">
+          <h3>
+            <Label
+              placeholder="Between Date"
+              width="20vw"
+              backgroundColor="none"
+            />
+          </h3>
+          <div className="flex gap">
+            <ReactDate
+              leftIcon={faCalendarAlt}
+              mindata={false}
+              name="date_1"
+              required={false}
+            />
+            <ReactDate
+              leftIcon={faCalendarAlt}
+              mindata={false}
+              name="date_2"
+              required={false}
+            />
+          </div>
+        </div>
+        <div className="btn-date">
+          <Button
+            width="8vw"
+            backgroundColor="primary"
+            placeHolder="submit"
+            textColor="white"
+          />
         </div>
       </div>
     </div>
