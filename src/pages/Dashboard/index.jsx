@@ -9,6 +9,7 @@ import ReactDate from "../../base/ReactDate";
 import { faAngleDown, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import ChooseOption from "../../base/ChooseOption";
 import { useSelector } from "react-redux";
+import DashboardFilter from "../../components/DashboardFilter";
 const Dashboard = () => {
   const response = useSelector((global) => global);
 
@@ -149,7 +150,9 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div></div>
+        <div>
+          <DashboardFilter />
+        </div>
       </div>
     </div>
   );
