@@ -22,7 +22,6 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import ChooseOption from "../../base/ChooseOption";
-import { Machines01 } from "../../data/remote/Machine01";
 const AddMachine = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -40,14 +39,13 @@ const AddMachine = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [allSerailNumber, setSerialNumber] = useState({});
-  console.log(selectedImage);
+  const [allMachineName, setMachineName] = useState({});
   const ChangingFormData = (key, value) => {
     setFormData({
       ...formData,
       [key]: value,
     });
   };
-  console.log("asdfsda", allSerailNumber);
   useEffect(() => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -77,11 +75,19 @@ const AddMachine = () => {
       }
     }
   };
-
+  console.log(allMachineName);
   const handleMachineSerialNumbers = async () => {
-    const data = await Machines01.GetAllMachineSerialNumber();
+    const data = await Machines.GetAllMachineSerialNumber();
     setSerialNumber(data);
   };
+  const handleMachineAllName = async () => {
+    const data = await Machines.GetAllMachineAllNames();
+    setMachineName(data);
+  };
+  useEffect(() => {
+    handleMachineSerialNumbers();
+    handleMachineAllName();
+  }, []);
   const handleDeleteMachine = async () => {
     if (machine.id) {
       const deleteData = await Machines.DeleteMachine(machine.id);
@@ -138,7 +144,7 @@ const AddMachine = () => {
   };
   const HeaderOptions = [
     { label: "Add Machine", url: "addmachine" },
-    { label: "All Machines", url: "allmachin  es" },
+    { label: "All Machines", url: "allmachines" },
   ];
   const statusOption = [
     { label: "active" },
@@ -198,7 +204,7 @@ const AddMachine = () => {
               </div>
               <div className="flex gap">
                 <Button
-                  placeHolder="Upload Image"
+                  placeHolder="upload"
                   width="7vw"
                   backgroundColor="primary"
                   textColor="white"
@@ -230,16 +236,15 @@ const AddMachine = () => {
                 ChangingFormData("name", e.target.value);
               }}
             />
-            {machine.id ? (
+            {machine.serial_number ? (
               <ChooseOption
-                options={allSerailNumber}
+                options={HeaderOptions}
                 onSelect={handleOptionSelect}
                 placeholder={machine.serial_number}
                 width="30vw"
                 textColor="black"
                 leftIcon={faAngleDown}
                 name="Serial Number"
-                onClick={handleMachineSerialNumbers}
               />
             ) : (
               <Input
