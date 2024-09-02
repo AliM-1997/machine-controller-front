@@ -26,6 +26,7 @@ export const MachineStatistics = {
     }
   },
   GetStatisticByNameAndDate: async (name, date) => {
+    console.log(date);
     try {
       const data = await requestApi({
         route: `/machineStatistics/byName/byDate/?machine_name=${name}&date=${date}`,
@@ -35,6 +36,17 @@ export const MachineStatistics = {
     } catch (error) {
       console.error("Error creating user:", error.message);
       alert("No statistics found at this date.");
+    }
+  },
+  GetStatisticBetweenDate: async (name, startDate, endDate) => {
+    try {
+      const data = await requestApi({
+        route: `/machineStatistics/byName/betweenDate/?machine_name=${name}&startDate=${startDate}&endDate=${endDate}`,
+      });
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      alert("No statistics found between given dates.");
     }
   },
 };
