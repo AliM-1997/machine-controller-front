@@ -1,21 +1,34 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import Label from "../../base/Label";
-import Button from "../../base/Button";
 import { Tasks } from "../../data/remote/Tasks";
 import { faAngleDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import HighlightLabel from "../../base/HighlightLable";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadTask } from "../../data/redux/taskSlice";
 import DropButton from "../../base/DropButton";
 import Input from "../../base/Input";
 import Header from "../../components/Header";
+import ChooseOption from "../../base/ChooseOption";
 
 const AllTasks = () => {
+  const response = useSelector((global) => global);
+  console.log(response);
   const dispatch = useDispatch();
   const [allTasks, setAllTasks] = useState([]);
   const [searchId, setSearchId] = useState("");
+  const [formData, setFormData] = useState({
+    machine_name: "",
+    date: null,
+  });
+  const ChangingFormat = (key, value) => {
+    setFormData({
+      ...formData,
+      [key]: value,
+    });
+  };
+  console.log("asfdassdasdasd", formData);
   const navigate = useNavigate();
   const handleEditNavigate = async (id) => {
     const task = allTasks.find((task) => task.id === id);
@@ -44,7 +57,9 @@ const AllTasks = () => {
       handleGetAllTasks();
     }
   };
-
+  const handleOptionSelect = (name, option) => {
+    ChangingFormat(name, option.label);
+  };
   useEffect(() => {
     handleGetAllTasks();
   }, []);
@@ -86,13 +101,16 @@ const AllTasks = () => {
                   required={false}
                   onChange={(e) => handleGetTaskbyID(e.target.value)}
                 />
-                <Button
-                  placeHolder="Date"
-                  backgroundColor="primary"
-                  width="10vw"
-                  textColor="white"
+                <ChooseOption
+                  options={response.data.MachineNames}
+                  onSelect={(option) =>
+                    handleOptionSelect("machine_name", option)
+                  }
+                  placeholder={"machine name"}
+                  width="30vw"
+                  textColor="black"
                   leftIcon={faAngleDown}
-                  iconColor="white"
+                  name="Name"
                 />
                 <DropButton
                   options={[

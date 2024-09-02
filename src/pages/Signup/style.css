@@ -16,6 +16,8 @@
     rgba(78, 78, 78, 0.8),
     rgba(78, 78, 78, 0.2)
   );
+
+  height: 600px;
 }
 
 .Admin-image {

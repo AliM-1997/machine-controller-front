@@ -69,7 +69,7 @@ const Dashboard = () => {
 
   return (
     <div className="dash-cont">
-      <Header />
+      <Header pageName={"Dashboard"} />
       <div className="flex center column gap dashboard-container">
         <div className="stat-title">
           <h2>Machine Statistics</h2>
