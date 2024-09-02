@@ -19,7 +19,21 @@ const Alerts = () => {
   return (
     <div>
       <Header pageName={"Alerts"} showChooseInput={false} />
-      <div className="flex column"></div>
+      <div className="flex column notification-outer">
+        <div className=" flex title-notification">
+          <h3>Notifications</h3>
+        </div>
+        <div className="flex column center gap padding-30px full-width">
+          <div className=" flex full-width Lprimary-bg padding-30px space-btw">
+            <div>
+              <p>notification</p>
+            </div>
+            <div>
+              <p className="blue-txt mark-read">mark as read</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
