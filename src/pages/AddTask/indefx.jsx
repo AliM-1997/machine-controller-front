@@ -5,6 +5,7 @@ import Icon from "../../base/Icon";
 import {
   faAngleDown,
   faAngleLeft,
+  faCalendarAlt,
   faCalendarDays,
   faClipboard,
   faGear,
@@ -29,11 +30,12 @@ const AddTask = () => {
     machine_id: "",
     spare_part_id: "",
     jobDescription: "",
-    assignedDate: null,
-    dueDate: null,
+    assignedDate: "",
+    dueDate: "",
     status: "",
     location: "",
   });
+  console.log(formData);
   useEffect(() => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -66,8 +68,6 @@ const AddTask = () => {
   const handleCreateTask = async () => {
     const dataToSend = {
       ...formData,
-      assignedDate: convertToDatabaseFormat(formData.assignedDate),
-      dueDate: convertToDatabaseFormat(formData.dueDate),
     };
     if (task.id) {
       const updateDate = await Tasks.UpdateTask(task.id, dataToSend);
@@ -146,25 +146,19 @@ const AddTask = () => {
         </div>
         <div className="flex row center space-btw full-width">
           <ReactDate
-            leftIcon={faCalendarDays}
-            width="37vw"
+            leftIcon={faCalendarAlt}
+            mindata={false}
             name="Assigned Date"
-            placeHolder={
-              formData.assignedDate
-                ? formData.assignedDate.toISOString().slice(0, 10)
-                : "dd/MM/yyyy"
-            }
+            required={false}
+            width="37vw"
             onChange={(e) => ChangingFormIput("assignedDate", e)}
           />
           <ReactDate
-            leftIcon={faCalendarDays}
-            width="37vw"
+            leftIcon={faCalendarAlt}
+            mindata={false}
             name="Due Date"
-            placeHolder={
-              formData.dueDate
-                ? formData.dueDate.toISOString().slice(0, 10)
-                : "dd/MM/yyyy"
-            }
+            required={false}
+            width="37vw"
             onChange={(e) => ChangingFormIput("dueDate", e)}
           />
         </div>
