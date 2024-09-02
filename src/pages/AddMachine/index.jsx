@@ -14,6 +14,7 @@ import { ClearMachine, LoadMachine } from "../../data/redux/machineSlice";
 import { useNavigate } from "react-router-dom";
 import {
   faAngleDown,
+  faAngleRight,
   faAt,
   faCalendarDays,
   faClipboard,
@@ -22,6 +23,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import ChooseOption from "../../base/ChooseOption";
+import Icon from "../../base/Icon";
 const AddMachine = () => {
   const response = useSelector((global) => global);
   const [formData, setFormData] = useState({
@@ -72,7 +74,7 @@ const AddMachine = () => {
       const createData = await Machines.CreateMachine(dataToSend);
       if (createData) {
         alert("Machine Created Successfullty");
-        navigate("/allmachines");
+        allmachineNavigaet();
       }
     }
   };
@@ -143,7 +145,7 @@ const AddMachine = () => {
   const handleOptionSelect = (name, option) => {
     ChangingFormData(name, option.label);
   };
-
+  const allmachineNavigaet = () => navigate("/allmachines");
   return (
     <div>
       <Header
@@ -151,11 +153,16 @@ const AddMachine = () => {
         options={HeaderOptions}
         className="container"
       />
-      <div className="flex column full-width addMachine-container gap center">
+      <div className="flex column full-width addMachine-container  center">
         <div className="flex column gap title">
-          <h2>
-            <Label placeholder="Add/Edit Machine" />
-          </h2>
+          <div className=" flex row space-btw full-width">
+            <h2>
+              <Label placeholder="Add/Edit Machine" />
+            </h2>
+            <div className="flex center">
+              <Icon icon={faAngleRight} onClick={allmachineNavigaet} />
+            </div>
+          </div>
           {machine.id ? (
             <div className="flex space-btw machine-image-container full-width">
               <div className="machine-image">

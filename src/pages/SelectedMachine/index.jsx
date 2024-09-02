@@ -16,12 +16,9 @@ const SelectedMachine = () => {
     { label: "All Machines", url: "allmachines" },
   ];
   const handleMachineById = async () => {
-    try {
-      const data = await Machines.GetMachineById(id);
-      setSelectedMachine(data.machine_input);
-    } catch (error) {
-      console.error("Error fetching machine data:", error);
-    }
+    const data = await Machines.GetMachineById(id);
+    setSelectedMachine(data.machine_input);
+    console.log(data);
   };
   useEffect(() => {
     {
@@ -40,7 +37,7 @@ const SelectedMachine = () => {
         <div>
           <DisplayImage
             url={selectedMachine.image_path}
-            width="77vw"
+            width="78.5vw"
             height="80vh"
             borderRadius="12px"
           />
@@ -51,9 +48,10 @@ const SelectedMachine = () => {
               <MachineCard
                 label={"Machine Info"}
                 machineData={selectedMachine}
-                width="0"
-                height="0"
-                className="info"
+                width="78.5"
+                height="10px"
+                className="selected-machine-info"
+                selected={true}
               />
             </div>
           </div>
