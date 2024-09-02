@@ -20,8 +20,8 @@ ChartJS.register(
   Legend
 );
 
-const BarGraph = ({ data = [], type, title, label }) => {
-  const labels = data.map((item) => item.date || "No Date");
+const BarGraph = ({ data, type, title, label }) => {
+  const labels = data.map((item) => item.date);
   let datasets = [];
 
   switch (type) {

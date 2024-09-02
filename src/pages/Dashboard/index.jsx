@@ -20,18 +20,20 @@ const Dashboard = () => {
     endDate: null,
   });
   const [statistics, setStatistics] = useState([]);
+  console.log("asdaksjdhkasjhdkajds", statistics);
 
-  const handleAllStatistics = async () => {
-    const data = await MachineStatistics.GetALLStatistics();
-    setStatistics(data.statistic);
-  };
-  console.log(statistics);
+  // const handleAllStatistics = async () => {
+  //   const data = await MachineStatistics.GetALLStatistics();
+  //   setStatistics(data.statistic);
+  // };
   const handleStatByMachineName = async () => {
     try {
       const data = await MachineStatistics.GetStatisticByMachineName(
         formData.machine_name
       );
-      setStatistics(data);
+      if (data && data.statistics) {
+        setStatistics([data.statistics]);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -59,9 +61,12 @@ const Dashboard = () => {
     });
   };
 
+  // useEffect(() => {
+  //   handleAllStatistics();
+  // }, []);
   useEffect(() => {
-    handleAllStatistics();
-  }, []);
+    handleStatByMachineName();
+  }, [formData.machine_name]);
 
   const handleOptionSelect = (name, option) => {
     ChangingFormat(name, option.label);

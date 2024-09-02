@@ -9,12 +9,12 @@ import { useDispatch } from "react-redux";
 
 const Layout = () => {
   const [clickedPage, setClickedPage] = useState(null);
+
   const dispatch = useDispatch();
   useEffect(() => {
     const handledata = async () => {
       const response = await Functions.HandlingAppRenderFuntions();
       dispatch(LoadData(response));
-      // console.log(response);
     };
     handledata();
   }, []);
