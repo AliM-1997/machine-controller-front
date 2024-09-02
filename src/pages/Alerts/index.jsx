@@ -1,7 +1,12 @@
 import React from "react";
 import "./style.css";
+import Header from "../../components/Header";
 const Alerts = () => {
-  return <div>hello from alerts</div>;
+  return (
+    <div>
+      <Header pageName={"Alerts"} showChooseInput={false} />
+    </div>
+  );
 };
 
 export default Alerts;
