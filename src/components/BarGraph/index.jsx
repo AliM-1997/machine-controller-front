@@ -20,7 +20,9 @@ ChartJS.register(
   Legend
 );
 
-const BarGraph = ({ data, type, title, label }) => {
+const BarGraph = ({ datas = [], type, title, label }) => {
+  console.log("Received data:", datas);
+  const data = Array.isArray(datas[0]) ? datas[0] : datas;
   const labels = data.map((item) => item.date);
   let datasets = [];
 
@@ -32,12 +34,14 @@ const BarGraph = ({ data, type, title, label }) => {
           data: data.map((item) => parseFloat(item.upTime) || 0),
           backgroundColor: "rgba(0, 255, 0, 1)",
           borderRadius: 6,
+          barThickness: 12,
         },
         {
           label: "Downtime",
           data: data.map((item) => parseFloat(item.downtime) || 0),
           backgroundColor: "rgba(255, 0, 0, 1)",
           borderRadius: 6,
+          barThickness: 12,
         }
       );
       break;
@@ -47,6 +51,7 @@ const BarGraph = ({ data, type, title, label }) => {
         data: data.map((item) => parseFloat(item.operationalTime) || 0),
         backgroundColor: "rgba(0, 0, 255, 1)",
         borderRadius: 6,
+        barThickness: 12,
       });
       break;
     case "MTBF_MTTR_MTTD":
@@ -56,18 +61,21 @@ const BarGraph = ({ data, type, title, label }) => {
           data: data.map((item) => parseFloat(item.MTBF) || 0),
           backgroundColor: "rgba(0, 255, 0, 1)",
           borderRadius: 6,
+          barThickness: 12,
         },
         {
           label: "MTTR",
           data: data.map((item) => parseFloat(item.MTTR) || 0),
           backgroundColor: "rgba(255, 0, 0, 1)",
           borderRadius: 6,
+          barThickness: 12,
         },
         {
           label: "MTTD",
           data: data.map((item) => parseFloat(item.MTTD) || 0),
           backgroundColor: "rgba(255, 255, 0, 1)",
           borderRadius: 6,
+          barThickness: 12,
         }
       );
       break;
@@ -78,12 +86,14 @@ const BarGraph = ({ data, type, title, label }) => {
           data: data.map((item) => parseFloat(item.efficiency) || 0),
           backgroundColor: "rgba(255, 0, 0, 1)",
           borderRadius: 6,
+          barThickness: 12,
         },
         {
           label: "Availability",
           data: data.map((item) => parseFloat(item.availability) || 0),
           backgroundColor: "rgba(0, 255, 0, 1)",
           borderRadius: 6,
+          barThickness: 12,
         }
       );
       break;

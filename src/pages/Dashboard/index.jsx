@@ -38,18 +38,14 @@ const Dashboard = () => {
   };
 
   const handleGetStatByNameAndDate = async () => {
-    try {
-      const formattedDate = formData.date
-        ? formData.date.toISOString().slice(0, 10)
-        : "";
-      const data = await MachineStatistics.GetStatisticByNameAndDate(
-        formData.machine_name,
-        formattedDate
-      );
-      setStatistics(data.statistics);
-    } catch (error) {
-      console.error("Error fetching statistics by name and date:", error);
-    }
+    const formattedDate = formData.date
+      ? formData.date.toISOString().slice(0, 10)
+      : "";
+    const data = await MachineStatistics.GetStatisticByNameAndDate(
+      formData.machine_name,
+      formattedDate
+    );
+    setStatistics(data.statistics);
   };
 
   const ChangingFormat = (key, value) => {
@@ -114,24 +110,24 @@ const Dashboard = () => {
         </div>
         <div className="flex space-around gap">
           <BarGraph
-            data={statistics}
+            datas={statistics}
             type="uptime_downtime"
             title="Uptime and Downtime Hours"
           />
           <BarGraph
-            data={statistics}
+            datas={statistics}
             type="operationalTime"
             title="Operation Time"
           />
         </div>
         <div className="flex space-around gap">
           <BarGraph
-            data={statistics}
+            datas={statistics}
             type="MTBF_MTTR_MTTD"
             title="MTBF, MTTR, MTTD"
           />
           <BarGraph
-            data={statistics}
+            datas={statistics}
             type="efficiency_availability"
             title="Efficiency and Availability"
           />
