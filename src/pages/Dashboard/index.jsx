@@ -17,6 +17,7 @@ const Dashboard = () => {
     startDate: null,
     endDate: null,
   });
+  console.log("form date ", formData);
   const [statistics, setStatistics] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -36,13 +37,10 @@ const Dashboard = () => {
   };
 
   const handleGetStatByNameAndDate = async () => {
-    const formattedDate = formData.date
-      ? formData.date.toISOString().slice(0, 10)
-      : "";
     setLoading(true);
     const response = await MachineStatistics.GetStatisticByNameAndDate(
       formData.machine_name,
-      formattedDate
+      formData.date
     );
 
     if (response && response.statistics) {
@@ -54,6 +52,14 @@ const Dashboard = () => {
     setShowFilter(false);
   };
 
+  const handleGetStatBetweenDate = async () => {
+    const response = await MachineStatistics.GetStatisticBetweenDate(
+      formData.machine_name,
+      formData.startDate,
+      formData.endDate
+    );
+    console.log("handle between dates", response);
+  };
   const ChangingFormat = (key, value) => {
     setFormData({
       ...formData,
@@ -125,7 +131,7 @@ const Dashboard = () => {
               filter1={handleGetStatByNameAndDate}
               date_1_Change={(e) => ChangingFormat("startDate", e)}
               date_2_change={(e) => ChangingFormat("endDate", e)}
-              filter2={handleGetStatByNameAndDate}
+              filter2={handleGetStatBetweenDate}
             />
           )}
         </div>
