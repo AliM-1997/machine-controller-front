@@ -32,30 +32,32 @@ const Alerts = () => {
           <h3>Notifications</h3>
         </div>
         <div className="flex column center gap padding-30px full-width white-bg">
-          {nonRead.length > 0 ? (
-            nonRead.map((alert) => (
-              <div
-                key={alert.id}
-                className="flex full-width Lprimary-bg padding-30px space-btw"
-              >
-                <p>{alert.data.user_id}</p>
-                <p>{alert.data.machine_name}</p>
-                <p>{alert.data.status}</p>
+          <div className="flex column  gap full-width notification-info">
+            {nonRead.length > 0 ? (
+              nonRead.map((alert) => (
+                <div
+                  key={alert.id}
+                  className="flex full-width Lprimary-bg padding-30px space-btw center"
+                >
+                  <p>{alert.data.user_id}</p>
+                  <p>{alert.data.machine_name}</p>
+                  <p>{alert.data.status}</p>
 
-                <div>
-                  <Button
-                    placeHolder="mark as read"
-                    backgroundColor="Lprimary"
-                    textColor="blue"
-                    onClick={() => handleMarkNotificationAsRead(alert.id)}
-                    className="mark-read"
-                  />
+                  <div>
+                    <Button
+                      placeHolder="mark as read"
+                      backgroundColor="Lprimary"
+                      textColor="blue"
+                      onClick={() => handleMarkNotificationAsRead(alert.id)}
+                      className="mark-read"
+                    />
+                  </div>
                 </div>
-              </div>
-            ))
-          ) : (
-            <p>No unread notifications</p>
-          )}
+              ))
+            ) : (
+              <p>No unread notifications</p>
+            )}
+          </div>
         </div>
       </div>
     </div>
