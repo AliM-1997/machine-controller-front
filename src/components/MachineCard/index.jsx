@@ -17,12 +17,10 @@ const MachineCard = ({
   onEdit,
   onDelete,
   onPreview,
+  selected = false,
 }) => {
   return (
-    <div
-      className="machine-card flex column white-bg "
-      style={{ width: width }}
-    >
+    <div className="machine-card flex column white-bg ">
       <DisplayImage
         url={machineData.image_path}
         borderRadius="24px 24px 0 0"
@@ -58,24 +56,28 @@ const MachineCard = ({
 
             <HighlightLabel placeHolder={machineData.status} />
           </div>
-          {/* <div className="info-row">
-            <div className="info-label">Last Maintenance</div>
-            <div className="info-value">{machineData.last_maintenance}</div>
-          </div>
-          <div className="info-row">
-            <div className="info-label">Max unit/hr</div>
-            <div className="info-value">{machineData.unit_per_hour}</div>
-          </div>
-          <div className="info-row">
-            <div className="info-label">Location</div>
-            <div className="info-value">{machineData.location}</div>
-          </div>
-          <div className="info-row">
-            <div className="info-label">Description</div>
-            <div className="info-value scrollable-description">
-              {machineData.description}
-            </div>
-          </div> */}
+          {selected && (
+            <>
+              <div className="info-row">
+                <div className="info-label">Last Maintenance</div>
+                <div className="info-value">{machineData.last_maintenance}</div>
+              </div>
+              <div className="info-row">
+                <div className="info-label">Max unit/hr</div>
+                <div className="info-value">{machineData.unit_per_hour}</div>
+              </div>
+              <div className="info-row">
+                <div className="info-label">Location</div>
+                <div className="info-value">{machineData.location}</div>
+              </div>
+              <div className="info-row">
+                <div className="info-label">Description</div>
+                <div className="info-value scrollable-description">
+                  {machineData.description}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

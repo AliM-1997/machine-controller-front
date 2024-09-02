@@ -8,11 +8,11 @@
 .scrollable-machine-table {
   max-height: 60vw;
   width: 70.6vw+10px;
+  row-gap: 16px;
 }
 
 .all-m-t {
-  background-color: red;
-  max-height: 110%;
+  height: 650px;
   overflow-y: scroll;
   scrollbar-width: none;
 }

@@ -107,13 +107,13 @@ const AllMachines = () => {
               />
             </div>
           </div>
-          <div className=" all-m-t">
-            <div className="flex wrap gap scrollable-machine-table">
+          <div className="  all-m-t">
+            <div className="flex wrap  space-btw scrollable-machine-table">
               {allMachines.length > 0 ? (
                 allMachines.map((machine) => (
                   <MachineCard
                     className="card-adjust"
-                    width="26.2vw"
+                    style={{ maxWidth: "26.2vw" }}
                     height="20vw"
                     key={machine.id}
                     machineData={machine}
