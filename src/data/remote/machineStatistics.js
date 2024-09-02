@@ -12,11 +12,11 @@ export const MachineStatistics = {
       throw error;
     }
   },
-  GetStatisticByMachineName: async (machineName) => {
-    console.log("machine name testing", machineName);
+  GetStatisticByMachineName: async (name) => {
+    console.log("machine name testing", name);
     try {
       const data = await requestApi({
-        route: `/machineStatistics/${machineName}`,
+        route: `/machineStatistics/${name}`,
       });
       console.log("all statistics form remote", data);
       return data;
