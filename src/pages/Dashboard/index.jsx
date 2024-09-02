@@ -42,23 +42,30 @@ const Dashboard = () => {
       formData.machine_name,
       formData.date
     );
-
     if (response && response.statistics) {
       setStatistics([response.statistics]);
     } else {
-      setStatistics((prevData) => prevData);
+      setStatistics((prevform) => prevform);
     }
     setLoading(false);
-    setShowFilter(false);
   };
 
   const handleGetStatBetweenDate = async () => {
+    setLoading(true);
     const response = await MachineStatistics.GetStatisticBetweenDate(
       formData.machine_name,
       formData.startDate,
       formData.endDate
     );
-    console.log("handle between dates", response);
+
+    if (response && response.statistics) {
+      setStatistics([response.statistics]);
+      setShowFilter(false);
+    } else {
+      clearFilterState();
+      setStatistics((prevform) => prevform);
+    }
+    setLoading(false);
   };
   const ChangingFormat = (key, value) => {
     setFormData({
