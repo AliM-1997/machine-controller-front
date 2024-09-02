@@ -11,7 +11,12 @@ import Icon from "../../base/Icon";
 import DropButton from "../../base/DropButton";
 import "./style.css";
 
-const Header = ({ pageName, showChooseInput, showIcons, options = [] }) => {
+const Header = ({
+  pageName,
+  showChooseInput = true,
+  showIcons = true,
+  options = [],
+}) => {
   const navigate = useNavigate();
 
   const handleSelect = (option) => {
