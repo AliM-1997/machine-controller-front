@@ -20,7 +20,7 @@ const Dashboard = () => {
     endDate: null,
   });
   const [statistics, setStatistics] = useState([]);
-  console.log("asdaksjdhkasjhdkajds", statistics);
+  console.log("statistics", statistics);
 
   // const handleAllStatistics = async () => {
   //   const data = await MachineStatistics.GetALLStatistics();
@@ -41,11 +41,17 @@ const Dashboard = () => {
     const formattedDate = formData.date
       ? formData.date.toISOString().slice(0, 10)
       : "";
-    const data = await MachineStatistics.GetStatisticByNameAndDate(
+    const response = await MachineStatistics.GetStatisticByNameAndDate(
       formData.machine_name,
       formattedDate
     );
-    setStatistics(data.statistics);
+
+    if (response && response.statistics) {
+      setStatistics([response.statistics]);
+    } else {
+      setStatistics((prevData) => prevData);
+    }
+    setShowFilter(false);
   };
 
   const ChangingFormat = (key, value) => {
@@ -84,11 +90,6 @@ const Dashboard = () => {
               leftIcon={faAngleDown}
               required={false}
             />
-            <ReactDate
-              leftIcon={faCalendarAlt}
-              mindata={false}
-              onChange={(e) => ChangingFormat("date", e)}
-            />
           </div>
           <Button
             placeHolder="filter"
@@ -97,7 +98,7 @@ const Dashboard = () => {
             textColor="white"
             onClick={() => setShowFilter(true)}
           />
-          {showFilter && (
+          {showFilter && formData.machine_name && (
             <DashboardFilter
               onExit={() => setShowFilter(false)}
               dateChange={(e) => ChangingFormat("date", e)}

@@ -21,7 +21,6 @@ ChartJS.register(
 );
 
 const BarGraph = ({ datas = [], type, title, label }) => {
-  console.log("Received data:", datas);
   const data = Array.isArray(datas[0]) ? datas[0] : datas;
   const labels = data.map((item) => item.date);
   let datasets = [];
