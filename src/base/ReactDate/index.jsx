@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.css";
 import Icon from "../Icon";
+import { format, parse } from "date-fns";
 
 const ReactDate = ({
   placeHolder = "dd/MM/yyyy",
@@ -23,6 +24,17 @@ const ReactDate = ({
   const textColorClass = `${textColor}-txt`;
   const borderClass = border ? "border" : "";
 
+  const handleDateChange = (selectedDate) => {
+    setDate(selectedDate);
+
+    if (onChange) {
+      const formattedDate = selectedDate
+        ? format(selectedDate, "yyyy-MM-dd")
+        : null;
+      onChange(formattedDate);
+    }
+  };
+
   return (
     <div>
       {name && (
@@ -41,11 +53,8 @@ const ReactDate = ({
         <DatePicker
           className={`input-field ${textColorClass}`}
           selected={date}
-          onChange={(date) => {
-            setDate(date);
-            if (onChange) onChange(date);
-          }}
-          dateFormat="dd/MM/yyyy"
+          onChange={handleDateChange}
+          dateFormat="yyyy-MM-dd"
           placeholderText={placeHolder}
           minDate={mindata ? new Date() : null}
         />
