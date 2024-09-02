@@ -75,60 +75,62 @@ const AllMachines = () => {
 
   return (
     <div className="flex column gap">
-      <Header pageName="All Machines" options={options} />
-      <div className="flex column gap machines-container ">
-        <div>
-          <h2>
-            <Label placeholder="All Machines" />
-          </h2>
-        </div>
-        <div className=" flex row  full-width space-btw search-bar">
-          <ChooseOption
-            options={response.data.MachineNames}
-            onSelect={handleOptionChange}
-            placeholder="searchMachine"
-            width="20vw"
-            leftIcon={faSearch}
-            required={false}
-          />
-          <div className="flex gap-btn">
-            <Button
-              width="7vw"
-              placeHolder="add"
-              backgroundColor="primary"
-              onClick={navigateToAddMachine}
-            />
-            <Button
-              width="7vw"
-              placeHolder="all"
-              backgroundColor="primary"
-              onClick={handleAllMachines}
-            />
+      <Header pageName="Machines" options={options} />
+      <div className=" all-machines padding-30px">
+        <div className="flex column gap machines-container">
+          <div>
+            <h2>
+              <Label placeholder="All Machines" />
+            </h2>
           </div>
-        </div>
-        <div className=" all-m-t">
-          <div className="flex wrap gap scrollable-machine-table">
-            {allMachines.length > 0 ? (
-              allMachines.map((machine) => (
-                <MachineCard
-                  className="card-adjust"
-                  width="26.2vw"
-                  height="20vw"
-                  key={machine.id}
-                  machineData={machine}
-                  onEdit={() => editMachine(machine.id)}
-                  onPreview={() => {
-                    previewMachine(machine.id);
-                  }}
-                  onDelete={() => {
-                    <SelectedMachine id={machine.id} />;
-                    deleteMachine(machine.id);
-                  }}
-                />
-              ))
-            ) : (
-              <td colSpan="7">No tasks found</td>
-            )}
+          <div className="all-card flex row  full-width space-btw search-bar">
+            <ChooseOption
+              options={response.data.MachineNames}
+              onSelect={handleOptionChange}
+              placeholder="searchMachine"
+              width="20vw"
+              leftIcon={faSearch}
+              required={false}
+            />
+            <div className="flex gap-btn">
+              <Button
+                width="7vw"
+                placeHolder="add"
+                backgroundColor="primary"
+                onClick={navigateToAddMachine}
+              />
+              <Button
+                width="7vw"
+                placeHolder="all"
+                backgroundColor="primary"
+                onClick={handleAllMachines}
+              />
+            </div>
+          </div>
+          <div className=" all-m-t">
+            <div className="flex wrap gap scrollable-machine-table">
+              {allMachines.length > 0 ? (
+                allMachines.map((machine) => (
+                  <MachineCard
+                    className="card-adjust"
+                    width="26.2vw"
+                    height="20vw"
+                    key={machine.id}
+                    machineData={machine}
+                    onEdit={() => editMachine(machine.id)}
+                    onPreview={() => {
+                      previewMachine(machine.id);
+                    }}
+                    onDelete={() => {
+                      <SelectedMachine id={machine.id} />;
+                      deleteMachine(machine.id);
+                    }}
+                  />
+                ))
+              ) : (
+                <td colSpan="7">No tasks found</td>
+              )}
+            </div>
           </div>
         </div>
       </div>

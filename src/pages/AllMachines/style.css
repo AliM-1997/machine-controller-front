@@ -1,16 +1,18 @@
-/* .machines-container {
-  padding: 30px;
-} */
+.machines-container {
+  width: 78.6vw+15px;
+}
 .search-bar {
   align-items: center;
 }
 
 .scrollable-machine-table {
-  max-height: 60vh;
-  overflow-y: inherit;
+  max-height: 60vw;
+  width: 70.6vw+10px;
 }
 
 .all-m-t {
   background-color: red;
-  height: inherit;
+  max-height: 110%;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }

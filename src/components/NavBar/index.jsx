@@ -62,7 +62,7 @@ const NavBar = ({ onNavigate, isClick }) => {
       </div>
       <div className="flex column center gap">
         <Button
-          placeHolder="Dark Mood"
+          placeHolder="Dark Mode"
           width="12vw"
           leftIcon={faMoon}
           iconColor="#00b7eb"
