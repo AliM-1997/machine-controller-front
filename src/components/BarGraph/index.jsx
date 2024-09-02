@@ -29,7 +29,7 @@ const BarGraph = ({ data = [], type, title, label }) => {
       datasets.push(
         {
           label: "Uptime",
-          data: data.map((item) => parseFloat(item.uptimeHours) || 0),
+          data: data.map((item) => parseFloat(item.upTime) || 0),
           backgroundColor: "rgba(0, 255, 0, 1)",
           borderRadius: 6,
         },
