@@ -12,7 +12,7 @@ import HighlightLabel from "../../base/HighlightLable";
 const MachineCard = ({
   label = null,
   machineData,
-  width = "30vw",
+  width = "25vw",
   height = "10vw",
   onEdit,
   onDelete,
@@ -27,6 +27,7 @@ const MachineCard = ({
         url={machineData.image_path}
         borderRadius="24px 24px 0 0"
         width={width}
+        height={height}
         className="only-image"
       />
       <div className="flex column machine-info ">
