@@ -58,6 +58,7 @@ const NavBar = ({ onNavigate, isClick }) => {
           <Button {...navButton("Tasks", faClipboard, "/tasks")} />
           <Button {...navButton("Predictions", faChartLine, "/predictions")} />
           <Button {...navButton("User Management", faUsers, "/allusers")} />
+          <Button {...navButton("Alerts", faUsers, "/alerts")} />
         </div>
       </div>
       <div className="flex column center gap">
