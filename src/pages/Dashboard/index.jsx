@@ -3,13 +3,11 @@ import BarGraph from "../../components/BarGraph";
 import { MachineStatistics } from "../../data/remote/machineStatistics";
 import Header from "../../components/Header";
 import Button from "../../base/Button";
-import ReactDate from "../../base/ReactDate";
-import { faAngleDown, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import ChooseOption from "../../base/ChooseOption";
 import { useSelector } from "react-redux";
 import DashboardFilter from "../../components/DashboardFilter";
 import "./style.css";
-
 const Dashboard = () => {
   const response = useSelector((global) => global);
   const [showFilter, setShowFilter] = useState(false);
@@ -20,13 +18,12 @@ const Dashboard = () => {
     endDate: null,
   });
   const [statistics, setStatistics] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   console.log("statistics", statistics);
 
-  // const handleAllStatistics = async () => {
-  //   const data = await MachineStatistics.GetALLStatistics();
-  //   setStatistics(data.statistic);
-  // };
   const handleStatByMachineName = async () => {
+    setLoading(true);
     const response = await MachineStatistics.GetStatisticByMachineName(
       formData.machine_name
     );
@@ -35,12 +32,14 @@ const Dashboard = () => {
     } else {
       setStatistics([]);
     }
+    setLoading(false);
   };
 
   const handleGetStatByNameAndDate = async () => {
     const formattedDate = formData.date
       ? formData.date.toISOString().slice(0, 10)
       : "";
+    setLoading(true);
     const response = await MachineStatistics.GetStatisticByNameAndDate(
       formData.machine_name,
       formattedDate
@@ -51,6 +50,7 @@ const Dashboard = () => {
     } else {
       setStatistics((prevData) => prevData);
     }
+    setLoading(false);
     setShowFilter(false);
   };
 
@@ -61,15 +61,31 @@ const Dashboard = () => {
     });
   };
 
-  // useEffect(() => {
-  //   handleAllStatistics();
-  // }, []);
+  const handleFilterClick = () => {
+    if (formData.machine_name === "") {
+      setError("Please select a machine name before applying filters.");
+      return;
+    }
+    setError("");
+    setShowFilter(true);
+  };
+
   useEffect(() => {
     if (formData.machine_name !== "") handleStatByMachineName();
   }, [formData.machine_name]);
 
   const handleOptionSelect = (name, option) => {
     ChangingFormat(name, option.label);
+  };
+
+  const clearFilterState = () => {
+    setFormData({
+      machine_name: formData.machine_name,
+      date: null,
+      startDate: null,
+      endDate: null,
+    });
+    setError("");
   };
 
   return (
@@ -91,16 +107,20 @@ const Dashboard = () => {
               required={false}
             />
           </div>
+          {error && <div>{error}</div>}
           <Button
             placeHolder="filter"
             backgroundColor="primary"
             width="5vw"
             textColor="white"
-            onClick={() => setShowFilter(true)}
+            onClick={handleFilterClick}
           />
-          {showFilter && formData.machine_name && (
+          {showFilter && (
             <DashboardFilter
-              onExit={() => setShowFilter(false)}
+              onExit={() => {
+                setShowFilter(false);
+                clearFilterState();
+              }}
               dateChange={(e) => ChangingFormat("date", e)}
               filter1={handleGetStatByNameAndDate}
               date_1_Change={(e) => ChangingFormat("startDate", e)}
@@ -109,30 +129,36 @@ const Dashboard = () => {
             />
           )}
         </div>
-        <div className="flex space-around gap">
-          <BarGraph
-            datas={statistics}
-            type="uptime_downtime"
-            title="Uptime and Downtime Hours"
-          />
-          <BarGraph
-            datas={statistics}
-            type="operationalTime"
-            title="Operation Time"
-          />
-        </div>
-        <div className="flex space-around gap">
-          <BarGraph
-            datas={statistics}
-            type="MTBF_MTTR_MTTD"
-            title="MTBF, MTTR, MTTD"
-          />
-          <BarGraph
-            datas={statistics}
-            type="efficiency_availability"
-            title="Efficiency and Availability"
-          />
-        </div>
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <div className="flex space-around gap">
+              <BarGraph
+                datas={statistics}
+                type="uptime_downtime"
+                title="Uptime and Downtime Hours"
+              />
+              <BarGraph
+                datas={statistics}
+                type="operationalTime"
+                title="Operation Time"
+              />
+            </div>
+            <div className="flex space-around gap">
+              <BarGraph
+                datas={statistics}
+                type="MTBF_MTTR_MTTD"
+                title="MTBF, MTTR, MTTD"
+              />
+              <BarGraph
+                datas={statistics}
+                type="efficiency_availability"
+                title="Efficiency and Availability"
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
