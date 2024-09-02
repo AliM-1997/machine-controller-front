@@ -17,11 +17,9 @@ const Dashboard = () => {
     startDate: null,
     endDate: null,
   });
-  console.log("form date ", formData);
   const [statistics, setStatistics] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  console.log("statistics", statistics);
 
   const handleStatByMachineName = async () => {
     setLoading(true);
@@ -72,6 +70,9 @@ const Dashboard = () => {
       ...formData,
       [key]: value,
     });
+    if (key === "machine_name" && value !== "") {
+      setError("");
+    }
   };
 
   const handleFilterClick = () => {
@@ -120,7 +121,7 @@ const Dashboard = () => {
               required={false}
             />
           </div>
-          {error && <div>{error}</div>}
+          {error && <div className="error-message">{error}</div>}
           <Button
             placeHolder="filter"
             backgroundColor="primary"

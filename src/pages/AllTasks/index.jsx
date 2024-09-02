@@ -14,7 +14,6 @@ import ChooseOption from "../../base/ChooseOption";
 
 const AllTasks = () => {
   const response = useSelector((global) => global);
-  console.log(response);
   const dispatch = useDispatch();
   const [allTasks, setAllTasks] = useState([]);
   const [searchId, setSearchId] = useState("");
@@ -28,7 +27,6 @@ const AllTasks = () => {
       [key]: value,
     });
   };
-  console.log("asfdassdasdasd", formData);
   const navigate = useNavigate();
   const handleEditNavigate = async (id) => {
     const task = allTasks.find((task) => task.id === id);

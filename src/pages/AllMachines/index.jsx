@@ -14,7 +14,6 @@ import SelectedMachine from "../SelectedMachine";
 import ChooseOption from "../../base/ChooseOption";
 const AllMachines = () => {
   const response = useSelector((global) => global);
-  console.log(response);
   const dispatch = useDispatch();
   const [allMachines, setAllMachines] = useState([]);
   const [searchMachine, setSearchMachine] = useState("");
