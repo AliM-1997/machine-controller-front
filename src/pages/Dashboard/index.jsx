@@ -27,15 +27,13 @@ const Dashboard = () => {
   //   setStatistics(data.statistic);
   // };
   const handleStatByMachineName = async () => {
-    try {
-      const data = await MachineStatistics.GetStatisticByMachineName(
-        formData.machine_name
-      );
-      if (data && data.statistics) {
-        setStatistics([data.statistics]);
-      }
-    } catch (error) {
-      console.error(error);
+    const response = await MachineStatistics.GetStatisticByMachineName(
+      formData.machine_name
+    );
+    if (response && response.statistics) {
+      setStatistics([response.statistics]);
+    } else {
+      setStatistics([]);
     }
   };
 
@@ -65,7 +63,7 @@ const Dashboard = () => {
   //   handleAllStatistics();
   // }, []);
   useEffect(() => {
-    handleStatByMachineName();
+    if (formData.machine_name !== "") handleStatByMachineName();
   }, [formData.machine_name]);
 
   const handleOptionSelect = (name, option) => {

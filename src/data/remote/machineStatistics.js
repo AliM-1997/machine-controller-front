@@ -22,7 +22,7 @@ export const MachineStatistics = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
+      alert("No statistics found for this machine.");
     }
   },
   GetStatisticByNameAndDate: async (name, date) => {
