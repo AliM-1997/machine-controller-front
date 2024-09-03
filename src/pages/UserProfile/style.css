@@ -1,7 +1,6 @@
 .userProfile-container {
   padding: 30px;
-  overflow: auto;
-  gap: 40px;
+  width: 66vw;
 }
 .image {
   width: 70px;

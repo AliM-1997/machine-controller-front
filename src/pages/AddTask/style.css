@@ -1,4 +1,8 @@
 .addTask-container {
   padding: 30px;
-  overflow: auto;
+}
+
+.addtask-inputs {
+  padding: 30px;
+  border-radius: 12px;
 }

@@ -31,6 +31,7 @@ const UserProfile = () => {
     location: "",
     image_path: "",
   });
+  console.log(user);
   useEffect(() => {
     if (user) {
       setFormData({
@@ -113,151 +114,160 @@ const UserProfile = () => {
   return (
     <div>
       <Header pageName={"User Management"} options={options} />
-      <div className="flex column userProfile-container gap ">
-        <div>
-          <h2>
-            <Label placeholder="User Profile" fontWeight="bold" />
-          </h2>
+      <div className="flex column full-width  center">
+        <div className="flex column gap title userProfile-container">
+          <div className="flex column space-btw full-width gap">
+            <h2>
+              <Label placeholder="User Profile" fontWeight="bold" />
+            </h2>
+            {user.id && (
+              <div className="flex full-width space-btw ">
+                <div className="flex space-btw gap ">
+                  <div className="flex space-btw">
+                    {imagePreview ? (
+                      <img src={imagePreview} className="image" alt="user" />
+                    ) : user.image_path ? (
+                      <DisplayImage
+                        url={user.image_path}
+                        width="70px"
+                        heigth="70px"
+                      />
+                    ) : (
+                      <img src={whiteImage} className="image" alt="default" />
+                    )}
+                    <input
+                      className="choose-file"
+                      type="file"
+                      onChange={handleFileChange}
+                      style={{ display: "" }}
+                    />
+                  </div>
+                  <div className="flex column">
+                    <Label placeholder={user.name || "Name"} />
+                    <Label placeholder={user.role || "Role"} />
+                    <Label placeholder={user.email || "email"} />
+                  </div>
+                </div>
+                <div className="flex center gap-btn  ">
+                  <Button
+                    placeHolder="Upload"
+                    width="7vw"
+                    textColor="white"
+                    backgroundColor="primary"
+                    onClick={handleUploadImage}
+                  />
+                  <Button
+                    placeHolder="delete"
+                    width="7vw"
+                    textColor="white"
+                    backgroundColor="primary"
+                    onClick={handleDeleteImage}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="flex full-width space-btw">
-          <div className="flex space-btw gap ">
-            <div className="">
-              {imagePreview ? (
-                <img src={imagePreview} className="image" alt="user" />
-              ) : user.image_path ? (
-                <DisplayImage
-                  url={user.image_path}
-                  width="70px"
-                  heigth="70px"
-                />
-              ) : (
-                <img src={whiteImage} className="image" alt="default" />
-              )}
-              <input
-                className="choose-file"
-                type="file"
-                onChange={handleFileChange}
-                style={{ display: "" }}
+        <div className="flex column gap full-height addtask-inputs white-bg ">
+          <div className="flex row center gap full-width">
+            <Input
+              width="30vw"
+              placeHolder={user.name || "Name"}
+              name="Name"
+              type="text"
+              leftIcon={faUser}
+              onChange={(e) => handleFormData("name", e.target.value)}
+            />
+            <Input
+              width="30vw"
+              placeHolder={user.username || "@username"}
+              name="username"
+              type="text"
+              leftIcon={faUser}
+              required={false}
+              onChange={(e) => handleFormData("username", e.target.value)}
+            />
+          </div>
+          <div className="flex row center gap full-width">
+            <Input
+              width="30vw"
+              placeHolder={user.role || "user/admin"}
+              name="Role"
+              type="text"
+              leftIcon={faUser}
+              required={false}
+              onChange={(e) => handleFormData("role", e.target.value)}
+            />
+            <Input
+              width="30vw"
+              placeHolder={user.phone_number || "961-00-000000"}
+              name="Phone Number"
+              type="text"
+              leftIcon={faPhone}
+              required={false}
+              onChange={(e) => handleFormData("phone_number", e.target.value)}
+            />
+          </div>
+          <div className="flex full-width gap column center">
+            <div>
+              <Input
+                placeHolder={user.email || "example@gamil.com"}
+                name="Email"
+                type="email"
+                leftIcon={faEnvelope}
+                width="62vw"
+                onChange={(e) => handleFormData("email", e.target.value)}
               />
             </div>
-            <div className="flex column">
-              <Label placeholder={user.name || "Name"} />
-              <Label placeholder={user.role || "Role"} />
-              <Label placeholder={user.email || "email"} />
+            <div className="flex row center gap full-width">
+              <Input
+                width="30vw"
+                placeHolder={user.password || "password"}
+                name="Password"
+                type="password"
+                leftIcon={faKey}
+                onChange={(e) => handleFormData("password", e.target.value)}
+              />
+              <Input
+                width="30vw"
+                placeHolder={user.password || "password"}
+                name="Confirmed-Password"
+                type="password"
+                leftIcon={faKey}
+                onChange={(e) =>
+                  handleFormData("password_confirmation", e.target.value)
+                }
+              />
             </div>
           </div>
-          <div className="flex center gap full-width ">
+          <div className="flex center">
+            <Input
+              placeHolder="location"
+              name="Location"
+              leftIcon={faLocation}
+              type="text"
+              required={false}
+              width="62vw"
+              onChange={(e) => handleFormData("location", e.target.value)}
+            />
+          </div>
+
+          <div className="flex end gap-btn">
             <Button
-              placeHolder="Upload image"
-              width="15vw"
-              textColor="white"
+              placeHolder="Cancel"
               backgroundColor="primary"
-              onClick={handleUploadImage}
+              width="7vw"
+              textColor="white"
+              onClick={handleCancel}
             />
             <Button
-              placeHolder="delete"
-              width="10vw"
-              textColor="white"
+              placeHolder={user.name ? "save" : "create"}
               backgroundColor="primary"
-              onClick={handleDeleteImage}
+              width="7vw"
+              textColor="white"
+              onClick={handleSave}
             />
           </div>
-        </div>
-        <div className="flex row center full-width space-btw ">
-          <Input
-            width="37vw"
-            placeHolder={user.name || "Name"}
-            name="Name"
-            type="text"
-            leftIcon={faUser}
-            onChange={(e) => handleFormData("name", e.target.value)}
-          />
-          <Input
-            width="37vw"
-            placeHolder={user.username || "@username"}
-            name="username"
-            type="text"
-            leftIcon={faUser}
-            required={false}
-            onChange={(e) => handleFormData("username", e.target.value)}
-          />
-        </div>
-        <div className="flex row center full-width space-btw ">
-          <Input
-            width="37vw"
-            placeHolder={user.role || "user/admin"}
-            name="Role"
-            type="text"
-            leftIcon={faUser}
-            required={false}
-            onChange={(e) => handleFormData("role", e.target.value)}
-          />
-          <Input
-            width="37vw"
-            placeHolder={user.phone_number || "961-00-000000"}
-            name="Phone Number"
-            type="text"
-            leftIcon={faPhone}
-            required={false}
-            onChange={(e) => handleFormData("phone_number", e.target.value)}
-          />
-        </div>
-        <div className="flex full-width gap column">
-          <div>
-            <Input
-              placeHolder={user.email || "example@gamil.com"}
-              name="Email"
-              type="email"
-              leftIcon={faEnvelope}
-              onChange={(e) => handleFormData("email", e.target.value)}
-            />
-          </div>
-          <div className="flex full-width row center space-btw ">
-            <Input
-              width="37vw"
-              placeHolder={user.password || "password"}
-              name="Password"
-              type="password"
-              leftIcon={faKey}
-              onChange={(e) => handleFormData("password", e.target.value)}
-            />
-            <Input
-              width="37vw"
-              placeHolder={user.password || "password"}
-              name="Confirmed-Password"
-              type="password"
-              leftIcon={faKey}
-              onChange={(e) =>
-                handleFormData("password_confirmation", e.target.value)
-              }
-            />
-          </div>
-        </div>
-        <div className="full-width">
-          <Input
-            placeHolder="location"
-            name="Location"
-            leftIcon={faLocation}
-            type="text"
-            required={false}
-            onChange={(e) => handleFormData("location", e.target.value)}
-          />
-        </div>
-        <div className="flex end gap">
-          <Button
-            placeHolder="Cancel"
-            backgroundColor="primary"
-            width="10vw"
-            textColor="white"
-            onClick={handleCancel}
-          />
-          <Button
-            placeHolder={user.name ? "save" : "create"}
-            backgroundColor="primary"
-            width="10vw"
-            textColor="white"
-            onClick={handleSave}
-          />
         </div>
       </div>
     </div>

@@ -155,7 +155,7 @@ const AddMachine = () => {
       />
       <div className="flex column full-width addMachine-container  center">
         <div className="flex column gap title">
-          <div className=" flex row space-btw full-width">
+          <div className="flex full-width space-btw title ">
             <h2>
               <Label placeholder="Add/Edit Machine" />
             </h2>
