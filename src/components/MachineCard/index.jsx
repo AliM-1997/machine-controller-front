@@ -43,10 +43,10 @@ const MachineCard = ({
           </div>
         </div>
         <div className="info-table">
-          <div className="info-row">
+          {/* <div className="info-row">
             <div className="info-label">Name</div>
             <div className="info-value">{machineData.name}</div>
-          </div>
+          </div> */}
           <div className="info-row">
             <div className="info-label">Serial Number</div>
             <div className="info-value">{machineData.serial_number}</div>
