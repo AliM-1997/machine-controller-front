@@ -34,7 +34,7 @@ const AddMachine = () => {
     location: "",
     image_path: "",
     description: "",
-    last_maintenance: null,
+    last_maintenance: "",
     unit_per_hour: "",
   });
   console.log("formdata add machine", formData);
@@ -72,8 +72,10 @@ const AddMachine = () => {
         alert("Machine Updated Successfully");
       }
     } else {
-      const createData = await Machines.CreateMachine(dataToSend);
+      const createData = await Machines.CreateMachine(formData);
+      console.log("testing", createData);
       if (createData) {
+        handleUploadImage();
         alert("Machine Created Successfullty");
         allmachineNavigaet();
       }
@@ -168,9 +170,12 @@ const AddMachine = () => {
               <Icon icon={faAngleRight} onClick={allmachineNavigaet} />
             </div>
           </div>
+        </div>
+
+        <div className="flex column gap full-height machine-inputs white-bg">
           {machine.id ? (
-            <div className="flex space-btw machine-image-container full-width">
-              <div className="machine-image">
+            <div className="flex column center">
+              <div className="machine-image flex center">
                 <>
                   {imagePreview ? (
                     <img
@@ -182,7 +187,6 @@ const AddMachine = () => {
                     <DisplayImage
                       width="150px"
                       height="150px"
-                      borderRadius="12px"
                       url={machine.image_path}
                     />
                   ) : (
@@ -193,75 +197,30 @@ const AddMachine = () => {
                     />
                   )}
                 </>
-                {/* </div> */}
-                <div>
-                  <input
-                    type="file"
-                    onChange={handleFileChange}
-                    className="machine-upload"
-                  />
-                </div>
               </div>
-              <div className="flex gap">
+              <div>
+                <input
+                  type="file"
+                  onChange={handleFileChange}
+                  className="machine-upload1"
+                />
+              </div>
+              <div className="flex space-btw center" style={{ width: "150px" }}>
                 <Button
-                  placeHolder="upload"
-                  width="7vw"
-                  backgroundColor="primary"
-                  textColor="white"
+                  placeHolder="Upload Image"
+                  backgroundColor="white"
+                  textColor="blue"
+                  className="mark-read"
                   onClick={handleUploadImage}
                 />
-                <Button
-                  placeHolder="Delete"
-                  width="7vw"
-                  backgroundColor="primary"
-                  textColor=" white"
-                  onClick={handleDeleteImage}
-                />
+                <Icon icon={faTrashCan} onClick={handleDeleteImage} />
               </div>
             </div>
           ) : (
-            <></>
+            <div className="flex center">
+              <img src={whiteImge} className="machineImage" alt="default" />
+            </div>
           )}
-        </div>
-
-        <div className="flex column gap full-height machine-inputs white-bg">
-          <div className="flex column center">
-            <div className="machine-image flex center">
-              <>
-                {imagePreview ? (
-                  <img
-                    src={imagePreview}
-                    className="machineImage"
-                    alt="machine"
-                  />
-                ) : machine.image_path ? (
-                  <DisplayImage
-                    width="150px"
-                    height="150px"
-                    url={machine.image_path}
-                  />
-                ) : (
-                  <img src={whiteImge} className="machineImage" alt="default" />
-                )}
-              </>
-            </div>
-            <div>
-              <input
-                type="file"
-                onChange={handleFileChange}
-                className="machine-upload1"
-              />
-            </div>
-            <div className="flex space-btw center" style={{ width: "150px" }}>
-              <Button
-                placeHolder="Upload Image"
-                backgroundColor="white"
-                textColor="blue"
-                className="mark-read"
-              />
-              <Icon icon={faTrashCan} />
-            </div>
-          </div>
           <div className=" flex column gap-btn">
             <div className="flex gap full-width center">
               <Input
@@ -336,11 +295,7 @@ const AddMachine = () => {
                 leftIcon={faCalendarDays}
                 name="Last Maintenance"
                 width="calc(48vw + 24px)"
-                placeHolder={
-                  formData.last_maintenance
-                    ? formData.last_maintenance.toISOString().slice(0, 10)
-                    : "dd/MM/yyyy"
-                }
+                placeHolder={"dd/MM/yyyy"}
                 onChange={(e) => ChangingFormData("last_maintenance", e)}
               />
             </div>
