@@ -109,7 +109,7 @@ const Dashboard = () => {
         <div className="stat-title">
           <h2>Machine Statistics</h2>
         </div>
-        <div className="flex row space-btw stat-input">
+        <div className="flex row space-btw stat-input gap">
           <div className="flex gap">
             <ChooseOption
               options={response.data.MachineNames}
@@ -147,7 +147,7 @@ const Dashboard = () => {
           <div>Loading...</div>
         ) : (
           <>
-            <div className="flex space-around gap">
+            <div className="flex  gap">
               <BarGraph
                 datas={statistics}
                 type="uptime_downtime"
@@ -159,7 +159,7 @@ const Dashboard = () => {
                 title="Operation Time"
               />
             </div>
-            <div className="flex space-around gap">
+            <div className="flex  gap">
               <BarGraph
                 datas={statistics}
                 type="MTBF_MTTR_MTTD"

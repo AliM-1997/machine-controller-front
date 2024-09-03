@@ -17,3 +17,7 @@
   margin-top: 10px;
   width: fit-content;
 }
+.dashboard-container {
+  padding: 60px 0 0 30px;
+  align-items: start;
+}
