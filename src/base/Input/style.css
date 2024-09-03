@@ -17,3 +17,7 @@
   color: red;
   margin-left: 4px;
 }
+
+.input-lable {
+  gap: 8px;
+}

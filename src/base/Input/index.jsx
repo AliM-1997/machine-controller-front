@@ -23,9 +23,9 @@ const Input = ({
     return null;
   }
   return (
-    <div>
+    <div className="flex column input-lable">
       <div>
-        <label className="bold black-txt " style={{ width: width }}>
+        <label className=" black-txt " style={{ width: width }}>
           {name}
           {required && <span className="required">*</span>}
         </label>
