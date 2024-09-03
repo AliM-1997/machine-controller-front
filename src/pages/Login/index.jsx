@@ -35,9 +35,9 @@ const Login = () => {
   return (
     <div>
       <img src={loginImage} alt="admin" className="Admin-image" />
-      <div className="flex center Admin-container">
-        <div className=" flex center ">
-          <div className=" flex column center login-container gap ">
+      <div className="flex  Admin-container">
+        <div className=" flex  ">
+          <div className=" flex column  login-container gap ">
             <div className=" flex column center gap">
               <h1>
                 <span className="highlight">D</span>ustry
@@ -58,7 +58,7 @@ const Login = () => {
                 />
               </div>
             </div>
-            <div className="flex column gap ">
+            <div className="flex column gap-btn ">
               <Input
                 name="Email"
                 width="400px"
@@ -79,11 +79,11 @@ const Login = () => {
                   setPassword(e.target.value);
                 }}
               />
-              <p className="underline">forgetPassword?</p>
+              <p className="underline">Forgot Password?</p>
               <Button
                 backgroundColor="primary"
                 width="400px"
-                textColor="White"
+                textColor="white"
                 placeHolder="Login"
                 onClick={LoginHandler}
               />
@@ -92,7 +92,7 @@ const Login = () => {
                 backgroundColor="secondary"
                 width="400px"
                 textColor="White"
-                placeHolder="switch to employee"
+                placeHolder="Switch to Employee"
                 border={true}
               />
             </div>

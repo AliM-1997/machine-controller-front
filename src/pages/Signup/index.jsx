@@ -44,9 +44,9 @@ const Signup = () => {
     <div>
       <img src={loginImage} alt="admin" className="Admin-image" />
 
-      <div className="flex column center gap Admin-container">
-        <div className="flex column center  gap signup-container gape-oo">
-          <div className="flex column center gap">
+      <div className="flex column  Admin-container">
+        <div className="flex column   gap signup-container ">
+          <div className="flex column center gap ">
             <h1>
               <span className="highlight">D</span>ustry
             </h1>
@@ -66,7 +66,7 @@ const Signup = () => {
               />
             </div>
           </div>
-          <div className="flex column signup-input ">
+          <div className="flex column signup-input gap-btn">
             <Input
               placeHolder="name"
               width="400px"
@@ -78,7 +78,7 @@ const Signup = () => {
             <Input
               placeHolder="example@gamil.com"
               width="400px"
-              name="email"
+              name="Email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -105,7 +105,7 @@ const Signup = () => {
               backgroundColor="primary"
               width="400px"
               textColor="white"
-              placeHolder="Signup"
+              placeHolder="Sign Up"
               onClick={handelSignup}
             />
           </div>
