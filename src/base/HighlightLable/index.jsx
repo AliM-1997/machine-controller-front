@@ -9,29 +9,29 @@ const HighlightLabel = ({ highlight = true, placeHolder = "text" }) => {
     case "Pending":
     case "attention":
       textColor = "yellow";
-      backgroundColor = "Lyellow";
+      // backgroundColor = "Lyellow";
       break;
     case "In Progress":
       textColor = "blue";
-      backgroundColor = "Lblue";
+      // backgroundColor = "Lblue";
       break;
     case "Completed":
     case "active":
       textColor = "green";
-      backgroundColor = "Lgreen";
+      // backgroundColor = "Lgreen";
       break;
     case "Risked":
     case "under maintenance":
       textColor = "red";
-      backgroundColor = "Lred";
+      // backgroundColor = "Lred";
       break;
     case "Delayed":
       textColor = "orange";
-      backgroundColor = "Lorange";
+      // backgroundColor = "Lorange";
       break;
     default:
       textColor = "black";
-      backgroundColor = "white";
+    // backgroundColor = "white";
   }
 
   return (
