@@ -12,6 +12,7 @@ const Button = ({
   onClick,
   iconColor = "black",
   border = false,
+  start = false,
 }) => {
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
@@ -19,15 +20,41 @@ const Button = ({
 
   return (
     <div>
+      {start && (
+        <div className="btn-1">
+          <Icon icon={leftIcon} color={iconColor} />
+          <button
+            type={type}
+            style={{ width: width }}
+            onClick={onClick}
+            className={`btn ${backgroundColorClass} ${textColorClass} ${borderClass}`}
+          >
+            {placeHolder}
+            <Icon icon={rightIcon} />
+          </button>
+        </div>
+      )}
       <button
         type={type}
         style={{ width: width }}
         onClick={onClick}
         className={`btn ${backgroundColorClass} ${textColorClass} ${borderClass}`}
       >
-        <Icon icon={leftIcon} color={iconColor} />
-        {placeHolder}
-        <Icon icon={rightIcon} />
+        {leftIcon ? (
+          <>
+            <div className="flex gap-btn">
+              <Icon icon={leftIcon} color={iconColor} />
+              {placeHolder}
+            </div>
+            <Icon icon={rightIcon} />
+          </>
+        ) : (
+          <>
+            <Icon icon={leftIcon} color={iconColor} />
+            {placeHolder}
+            <Icon icon={rightIcon} />
+          </>
+        )}
       </button>
     </div>
   );
