@@ -38,8 +38,8 @@ const AllTasks = () => {
     setAllTasks(data.task);
   };
 
-  const handleSelect = (option) => {
-    console.log("Selected option:", option);
+  const handleSelect = (name, option) => {
+    console.log("Selected option:", option.label);
   };
 
   const handleGetTaskbyID = async (id) => {
@@ -65,13 +65,20 @@ const AllTasks = () => {
   useEffect(() => {
     handleGetTaskbyID();
   }, [searchId]);
-  const options = [
+  const headerOptions = [
     { label: "All Tasks", url: "tasks" },
     { label: "Add/Edit Task", url: "addTask" },
   ];
+  const statusOption = [
+    { label: "Risked" },
+    { label: "Completed" },
+    { label: "Pending" },
+    { label: "Delayed" },
+    { label: "In Progress" },
+  ];
   return (
     <div>
-      <Header pageName="Tasks" options={options} />
+      <Header pageName="Tasks" options={headerOptions} />
       <div className="flex column  gap task-container">
         <div>
           <h2>
@@ -105,19 +112,22 @@ const AllTasks = () => {
                     handleOptionSelect("machine_name", option)
                   }
                   placeholder={"machine name"}
-                  width="30vw"
+                  width="12vw"
                   textColor="black"
                   leftIcon={faAngleDown}
-                  name="Name"
+                  required={false}
                 />
-                <DropButton
-                  options={[
-                    "Pending",
-                    "In Progress",
-                    "Delayed",
-                    "Risked",
-                    "Completed",
-                  ]}
+                <ChooseOption
+                  options={statusOption}
+                  onSelect={(option) => handleOptionSelect("status", option)}
+                  width="12vw"
+                  placeholder="choose status"
+                  textColor="black"
+                  leftIcon={faAngleDown}
+                  required={false}
+                />
+                {/* <DropButton
+                  options={statusOption}
                   onSelect={handleSelect}
                   placeHolder="Status"
                   backgroundColor="primary"
@@ -125,7 +135,7 @@ const AllTasks = () => {
                   textColor="white"
                   leftIcon={faAngleDown}
                   iconColor="white"
-                />
+                /> */}
               </div>
             </div>
             <div>
