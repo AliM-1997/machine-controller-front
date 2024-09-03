@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import Label from "../../base/Label";
 import { Tasks } from "../../data/remote/Tasks";
-import { faAngleDown, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown,
+  faCalendarAlt,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 import HighlightLabel from "../../base/HighlightLable";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadTask } from "../../data/redux/taskSlice";
-import DropButton from "../../base/DropButton";
 import Input from "../../base/Input";
 import Header from "../../components/Header";
 import ChooseOption from "../../base/ChooseOption";
+import ReactDate from "../../base/ReactDate";
 
 const AllTasks = () => {
   const response = useSelector((global) => global);
@@ -20,6 +24,7 @@ const AllTasks = () => {
   const [formData, setFormData] = useState({
     machine_name: "",
     date: null,
+    status: "",
   });
   const ChangingFormat = (key, value) => {
     setFormData({
@@ -27,6 +32,7 @@ const AllTasks = () => {
       [key]: value,
     });
   };
+  console.log(formData);
   const navigate = useNavigate();
   const handleEditNavigate = async (id) => {
     const task = allTasks.find((task) => task.id === id);
@@ -40,6 +46,7 @@ const AllTasks = () => {
 
   const handleSelect = (name, option) => {
     console.log("Selected option:", option.label);
+    ChangingFormat(name, option.label);
   };
 
   const handleGetTaskbyID = async (id) => {
@@ -117,6 +124,12 @@ const AllTasks = () => {
                   leftIcon={faAngleDown}
                   required={false}
                 />
+                <ReactDate
+                  leftIcon={faCalendarAlt}
+                  required={true}
+                  width="12vw"
+                  onChange={(e) => ChangingFormat("date", e)}
+                />
                 <ChooseOption
                   options={statusOption}
                   onSelect={(option) => handleOptionSelect("status", option)}
@@ -126,16 +139,6 @@ const AllTasks = () => {
                   leftIcon={faAngleDown}
                   required={false}
                 />
-                {/* <DropButton
-                  options={statusOption}
-                  onSelect={handleSelect}
-                  placeHolder="Status"
-                  backgroundColor="primary"
-                  width="10vw"
-                  textColor="white"
-                  leftIcon={faAngleDown}
-                  iconColor="white"
-                /> */}
               </div>
             </div>
             <div>
