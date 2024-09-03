@@ -63,4 +63,14 @@ export const Tasks = {
       throw error;
     }
   },
+  GetByMachineName: async (name) => {
+    try {
+      const data = await requestApi({ route: `/task/machinename/${name}` });
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error);
+      alert("No task found for the given machine");
+    }
+  },
 };
