@@ -20,6 +20,7 @@ import {
   faClipboard,
   faHashtag,
   faLocation,
+  faTrashCan,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import ChooseOption from "../../base/ChooseOption";
@@ -153,11 +154,15 @@ const AddMachine = () => {
         options={HeaderOptions}
         className="container"
       />
-      <div className="flex column full-width addMachine-container  center">
-        <div className="flex column gap title">
-          <div className="flex full-width space-btw title ">
+      <div className="flex column full-width addMachine-container gap center">
+        <div className="flex column gap ">
+          <div className="flex space-btw title ">
             <h2>
-              <Label placeholder="Add/Edit Machine" />
+              {machine.id ? (
+                <Label placeholder={"Edit Machine"} />
+              ) : (
+                <Label placeholder={"Add Machine"} />
+              )}
             </h2>
             <div className="flex center">
               <Icon icon={faAngleRight} onClick={allmachineNavigaet} />
@@ -220,88 +225,125 @@ const AddMachine = () => {
         </div>
 
         <div className="flex column gap full-height machine-inputs white-bg">
-          <div className="flex space-arr full-width">
-            <Input
-              placeHolder={machine.name || "name"}
-              name="Name"
-              width="30vw"
-              leftIcon={faUser}
-              type="text"
-              onChange={(e) => {
-                ChangingFormData("name", e.target.value);
-              }}
-            />
-            <Input
-              leftIcon={faAt}
-              placeHolder={machine.serial_number || "serial number"}
-              name="Serial Number"
-              width="30vw"
-              type="text"
-              onChange={(e) => {
-                ChangingFormData("serial_number", e.target.value);
-              }}
-            />
+          <div className="flex column center">
+            <div className="machine-image flex center">
+              <>
+                {imagePreview ? (
+                  <img
+                    src={imagePreview}
+                    className="machineImage"
+                    alt="machine"
+                  />
+                ) : machine.image_path ? (
+                  <DisplayImage
+                    width="150px"
+                    height="150px"
+                    url={machine.image_path}
+                  />
+                ) : (
+                  <img src={whiteImge} className="machineImage" alt="default" />
+                )}
+              </>
+            </div>
+            <div>
+              <input
+                type="file"
+                onChange={handleFileChange}
+                className="machine-upload1"
+              />
+            </div>
+            <div className="flex space-btw center" style={{ width: "150px" }}>
+              <Button
+                placeHolder="Upload Image"
+                backgroundColor="white"
+                textColor="blue"
+                className="mark-read"
+              />
+              <Icon icon={faTrashCan} />
+            </div>
           </div>
-          <div className="flex space-arr full-width">
-            <Input
-              name="Units Per Hour"
-              width="30vw"
-              leftIcon={faHashtag}
-              type="text"
-              onChange={(e) => {
-                ChangingFormData("unit_per_hour", e.target.value);
-              }}
-            />
-            <ChooseOption
-              options={statusOption}
-              onSelect={(option) => handleOptionSelect("status", option)}
-              width="30vw"
-              textColor="black"
-              leftIcon={faAngleDown}
-              name="Status"
-            />
-          </div>
+          <div className=" flex column gap-btn">
+            <div className="flex gap full-width center">
+              <Input
+                placeHolder={machine.name || "name"}
+                name="Name"
+                width="24vw"
+                leftIcon={faUser}
+                type="text"
+                onChange={(e) => {
+                  ChangingFormData("name", e.target.value);
+                }}
+              />
+              <Input
+                leftIcon={faAt}
+                placeHolder={machine.serial_number || "serial number"}
+                name="Serial Number"
+                width="24vw"
+                type="text"
+                onChange={(e) => {
+                  ChangingFormData("serial_number", e.target.value);
+                }}
+              />
+            </div>
+            <div className="flex gap full-width center">
+              <Input
+                name="Units Per Hour"
+                width="24vw"
+                leftIcon={faHashtag}
+                type="text"
+                onChange={(e) => {
+                  ChangingFormData("unit_per_hour", e.target.value);
+                }}
+              />
+              <ChooseOption
+                options={statusOption}
+                onSelect={(option) => handleOptionSelect("status", option)}
+                width="24vw"
+                textColor="black"
+                leftIcon={faAngleDown}
+                name="Status"
+              />
+            </div>
 
-          <div className="flex center ">
-            <Input
-              placeHolder={machine.location || "location"}
-              name="Location"
-              leftIcon={faLocation}
-              type="text"
-              width="62vw"
-              onChange={(e) => {
-                ChangingFormData("location", e.target.value);
-              }}
-              required={false}
-            />
-          </div>
-          <div className="flex center space-arr">
-            <Input
-              placeHolder={machine.description || "description"}
-              name="machine Description"
-              leftIcon={faClipboard}
-              width="62vw"
-              type="text"
-              onChange={(e) => {
-                ChangingFormData("description", e.target.value);
-              }}
-              required={false}
-            />
-          </div>
-          <div className="flex center space-arr">
-            <ReactDate
-              leftIcon={faCalendarDays}
-              name="Last Maintenance"
-              width="62vw"
-              placeHolder={
-                formData.last_maintenance
-                  ? formData.last_maintenance.toISOString().slice(0, 10)
-                  : "dd/MM/yyyy"
-              }
-              onChange={(e) => ChangingFormData("last_maintenance", e)}
-            />
-          </div>
-          <div className="flex center space-arr">
+            <div className="flex center ">
+              <Input
+                placeHolder={machine.location || "location"}
+                name="Location"
+                leftIcon={faLocation}
+                type="text"
+                width="calc(48vw + 24px)"
+                onChange={(e) => {
+                  ChangingFormData("location", e.target.value);
+                }}
+                required={false}
+              />
+            </div>
+            <div className="flex center ">
+              <Input
+                placeHolder={machine.description || "description"}
+                name="machine Description"
+                leftIcon={faClipboard}
+                width="calc(48vw + 24px)"
+                type="text"
+                onChange={(e) => {
+                  ChangingFormData("description", e.target.value);
+                }}
+                required={false}
+              />
+            </div>
+            <div className="flex center space-arr">
+              <ReactDate
+                leftIcon={faCalendarDays}
+                name="Last Maintenance"
+                width="calc(48vw + 24px)"
+                placeHolder={
+                  formData.last_maintenance
+                    ? formData.last_maintenance.toISOString().slice(0, 10)
+                    : "dd/MM/yyyy"
+                }
+                onChange={(e) => ChangingFormData("last_maintenance", e)}
+              />
+            </div>
             <div className="flex end gap btn-con">
               <Button
                 placeHolder="Delete"

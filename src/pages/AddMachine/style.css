@@ -15,7 +15,7 @@
 .machineImage {
   width: 150px;
   height: 150px;
-  border-radius: 12px;
+  border-radius: 50%;
   position: relative;
   display: inline-block;
 }
@@ -23,7 +23,7 @@
   position: absolute;
   width: 150px;
   height: 150px;
-  opacity: 0;
+  /* opacity: 0; */
   cursor: pointer;
   z-index: 1;
   top: 21vh;
@@ -31,12 +31,20 @@
 }
 
 .btn-con {
-  padding: 14px;
-  width: 64vw;
-  align-items: center;
+  width: calc(48vw+24px);
 }
 .title {
-  width: 64vw;
-  padding: 14px;
-  align-items: start;
+  width: calc(48vw + 48px);
+}
+
+.machine-upload1 {
+  position: absolute;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+  top: 21.5vh;
+  left: 53vw;
 }
