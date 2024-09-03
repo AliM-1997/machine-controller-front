@@ -15,7 +15,7 @@
 }
 
 .notification-info {
-  max-height: 760px;
+  height: 80vh;
   overflow-y: auto;
   scrollbar-width: none;
   position: relative;
