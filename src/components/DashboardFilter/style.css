@@ -1,18 +1,18 @@
 .filter-cont {
   position: absolute;
-  top: 19%;
-  left: 65%;
+  top: 24%;
+  left: 62%;
   padding: 24px;
   border-radius: 24px;
   background: linear-gradient(
     to top,
-    rgba(109, 109, 109, 0.6),
-    rgba(198, 198, 198, 0.2)
+    rgba(255, 255, 255, 0.6),
+    rgba(248, 248, 248, 0.2)
   );
-  border: 1px solid black;
+  border: 1px solid lightgrey;
 }
 .btn-date {
   display: flex;
-  width: 20vw;
-  justify-content: center;
+  width: 100%;
+  justify-content: end;
 }

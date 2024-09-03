@@ -19,15 +19,15 @@ const DashboardFilter = ({
         <Icon icon={faX} onClick={onExit} />
       </div>
       <div className=" gap">
-        <div className=" flex column center gap">
+        <div className=" flex column start gap">
           <h3>
-            <Label placeholder="Date" width="20vw" clas />
+            <Label placeholder="Date" className=" flex start" />
           </h3>
           <div className="date_1">
             <ReactDate
               leftIcon={faCalendarAlt}
               mindata={false}
-              name="date"
+              name="On"
               required={false}
               width="25vw"
               onChange={dateChange}
@@ -46,18 +46,11 @@ const DashboardFilter = ({
       </div>
       <div className="flex column gap">
         <div className=" flex column center gap">
-          <h3>
-            <Label
-              placeholder="Between Date"
-              width="20vw"
-              backgroundColor="none"
-            />
-          </h3>
           <div className="flex gap">
             <ReactDate
               leftIcon={faCalendarAlt}
               mindata={false}
-              name="date_1"
+              name="From"
               required={false}
               width="12vw"
               onChange={date_1_Change}
@@ -65,7 +58,7 @@ const DashboardFilter = ({
             <ReactDate
               leftIcon={faCalendarAlt}
               mindata={false}
-              name="date_2"
+              name="To"
               width="12vw"
               required={false}
               onChange={date_2_change}
