@@ -34,6 +34,7 @@ const AllTasks = () => {
   };
   console.log(formData);
   const navigate = useNavigate();
+
   const handleEditNavigate = async (id) => {
     const task = allTasks.find((task) => task.id === id);
     dispatch(loadTask(task));
@@ -44,10 +45,17 @@ const AllTasks = () => {
     setAllTasks(data.task);
   };
 
-  const handleSelect = (name, option) => {
-    console.log("Selected option:", option.label);
-    ChangingFormat(name, option.label);
+  const handleTaskByMachineName = async () => {
+    const response = await Tasks.GetByMachineName(formData.machine_name);
+    if (response && response.tasks.length > 0) {
+      setAllTasks(response.tasks);
+    }
+    console.log("form all tasks page", response);
   };
+
+  useEffect(() => {
+    if (formData.machine_name !== "") handleTaskByMachineName();
+  }, [formData.machine_name]);
 
   const handleGetTaskbyID = async (id) => {
     if (id) {
@@ -62,9 +70,11 @@ const AllTasks = () => {
       handleGetAllTasks();
     }
   };
+
   const handleOptionSelect = (name, option) => {
     ChangingFormat(name, option.label);
   };
+
   useEffect(() => {
     handleGetAllTasks();
   }, []);
@@ -72,6 +82,7 @@ const AllTasks = () => {
   useEffect(() => {
     handleGetTaskbyID();
   }, [searchId]);
+
   const headerOptions = [
     { label: "All Tasks", url: "tasks" },
     { label: "Add/Edit Task", url: "addTask" },
