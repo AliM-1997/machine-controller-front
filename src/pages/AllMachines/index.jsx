@@ -94,15 +94,17 @@ const AllMachines = () => {
             <div className="flex gap-btn">
               <Button
                 width="7vw"
-                placeHolder="add"
+                placeHolder="Add"
                 backgroundColor="primary"
                 onClick={navigateToAddMachine}
+                textColor="white"
               />
               <Button
                 width="7vw"
-                placeHolder="all"
+                placeHolder="All"
                 backgroundColor="primary"
                 onClick={handleAllMachines}
+                textColor="white"
               />
             </div>
           </div>
