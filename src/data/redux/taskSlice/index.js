@@ -9,6 +9,9 @@ const initialState = {
   dueDate: "",
   status: "",
   location: "",
+  username: "",
+  machine_serial_number: "",
+  spare_part_serial_number: "",
 };
 const taskSlice = createSlice({
   initialState,
