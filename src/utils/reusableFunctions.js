@@ -1,4 +1,5 @@
 import { Machines } from "../data/remote/Machine";
+import { Notifications } from "../data/remote/notification";
 import { Users } from "../data/remote/User";
 
 export const Functions = {
@@ -18,8 +19,13 @@ export const Functions = {
 
       const MachineNames = await Machines.GetAllMachineAllNames();
       data.MachineNames = MachineNames;
+
       const UserNames = await Users.GetAllUserName();
       data.UserNames = UserNames;
+
+      const UnReadNotification = await Notifications.UnReadNotification();
+      data.UnReadNotification = UnReadNotification.notifications?.length || 0;
+
       const Taskstatus = [
         { label: "Completed" },
         { label: "Risked" },
