@@ -20,6 +20,20 @@ export const Functions = {
       data.MachineNames = MachineNames;
       const UserNames = await Users.GetAllUserName();
       data.UserNames = UserNames;
+      const Taskstatus = [
+        { label: "Completed" },
+        { label: "Risked" },
+        { label: "Delayed" },
+        { label: "In Progress" },
+        { label: "Pending" },
+      ];
+      data.Taskstatus = Taskstatus;
+      const MachineStatus = [
+        { label: "active" },
+        { label: "Under Maintenance" },
+        { label: "attention" },
+      ];
+      data.MachineStatus = MachineStatus;
     } catch (error) {
       console.error("Error fetching machine data:", error);
     }
