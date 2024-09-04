@@ -2,19 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import Label from "../../base/Label";
 import { Tasks } from "../../data/remote/Tasks";
-import {
-  faAngleDown,
-  faCalendarAlt,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import HighlightLabel from "../../base/HighlightLable";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadTask } from "../../data/redux/taskSlice";
 import Input from "../../base/Input";
 import Header from "../../components/Header";
-import ChooseOption from "../../base/ChooseOption";
-import ReactDate from "../../base/ReactDate";
 import Button from "../../base/Button";
 import TaskFilter from "../../components/TaskFilter";
 const AllTasks = () => {
@@ -33,7 +27,9 @@ const AllTasks = () => {
   console.log(showFilter);
   const ChangingFormat = (key, value) => {
     setFormData({
-      ...formData,
+      machine_name: "",
+      date: "",
+      status: "",
       [key]: value,
     });
   };
@@ -106,31 +102,12 @@ const AllTasks = () => {
   };
 
   useEffect(() => {
-    if (formData.machine_name !== "") {
-      handleTaskByMachineName();
-    }
-    if (formData.status !== "") {
-      handleTaskByStatus();
-    } else {
-      handleGetAllTasks();
-    }
-  }, [formData.machine_name, formData.status]);
-
-  useEffect(() => {
     handleGetAllTasks();
   }, []);
 
   const headerOptions = [
     { label: "All Tasks", url: "tasks" },
     { label: "Add/Edit Task", url: "addTask" },
-  ];
-
-  const statusOption = [
-    { label: "Risked" },
-    { label: "Completed" },
-    { label: "Pending" },
-    { label: "Delayed" },
-    { label: "In Progress" },
   ];
 
   return (
@@ -147,14 +124,7 @@ const AllTasks = () => {
           <div className="flex column gap">
             <div className="flex space-btw white-bg center">
               <div>
-                <Label
-                  placeholder=""
-                  fontWeight="bold"
-                  backgroundColor="white"
-                />
-              </div>
-              <div className="flex center gap-btn">
-                {/* <Input
+                <Input
                   placeHolder="Ticket ID"
                   backgroundColor="white"
                   width="12vw"
@@ -163,33 +133,8 @@ const AllTasks = () => {
                   required={false}
                   onChange={(e) => handleGetTaskbyID(e.target.value)}
                 />
-                <ChooseOption
-                  placeholder="machine "
-                  options={response.data.MachineNames}
-                  onSelect={(option) =>
-                    handleOptionSelect("machine_name", option)
-                  }
-                  width="12vw"
-                  textColor="black"
-                  leftIcon={faAngleDown}
-                  required={false}
-                  // value={formData.status}
-                />
-                <ReactDate
-                  leftIcon={faCalendarAlt}
-                  required={true}
-                  width="12vw"
-                  onChange={(e) => ChangingFormat("date", e)}
-                />
-                <ChooseOption
-                  options={statusOption}
-                  onSelect={(option) => handleOptionSelect("status", option)}
-                  width="12vw"
-                  placeholder="choose status"
-                  textColor="black"
-                  leftIcon={faSearch}
-                  required={false}
-                /> */}
+              </div>
+              <div className="flex center gap-btn">
                 <Button
                   placeHolder="Clear"
                   width="7vw"
@@ -208,6 +153,14 @@ const AllTasks = () => {
                   <TaskFilter
                     className="filter-box"
                     Exitfilter={handleExitFilter}
+                    selectMachine={(option) =>
+                      handleOptionSelect("machine_name", option)
+                    }
+                    machineChange={handleTaskByMachineName}
+                    selectStatus={(option) =>
+                      handleOptionSelect("status", option)
+                    }
+                    StatusChange={handleTaskByStatus}
                   />
                 )}
               </div>
