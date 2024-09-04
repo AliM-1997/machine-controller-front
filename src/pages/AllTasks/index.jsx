@@ -233,7 +233,7 @@ const AllTasks = () => {
                 )}
               </div>
             </div>
-            <div>
+            <div className="tasks-table">
               <table>
                 <thead>
                   <tr>

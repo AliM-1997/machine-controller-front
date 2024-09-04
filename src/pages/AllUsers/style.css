@@ -9,7 +9,6 @@
 
 table {
   width: 100%;
-  /* border-collapse: collapse; */
 }
 th {
   padding: 8px 0;
@@ -33,7 +32,13 @@ tr:not(:last-child) td {
   align-items: center;
 }
 .user-table {
-  max-height: 71vw;
-  overflow-y: scroll;
+  height: 650px;
+  overflow-y: auto;
   scrollbar-width: none;
+}
+.user-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
 }
