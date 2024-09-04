@@ -1,4 +1,5 @@
 import { Machines } from "../data/remote/Machine";
+import { Users } from "../data/remote/User";
 
 export const Functions = {
   ToDateformat: (date) => {
@@ -17,6 +18,8 @@ export const Functions = {
 
       const MachineNames = await Machines.GetAllMachineAllNames();
       data.MachineNames = MachineNames;
+      const UserNames = await Users.GetAllUserName();
+      data.UserNames = UserNames;
     } catch (error) {
       console.error("Error fetching machine data:", error);
     }
