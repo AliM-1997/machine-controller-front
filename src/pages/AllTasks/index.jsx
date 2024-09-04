@@ -23,6 +23,7 @@ const AllTasks = () => {
     machine_name: "",
     date: "",
     status: "",
+    username: "",
   });
   console.log(showFilter);
   const ChangingFormat = (key, value) => {
@@ -30,6 +31,7 @@ const AllTasks = () => {
       machine_name: "",
       date: "",
       status: "",
+      username: "",
       [key]: value,
     });
   };
@@ -82,7 +84,15 @@ const AllTasks = () => {
   };
   const handleTaskByDate = async () => {
     const data = await Tasks.GetTaskByDate(formData.date);
-    console.log("Asdasdasdasdasd", data);
+    if (response && data.tasks.length > 0) {
+      setAllTasks(data.tasks);
+    } else {
+      clearFilterState();
+    }
+  };
+
+  const handleTaskByUsername = async () => {
+    const data = await Tasks.GetTaskByUsername("hansen.eva");
     if (response && data.tasks.length > 0) {
       setAllTasks(data.tasks);
     } else {
