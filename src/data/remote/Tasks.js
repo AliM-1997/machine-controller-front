@@ -76,11 +76,20 @@ export const Tasks = {
   GetTaskByStatus: async (status) => {
     try {
       const data = await requestApi({ route: `/task/status/${status}` });
+      return data;
+    } catch (error) {
+      console.error(error);
+      alert("No task found for the given status");
+    }
+  },
+  GetTaskByDate: async (date) => {
+    try {
+      const data = await requestApi({ route: `/task/date/${date}` });
       console.log(data);
       return data;
     } catch (error) {
       console.error(error);
-      alert("No task found for the given machine");
+      alert("No task found for the given date");
     }
   },
 };
