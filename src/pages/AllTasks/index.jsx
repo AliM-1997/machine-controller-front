@@ -82,7 +82,12 @@ const AllTasks = () => {
   };
   const handleTaskByDate = async () => {
     const data = await Tasks.GetTaskByDate(formData.date);
-    console.log(data);
+    console.log("Asdasdasdasdasd", data);
+    if (response && data.tasks.length > 0) {
+      setAllTasks(data.tasks);
+    } else {
+      clearFilterState();
+    }
   };
   const handleOptionSelect = (name, option) => {
     ChangingFormat(name, option.label);
@@ -164,6 +169,8 @@ const AllTasks = () => {
                       handleOptionSelect("status", option)
                     }
                     StatusChange={handleTaskByStatus}
+                    selectDate={(e) => ChangingFormat("date", e)}
+                    DateChange={handleTaskByDate}
                   />
                 )}
               </div>
