@@ -8,8 +8,23 @@
 
 .h-icon {
   gap: 30px;
+  position: relative;
 }
 
 .header-left {
   gap: 70px;
+}
+.notification-count {
+  background-color: red;
+  position: absolute;
+  top: -8px;
+  right: 34px;
+  color: white;
+  padding: 2px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+.notification-icon {
+  position: relative;
 }
