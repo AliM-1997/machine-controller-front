@@ -3,7 +3,6 @@ import "./style.css";
 import Label from "../../base/Label";
 import Icon from "../../base/Icon";
 import {
-  faAngleLeft,
   faAngleRight,
   faCalendarAlt,
   faClipboard,

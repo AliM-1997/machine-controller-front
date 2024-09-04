@@ -4,7 +4,6 @@ import Label from "../../base/Label";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 import {
-  faAngleDoubleRight,
   faAngleRight,
   faEnvelope,
   faKey,

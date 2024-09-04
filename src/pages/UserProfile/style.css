@@ -10,17 +10,29 @@
 }
 
 .image-container {
-  position: relative;
   display: inline-block;
+}
+
+.over {
+  position: relative;
+  z-index: 1;
 }
 
 .choose-file {
   position: absolute;
-  top: 16.5vh;
-  left: 21.7vw;
-  width: 70px;
-  height: 100px;
+
+  width: 150px;
+  height: 150px;
   opacity: 0;
   cursor: pointer;
   z-index: 1;
+}
+
+.userImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.image-actions {
+  align-items: center;
 }
