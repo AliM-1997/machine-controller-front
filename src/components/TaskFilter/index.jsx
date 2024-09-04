@@ -14,6 +14,10 @@ const TaskFilter = ({
   machineName,
   Selectedoption,
   machineChange,
+  EmployeeName,
+  EmployeeChange,
+  TaskStatus,
+  StatusChange,
 }) => {
   const [choosenItem, setChoosenItem] = useState({
     Date: false,
@@ -36,7 +40,7 @@ const TaskFilter = ({
     <div className="flex column taskFilter-wrapper gap end">
       <Icon icon={faX} />
       <table>
-        <tr>
+        <tr className="flex gap">
           <th
             className={choosenItem.Date ? "underline" : ""}
             onClick={() => itemChange("Date", true)}
@@ -97,6 +101,26 @@ const TaskFilter = ({
             textColor="white"
             backgroundColor="primary"
             onClick={machineChange}
+          />
+        </div>
+      )}
+      {choosenItem.Employee && (
+        <div className="flex column end gap-btn">
+          <ChooseOption
+            name="Employee Name"
+            placeholder="Employee "
+            options={EmployeeName}
+            onSelect={Selectedoption}
+            width="25vw"
+            textColor="black"
+            leftIcon={faSearch}
+            required={false}
+          />
+          <Button
+            placeHolder="Submit"
+            textColor="white"
+            backgroundColor="primary"
+            onClick={EmployeeChange}
           />
         </div>
       )}
