@@ -49,7 +49,6 @@ const DropButton = ({
             top: "100%",
             left: 0,
             width,
-            // backgroundColor: "#fff",
             zIndex: 1000,
             color: { textColorClass },
           }}
@@ -62,6 +61,7 @@ const DropButton = ({
                 padding: "8px",
                 cursor: "pointer",
                 borderBottom: "1px solid #ddd",
+                borderRadius: "12px",
                 backgroundColor: selectedOption === option ? "#f1f1f1" : "#fff",
               }}
             >
