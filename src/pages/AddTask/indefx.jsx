@@ -60,6 +60,10 @@ const AddTask = () => {
     navigate("/tasks");
   };
 
+  const getalltaskDetail = async (id) => {
+    const data = await Tasks.GetAllTaskDetailsById(id);
+    console.log(data);
+  };
   const convertToDatabaseFormat = (date) => {
     if (date instanceof Date && !isNaN(date.getTime())) {
       return date.toISOString().slice(0, 19).replace("T", " ");
