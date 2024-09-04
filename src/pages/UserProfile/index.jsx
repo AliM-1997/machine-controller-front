@@ -171,7 +171,7 @@ const UserProfile = () => {
         <div className="flex column gap full-height addtask-inputs white-bg ">
           <div className="flex row center gap full-width">
             <Input
-              width="30vw"
+              width="24vw"
               placeHolder={user.name || "Name"}
               name="Name"
               type="text"
@@ -179,7 +179,7 @@ const UserProfile = () => {
               onChange={(e) => handleFormData("name", e.target.value)}
             />
             <Input
-              width="30vw"
+              width="24vw"
               placeHolder={user.username || "@username"}
               name="username"
               type="text"
@@ -190,7 +190,7 @@ const UserProfile = () => {
           </div>
           <div className="flex row center gap full-width">
             <Input
-              width="30vw"
+              width="24vw"
               placeHolder={user.role || "user/admin"}
               name="Role"
               type="text"
@@ -199,7 +199,7 @@ const UserProfile = () => {
               onChange={(e) => handleFormData("role", e.target.value)}
             />
             <Input
-              width="30vw"
+              width="24vw"
               placeHolder={user.phone_number || "961-00-000000"}
               name="Phone Number"
               type="text"
@@ -215,13 +215,13 @@ const UserProfile = () => {
                 name="Email"
                 type="email"
                 leftIcon={faEnvelope}
-                width="62vw"
+                width="calc(48vw + 24px)"
                 onChange={(e) => handleFormData("email", e.target.value)}
               />
             </div>
             <div className="flex row center gap full-width">
               <Input
-                width="30vw"
+                width="24vw"
                 placeHolder={user.password || "password"}
                 name="Password"
                 type="password"
@@ -229,7 +229,7 @@ const UserProfile = () => {
                 onChange={(e) => handleFormData("password", e.target.value)}
               />
               <Input
-                width="30vw"
+                width="24vw"
                 placeHolder={user.password || "password"}
                 name="Confirmed-Password"
                 type="password"
@@ -247,7 +247,7 @@ const UserProfile = () => {
               leftIcon={faLocation}
               type="text"
               required={false}
-              width="62vw"
+              width="calc(48vw + 24px)"
               onChange={(e) => handleFormData("location", e.target.value)}
             />
           </div>
