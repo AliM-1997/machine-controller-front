@@ -73,4 +73,14 @@ export const Tasks = {
       alert("No task found for the given machine");
     }
   },
+  GetTaskByStatus: async (status) => {
+    try {
+      const data = await requestApi({ route: `/task/status/${status}` });
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error);
+      alert("No task found for the given machine");
+    }
+  },
 };
