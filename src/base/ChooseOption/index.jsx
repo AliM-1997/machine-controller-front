@@ -38,9 +38,9 @@ const ChooseOption = ({
   const textColorClass = `${textColor}-txt`;
 
   return (
-    <div>
-      <div>
-        <label className="bold black-txt" style={{ width }}>
+    <div className="flex column input-lable">
+      <div className="flex column gap">
+        <label className="black-txt" style={{ width }}>
           {name}
           {required && <span className="required">*</span>}
         </label>
@@ -57,33 +57,24 @@ const ChooseOption = ({
           placeholder={placeholder}
         />
         <Icon icon={rightIcon} color={iconColor} />
+        {isOpen && (
+          <div className="toggle-option" style={{ width: width }}>
+            {filteredOptions.length > 0 ? (
+              filteredOptions.map((option, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleOptionClick(option)}
+                  className="selected-option"
+                >
+                  {option.label}
+                </div>
+              ))
+            ) : (
+              <div style={{ padding: "8px" }}>No options available</div>
+            )}
+          </div>
+        )}
       </div>
-      {isOpen && (
-        <div
-          className="toggle-option"
-          style={{
-            width: width,
-          }}
-        >
-          {filteredOptions.length > 0 ? (
-            filteredOptions.map((option, index) => (
-              <div
-                key={index}
-                onClick={() => handleOptionClick(option)}
-                className="selected-option"
-                style={{
-                  backgroundColor:
-                    searchTerm === option.label ? "black" : "#fff",
-                }}
-              >
-                {option.label}
-              </div>
-            ))
-          ) : (
-            <div style={{ padding: "8px" }}>No options available</div>
-          )}
-        </div>
-      )}
     </div>
   );
 };
