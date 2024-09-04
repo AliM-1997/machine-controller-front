@@ -91,14 +91,27 @@ export const Tasks = {
       alert("No task found for the given date");
     }
   },
-  GetTaskByUsername: async (username) => {
+  CreateTaskByUsername: async (username) => {
     try {
-      const data = await requestApi({ route: `/task/username/${username}` });
+      const data = await requestApi({
+        route: `/task/username/${username}`,
+        requestMethod: RequestMethods.POST,
+      });
       console.log(data);
       return data;
     } catch (error) {
       console.error(error);
       alert("No task found for the given user");
+    }
+  },
+  GetAllTaskDetailsById: async (id) => {
+    try {
+      const data = await requestApi({ route: `task/all/details/${id}` });
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error);
+      alert("No task found for the given id");
     }
   },
 };
