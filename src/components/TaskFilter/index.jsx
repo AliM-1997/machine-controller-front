@@ -124,6 +124,26 @@ const TaskFilter = ({
           />
         </div>
       )}
+      {choosenItem.Status && (
+        <div className="flex column end gap-btn">
+          <ChooseOption
+            name="Status"
+            placeholder="status "
+            options={TaskStatus}
+            onSelect={Selectedoption}
+            width="25vw"
+            textColor="black"
+            leftIcon={faSearch}
+            required={false}
+          />
+          <Button
+            placeHolder="Submit"
+            textColor="white"
+            backgroundColor="primary"
+            onClick={StatusChange}
+          />
+        </div>
+      )}
     </div>
   );
 };
