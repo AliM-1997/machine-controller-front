@@ -42,7 +42,7 @@ const AllTasks = () => {
   const handleEditNavigate = async (id) => {
     const task = allTasks.find((task) => task.id === id);
     dispatch(loadTask(task));
-    navigate("/addTask");
+    navigate(`/addTask/${id}`);
   };
 
   const handleGetAllTasks = async () => {
