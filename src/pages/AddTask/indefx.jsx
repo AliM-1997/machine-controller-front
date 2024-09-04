@@ -3,16 +3,11 @@ import "./style.css";
 import Label from "../../base/Label";
 import Icon from "../../base/Icon";
 import {
-  faAngleDown,
   faAngleLeft,
   faCalendarAlt,
   faClipboard,
-  faGear,
-  faInfoCircle,
   faLocation,
   faSearch,
-  faTools,
-  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
@@ -64,16 +59,14 @@ const AddTask = () => {
     });
   };
   const handleCreateTask = async () => {
-    const dataToSend = {
-      ...formData,
-    };
-    if (task.id) {
-      const updateDate = await Tasks.UpdateTask(task.id, dataToSend);
+    if (id) {
+      const updateDate = await Tasks.UpdateTask(id, formData);
       if (updateDate) {
         alert("Task Updated Successfully");
+        console.log(updateDate);
       }
     } else {
-      const createData = await Tasks.CreateTask(dataToSend);
+      const createData = await Tasks.CreateTaskByUsername(formData);
       if (createData) {
         alert("Task Created Successfully");
       }
@@ -81,7 +74,7 @@ const AddTask = () => {
   };
 
   const handleDeleteTask = async () => {
-    const data = await Tasks.DeleteTask(task.id);
+    const data = await Tasks.DeleteTask(id);
     dispatch(clearTask());
     if (data === "") {
       alert("Task Deleted Successfully");
@@ -105,7 +98,10 @@ const AddTask = () => {
       <div className="flex column gap addTask-container center">
         <div className="flex full-width space-btw title ">
           <h2>
-            <Label placeholder="Add or Edit Task" fontWeight="bold" />
+            <Label
+              placeholder={id ? "Edit Task" : "Add Task"}
+              fontWeight="bold"
+            />
           </h2>
           <Icon icon={faAngleLeft} onClick={navigateBack} />
         </div>
@@ -195,16 +191,21 @@ const AddTask = () => {
               }
             />
           </div>
+
           <div className="flex end gap">
+            {id ? (
+              <Button
+                placeHolder="Delete"
+                width="10vw"
+                backgroundColor="primary"
+                textColor="white"
+                onClick={handleDeleteTask}
+              />
+            ) : (
+              <></>
+            )}
             <Button
-              placeHolder="Delete"
-              width="10vw"
-              backgroundColor="primary"
-              textColor="white"
-              onClick={handleDeleteTask}
-            />
-            <Button
-              placeHolder="Save"
+              placeHolder={id ? "Save" : "Create"}
               backgroundColor="primary"
               width="10vw"
               textColor="white"
