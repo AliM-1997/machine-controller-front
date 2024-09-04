@@ -27,6 +27,7 @@ import ChooseOption from "../../base/ChooseOption";
 const AddTask = () => {
   const { id } = useParams();
   const task = useSelector((global) => global);
+  console.log(task);
   const [formData, setFormData] = useState({
     user_id: "",
     machine_id: "",
@@ -110,56 +111,48 @@ const AddTask = () => {
         </div>
         <div className="flex column gap full-height addtask-inputs white-bg ">
           <div className="flex row center space-btw full-width">
-            <Input
-              name="Machine_id"
-              placeHolder={task.machine_id || "choose machine "}
-              leftIcon={faGear}
-              rightIcon={faAngleDown}
-              width="30vw"
-              type="text"
-              onChange={(e) => ChangingFormIput("machine_id", e.target.value)}
-            />
-            <Input
-              name="user_id"
-              placeHolder={"choose user"}
-              leftIcon={faUser}
-              rightIcon={faAngleDown}
+            <ChooseOption
+              name="Machine Serial Number"
+              placeHolder={formData.machine_serial_number || "choose machine "}
+              options={task.data.MachineSerialNumber}
+              leftIcon={faSearch}
               width="24vw"
               type="text"
-              onChange={(e) => ChangingFormIput("user_id", e.target.value)}
+              onSelect={(e) =>
+                ChangingFormIput("machine_serial_number", e.label)
+              }
             />
             <ChooseOption
               name="Username"
               placeholder={"choose user"}
               options={task.data.UserNames}
               onSelect={(e) => ChangingFormIput("username", e.label)}
-              width="25vw"
+              width="24vw"
               textColor="black"
               leftIcon={faSearch}
               required={false}
             />
           </div>
           <div className="flex row center space-btw full-width">
-            <Input
-              name="Spare Part"
-              placeHolder={task.spare_part_id || "choose sparePart "}
-              leftIcon={faTools}
-              rightIcon={faAngleDown}
-              width="30vw"
+            <ChooseOption
+              name="Spare Part Serial Number"
+              placeHolder={
+                formData.spare_part_serial_number || "choose sparePart "
+              }
+              leftIcon={faSearch}
+              width="24vw"
               type="text"
               required={false}
-              onChange={(e) =>
-                ChangingFormIput("spare_part_id", e.target.value)
-              }
+              onChange={(e) => ChangingFormIput("spare_part_id", e.label)}
             />
-            <Input
-              name="status"
-              placeHolder={task.status || "pending"}
-              leftIcon={faInfoCircle}
-              rightIcon={faAngleDown}
-              width="30vw"
+            <ChooseOption
+              options={task.data.Taskstatus}
+              name="Status"
+              placeHolder={formData.status || "pending"}
+              leftIcon={faSearch}
+              width="24vw"
               type="text"
-              onChange={(e) => ChangingFormIput("status", e.target.value)}
+              onSelect={(e) => ChangingFormIput("status", e.label)}
             />
           </div>
           <div className="flex row center space-btw full-width">
@@ -168,14 +161,14 @@ const AddTask = () => {
               mindata={true}
               name="Assigned Date"
               required={true}
-              width="30vw"
+              width="24vw"
               onChange={(e) => ChangingFormIput("assignedDate", e)}
             />
             <ReactDate
               leftIcon={faCalendarAlt}
               mindata={true}
               name="Due Date"
-              width="30vw"
+              width="24vw"
               onChange={(e) => ChangingFormIput("dueDate", e)}
               required={true}
             />
@@ -185,7 +178,7 @@ const AddTask = () => {
               placeHolder={"location"}
               name="Location"
               leftIcon={faLocation}
-              width="62vw"
+              width="calc(48vw + 24px)"
               type="text"
               onChange={(e) => ChangingFormIput("location", e.target.value)}
             />
@@ -195,7 +188,7 @@ const AddTask = () => {
               placeHolder={"task"}
               name="Job Description"
               leftIcon={faClipboard}
-              width="62vw"
+              width="calc(48vw + 24px)"
               type="text"
               onChange={(e) =>
                 ChangingFormIput("jobDescription", e.target.value)
