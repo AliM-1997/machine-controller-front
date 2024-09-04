@@ -201,6 +201,7 @@ const AllTasks = () => {
                   width="7vw"
                   backgroundColor="primary"
                   textColor="white"
+                  onClick={handleGetAllTasks}
                 />
                 <Button
                   placeHolder="Filter"
