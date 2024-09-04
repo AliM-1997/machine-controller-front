@@ -15,6 +15,7 @@ const Layout = () => {
     const handledata = async () => {
       const response = await Functions.HandlingAppRenderFuntions();
       dispatch(LoadData(response));
+      console.log(response);
     };
     handledata();
   }, []);

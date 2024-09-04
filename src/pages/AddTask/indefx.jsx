@@ -10,6 +10,7 @@ import {
   faGear,
   faInfoCircle,
   faLocation,
+  faSearch,
   faTools,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -21,9 +22,11 @@ import { useNavigate } from "react-router-dom";
 import { clearTask } from "../../data/redux/taskSlice";
 import { Tasks } from "../../data/remote/Tasks";
 import Header from "../../components/Header";
+import ChooseOption from "../../base/ChooseOption";
 
 const AddTask = () => {
-  const task = useSelector((global) => global.task);
+  const task = useSelector((global) => global);
+  console.log(task);
   const [formData, setFormData] = useState({
     user_id: "",
     machine_id: "",
@@ -33,12 +36,13 @@ const AddTask = () => {
     dueDate: "",
     status: "",
     location: "",
+    username: "",
   });
-  console.log(formData);
+  console.log("asdasdasdasdasd", formData);
   useEffect(() => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      ...task,
+      ...task.task,
       assignedDate: task.assignedDate ? new Date(task.assignedDate) : null,
       dueDate: task.dueDate ? new Date(task.dueDate) : null,
     }));
@@ -80,6 +84,7 @@ const AddTask = () => {
       }
     }
   };
+
   const handleDeleteTask = async () => {
     const data = await Tasks.DeleteTask(task.id);
     dispatch(clearTask());
@@ -115,12 +120,22 @@ const AddTask = () => {
             />
             <Input
               name="user_id"
-              placeHolder={task.user_id || "choose user"}
+              placeHolder={task.task.user_id || "choose user"}
               leftIcon={faUser}
               rightIcon={faAngleDown}
-              width="30vw"
+              width="24vw"
               type="text"
               onChange={(e) => ChangingFormIput("user_id", e.target.value)}
+            />
+            <ChooseOption
+              name="Username"
+              placeholder={task.task.username || "choose user"}
+              options={task.data.UserNames}
+              onSelect={(e) => ChangingFormIput("username", e.label)}
+              width="25vw"
+              textColor="black"
+              leftIcon={faSearch}
+              required={false}
             />
           </div>
           <div className="flex row center space-btw full-width">
