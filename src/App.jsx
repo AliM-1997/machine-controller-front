@@ -37,6 +37,7 @@ function App() {
               <Route path="allUsers" element={<AllUsers />} />
               <Route path="userProfile" element={<UserProfile />} />
               <Route path="addTask" element={<AddTask />} />
+              <Route path="addTask/:id" element={<AddTask />} />
               <Route path="alerts" element={<Alerts />} />
             </Route>
           </Routes>
