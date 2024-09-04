@@ -15,7 +15,7 @@ import Input from "../../base/Input";
 import Header from "../../components/Header";
 import ChooseOption from "../../base/ChooseOption";
 import ReactDate from "../../base/ReactDate";
-
+import Button from "../../base/Button";
 const AllTasks = () => {
   const response = useSelector((global) => global);
   const dispatch = useDispatch();
@@ -145,8 +145,8 @@ const AllTasks = () => {
                   backgroundColor="white"
                 />
               </div>
-              <div className="flex center gap">
-                <Input
+              <div className="flex center gap-btn">
+                {/* <Input
                   placeHolder="Ticket ID"
                   backgroundColor="white"
                   width="12vw"
@@ -181,6 +181,18 @@ const AllTasks = () => {
                   textColor="black"
                   leftIcon={faSearch}
                   required={false}
+                /> */}
+                <Button
+                  placeHolder="Clear"
+                  width="7vw"
+                  backgroundColor="primary"
+                  textColor="white"
+                />
+                <Button
+                  placeHolder="Filter"
+                  width="7vw"
+                  backgroundColor="primary"
+                  textColor="white"
                 />
               </div>
             </div>
