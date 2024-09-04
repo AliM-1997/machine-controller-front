@@ -10,6 +10,7 @@ import {
 import Icon from "../../base/Icon";
 import DropButton from "../../base/DropButton";
 import "./style.css";
+import { useSelector } from "react-redux";
 
 const Header = ({
   pageName,
@@ -17,6 +18,7 @@ const Header = ({
   showIcons = true,
   options = [],
 }) => {
+  const state = useSelector((global) => global.data);
   const navigate = useNavigate();
 
   const handleSelect = (option) => {
@@ -46,7 +48,12 @@ const Header = ({
         )}
         {showIcons && (
           <div className="flex center h-icon">
-            <Icon icon={faBell} color="primary" />
+            <Icon icon={faBell} color="primary" className="" />
+            {state.UnReadNotification > 0 && (
+              <div className=" flex center notification-count">
+                {state.UnReadNotification}
+              </div>
+            )}
             <Icon icon={faUser} color="primary" />
           </div>
         )}
