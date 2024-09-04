@@ -16,6 +16,7 @@ import Header from "../../components/Header";
 import ChooseOption from "../../base/ChooseOption";
 import ReactDate from "../../base/ReactDate";
 import Button from "../../base/Button";
+import TaskFilter from "../../components/TaskFilter";
 const AllTasks = () => {
   const response = useSelector((global) => global);
   const dispatch = useDispatch();
@@ -23,12 +24,13 @@ const AllTasks = () => {
   const [searchId, setSearchId] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
   const [formData, setFormData] = useState({
     machine_name: "",
     date: "",
     status: "",
   });
-
+  console.log(showFilter);
   const ChangingFormat = (key, value) => {
     setFormData({
       ...formData,
@@ -85,6 +87,12 @@ const AllTasks = () => {
 
   const handleOptionSelect = (name, option) => {
     ChangingFormat(name, option.label);
+  };
+  const handleFilter = () => {
+    setShowFilter(true);
+  };
+  const handleExitFilter = () => {
+    setShowFilter(false);
   };
 
   const clearFilterState = () => {
@@ -193,7 +201,15 @@ const AllTasks = () => {
                   width="7vw"
                   backgroundColor="primary"
                   textColor="white"
+                  onClick={handleFilter}
+                  className="filter-btn"
                 />
+                {showFilter && (
+                  <TaskFilter
+                    className="filter-box"
+                    Exitfilter={handleExitFilter}
+                  />
+                )}
               </div>
             </div>
             <div>
