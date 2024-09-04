@@ -18,13 +18,15 @@ import Input from "../../base/Input";
 import Button from "../../base/Button";
 import { useDispatch, useSelector } from "react-redux";
 import ReactDate from "../../base/ReactDate";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { clearTask } from "../../data/redux/taskSlice";
 import { Tasks } from "../../data/remote/Tasks";
 import Header from "../../components/Header";
 import ChooseOption from "../../base/ChooseOption";
 
 const AddTask = () => {
+  const { id } = useParams();
+  console.log(id);
   const task = useSelector((global) => global);
   console.log(task);
   const [formData, setFormData] = useState({
@@ -60,10 +62,11 @@ const AddTask = () => {
     navigate("/tasks");
   };
 
-  const getalltaskDetail = async (id) => {
+  const getalltaskDetail = async () => {
     const data = await Tasks.GetAllTaskDetailsById(id);
     console.log(data);
   };
+  getalltaskDetail();
   const convertToDatabaseFormat = (date) => {
     if (date instanceof Date && !isNaN(date.getTime())) {
       return date.toISOString().slice(0, 19).replace("T", " ");
@@ -133,7 +136,7 @@ const AddTask = () => {
             />
             <ChooseOption
               name="Username"
-              placeholder={task.task.username || "choose user"}
+              placeholder={"choose user"}
               options={task.data.UserNames}
               onSelect={(e) => ChangingFormIput("username", e.label)}
               width="25vw"
