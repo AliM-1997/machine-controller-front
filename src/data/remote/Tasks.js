@@ -85,11 +85,20 @@ export const Tasks = {
   GetTaskByDate: async (date) => {
     try {
       const data = await requestApi({ route: `/task/date/${date}` });
-      console.log(data);
       return data;
     } catch (error) {
       console.error(error);
       alert("No task found for the given date");
+    }
+  },
+  GetTaskByUsername: async (username) => {
+    try {
+      const data = await requestApi({ route: `/task/username/${username}` });
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error);
+      alert("No task found for the given user");
     }
   },
 };
