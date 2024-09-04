@@ -11,6 +11,7 @@ import Input from "../../base/Input";
 import Header from "../../components/Header";
 import Button from "../../base/Button";
 import TaskFilter from "../../components/TaskFilter";
+
 const AllTasks = () => {
   const response = useSelector((global) => global);
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const AllTasks = () => {
     status: "",
     username: "",
   });
-  console.log(showFilter);
+
   const ChangingFormat = (key, value) => {
     setFormData({
       machine_name: "",
@@ -36,7 +37,6 @@ const AllTasks = () => {
     });
   };
 
-  console.log(formData);
   const navigate = useNavigate();
 
   const handleEditNavigate = async (id) => {
@@ -46,6 +46,7 @@ const AllTasks = () => {
   };
 
   const handleGetAllTasks = async () => {
+    setLoading(true);
     try {
       const data = await Tasks.GetAllTasks();
       setAllTasks(data.task || []);
@@ -53,27 +54,34 @@ const AllTasks = () => {
       console.error("Error fetching all tasks:", error);
       setAllTasks([]);
     }
+    setLoading(false);
   };
 
   const handleTaskByMachineName = async () => {
+    setLoading(true);
     const response = await Tasks.GetByMachineName(formData.machine_name);
     if (response && response.tasks.length > 0) {
       setAllTasks(response.tasks);
     } else {
       clearFilterState();
     }
+    setLoading(false);
   };
 
   const handleTaskByStatus = async () => {
+    setLoading(true);
     const response = await Tasks.GetTaskByStatus(formData.status);
-    console.log("stsatus", response);
+    console.log("status", response);
     if (response && response.tasks.length > 0) {
       setAllTasks(response.tasks);
     } else {
       clearFilterState();
     }
+    setLoading(false);
   };
+
   const handleGetTaskbyID = async (id) => {
+    setLoading(true);
     if (id) {
       const data = await Tasks.GetTaskByID(id);
       setAllTasks([data.task]);
@@ -81,30 +89,39 @@ const AllTasks = () => {
     } else {
       handleGetAllTasks();
     }
+    setLoading(false);
   };
+
   const handleTaskByDate = async () => {
+    setLoading(true);
     const data = await Tasks.GetTaskByDate(formData.date);
-    if (response && data.tasks.length > 0) {
+    if (data && data.tasks.length > 0) {
       setAllTasks(data.tasks);
     } else {
       clearFilterState();
     }
+    setLoading(false);
   };
 
   const handleTaskByUsername = async () => {
+    setLoading(true);
     const data = await Tasks.GetTaskByUsername("hansen.eva");
-    if (response && data.tasks.length > 0) {
+    if (data && data.tasks.length > 0) {
       setAllTasks(data.tasks);
     } else {
       clearFilterState();
     }
+    setLoading(false);
   };
+
   const handleOptionSelect = (name, option) => {
     ChangingFormat(name, option.label);
   };
+
   const handleFilter = () => {
     setShowFilter(true);
   };
+
   const handleExitFilter = () => {
     setShowFilter(false);
   };
@@ -201,33 +218,37 @@ const AllTasks = () => {
                     <th className="center-text">Status</th>
                   </tr>
                 </thead>
-                <tbody className="tasks-body">
-                  {allTasks.length > 0 ? (
-                    allTasks.map((task) => (
-                      <tr key={task.id}>
-                        <td onClick={() => handleEditNavigate(task.id)}>
-                          {task.id}
-                        </td>
-                        <td>{task.machine_id}</td>
-                        <td>{task.user_id}</td>
-                        <td>{task.assignedDate}</td>
-                        <td>{task.dueDate}</td>
-                        <td className=" flex center">
-                          {
-                            <HighlightLabel
-                              placeHolder={task.status}
-                              style={{ fontWeight: "bold" }}
-                            />
-                          }
-                        </td>
+                {loading ? (
+                  <div>Loading...</div>
+                ) : (
+                  <tbody className="tasks-body">
+                    {allTasks.length > 0 ? (
+                      allTasks.map((task) => (
+                        <tr key={task.id}>
+                          <td onClick={() => handleEditNavigate(task.id)}>
+                            {task.id}
+                          </td>
+                          <td>{task.machine_id}</td>
+                          <td>{task.user_id}</td>
+                          <td>{task.assignedDate}</td>
+                          <td>{task.dueDate}</td>
+                          <td className=" flex center">
+                            {
+                              <HighlightLabel
+                                placeHolder={task.status}
+                                style={{ fontWeight: "bold" }}
+                              />
+                            }
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="7">No tasks found</td>
                       </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="7">No tasks found</td>
-                    </tr>
-                  )}
-                </tbody>
+                    )}
+                  </tbody>
+                )}
               </table>
             </div>
           </div>
