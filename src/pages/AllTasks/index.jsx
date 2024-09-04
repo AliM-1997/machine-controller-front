@@ -195,7 +195,7 @@ const AllTasks = () => {
                   onChange={(e) => handleGetTaskbyID(e.target.value)}
                 />
               </div>
-              <div className="flex center gap-btn">
+              <div className="flex center gap-btn filter-btn-container">
                 <Button
                   placeHolder="Clear"
                   width="7vw"
@@ -203,6 +203,7 @@ const AllTasks = () => {
                   textColor="white"
                   onClick={handleGetAllTasks}
                 />
+
                 <Button
                   placeHolder="Filter"
                   width="7vw"
@@ -211,25 +212,27 @@ const AllTasks = () => {
                   onClick={handleFilter}
                   className="filter-btn"
                 />
+
                 {showFilter && (
-                  <TaskFilter
-                    className="filter-box"
-                    Exitfilter={handleExitFilter}
-                    selectMachine={(option) =>
-                      handleOptionSelect("machine_name", option)
-                    }
-                    machineChange={handleTaskByMachineName}
-                    selectStatus={(option) =>
-                      handleOptionSelect("status", option)
-                    }
-                    StatusChange={handleTaskByStatus}
-                    selectDate={(e) => ChangingFormat("date", e)}
-                    DateChange={handleTaskByDate}
-                    selectUsername={(option) =>
-                      ChangingFormat("username", option)
-                    }
-                    UsernameChange={handleTaskByUsername}
-                  />
+                  <div className="filter-box">
+                    <TaskFilter
+                      Exitfilter={handleExitFilter}
+                      selectMachine={(option) =>
+                        handleOptionSelect("machine_name", option)
+                      }
+                      machineChange={handleTaskByMachineName}
+                      selectStatus={(option) =>
+                        handleOptionSelect("status", option)
+                      }
+                      StatusChange={handleTaskByStatus}
+                      selectDate={(e) => ChangingFormat("date", e)}
+                      DateChange={handleTaskByDate}
+                      selectUsername={(option) =>
+                        ChangingFormat("username", option)
+                      }
+                      UsernameChange={handleTaskByUsername}
+                    />
+                  </div>
                 )}
               </div>
             </div>

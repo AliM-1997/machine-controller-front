@@ -25,3 +25,18 @@
   z-index: 1;
   background-color: white;
 }
+
+.filter-btn-container {
+  position: relative;
+}
+.filter-btn {
+  z-index: 10;
+}
+.filter-box {
+  position: absolute;
+  top: 100%;
+  right: 25%;
+  top: 50%;
+
+  z-index: 1000;
+}
