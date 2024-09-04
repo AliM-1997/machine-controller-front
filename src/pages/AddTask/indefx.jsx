@@ -26,9 +26,7 @@ import ChooseOption from "../../base/ChooseOption";
 
 const AddTask = () => {
   const { id } = useParams();
-  console.log(id);
   const task = useSelector((global) => global);
-  console.log(task);
   const [formData, setFormData] = useState({
     user_id: "",
     machine_id: "",
@@ -39,18 +37,14 @@ const AddTask = () => {
     status: "",
     location: "",
     username: "",
+    machine_serial_number: "",
+    spare_part_serial_number: "",
   });
   console.log("asdasdasdasdasd", formData);
-  useEffect(() => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      ...task.task,
-      assignedDate: task.assignedDate ? new Date(task.assignedDate) : null,
-      dueDate: task.dueDate ? new Date(task.dueDate) : null,
-    }));
-  }, [task]);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const ChangingFormIput = (key, value) => {
     setFormData({
       ...formData,
@@ -64,16 +58,9 @@ const AddTask = () => {
 
   const getalltaskDetail = async () => {
     const data = await Tasks.GetAllTaskDetailsById(id);
-    console.log(data);
-  };
-  getalltaskDetail();
-  const convertToDatabaseFormat = (date) => {
-    if (date instanceof Date && !isNaN(date.getTime())) {
-      return date.toISOString().slice(0, 19).replace("T", " ");
-    } else {
-      console.error("Invalid date:", date);
-      return "";
-    }
+    setFormData({
+      ...data.task,
+    });
   };
   const handleCreateTask = async () => {
     const dataToSend = {
@@ -100,6 +87,13 @@ const AddTask = () => {
     }
     navigate("/tasks");
   };
+
+  useEffect(() => {
+    if (id) {
+      getalltaskDetail();
+    }
+  }, []);
+
   const options = [
     { label: "Add/Edit Task", url: "addTask" },
     { label: "All Tasks", url: "tasks" },
@@ -127,7 +121,7 @@ const AddTask = () => {
             />
             <Input
               name="user_id"
-              placeHolder={task.task.user_id || "choose user"}
+              placeHolder={"choose user"}
               leftIcon={faUser}
               rightIcon={faAngleDown}
               width="24vw"
@@ -188,7 +182,7 @@ const AddTask = () => {
           </div>
           <div className="full-width">
             <Input
-              placeHolder={task.location || "location"}
+              placeHolder={"location"}
               name="Location"
               leftIcon={faLocation}
               width="62vw"
@@ -198,7 +192,7 @@ const AddTask = () => {
           </div>
           <div className="full-width">
             <Input
-              placeHolder={task.jobDescription || "task"}
+              placeHolder={"task"}
               name="Job Description"
               leftIcon={faClipboard}
               width="62vw"

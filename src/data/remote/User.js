@@ -96,7 +96,6 @@ export const Users = {
       const data = await requestApi({
         route: `/user/all/username`,
       });
-      console.log("username", data);
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
