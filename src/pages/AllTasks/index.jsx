@@ -21,17 +21,21 @@ const AllTasks = () => {
   const dispatch = useDispatch();
   const [allTasks, setAllTasks] = useState([]);
   const [searchId, setSearchId] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     machine_name: "",
     date: null,
     status: "",
   });
+
   const ChangingFormat = (key, value) => {
     setFormData({
       ...formData,
       [key]: value,
     });
   };
+
   console.log(formData);
   const navigate = useNavigate();
 
@@ -40,32 +44,39 @@ const AllTasks = () => {
     dispatch(loadTask(task));
     navigate("/addTask");
   };
+
   const handleGetAllTasks = async () => {
-    const data = await Tasks.GetAllTasks();
-    setAllTasks(data.task);
+    try {
+      const data = await Tasks.GetAllTasks();
+      setAllTasks(data.task || []);
+    } catch (error) {
+      console.error("Error fetching all tasks:", error);
+      setAllTasks([]);
+    }
   };
 
   const handleTaskByMachineName = async () => {
     const response = await Tasks.GetByMachineName(formData.machine_name);
     if (response && response.tasks.length > 0) {
       setAllTasks(response.tasks);
+    } else {
+      clearFilterState();
     }
-    console.log("form all tasks page", response);
   };
 
   useEffect(() => {
-    if (formData.machine_name !== "") handleTaskByMachineName();
+    if (formData.machine_name !== "") {
+      handleTaskByMachineName();
+    } else {
+      handleGetAllTasks();
+    }
   }, [formData.machine_name]);
 
   const handleGetTaskbyID = async (id) => {
     if (id) {
-      try {
-        const data = await Tasks.GetTaskByID(id);
-        setAllTasks([data.task]);
-        setSearchId(id);
-      } catch (error) {
-        setAllTasks([]);
-      }
+      const data = await Tasks.GetTaskByID(id);
+      setAllTasks([data.task]);
+      setSearchId(id);
     } else {
       handleGetAllTasks();
     }
@@ -75,18 +86,25 @@ const AllTasks = () => {
     ChangingFormat(name, option.label);
   };
 
+  const clearFilterState = () => {
+    setFormData({
+      machine_name: "",
+      date: null,
+      status: "",
+    });
+    setError("");
+    setAllTasks([]);
+  };
+
   useEffect(() => {
     handleGetAllTasks();
   }, []);
-
-  useEffect(() => {
-    handleGetTaskbyID();
-  }, [searchId]);
 
   const headerOptions = [
     { label: "All Tasks", url: "tasks" },
     { label: "Add/Edit Task", url: "addTask" },
   ];
+
   const statusOption = [
     { label: "Risked" },
     { label: "Completed" },
@@ -94,22 +112,23 @@ const AllTasks = () => {
     { label: "Delayed" },
     { label: "In Progress" },
   ];
+
   return (
     <div>
       <Header pageName="Tasks" options={headerOptions} />
-      <div className="flex column  gap task-container">
+      <div className="flex column gap task-container">
         <div>
           <h2>
             <Label placeholder="All Tasks" />
           </h2>
         </div>
         <div></div>
-        <div className="flex column white-bg alltask ">
+        <div className="flex column white-bg alltask">
           <div className="flex column gap">
-            <div className="flex space-btw white-bg center ">
+            <div className="flex space-btw white-bg center">
               <div>
                 <Label
-                  placeholder="status"
+                  placeholder=""
                   fontWeight="bold"
                   backgroundColor="white"
                 />
@@ -129,11 +148,11 @@ const AllTasks = () => {
                   onSelect={(option) =>
                     handleOptionSelect("machine_name", option)
                   }
-                  placeholder={"machine name"}
                   width="12vw"
                   textColor="black"
                   leftIcon={faAngleDown}
                   required={false}
+                  value={null}
                 />
                 <ReactDate
                   leftIcon={faCalendarAlt}
@@ -147,7 +166,7 @@ const AllTasks = () => {
                   width="12vw"
                   placeholder="choose status"
                   textColor="black"
-                  leftIcon={faAngleDown}
+                  leftIcon={faSearch}
                   required={false}
                 />
               </div>
@@ -164,7 +183,7 @@ const AllTasks = () => {
                     <th className="center-text">Status</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="tasks-body">
                   {allTasks.length > 0 ? (
                     allTasks.map((task) => (
                       <tr key={task.id}>
@@ -176,7 +195,12 @@ const AllTasks = () => {
                         <td>{task.assignedDate}</td>
                         <td>{task.dueDate}</td>
                         <td className=" flex center">
-                          {<HighlightLabel placeHolder={task.status} />}
+                          {
+                            <HighlightLabel
+                              placeHolder={task.status}
+                              style={{ fontWeight: "bold" }}
+                            />
+                          }
                         </td>
                       </tr>
                     ))
