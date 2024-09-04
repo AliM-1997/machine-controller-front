@@ -25,7 +25,7 @@ const AllTasks = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     machine_name: "",
-    date: null,
+    date: "",
     status: "",
   });
 
@@ -64,14 +64,15 @@ const AllTasks = () => {
     }
   };
 
-  useEffect(() => {
-    if (formData.machine_name !== "") {
-      handleTaskByMachineName();
+  const handleTaskByStatus = async () => {
+    const response = await Tasks.GetTaskByStatus(formData.status);
+    console.log("stsatus", response);
+    if (response && response.tasks.length > 0) {
+      setAllTasks(response.tasks);
     } else {
-      handleGetAllTasks();
+      clearFilterState();
     }
-  }, [formData.machine_name]);
-
+  };
   const handleGetTaskbyID = async (id) => {
     if (id) {
       const data = await Tasks.GetTaskByID(id);
@@ -95,6 +96,17 @@ const AllTasks = () => {
     setError("");
     setAllTasks([]);
   };
+
+  useEffect(() => {
+    if (formData.machine_name !== "") {
+      handleTaskByMachineName();
+    }
+    if (formData.status !== "") {
+      handleTaskByStatus();
+    } else {
+      handleGetAllTasks();
+    }
+  }, [formData.machine_name, formData.status]);
 
   useEffect(() => {
     handleGetAllTasks();
@@ -144,6 +156,7 @@ const AllTasks = () => {
                   onChange={(e) => handleGetTaskbyID(e.target.value)}
                 />
                 <ChooseOption
+                  placeholder="machine "
                   options={response.data.MachineNames}
                   onSelect={(option) =>
                     handleOptionSelect("machine_name", option)
@@ -152,7 +165,7 @@ const AllTasks = () => {
                   textColor="black"
                   leftIcon={faAngleDown}
                   required={false}
-                  value={null}
+                  // value={formData.status}
                 />
                 <ReactDate
                   leftIcon={faCalendarAlt}

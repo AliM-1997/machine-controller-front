@@ -1,6 +1,5 @@
 .task-container {
   padding: 30px;
-  overflow: auto;
 }
 
 .alltask {
@@ -13,4 +12,9 @@
 
 .ticket-input {
   padding: 8px;
+}
+
+.tasks-body {
+  overflow-y: auto;
+  max-height: 400px;
 }
