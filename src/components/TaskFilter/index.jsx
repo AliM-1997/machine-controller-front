@@ -11,14 +11,13 @@ import Button from "../../base/Button";
 import ChooseOption from "../../base/ChooseOption";
 import { useSelector } from "react-redux";
 const TaskFilter = ({
-  datechange,
-  Selectedoption,
-  selectMachine,
-  EmployeeName,
-  EmployeeChange,
-  TaskStatus,
-  StatusChange,
   Exitfilter,
+  selectMachine,
+  selectStatus,
+  EmployeeName,
+  dateChange,
+  EmployeeChange,
+  StatusChange,
   machineChange,
 }) => {
   const state = useSelector((global) => global);
@@ -29,7 +28,6 @@ const TaskFilter = ({
     Machine: false,
     Status: false,
   });
-  // console.log(choosenItem);
   const itemChange = (key, value) => {
     setChoosenItem({
       Date: false,
@@ -90,7 +88,7 @@ const TaskFilter = ({
             placeHolder="Submit"
             textColor="white"
             backgroundColor="primary"
-            onClick={datechange}
+            onClick={dateChange}
           />
         </div>
       )}
@@ -120,7 +118,7 @@ const TaskFilter = ({
             name="Employee Name"
             placeholder="Employee "
             options={EmployeeName}
-            onSelect={Selectedoption}
+            onSelect={selectMachine}
             width="25vw"
             textColor="black"
             leftIcon={faSearch}
@@ -140,7 +138,7 @@ const TaskFilter = ({
             name="Status"
             placeholder="status "
             options={statusOption}
-            onSelect={Selectedoption}
+            onSelect={selectStatus}
             width="25vw"
             textColor="black"
             leftIcon={faSearch}
