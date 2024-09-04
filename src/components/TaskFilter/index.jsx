@@ -9,23 +9,27 @@ import {
 import ReactDate from "../../base/ReactDate";
 import Button from "../../base/Button";
 import ChooseOption from "../../base/ChooseOption";
+import { useSelector } from "react-redux";
 const TaskFilter = ({
   datechange,
-  machineName,
   Selectedoption,
-  machineChange,
+  selectMachine,
   EmployeeName,
   EmployeeChange,
   TaskStatus,
   StatusChange,
+  Exitfilter,
+  machineChange,
 }) => {
+  const state = useSelector((global) => global);
+
   const [choosenItem, setChoosenItem] = useState({
     Date: false,
     Emoloyee: false,
     Machine: false,
     Status: false,
   });
-  console.log(choosenItem);
+  // console.log(choosenItem);
   const itemChange = (key, value) => {
     setChoosenItem({
       Date: false,
@@ -35,10 +39,16 @@ const TaskFilter = ({
       [key]: value,
     });
   };
-
+  const statusOption = [
+    { label: "Risked" },
+    { label: "Completed" },
+    { label: "Pending" },
+    { label: "Delayed" },
+    { label: "In Progress" },
+  ];
   return (
     <div className="flex column taskFilter-wrapper gap end">
-      <Icon icon={faX} />
+      <Icon icon={faX} onClick={Exitfilter} />
       <table>
         <tr className="flex gap">
           <th
@@ -89,8 +99,8 @@ const TaskFilter = ({
           <ChooseOption
             name="Machine Name"
             placeholder="machine "
-            options={machineName}
-            onSelect={Selectedoption}
+            options={state.data.MachineNames}
+            onSelect={selectMachine}
             width="25vw"
             textColor="black"
             leftIcon={faSearch}
@@ -129,7 +139,7 @@ const TaskFilter = ({
           <ChooseOption
             name="Status"
             placeholder="status "
-            options={TaskStatus}
+            options={statusOption}
             onSelect={Selectedoption}
             width="25vw"
             textColor="black"
