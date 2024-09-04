@@ -53,65 +53,90 @@ const AllTasks = () => {
     } catch (error) {
       console.error("Error fetching all tasks:", error);
       setAllTasks([]);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleTaskByMachineName = async () => {
     setLoading(true);
-    const response = await Tasks.GetByMachineName(formData.machine_name);
-    if (response && response.tasks.length > 0) {
-      setAllTasks(response.tasks);
-    } else {
-      clearFilterState();
+    try {
+      const response = await Tasks.GetByMachineName(formData.machine_name);
+      if (response && response.tasks.length > 0) {
+        setAllTasks(response.tasks);
+      } else {
+        clearFilterState();
+      }
+    } catch (error) {
+      console.error("Error fetching tasks by machine name:", error);
+    } finally {
+      setLoading(false);
+      handleExitFilter();
     }
-    setLoading(false);
   };
 
   const handleTaskByStatus = async () => {
     setLoading(true);
-    const response = await Tasks.GetTaskByStatus(formData.status);
-    console.log("status", response);
-    if (response && response.tasks.length > 0) {
-      setAllTasks(response.tasks);
-    } else {
-      clearFilterState();
+    try {
+      const response = await Tasks.GetTaskByStatus(formData.status);
+      if (response && response.tasks.length > 0) {
+        setAllTasks(response.tasks);
+      } else {
+        clearFilterState();
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
+      handleExitFilter();
     }
-    setLoading(false);
   };
 
   const handleGetTaskbyID = async (id) => {
     setLoading(true);
-    if (id) {
-      const data = await Tasks.GetTaskByID(id);
-      setAllTasks([data.task]);
-      setSearchId(id);
-    } else {
-      handleGetAllTasks();
+    try {
+      if (id) {
+        const data = await Tasks.GetTaskByID(id);
+        setAllTasks([data.task]);
+        setSearchId(id);
+      } else {
+        await handleGetAllTasks();
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleTaskByDate = async () => {
     setLoading(true);
-    const data = await Tasks.GetTaskByDate(formData.date);
-    if (data && data.tasks.length > 0) {
-      setAllTasks(data.tasks);
-    } else {
-      clearFilterState();
+    try {
+      const data = await Tasks.GetTaskByDate(formData.date);
+      if (data && data.tasks.length > 0) {
+        setAllTasks(data.tasks);
+      } else {
+        clearFilterState();
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
+      handleExitFilter();
     }
-    setLoading(false);
   };
 
   const handleTaskByUsername = async () => {
     setLoading(true);
-    const data = await Tasks.GetTaskByUsername("hansen.eva");
-    if (data && data.tasks.length > 0) {
-      setAllTasks(data.tasks);
-    } else {
-      clearFilterState();
+    try {
+      const data = await Tasks.GetTaskByUsername("hansen.eva");
+      if (data && data.tasks.length > 0) {
+        setAllTasks(data.tasks);
+      } else {
+        clearFilterState();
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
+      handleExitFilter();
     }
-    setLoading(false);
   };
 
   const handleOptionSelect = (name, option) => {
@@ -129,8 +154,9 @@ const AllTasks = () => {
   const clearFilterState = () => {
     setFormData({
       machine_name: "",
-      date: null,
+      date: "",
       status: "",
+      username: "",
     });
     setError("");
     setAllTasks([]);
@@ -218,37 +244,32 @@ const AllTasks = () => {
                     <th className="center-text">Status</th>
                   </tr>
                 </thead>
-                {loading ? (
-                  <div>Loading...</div>
-                ) : (
-                  <tbody className="tasks-body">
-                    {allTasks.length > 0 ? (
-                      allTasks.map((task) => (
-                        <tr key={task.id}>
-                          <td onClick={() => handleEditNavigate(task.id)}>
-                            {task.id}
-                          </td>
-                          <td>{task.machine_id}</td>
-                          <td>{task.user_id}</td>
-                          <td>{task.assignedDate}</td>
-                          <td>{task.dueDate}</td>
-                          <td className=" flex center">
-                            {
-                              <HighlightLabel
-                                placeHolder={task.status}
-                                style={{ fontWeight: "bold" }}
-                              />
-                            }
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan="7">No tasks found</td>
+                {loading && <div className="loading">Loading...</div>}
+                <tbody className="tasks-body">
+                  {allTasks.length > 0 ? (
+                    allTasks.map((task) => (
+                      <tr key={task.id}>
+                        <td onClick={() => handleEditNavigate(task.id)}>
+                          {task.id}
+                        </td>
+                        <td>{task.machine_id}</td>
+                        <td>{task.user_id}</td>
+                        <td>{task.assignedDate}</td>
+                        <td>{task.dueDate}</td>
+                        <td className="flex center">
+                          <HighlightLabel
+                            placeHolder={task.status}
+                            style={{ fontWeight: "bold" }}
+                          />
+                        </td>
                       </tr>
-                    )}
-                  </tbody>
-                )}
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="7">No tasks found</td>
+                    </tr>
+                  )}
+                </tbody>
               </table>
             </div>
           </div>
