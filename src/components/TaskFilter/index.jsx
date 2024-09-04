@@ -15,24 +15,24 @@ const TaskFilter = ({
   selectMachine,
   selectStatus,
   selectDate,
+  selectUsername,
   DateChange,
-  EmployeeChange,
   StatusChange,
   machineChange,
-  EmployeeName,
+  UsernameChange,
 }) => {
   const state = useSelector((global) => global);
 
   const [choosenItem, setChoosenItem] = useState({
     Date: false,
-    Emoloyee: false,
+    UserName: false,
     Machine: false,
     Status: false,
   });
   const itemChange = (key, value) => {
     setChoosenItem({
       Date: false,
-      Employee: false,
+      UserName: false,
       Machine: false,
       Status: false,
       [key]: value,
@@ -57,10 +57,10 @@ const TaskFilter = ({
             Date
           </th>
           <th
-            className={choosenItem.Employee ? "underline" : ""}
-            onClick={() => itemChange("Employee", true)}
+            className={choosenItem.UserName ? "underline" : ""}
+            onClick={() => itemChange("UserName", true)}
           >
-            Employee
+            Username
           </th>
           <th
             className={choosenItem.Machine ? "underline" : ""}
@@ -115,13 +115,13 @@ const TaskFilter = ({
           />
         </div>
       )}
-      {choosenItem.Employee && (
+      {choosenItem.UserName && (
         <div className="flex column end gap-btn">
           <ChooseOption
-            name="Employee Name"
-            placeholder="Employee "
-            options={EmployeeName}
-            onSelect={selectMachine}
+            name="Username"
+            placeholder="UserName "
+            options={state.data.UserNames}
+            onSelect={selectUsername}
             width="25vw"
             textColor="black"
             leftIcon={faSearch}
@@ -131,7 +131,7 @@ const TaskFilter = ({
             placeHolder="Submit"
             textColor="white"
             backgroundColor="primary"
-            onClick={EmployeeChange}
+            onClick={UsernameChange}
           />
         </div>
       )}
