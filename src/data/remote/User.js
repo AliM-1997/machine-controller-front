@@ -91,4 +91,16 @@ export const Users = {
       throw error;
     }
   },
+  GetAllUserName: async () => {
+    try {
+      const data = await requestApi({
+        route: `/user/all/username`,
+      });
+      console.log("username", data);
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      throw error;
+    }
+  },
 };
