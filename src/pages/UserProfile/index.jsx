@@ -4,10 +4,13 @@ import Label from "../../base/Label";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 import {
+  faAngleDoubleRight,
+  faAngleRight,
   faEnvelope,
   faKey,
   faLocation,
   faPhone,
+  faTrashCan,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { Users } from "../../data/remote/User";
@@ -16,6 +19,9 @@ import { useSelector } from "react-redux";
 import DisplayImage from "../../base/DisplayImage";
 import Header from "../../components/Header";
 import whiteImage from "../../assets/images/white-bg.png";
+import whiteImge from "../../assets/images/white-bg.png";
+import Icon from "../../base/Icon";
+
 const UserProfile = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -48,6 +54,7 @@ const UserProfile = () => {
     }
   }, [user]);
   const navigate = useNavigate();
+
   const handleCancel = () => {
     navigate("/allUsers");
   };
@@ -116,59 +123,61 @@ const UserProfile = () => {
       <Header pageName={"User Management"} options={options} />
       <div className="flex column full-width  center">
         <div className="flex column gap title userProfile-container">
-          <div className="flex column space-btw full-width gap">
+          <div className="flex  space-btw full-width gap ">
             <h2>
-              <Label placeholder="User Profile" fontWeight="bold" />
+              <Label
+                placeholder={user.id ? "Edite User Profile" : "Add User"}
+                fontWeight="bold"
+              />
             </h2>
-            {user.id && (
-              <div className="flex full-width space-btw ">
-                <div className="flex space-btw gap ">
-                  <div className="flex space-btw">
-                    {imagePreview ? (
-                      <img src={imagePreview} className="image" alt="user" />
-                    ) : user.image_path ? (
-                      <DisplayImage
-                        url={user.image_path}
-                        width="70px"
-                        heigth="70px"
-                      />
-                    ) : (
-                      <img src={whiteImage} className="image" alt="default" />
-                    )}
-                    <input
-                      className="choose-file"
-                      type="file"
-                      onChange={handleFileChange}
-                      style={{ display: "" }}
-                    />
-                  </div>
-                  <div className="flex column">
-                    <Label placeholder={user.name || "Name"} />
-                    <Label placeholder={user.role || "Role"} />
-                    <Label placeholder={user.email || "email"} />
-                  </div>
-                </div>
-                <div className="flex center gap-btn  ">
-                  <Button
-                    placeHolder="Upload"
-                    width="7vw"
-                    textColor="white"
-                    backgroundColor="primary"
-                    onClick={handleUploadImage}
-                  />
-                  <Button
-                    placeHolder="delete"
-                    width="7vw"
-                    textColor="white"
-                    backgroundColor="primary"
-                    onClick={handleDeleteImage}
-                  />
-                </div>
-              </div>
-            )}
+            <Icon icon={faAngleRight} onClick={handleCancel} />
           </div>
         </div>
-        <div className="flex column gap full-height addtask-inputs white-bg ">
+        <div className="flex column gap full-height addtask-inputs white-bg center">
+          {user.id ? (
+            <div className="flex gap ">
+              <div className="flex space-btw over">
+                {imagePreview ? (
+                  <img src={imagePreview} className="userImage" alt="user" />
+                ) : user.image_path ? (
+                  <DisplayImage
+                    url={user.image_path}
+                    width="150px"
+                    heigth="150px"
+                  />
+                ) : (
+                  <img src={whiteImage} className="userImage" alt="default" />
+                )}
+                <input
+                  className="choose-file"
+                  type="file"
+                  onChange={handleFileChange}
+                  style={{ display: "" }}
+                />
+              </div>
+              <div className="flex column center">
+                <div className="flex column ">
+                  <Label placeholder={user.name || "Name"} />
+                  <Label placeholder={user.role || "Role"} />
+                  <Label placeholder={user.email || "email"} />
+                </div>
+                <div className="flex gap  image-actions">
+                  <Button
+                    placeHolder="Upload Image"
+                    backgroundColor="white"
+                    textColor="blue"
+                    className="mark-read"
+                    onClick={handleUploadImage}
+                  />
+                  <Icon icon={faTrashCan} onClick={handleDeleteImage} />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex center">
+              <img src={whiteImge} className="userImage" alt="default" />
+            </div>
+          )}
           <div className="flex row center gap full-width">
             <Input
               width="24vw"
@@ -252,14 +261,20 @@ const UserProfile = () => {
             />
           </div>
 
-          <div className="flex end gap-btn">
-            <Button
-              placeHolder="Cancel"
-              backgroundColor="primary"
-              width="7vw"
-              textColor="white"
-              onClick={handleCancel}
-            />
+          <div
+            className="flex end gap-btn "
+            style={{ width: `calc(48vw + 24px)` }}
+          >
+            {user.id && (
+              <Button
+                placeHolder="Cancel"
+                backgroundColor="primary"
+                width="7vw"
+                textColor="white"
+                onClick={handleCancel}
+              />
+            )}
+
             <Button
               placeHolder={user.name ? "save" : "create"}
               backgroundColor="primary"

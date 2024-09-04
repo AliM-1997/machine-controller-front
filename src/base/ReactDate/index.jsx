@@ -36,10 +36,10 @@ const ReactDate = ({
   };
 
   return (
-    <div>
+    <div className="flex column input-lable">
       {name && (
         <div>
-          <label className={`bold ${textColorClass}`} style={{ width: width }}>
+          <label className={` ${textColorClass}`} style={{ width: width }}>
             {name}
             {required && <span className="required">*</span>}
           </label>

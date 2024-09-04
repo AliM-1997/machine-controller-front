@@ -4,6 +4,7 @@ import Label from "../../base/Label";
 import Icon from "../../base/Icon";
 import {
   faAngleLeft,
+  faAngleRight,
   faCalendarAlt,
   faClipboard,
   faLocation,
@@ -103,7 +104,7 @@ const AddTask = () => {
               fontWeight="bold"
             />
           </h2>
-          <Icon icon={faAngleLeft} onClick={navigateBack} />
+          <Icon icon={faAngleRight} onClick={navigateBack} />
         </div>
         <div className="flex column gap full-height addtask-inputs white-bg ">
           <div className="flex row center space-btw full-width">

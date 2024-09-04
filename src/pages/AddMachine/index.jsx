@@ -247,6 +247,7 @@ const AddMachine = () => {
             <div className="flex gap full-width center">
               <Input
                 name="Units Per Hour"
+                placeHolder="number"
                 width="24vw"
                 leftIcon={faHashtag}
                 type="text"
@@ -259,6 +260,7 @@ const AddMachine = () => {
                 onSelect={(option) => handleOptionSelect("status", option)}
                 width="24vw"
                 textColor="black"
+                required={true}
                 leftIcon={faAngleDown}
                 name="Status"
               />
