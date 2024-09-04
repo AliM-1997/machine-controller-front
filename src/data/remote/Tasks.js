@@ -91,11 +91,12 @@ export const Tasks = {
       alert("No task found for the given date");
     }
   },
-  CreateTaskByUsername: async (username) => {
+  CreateTaskByUsername: async (formData) => {
     try {
       const data = await requestApi({
-        route: `/task/username/${username}`,
+        route: `/task/username`,
         requestMethod: RequestMethods.POST,
+        body: formData,
       });
       console.log(data);
       return data;
