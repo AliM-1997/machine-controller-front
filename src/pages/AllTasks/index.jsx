@@ -80,7 +80,10 @@ const AllTasks = () => {
       handleGetAllTasks();
     }
   };
-
+  const handleTaskByDate = async () => {
+    const data = await Tasks.GetTaskByDate(formData.date);
+    console.log(data);
+  };
   const handleOptionSelect = (name, option) => {
     ChangingFormat(name, option.label);
   };
