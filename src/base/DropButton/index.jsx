@@ -29,13 +29,16 @@ const DropButton = ({
 
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
-  const borderClass = border ? "border" : "";
+  const borderClass = border ? "border:1px solid #c7c7c7" : "none";
 
   return (
     <div style={{ position: "relative", width }}>
       <button
-        style={{ width }}
-        className={`dropbtn ${backgroundColorClass} ${textColorClass} ${borderClass}`}
+        style={{
+          width,
+          border: border ? `1px solid #c7c7c7` : "none",
+        }}
+        className={`dropbtn ${backgroundColorClass} ${textColorClass} `}
         onClick={toggleDropdown}
       >
         <Icon icon={leftIcon} color={iconColor} />
