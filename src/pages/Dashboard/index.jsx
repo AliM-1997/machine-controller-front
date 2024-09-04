@@ -3,7 +3,7 @@ import BarGraph from "../../components/BarGraph";
 import { MachineStatistics } from "../../data/remote/machineStatistics";
 import Header from "../../components/Header";
 import Button from "../../base/Button";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import ChooseOption from "../../base/ChooseOption";
 import { useSelector } from "react-redux";
 import DashboardFilter from "../../components/DashboardFilter";
@@ -117,13 +117,13 @@ const Dashboard = () => {
               placeholder={"search machine"}
               width="20vw"
               textColor="black"
-              leftIcon={faAngleDown}
+              leftIcon={faSearch}
               required={false}
             />
           </div>
           {error && <div className="error-message">{error}</div>}
           <Button
-            placeHolder="filter"
+            placeHolder="Filter"
             backgroundColor="primary"
             width="5vw"
             textColor="white"
