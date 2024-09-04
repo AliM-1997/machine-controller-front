@@ -181,6 +181,10 @@ const AllTasks = () => {
                     StatusChange={handleTaskByStatus}
                     selectDate={(e) => ChangingFormat("date", e)}
                     DateChange={handleTaskByDate}
+                    selectUsername={(option) =>
+                      ChangingFormat("username", option)
+                    }
+                    UsernameChange={handleTaskByUsername}
                   />
                 )}
               </div>
