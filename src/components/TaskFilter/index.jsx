@@ -14,11 +14,12 @@ const TaskFilter = ({
   Exitfilter,
   selectMachine,
   selectStatus,
-  EmployeeName,
-  dateChange,
+  selectDate,
+  DateChange,
   EmployeeChange,
   StatusChange,
   machineChange,
+  EmployeeName,
 }) => {
   const state = useSelector((global) => global);
 
@@ -82,13 +83,15 @@ const TaskFilter = ({
             required={false}
             width="25vw"
             name="Date"
+            onChange={selectDate}
+            mindata={false}
           />
 
           <Button
             placeHolder="Submit"
             textColor="white"
             backgroundColor="primary"
-            onClick={dateChange}
+            onClick={DateChange}
           />
         </div>
       )}
