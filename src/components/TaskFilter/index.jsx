@@ -1,14 +1,24 @@
 import React, { useState } from "react";
 import "./style.css";
 import Icon from "../../base/Icon";
-import { faCalendarAlt, faX } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendarAlt,
+  faSearch,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
 import ReactDate from "../../base/ReactDate";
 import Button from "../../base/Button";
-const TaskFilter = ({ datechange }) => {
+import ChooseOption from "../../base/ChooseOption";
+const TaskFilter = ({
+  datechange,
+  machineName,
+  Selectedoption,
+  machineChange,
+}) => {
   const [choosenItem, setChoosenItem] = useState({
     Date: false,
     Emoloyee: false,
-    Ticket: false,
+    Machine: false,
     Status: false,
   });
   console.log(choosenItem);
@@ -16,7 +26,7 @@ const TaskFilter = ({ datechange }) => {
     setChoosenItem({
       Date: false,
       Employee: false,
-      Ticket: false,
+      Machine: false,
       Status: false,
       [key]: value,
     });
@@ -34,16 +44,16 @@ const TaskFilter = ({ datechange }) => {
             Date
           </th>
           <th
-            className={choosenItem.Emoloyee ? "underline" : ""}
+            className={choosenItem.Employee ? "underline" : ""}
             onClick={() => itemChange("Employee", true)}
           >
             Employee
           </th>
           <th
-            className={choosenItem.Ticket ? "underline" : ""}
-            onClick={() => itemChange("Ticket", true)}
+            className={choosenItem.Machine ? "underline" : ""}
+            onClick={() => itemChange("Machine", true)}
           >
-            Ticket
+            Machine
           </th>
           <th
             className={choosenItem.Status ? "underline" : ""}
@@ -53,23 +63,43 @@ const TaskFilter = ({ datechange }) => {
           </th>
         </tr>
       </table>
-      <div className="flex column end gap">
-        <>
+      {choosenItem.Date && (
+        <div className="flex column end gap-btn">
           <ReactDate
             leftIcon={faCalendarAlt}
             required={false}
             width="25vw"
             name="Date"
           />
-        </>
 
-        <Button
-          placeHolder="Submit"
-          textColor="white"
-          backgroundColor="primary"
-          onClick={datechange}
-        />
-      </div>
+          <Button
+            placeHolder="Submit"
+            textColor="white"
+            backgroundColor="primary"
+            onClick={datechange}
+          />
+        </div>
+      )}
+      {choosenItem.Machine && (
+        <div className="flex column end gap-btn">
+          <ChooseOption
+            name="Machine Name"
+            placeholder="machine "
+            options={machineName}
+            onSelect={Selectedoption}
+            width="25vw"
+            textColor="black"
+            leftIcon={faSearch}
+            required={false}
+          />
+          <Button
+            placeHolder="Submit"
+            textColor="white"
+            backgroundColor="primary"
+            onClick={machineChange}
+          />
+        </div>
+      )}
     </div>
   );
 };
