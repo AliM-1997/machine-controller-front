@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import Icon from "../Icon";
+import Slider from "../Slider";
 const Button = ({
   placeHolder = "",
   leftIcon = null,
@@ -13,6 +14,7 @@ const Button = ({
   iconColor = "black",
   border = false,
   start = false,
+  mode = false,
 }) => {
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
@@ -46,7 +48,7 @@ const Button = ({
               <Icon icon={leftIcon} color={iconColor} />
               {placeHolder}
             </div>
-            <Icon icon={rightIcon} />
+            <>{mode ? <Slider /> : <Icon icon={rightIcon} />}</>
           </>
         ) : (
           <>
