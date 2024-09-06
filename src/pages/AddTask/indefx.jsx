@@ -18,8 +18,11 @@ import { clearTask } from "../../data/redux/taskSlice";
 import { Tasks } from "../../data/remote/Tasks";
 import Header from "../../components/Header";
 import ChooseOption from "../../base/ChooseOption";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 
 const AddTask = () => {
+  const { darkMode } = useDarkMode();
+
   const { id } = useParams();
   const task = useSelector((global) => global);
   console.log(task);
@@ -101,9 +104,15 @@ const AddTask = () => {
             <Label
               placeholder={id ? "Edit Task" : "Add Task"}
               fontWeight="bold"
+              backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+              textColor={darkMode ? "white" : "black"}
             />
           </h2>
-          <Icon icon={faAngleRight} onClick={navigateBack} />
+          <Icon
+            icon={faAngleRight}
+            onClick={navigateBack}
+            color={darkMode ? "white" : "black"}
+          />
         </div>
         <div className="flex column gap full-height addtask-inputs white-bg ">
           <div className="flex row center space-btw full-width">

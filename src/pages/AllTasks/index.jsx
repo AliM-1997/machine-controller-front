@@ -11,8 +11,10 @@ import Input from "../../base/Input";
 import Header from "../../components/Header";
 import Button from "../../base/Button";
 import TaskFilter from "../../components/TaskFilter";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 
 const AllTasks = () => {
+  const { darkMode } = useDarkMode();
   const response = useSelector((global) => global);
   const dispatch = useDispatch();
   const [allTasks, setAllTasks] = useState([]);
@@ -177,7 +179,11 @@ const AllTasks = () => {
       <div className="flex column gap task-container">
         <div>
           <h2>
-            <Label placeholder="All Tasks" />
+            <Label
+              placeholder="All Tasks"
+              backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+              textColor={darkMode ? "white" : "black"}
+            />
           </h2>
         </div>
         <div></div>
