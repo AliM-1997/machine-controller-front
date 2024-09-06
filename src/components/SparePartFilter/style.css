@@ -1,12 +1,14 @@
 .card-box {
   justify-content: space-between;
-  height: 40vw;
+  max-height: 70vh;
   overflow-y: scroll;
   scrollbar-width: none;
+  row-gap: 32px;
 }
 .sparepart-card {
   padding: 0 0 12px 0;
   border-radius: 12px;
+  height: 210px;
 }
 
 .underline-dark {

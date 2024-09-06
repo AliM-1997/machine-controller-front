@@ -39,7 +39,7 @@ const AddTask = () => {
     machine_serial_number: "",
     spare_part_serial_number: "",
   });
-  console.log("asdasdasdasdasd", formData);
+
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -63,6 +63,7 @@ const AddTask = () => {
   };
   const handleCreateTask = async () => {
     if (id) {
+      if(!formData.location||!formData.jobDescription||formData.dueDate||formData.status||formData.assignedDate||for)
       const updateDate = await Tasks.UpdateTask(id, formData);
       if (updateDate) {
         alert("Task Updated Successfully");
@@ -94,6 +95,13 @@ const AddTask = () => {
   const options = [
     { label: "Add/Edit Task", url: "addTask" },
     { label: "All Tasks", url: "tasks" },
+  ];
+  const Taskstatus = [
+    { label: "Completed" },
+    { label: "Risked" },
+    { label: "Delayed" },
+    { label: "In Progress" },
+    { label: "Pending" },
   ];
   return (
     <div>
@@ -140,6 +148,7 @@ const AddTask = () => {
           </div>
           <div className="flex row center space-btw full-width">
             <ChooseOption
+              options={task.data.SparePartSerialNumber}
               name="Spare Part Serial Number"
               placeHolder={
                 formData.spare_part_serial_number || "choose sparePart "
@@ -148,10 +157,12 @@ const AddTask = () => {
               width="24vw"
               type="text"
               required={false}
-              onChange={(e) => ChangingFormIput("spare_part_id", e.label)}
+              onSelect={(e) =>
+                ChangingFormIput("spare_part_serial_number", e.label)
+              }
             />
             <ChooseOption
-              options={task.data.Taskstatus}
+              options={Taskstatus}
               name="Status"
               placeHolder={formData.status || "pending"}
               leftIcon={faSearch}
