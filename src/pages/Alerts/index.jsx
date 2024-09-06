@@ -3,7 +3,10 @@ import "./style.css";
 import Header from "../../components/Header";
 import { Notifications } from "../../data/remote/notification";
 import Button from "../../base/Button";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 const Alerts = () => {
+  const { darkMode } = useDarkMode();
+  console.log("asdasdasdasd", darkMode);
   const [nonRead, setNoneRead] = useState([]);
   const handleUnReadNotification = async () => {
     const response = await Notifications.UnReadNotification();
@@ -26,12 +29,26 @@ const Alerts = () => {
 
   return (
     <div>
-      <Header pageName={"Alerts"} showChooseInput={false} />
-      <div className="flex column notification-outer">
-        <div className="flex title-notification">
+      <Header
+        pageName={"Alerts"}
+        showChooseInput
+        backgroundColor_btn={darkMode ? "black" : "white"}
+        border={false}
+        textColor_btn={darkMode ? "black" : "white"}
+      />
+      <div
+        className={`flex column notification-outer ${
+          darkMode ? "terchuery-bg" : "secondary-bg"
+        }`}
+      >
+        <div
+          className={`flex title-notification ${
+            darkMode ? "white-txt" : "black-txt"
+          }`}
+        >
           <h3>Notifications</h3>
         </div>
-        <div className="flex column center gap padding-30px full-width white-bg">
+        <div className="flex column center gap padding-30px full-width white-bg notification-box">
           <div className="flex column  gap full-width notification-info">
             {nonRead.length > 0 ? (
               nonRead.map((alert) => (
