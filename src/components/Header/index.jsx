@@ -28,7 +28,9 @@ const Header = ({
       console.log("Invalid option selected");
     }
   };
-
+  const handleNavigateAlerts = () => {
+    navigate("/alerts");
+  };
   return (
     <div className="header-container white-bg">
       <div className="flex row gap">
@@ -48,7 +50,12 @@ const Header = ({
         )}
         {showIcons && (
           <div className="flex center h-icon">
-            <Icon icon={faBell} color="primary" className="" />
+            <Icon
+              icon={faBell}
+              color="primary"
+              className=""
+              onClick={handleNavigateAlerts}
+            />
             {state.UnReadNotification > 0 && (
               <div className=" flex center notification-count">
                 {state.UnReadNotification}
