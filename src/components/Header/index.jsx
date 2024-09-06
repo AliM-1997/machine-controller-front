@@ -17,6 +17,9 @@ const Header = ({
   showChooseInput = true,
   showIcons = true,
   options = [],
+  backgroundColor_btn = "white",
+  border = true,
+  textColor_btn = "black",
 }) => {
   const state = useSelector((global) => global.data);
   const { darkMode } = useDarkMode();
@@ -44,8 +47,9 @@ const Header = ({
             width="15vw"
             rightIcon={faAngleDown}
             hidden={!showChooseInput}
-            backgroundColor="white"
-            border={true}
+            backgroundColor={backgroundColor_btn}
+            border={border}
+            textColor={textColor_btn}
           />
         )}
         {showIcons && (

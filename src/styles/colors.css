@@ -59,7 +59,12 @@
 .primary-color {
   color: #00b7eb;
 }
-
+.white-color {
+  color: white;
+}
+.black-color {
+  color: black;
+}
 .green-stat {
   color: rgba(0, 255, 0, 1);
 }
