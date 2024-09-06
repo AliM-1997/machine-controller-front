@@ -11,7 +11,7 @@ import Icon from "../../base/Icon";
 import DropButton from "../../base/DropButton";
 import "./style.css";
 import { useSelector } from "react-redux";
-
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 const Header = ({
   pageName,
   showChooseInput = true,
@@ -19,8 +19,8 @@ const Header = ({
   options = [],
 }) => {
   const state = useSelector((global) => global.data);
+  const { darkMode } = useDarkMode();
   const navigate = useNavigate();
-
   const handleSelect = (option) => {
     if (option.url) {
       navigate(`/${option.url}`);
@@ -32,9 +32,9 @@ const Header = ({
     navigate("/alerts");
   };
   return (
-    <div className="header-container white-bg">
+    <div className={`header-container ${darkMode ? "black-bg" : "white-bg"}`}>
       <div className="flex row gap">
-        <h1>{pageName}</h1>
+        <h1 className={darkMode ? "white-txt" : "black-txt"}>{pageName}</h1>
       </div>
       <div className="flex header-left">
         {showChooseInput && (
