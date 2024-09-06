@@ -6,10 +6,11 @@ import { Outlet } from "react-router-dom";
 import { Functions } from "../../utils/reusableFunctions";
 import { LoadData } from "../../data/redux/dataSlice";
 import { useDispatch } from "react-redux";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 
 const Layout = () => {
   const [clickedPage, setClickedPage] = useState(null);
-
+  const { darkMode } = useDarkMode();
   const dispatch = useDispatch();
   useEffect(() => {
     const handledata = async () => {
@@ -23,7 +24,7 @@ const Layout = () => {
   };
 
   return (
-    <div className="flex row page">
+    <div className={`flex row  ${darkMode ? "dark-mode" : "light-mode"}`}>
       <div className="container-1">
         <NavBar onNavigate={handlePageChange} isClick={clickedPage} />
       </div>
