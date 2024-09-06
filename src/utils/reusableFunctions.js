@@ -1,5 +1,6 @@
 import { Machines } from "../data/remote/Machine";
 import { Notifications } from "../data/remote/notification";
+import SpareParts from "../data/remote/spareParts";
 import { Users } from "../data/remote/User";
 
 export const Functions = {
@@ -22,6 +23,9 @@ export const Functions = {
 
       const UserNames = await Users.GetAllUserName();
       data.UserNames = UserNames;
+
+      const SparePartSerialNumber = await SpareParts.GetAllSerialNumbers();
+      data.SparePartSerialNumber = SparePartSerialNumber;
 
       const UnReadNotification = await Notifications.UnReadNotification();
       data.UnReadNotification = UnReadNotification.notifications?.length || 0;
