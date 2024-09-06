@@ -48,8 +48,8 @@ const NavBar = ({ onNavigate, isClick }) => {
       : "white",
     iconColor: !darkMode
       ? isClick === name
-        ? "black"
-        : "white"
+        ? "white"
+        : "black"
       : isClick === name
       ? "black"
       : "primary",
