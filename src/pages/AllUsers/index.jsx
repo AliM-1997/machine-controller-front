@@ -100,18 +100,11 @@ const AllUsers = () => {
           <div className="flex center gap">
             <Button
               className="filter-user"
-              width="10vw"
+              width="7vw"
               backgroundColor="primary"
-              placeHolder="add User"
+              placeHolder="add"
               textColor="white"
               onClick={handleCreate}
-            />
-            <Button
-              className="add-user"
-              width="8vw"
-              backgroundColor="primary"
-              textColor="white"
-              placeHolder="Filter"
             />
           </div>
         </div>
