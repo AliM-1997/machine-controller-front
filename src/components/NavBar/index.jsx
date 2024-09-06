@@ -12,6 +12,8 @@ import {
   faRightFromBracket,
   faMoon,
   faChevronRight,
+  faCalendarTimes,
+  faToolbox,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { authRemote } from "../../data/remote/Auth_user";
@@ -79,7 +81,8 @@ const NavBar = ({ onNavigate, isClick }) => {
           <Button {...navButton("Tasks", faClipboard, "/tasks")} />
           <Button {...navButton("Predictions", faChartLine, "/predictions")} />
           <Button {...navButton("User Management", faUsers, "/allusers")} />
-          <Button {...navButton("Alerts", faUsers, "/alerts")} />
+          <Button {...navButton("Alerts", faCalendarTimes, "/alerts")} />
+          <Button {...navButton("Spare Parts", faToolbox, "/allsparepart")} />
         </div>
       </div>
       <div className="flex column center gap">
