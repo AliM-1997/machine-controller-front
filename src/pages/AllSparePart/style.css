@@ -1,3 +1,7 @@
 .allsparepart-container {
   padding: 30px;
 }
+.sparepart-box {
+  padding: 30px;
+  border-radius: 24px;
+}

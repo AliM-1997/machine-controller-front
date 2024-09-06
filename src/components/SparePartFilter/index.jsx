@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
+import SpareParts from "../../data/remote/spareParts";
 const SparePartFilter = () => {
   const [choosenItem, setChoosenItem] = useState({
     Electrical: false,
@@ -16,7 +17,13 @@ const SparePartFilter = () => {
       [key]: value,
     });
   };
-
+  const handleGetAllSpareParts = async () => {
+    const response = await SpareParts.GetAllSpareParts();
+    console.log(response);
+  };
+  useEffect(() => {
+    handleGetAllSpareParts();
+  }, [choosenItem.All]);
   return (
     <div>
       <table>
