@@ -17,31 +17,36 @@ import AllTasks from "./pages/AllTasks";
 import AddMachine from "./pages/AddMachine";
 import AllMachines from "./pages/AllMachines";
 import SelectedMachine from "./pages/SelectedMachine";
+import { DarkModeProvider } from "./data/constext/DarkModeContext";
 
 function App() {
   return (
     <div className="App">
       <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="/" element={<Layout />}>
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="addmachine" element={<AddMachine />} />
-              <Route path="allmachines" element={<AllMachines />} />
-              <Route path="selectedmachine/:id" element={<SelectedMachine />} />
-              <Route path="tasks" element={<AllTasks />} />
-              <Route path="Predictions" element={<Predictions />} />
-              <Route path="alerts" element={<Alerts />} />
-              <Route path="allUsers" element={<AllUsers />} />
-              <Route path="userProfile" element={<UserProfile />} />
-              <Route path="addTask" element={<AddTask />} />
-              <Route path="addTask/:id" element={<AddTask />} />
-              <Route path="alerts" element={<Alerts />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <DarkModeProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} />
+              <Route path="/" element={<Layout />}>
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="addmachine" element={<AddMachine />} />
+                <Route path="allmachines" element={<AllMachines />} />
+                <Route
+                  path="selectedmachine/:id"
+                  element={<SelectedMachine />}
+                />
+                <Route path="tasks" element={<AllTasks />} />
+                <Route path="predictions" element={<Predictions />} />
+                <Route path="alerts" element={<Alerts />} />
+                <Route path="allUsers" element={<AllUsers />} />
+                <Route path="userProfile" element={<UserProfile />} />
+                <Route path="addTask" element={<AddTask />} />
+                <Route path="addTask/:id" element={<AddTask />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </DarkModeProvider>
       </Provider>
     </div>
   );
