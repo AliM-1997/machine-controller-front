@@ -1,0 +1,19 @@
+.card-box {
+  justify-content: space-between;
+  height: 40vw;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+.sparepart-card {
+  padding: 0 0 12px 0;
+  border-radius: 12px;
+}
+
+.underline-dark {
+  text-decoration: underline;
+  color: white;
+}
+.underline-light {
+  text-decoration: underline;
+  color: black;
+}
