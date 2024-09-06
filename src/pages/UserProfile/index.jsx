@@ -20,8 +20,11 @@ import Header from "../../components/Header";
 import whiteImage from "../../assets/images/white-bg.png";
 import whiteImge from "../../assets/images/white-bg.png";
 import Icon from "../../base/Icon";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 
 const UserProfile = () => {
+  const { darkMode } = useDarkMode();
+
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const user = useSelector((global) => global.user);
@@ -127,9 +130,15 @@ const UserProfile = () => {
               <Label
                 placeholder={user.id ? "Edite User Profile" : "Add User"}
                 fontWeight="bold"
+                backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+                textColor={darkMode ? "white" : "black"}
               />
             </h2>
-            <Icon icon={faAngleRight} onClick={handleCancel} />
+            <Icon
+              icon={faAngleRight}
+              onClick={handleCancel}
+              color={darkMode ? "white" : "black"}
+            />
           </div>
         </div>
         <div className="flex column gap full-height addtask-inputs white-bg center">

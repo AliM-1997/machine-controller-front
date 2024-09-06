@@ -14,7 +14,11 @@ import { useDispatch } from "react-redux";
 import { updateUser } from "../../data/redux/userSlice";
 import DisplayImage from "../../base/DisplayImage";
 import Header from "../../components/Header";
+import Label from "../../base/Label";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 const AllUsers = () => {
+  const { darkMode } = useDarkMode();
+
   const dispatch = useDispatch();
   const [allUsers, setAllUsers] = useState([]);
   const [searchUserId, setUserSearchId] = useState("");
@@ -77,11 +81,16 @@ const AllUsers = () => {
     <div>
       <Header pageName="User Management" options={options} />
       <div className="flex column users-container gap">
-        <div>
-          <h2> All Users</h2>
-        </div>
+        <h2>
+          <Label
+            placeholder="All Users"
+            backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+            textColor={darkMode ? "white" : "black"}
+          />
+        </h2>
         <div className="flex user-input-container">
           <Input
+            required={false}
             width="20vw"
             placeHolder="search by id"
             leftIcon={faSearch}
@@ -106,7 +115,7 @@ const AllUsers = () => {
             />
           </div>
         </div>
-        <div className=" user-table">
+        <div className=" user-table padding-30px white-bg">
           <table>
             <thead>
               <tr>
