@@ -18,6 +18,7 @@ import AddMachine from "./pages/AddMachine";
 import AllMachines from "./pages/AllMachines";
 import SelectedMachine from "./pages/SelectedMachine";
 import { DarkModeProvider } from "./data/constext/DarkModeContext";
+import AllSpareParts from "./pages/AllSparePart";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
                 <Route path="userProfile" element={<UserProfile />} />
                 <Route path="addTask" element={<AddTask />} />
                 <Route path="addTask/:id" element={<AddTask />} />
+                <Route path="allsparepart" element={<AllSpareParts />} />
               </Route>
             </Routes>
           </BrowserRouter>
