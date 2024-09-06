@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import SpareParts from "../../data/remote/spareParts";
+import SparePartCard from "../SparePartCard";
+import Label from "../../base/Label";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 const SparePartFilter = () => {
+  const { darkMode } = useDarkMode();
+  const [spareParts, setSpareParts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [choosenItem, setChoosenItem] = useState({
     Electrical: false,
     Mechanical: false,
     oil: false,
-    All: false,
+    All: true,
   });
+  console.log(spareParts);
   const itemChange = (key, value) => {
     setChoosenItem({
       Electrical: false,
@@ -18,8 +26,12 @@ const SparePartFilter = () => {
     });
   };
   const handleGetAllSpareParts = async () => {
+    setLoading(true);
     const response = await SpareParts.GetAllSpareParts();
-    console.log(response);
+    if (response && response.machineInputs.length > 0) {
+      setSpareParts(response.machineInputs);
+      setLoading(false);
+    }
   };
   useEffect(() => {
     handleGetAllSpareParts();
@@ -29,28 +41,68 @@ const SparePartFilter = () => {
       <table>
         <tr className="flex gap">
           <th
-            className={choosenItem.Electrical ? "underline" : ""}
+            className={
+              choosenItem.Electrical
+                ? darkMode
+                  ? "underline-dark"
+                  : "underline-light"
+                : ""
+            }
             onClick={() => itemChange("Electrical", true)}
           >
-            Electrical
+            <Label
+              placeholder={"Electrical"}
+              backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+              textColor={darkMode ? "white" : "black"}
+            />
           </th>
           <th
-            className={choosenItem.Mechanical ? "underline" : ""}
+            className={
+              choosenItem.Mechanical
+                ? darkMode
+                  ? "underline-dark"
+                  : "underline-light"
+                : ""
+            }
             onClick={() => itemChange("Mechanical", true)}
           >
-            Mechincal
+            <Label
+              placeholder={"Mechanical"}
+              backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+              textColor={darkMode ? "white" : "black"}
+            />
           </th>
           <th
-            className={choosenItem.oil ? "underline" : ""}
+            className={
+              choosenItem.oil
+                ? darkMode
+                  ? "underline-dark"
+                  : "underline-light"
+                : ""
+            }
             onClick={() => itemChange("oil", true)}
           >
-            Oil
+            <Label
+              placeholder={"Oil"}
+              backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+              textColor={darkMode ? "white" : "black"}
+            />
           </th>
           <th
-            className={choosenItem.All ? "underline" : ""}
+            className={
+              choosenItem.All
+                ? darkMode
+                  ? "underline-dark"
+                  : "underline-light"
+                : ""
+            }
             onClick={() => itemChange("All", true)}
           >
-            All
+            <Label
+              placeholder={"All"}
+              backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+              textColor={darkMode ? "white" : "black"}
+            />
           </th>
         </tr>
       </table>
