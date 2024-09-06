@@ -11,5 +11,14 @@ const SpareParts = {
       alert("No SparePart Found");
     }
   },
+  GetByType: async (type) => {
+    try {
+      const data = await requestApi({ route: `/sparePart/type/${type}` });
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      alert("No SparePart Found for the given type");
+    }
+  },
 };
 export default SpareParts;
