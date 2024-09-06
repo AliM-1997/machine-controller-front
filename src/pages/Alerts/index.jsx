@@ -38,7 +38,7 @@ const Alerts = () => {
       />
       <div
         className={`flex column notification-outer ${
-          darkMode ? "terchuery-bg" : "secondary-bg"
+          darkMode ? "tertiary-bg" : "secondary-bg"
         }`}
       >
         <div
