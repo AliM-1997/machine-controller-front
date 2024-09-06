@@ -25,7 +25,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ChooseOption from "../../base/ChooseOption";
 import Icon from "../../base/Icon";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 const AddMachine = () => {
+  const { darkMode } = useDarkMode();
   const response = useSelector((global) => global);
   const [formData, setFormData] = useState({
     name: "",
@@ -161,9 +163,17 @@ const AddMachine = () => {
           <div className="flex space-btw title ">
             <h2>
               {machine.id ? (
-                <Label placeholder={"Edit Machine"} />
+                <Label
+                  placeholder={"Edit Machine"}
+                  backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+                  textColor={darkMode ? "white" : "black"}
+                />
               ) : (
-                <Label placeholder={"Add Machine"} />
+                <Label
+                  placeholder={"Add Machine"}
+                  backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+                  textColor={darkMode ? "white" : "black"}
+                />
               )}
             </h2>
             <div className="flex center">

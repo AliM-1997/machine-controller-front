@@ -12,7 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoadMachine, UpdateMachine } from "../../data/redux/machineSlice";
 import SelectedMachine from "../SelectedMachine";
 import ChooseOption from "../../base/ChooseOption";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 const AllMachines = () => {
+  const { darkMode } = useDarkMode();
   const response = useSelector((global) => global);
   const dispatch = useDispatch();
   const [allMachines, setAllMachines] = useState([]);
@@ -79,7 +81,11 @@ const AllMachines = () => {
         <div className="flex column gap machines-container">
           <div>
             <h2>
-              <Label placeholder="All Machines" />
+              <Label
+                placeholder="All Machines"
+                backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+                textColor={darkMode ? "white" : "black"}
+              />
             </h2>
           </div>
           <div className="all-card flex row  full-width space-btw search-bar">
