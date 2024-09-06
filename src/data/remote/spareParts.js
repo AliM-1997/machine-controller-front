@@ -20,5 +20,14 @@ const SpareParts = {
       alert("No SparePart Found for the given type");
     }
   },
+  GetAllSerialNumbers: async () => {
+    try {
+      const data = await requestApi({ route: "/sparePart/serial/numbers" });
+      return data;
+    } catch (error) {
+      console.error("Error creating user:", error.message);
+      alert("No SparePart Found ");
+    }
+  },
 };
 export default SpareParts;
