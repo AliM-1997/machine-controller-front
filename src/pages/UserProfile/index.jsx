@@ -130,7 +130,7 @@ const UserProfile = () => {
               <Label
                 placeholder={user.id ? "Edite User Profile" : "Add User"}
                 fontWeight="bold"
-                backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+                backgroundColor={darkMode ? "tertiary-bg" : "secondary"}
                 textColor={darkMode ? "white" : "black"}
               />
             </h2>

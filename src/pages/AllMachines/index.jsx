@@ -83,7 +83,7 @@ const AllMachines = () => {
             <h2>
               <Label
                 placeholder="All Machines"
-                backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+                backgroundColor={darkMode ? "tertiary-bg" : "secondary"}
                 textColor={darkMode ? "white" : "black"}
               />
             </h2>

@@ -165,13 +165,13 @@ const AddMachine = () => {
               {machine.id ? (
                 <Label
                   placeholder={"Edit Machine"}
-                  backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+                  backgroundColor={darkMode ? "tertiary-bg" : "secondary"}
                   textColor={darkMode ? "white" : "black"}
                 />
               ) : (
                 <Label
                   placeholder={"Add Machine"}
-                  backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+                  backgroundColor={darkMode ? "tertiary-bg" : "secondary"}
                   textColor={darkMode ? "white" : "black"}
                 />
               )}

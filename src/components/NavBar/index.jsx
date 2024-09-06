@@ -44,7 +44,7 @@ const NavBar = ({ onNavigate, isClick }) => {
         ? "primary"
         : "secondary"
       : isClick === name
-      ? "terchuery"
+      ? "tertiary"
       : "white",
     iconColor: !darkMode
       ? isClick === name

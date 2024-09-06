@@ -104,7 +104,7 @@ const AddTask = () => {
             <Label
               placeholder={id ? "Edit Task" : "Add Task"}
               fontWeight="bold"
-              backgroundColor={darkMode ? "terchuery-bg" : "secondary"}
+              backgroundColor={darkMode ? "tertiary-bg" : "secondary"}
               textColor={darkMode ? "white" : "black"}
             />
           </h2>
