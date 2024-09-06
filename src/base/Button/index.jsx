@@ -14,8 +14,7 @@ const Button = ({
   iconColor = "black",
   border = false,
   start = false,
-  mode = false,
-  modeChange,
+  mode,
 }) => {
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
@@ -49,13 +48,7 @@ const Button = ({
               <Icon icon={leftIcon} color={iconColor} />
               {placeHolder}
             </div>
-            <>
-              {mode ? (
-                <Slider modeChange={modeChange} />
-              ) : (
-                <Icon icon={rightIcon} />
-              )}
-            </>
+            <>{mode ? <Slider /> : <Icon icon={rightIcon} />}</>
           </>
         ) : (
           <>
