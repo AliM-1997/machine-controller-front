@@ -106,6 +106,19 @@ const SparePartFilter = () => {
           </th>
         </tr>
       </table>
+      <div className="flex wrap gap full-width  card-box ">
+        {loading && <p>Loading...</p>}
+        {error && <p className="error">{error}</p>}
+        {!loading &&
+          spareParts.length > 0 &&
+          spareParts.map((sparePart) => (
+            <SparePartCard
+              className="sparepart-card"
+              key={sparePart.id}
+              sparePart={sparePart}
+            />
+          ))}
+      </div>
     </div>
   );
 };
