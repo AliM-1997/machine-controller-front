@@ -34,7 +34,7 @@ export const authRemote = {
       authLocal.saveToken(null);
       console.log("Logout successful:", data);
     } catch (error) {
-      throw error;
+      // throw error;
     }
   },
 };

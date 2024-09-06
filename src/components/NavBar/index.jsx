@@ -1,5 +1,6 @@
-import React from "react";
-import logo from "../../assets/images/logo.png";
+import React, { useEffect, useState } from "react";
+import logoLight from "../../assets/images/logoLight.png";
+import logoDark from "../../assets/images/LogoDark.png";
 import "./style.css";
 import Button from "../../base/Button";
 import {
@@ -18,13 +19,14 @@ import { authRemote } from "../../data/remote/Auth_user";
 import { authLocal } from "../../data/local/Auth_local";
 const NavBar = ({ onNavigate, isClick }) => {
   const navigate = useNavigate();
+  const [darkMode, setDarkMode] = useState(false);
 
   const handleLogout = async () => {
     navigate("/login");
     const data = await authRemote.Logout();
     authLocal.clearToken();
   };
-
+  console.log(darkMode);
   const handleClickedButton = (buttonName, path) => {
     onNavigate(buttonName);
     navigate(path);
@@ -42,13 +44,25 @@ const NavBar = ({ onNavigate, isClick }) => {
     },
   });
 
+  const hadnleMode = () => {
+    if (darkMode) {
+      setDarkMode(false);
+    } else {
+      setDarkMode(true);
+    }
+  };
   return (
-    <div className="flex column nav-container white-bg full-width full-height space-btw">
+    <div
+      className={`flex column nav-container ${
+        darkMode ? "black-bg" : "white-bg"
+      } full-width full-height space-btw`}
+    >
       <div className="top-nav">
         <div className="flex center logo-container">
-          <img src={logo} alt="Logo" />
+          <img src={darkMode ? logoDark : logoLight} alt="Logo" />
           <h1>
-            <span className="highlight">D</span>ustry
+            <span className="highlight">D</span>
+            <span className={darkMode ? "white-txt" : "black-txt"}>ustry</span>
           </h1>
         </div>
 
@@ -64,9 +78,12 @@ const NavBar = ({ onNavigate, isClick }) => {
       <div className="flex column center gap">
         <Button
           placeHolder="Dark Mode"
+          backgroundColor={!darkMode ? "secondary" : "white"}
           width="12vw"
           leftIcon={faMoon}
-          iconColor="#00b7eb"
+          iconColor={!darkMode ? "black" : "white"}
+          onClick={hadnleMode}
+          mode
         />
         <Button
           placeHolder="Logout"
