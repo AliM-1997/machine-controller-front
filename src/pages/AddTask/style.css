@@ -6,3 +6,6 @@
   padding: 30px;
   border-radius: 12px;
 }
+.error {
+  color: red;
+}

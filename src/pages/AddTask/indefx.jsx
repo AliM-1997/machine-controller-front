@@ -25,7 +25,6 @@ const AddTask = () => {
 
   const { id } = useParams();
   const task = useSelector((global) => global);
-  console.log(task);
   const [formData, setFormData] = useState({
     user_id: "",
     machine_id: "",
@@ -39,8 +38,7 @@ const AddTask = () => {
     machine_serial_number: "",
     spare_part_serial_number: "",
   });
-
-
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -63,16 +61,17 @@ const AddTask = () => {
   };
   const handleCreateTask = async () => {
     if (id) {
-      if(!formData.location||!formData.jobDescription||formData.dueDate||formData.status||formData.assignedDate||for)
       const updateDate = await Tasks.UpdateTask(id, formData);
       if (updateDate) {
         alert("Task Updated Successfully");
-        console.log(updateDate);
       }
     } else {
-      const createData = await Tasks.CreateTaskByUsername(formData);
-      if (createData) {
-        alert("Task Created Successfully");
+      if (validateForm()) {
+        const createData = await Tasks.CreateTaskByUsername(formData);
+        console.log(createData);
+        if (createData) {
+          alert("Task Created Successfully");
+        }
       }
     }
   };
@@ -103,6 +102,22 @@ const AddTask = () => {
     { label: "In Progress" },
     { label: "Pending" },
   ];
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.location) newErrors.location = "Location is required.";
+    if (!formData.jobDescription)
+      newErrors.jobDescription = "Job Description is required.";
+    if (!formData.assignedDate)
+      newErrors.assignedDate = "Assigned Date is required.";
+    if (!formData.dueDate) newErrors.dueDate = "Due Date is required.";
+    if (!formData.status) newErrors.status = "Status is required.";
+    if (!formData.machine_serial_number)
+      newErrors.machine_serial_number = "Machine Serial Number is required.";
+    if (!formData.username) newErrors.username = "Username is required.";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
   return (
     <div>
       <Header pageName="Tasks" showChooseInput={true} options={options} />
@@ -124,27 +139,39 @@ const AddTask = () => {
         </div>
         <div className="flex column gap full-height addtask-inputs white-bg ">
           <div className="flex row center space-btw full-width">
-            <ChooseOption
-              name="Machine Serial Number"
-              placeHolder={formData.machine_serial_number || "choose machine "}
-              options={task.data.MachineSerialNumber}
-              leftIcon={faSearch}
-              width="24vw"
-              type="text"
-              onSelect={(e) =>
-                ChangingFormIput("machine_serial_number", e.label)
-              }
-            />
-            <ChooseOption
-              name="Username"
-              placeholder={"choose user"}
-              options={task.data.UserNames}
-              onSelect={(e) => ChangingFormIput("username", e.label)}
-              width="24vw"
-              textColor="black"
-              leftIcon={faSearch}
-              required={false}
-            />
+            <div className="flex column">
+              <ChooseOption
+                name="Machine Serial Number"
+                placeHolder={
+                  formData.machine_serial_number || "choose machine "
+                }
+                options={task.data.MachineSerialNumber}
+                leftIcon={faSearch}
+                width="24vw"
+                type="text"
+                onSelect={(e) =>
+                  ChangingFormIput("machine_serial_number", e.label)
+                }
+              />
+              {errors.machine_serial_number && (
+                <div className="error">{errors.machine_serial_number}</div>
+              )}
+            </div>
+            <div className="flex column">
+              <ChooseOption
+                name="Username"
+                placeholder={"choose user"}
+                options={task.data.UserNames}
+                onSelect={(e) => ChangingFormIput("username", e.label)}
+                width="24vw"
+                textColor="black"
+                leftIcon={faSearch}
+                required={true}
+              />
+              {errors.username && (
+                <div className="error">{errors.username}</div>
+              )}
+            </div>
           </div>
           <div className="flex row center space-btw full-width">
             <ChooseOption
@@ -161,35 +188,46 @@ const AddTask = () => {
                 ChangingFormIput("spare_part_serial_number", e.label)
               }
             />
-            <ChooseOption
-              options={Taskstatus}
-              name="Status"
-              placeHolder={formData.status || "pending"}
-              leftIcon={faSearch}
-              width="24vw"
-              type="text"
-              onSelect={(e) => ChangingFormIput("status", e.label)}
-            />
+            <div className="flex column">
+              <ChooseOption
+                options={Taskstatus}
+                name="Status"
+                placeHolder={formData.status || "pending"}
+                leftIcon={faSearch}
+                width="24vw"
+                type="text"
+                onSelect={(e) => ChangingFormIput("status", e.label)}
+              />
+              {errors.status && <div className="error">{errors.status}</div>}
+            </div>
           </div>
           <div className="flex row center space-btw full-width">
-            <ReactDate
-              leftIcon={faCalendarAlt}
-              mindata={true}
-              name="Assigned Date"
-              required={true}
-              width="24vw"
-              onChange={(e) => ChangingFormIput("assignedDate", e)}
-            />
-            <ReactDate
-              leftIcon={faCalendarAlt}
-              mindata={true}
-              name="Due Date"
-              width="24vw"
-              onChange={(e) => ChangingFormIput("dueDate", e)}
-              required={true}
-            />
+            <div className="flex column">
+              <ReactDate
+                leftIcon={faCalendarAlt}
+                mindata={true}
+                name="Assigned Date"
+                required={true}
+                width="24vw"
+                onChange={(e) => ChangingFormIput("assignedDate", e)}
+              />
+              {errors.assignedDate && (
+                <div className="error">{errors.assignedDate}</div>
+              )}
+            </div>
+            <div className="flex column">
+              <ReactDate
+                leftIcon={faCalendarAlt}
+                mindata={true}
+                name="Due Date"
+                width="24vw"
+                onChange={(e) => ChangingFormIput("dueDate", e)}
+                required={true}
+              />
+              {errors.dueDate && <div className="error">{errors.dueDate}</div>}
+            </div>
           </div>
-          <div className="full-width">
+          <div className=" flex column full-width">
             <Input
               placeHolder={"location"}
               name="Location"
@@ -198,8 +236,9 @@ const AddTask = () => {
               type="text"
               onChange={(e) => ChangingFormIput("location", e.target.value)}
             />
+            {errors.location && <div className="error">{errors.location}</div>}
           </div>
-          <div className="full-width">
+          <div className="full-width flex column">
             <Input
               placeHolder={"task"}
               name="Job Description"
@@ -210,6 +249,9 @@ const AddTask = () => {
                 ChangingFormIput("jobDescription", e.target.value)
               }
             />
+            {errors.jobDescription && (
+              <div className="error">{errors.jobDescription}</div>
+            )}
           </div>
 
           <div className="flex end gap">
