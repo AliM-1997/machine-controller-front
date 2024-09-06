@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import logoLight from "../../assets/images/logoLight.png";
 import logoDark from "../../assets/images/LogoDark.png";
 import "./style.css";
 import Button from "../../base/Button";
 import {
   faGear,
-  faBell,
   faTh,
   faUsers,
   faClipboard,
@@ -17,26 +16,41 @@ import {
 import { useNavigate } from "react-router-dom";
 import { authRemote } from "../../data/remote/Auth_user";
 import { authLocal } from "../../data/local/Auth_local";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
+
 const NavBar = ({ onNavigate, isClick }) => {
+  const { darkMode } = useDarkMode();
   const navigate = useNavigate();
-  const [darkMode, setDarkMode] = useState(false);
 
   const handleLogout = async () => {
-    navigate("/login");
-    const data = await authRemote.Logout();
+    await authRemote.Logout();
     authLocal.clearToken();
+    navigate("/login");
   };
-  console.log(darkMode);
+
   const handleClickedButton = (buttonName, path) => {
     onNavigate(buttonName);
     navigate(path);
   };
+
   const navButton = (name, icon, path) => ({
     placeHolder: name,
     width: "12vw",
     leftIcon: icon,
-    backgroundColor: isClick === name ? "primary" : "secondary",
-    iconColor: isClick === name ? "white" : "#00b7eb",
+    backgroundColor: !darkMode
+      ? isClick === name
+        ? "primary"
+        : "secondary"
+      : isClick === name
+      ? "terchuery"
+      : "white",
+    iconColor: !darkMode
+      ? isClick === name
+        ? "black"
+        : "white"
+      : isClick === name
+      ? "black"
+      : "primary",
     rightIcon: isClick === name ? faChevronRight : null,
     textColor: isClick === name ? "white" : "black",
     onClick: () => {
@@ -44,13 +58,6 @@ const NavBar = ({ onNavigate, isClick }) => {
     },
   });
 
-  const hadnleMode = () => {
-    if (darkMode) {
-      setDarkMode(false);
-    } else {
-      setDarkMode(true);
-    }
-  };
   return (
     <div
       className={`flex column nav-container ${
@@ -82,7 +89,6 @@ const NavBar = ({ onNavigate, isClick }) => {
           width="12vw"
           leftIcon={faMoon}
           iconColor={!darkMode ? "black" : "white"}
-          onClick={hadnleMode}
           mode
         />
         <Button
