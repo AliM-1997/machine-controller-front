@@ -2,6 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   MachineSerialNumber: [],
   MachineNames: [],
+  UserNames: [],
+  SparePartSerialNumber: [],
+  UnReadNotification: 0,
 };
 const data = createSlice({
   initialState: initialState,
