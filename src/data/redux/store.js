@@ -4,6 +4,7 @@ import { taskReducer } from "./taskSlice";
 import { machineReducre } from "./machineSlice";
 import { statisticReducer } from "./statisticSlice";
 import { dataReducer } from "./dataSlice";
+import { notificationReducer } from "./notification";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     machine: machineReducre,
     statistic: statisticReducer,
     data: dataReducer,
+    notification: notificationReducer,
   },
 });
 export default store;
