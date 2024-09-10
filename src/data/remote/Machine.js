@@ -12,20 +12,18 @@ export const Machines = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
     }
   },
-  UpadateMachine: async (id, formData) => {
+  UpadateMachine: async (machine, formData) => {
     try {
       const data = await requestApi({
-        route: `/machine/${id}`,
+        route: `/machine/${machine}`,
         requestMethod: RequestMethods.PUT,
         body: formData,
       });
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
     }
   },
   DeleteMachine: async (id) => {
@@ -34,10 +32,10 @@ export const Machines = {
         route: `/machine/${id}`,
         requestMethod: RequestMethods.DELETE,
       });
+      console.log("asdsadasdD", data);
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
     }
   },
   GetMachineById: async (id) => {
@@ -46,7 +44,6 @@ export const Machines = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
     }
   },
   GetAllMachines: async () => {
@@ -55,7 +52,6 @@ export const Machines = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
     }
   },
   DeleteImage: async (id) => {
@@ -67,7 +63,6 @@ export const Machines = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
     }
   },
   UploadImage: async (file, id) => {
@@ -82,7 +77,6 @@ export const Machines = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
     }
   },
   GetMachineByName: async (name) => {
@@ -91,7 +85,6 @@ export const Machines = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
     }
   },
   GetAllMachineSerialNumber: async () => {
@@ -100,7 +93,6 @@ export const Machines = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
     }
   },
   GetAllMachineAllNames: async () => {
@@ -109,7 +101,6 @@ export const Machines = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
     }
   },
 };
