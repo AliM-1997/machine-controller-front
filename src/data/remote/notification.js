@@ -1,6 +1,5 @@
 import { requestApi } from "../../utils/request";
 import { RequestMethods } from "../../utils/request_methods";
-
 export const Notifications = {
   UnReadNotification: async () => {
     try {

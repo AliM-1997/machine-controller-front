@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Input from "../../base/Input";
 import {
@@ -10,8 +11,8 @@ import {
 import Icon from "../../base/Icon";
 import DropButton from "../../base/DropButton";
 import "./style.css";
-import { useSelector } from "react-redux";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
+
 const Header = ({
   pageName,
   showChooseInput = true,
@@ -21,9 +22,15 @@ const Header = ({
   border = true,
   textColor_btn = "black",
 }) => {
-  const state = useSelector((global) => global.data);
+  const state = useSelector((state) => state.data);
   const { darkMode } = useDarkMode();
   const navigate = useNavigate();
+  const [notificationCount, setNotificationCount] = useState(0);
+
+  useEffect(() => {
+    setNotificationCount(state.UnReadNotification);
+  }, [state.UnReadNotification]);
+
   const handleSelect = (option) => {
     if (option.url) {
       navigate(`/${option.url}`);
@@ -31,9 +38,11 @@ const Header = ({
       console.log("Invalid option selected");
     }
   };
+
   const handleNavigateAlerts = () => {
     navigate("/alerts");
   };
+
   return (
     <div className={`header-container ${darkMode ? "black-bg" : "white-bg"}`}>
       <div className="flex row gap">
@@ -60,9 +69,9 @@ const Header = ({
               className=""
               onClick={handleNavigateAlerts}
             />
-            {state.UnReadNotification > 0 && (
-              <div className=" flex center notification-count">
-                {state.UnReadNotification}
+            {notificationCount > 0 && (
+              <div className="flex center notification-count">
+                {notificationCount}
               </div>
             )}
             <Icon icon={faUser} color="primary" />
