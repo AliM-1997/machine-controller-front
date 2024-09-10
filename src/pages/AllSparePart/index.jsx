@@ -6,10 +6,13 @@ import { useDarkMode } from "../../data/constext/DarkModeContext";
 import SparePartFilter from "../../components/SparePartFilter";
 const AllSpareParts = () => {
   const { darkMode } = useDarkMode();
-
+  const options = [
+    { label: "All SparePrts", url: "allsparepart" },
+    { label: "Add SparePart", url: "addsparepart" },
+  ];
   return (
     <div>
-      <Header pageName={"Spare Parts"} />
+      <Header pageName={"Spare Parts"} options={options} />
       <div className="flex column allsparepart-container gap">
         <div>
           <h2>

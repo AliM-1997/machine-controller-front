@@ -6,7 +6,6 @@ import Button from "../../base/Button";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
 const Alerts = () => {
   const { darkMode } = useDarkMode();
-  console.log("asdasdasdasd", darkMode);
   const [nonRead, setNoneRead] = useState([]);
   const handleUnReadNotification = async () => {
     const response = await Notifications.UnReadNotification();

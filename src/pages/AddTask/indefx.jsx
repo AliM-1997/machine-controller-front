@@ -19,10 +19,10 @@ import { Tasks } from "../../data/remote/Tasks";
 import Header from "../../components/Header";
 import ChooseOption from "../../base/ChooseOption";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
+import { incrementNotification } from "../../data/redux/notification";
 
 const AddTask = () => {
   const { darkMode } = useDarkMode();
-
   const { id } = useParams();
   const task = useSelector((global) => global);
   const [formData, setFormData] = useState({
@@ -71,6 +71,8 @@ const AddTask = () => {
         console.log(createData);
         if (createData) {
           alert("Task Created Successfully");
+          dispatch(incrementNotification());
+          console.log(dispatch(incrementNotification()));
         }
       }
     }

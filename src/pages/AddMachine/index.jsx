@@ -29,10 +29,11 @@ import { useDarkMode } from "../../data/constext/DarkModeContext";
 const AddMachine = () => {
   const { darkMode } = useDarkMode();
   const response = useSelector((global) => global);
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     name: "",
     serial_number: "",
-    status: "active",
+    status: "",
     location: "",
     image_path: "",
     description: "",
@@ -56,30 +57,24 @@ const AddMachine = () => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       ...machine,
-      last_maintenance: machine.last_maintenance
-        ? new Date(machine.last_maintenance)
-        : null,
     }));
   }, [machine]);
 
   const handleCreateMachine = async () => {
-    const dataToSend = {
-      ...formData,
-      last_maintenance: Functions.ToDateformat(formData.last_maintenance),
-    };
     if (machine.id) {
-      const updateDate = await Machines.UpadateMachine(machine.id, dataToSend);
+      const updateDate = await Machines.UpadateMachine(machine.id, formData);
       if (updateDate) {
         dispatch(LoadMachine(updateDate));
         alert("Machine Updated Successfully");
       }
     } else {
-      const createData = await Machines.CreateMachine(formData);
-      console.log("testing", createData);
-      if (createData) {
-        handleUploadImage();
-        alert("Machine Created Successfullty");
-        allmachineNavigaet();
+      if (validateForm()) {
+        const createData = await Machines.CreateMachine(formData);
+        if (createData) {
+          handleUploadImage();
+          alert("Machine Created Successfullty");
+          allmachineNavigaet();
+        }
       }
     }
   };
@@ -151,6 +146,25 @@ const AddMachine = () => {
     ChangingFormData(name, option.label);
   };
   const allmachineNavigaet = () => navigate("/allmachines");
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.name) newErrors.name = "Name is required.";
+    if (!formData.serial_number)
+      newErrors.serial_number = "Serial Number is required.";
+    if (!formData.unit_per_hour)
+      newErrors.unit_per_hour = "Units Per Hour is required.";
+    if (!formData.status) newErrors.status = "status is required.";
+
+    if (!formData.last_maintenance) {
+      newErrors.last_maintenance = " last maintenance date required.";
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
   return (
     <div>
       <Header
@@ -232,48 +246,64 @@ const AddMachine = () => {
             </div>
           )}
           <div className=" flex column gap-btn">
-            <div className="flex gap full-width center">
-              <Input
-                placeHolder={machine.name || "name"}
-                name="Name"
-                width="24vw"
-                leftIcon={faUser}
-                type="text"
-                onChange={(e) => {
-                  ChangingFormData("name", e.target.value);
-                }}
-              />
-              <Input
-                leftIcon={faAt}
-                placeHolder={machine.serial_number || "serial number"}
-                name="Serial Number"
-                width="24vw"
-                type="text"
-                onChange={(e) => {
-                  ChangingFormData("serial_number", e.target.value);
-                }}
-              />
+            <div className="flex gap full-width start">
+              <div className="flex column">
+                <Input
+                  placeHolder={machine.name || "name"}
+                  name="Name"
+                  width="24vw"
+                  leftIcon={faUser}
+                  type="text"
+                  onChange={(e) => {
+                    ChangingFormData("name", e.target.value);
+                  }}
+                />
+                {errors.name && <p className="error">{errors.name}</p>}
+              </div>
+              <div className="flex column">
+                <Input
+                  leftIcon={faAt}
+                  placeHolder={machine.serial_number || "serial number"}
+                  name="Serial Number"
+                  width="24vw"
+                  type="text"
+                  onChange={(e) => {
+                    ChangingFormData("serial_number", e.target.value);
+                  }}
+                />
+                {errors.serial_number && (
+                  <p className="error">{errors.serial_number}</p>
+                )}
+              </div>
             </div>
-            <div className="flex gap full-width center">
-              <Input
-                name="Units Per Hour"
-                placeHolder="number"
-                width="24vw"
-                leftIcon={faHashtag}
-                type="text"
-                onChange={(e) => {
-                  ChangingFormData("unit_per_hour", e.target.value);
-                }}
-              />
-              <ChooseOption
-                options={statusOption}
-                onSelect={(option) => handleOptionSelect("status", option)}
-                width="24vw"
-                textColor="black"
-                required={true}
-                leftIcon={faAngleDown}
-                name="Status"
-              />
+            <div className="flex gap full-width start">
+              <div className="flex column">
+                <Input
+                  name="Units Per Hour"
+                  placeHolder="number"
+                  width="24vw"
+                  leftIcon={faHashtag}
+                  type="text"
+                  onChange={(e) => {
+                    ChangingFormData("unit_per_hour", e.target.value);
+                  }}
+                />
+                {errors.unit_per_hour && (
+                  <p className="error">{errors.unit_per_hour}</p>
+                )}
+              </div>
+              <div className=" flex column">
+                <ChooseOption
+                  options={statusOption}
+                  onSelect={(option) => handleOptionSelect("status", option)}
+                  width="24vw"
+                  textColor="black"
+                  required={false}
+                  leftIcon={faAngleDown}
+                  name="Status"
+                />
+                {errors.status && <p className="error">{errors.status}</p>}
+              </div>
             </div>
 
             <div className="flex center ">
@@ -303,13 +333,18 @@ const AddMachine = () => {
               />
             </div>
             <div className="flex center space-arr">
-              <ReactDate
-                leftIcon={faCalendarDays}
-                name="Last Maintenance"
-                width="calc(48vw + 24px)"
-                placeHolder={"dd/MM/yyyy"}
-                onChange={(e) => ChangingFormData("last_maintenance", e)}
-              />
+              <div className="flex column">
+                <ReactDate
+                  leftIcon={faCalendarDays}
+                  name="Last Maintenance"
+                  width="calc(48vw + 24px)"
+                  placeHolder={"dd/MM/yyyy"}
+                  onChange={(e) => ChangingFormData("last_maintenance", e)}
+                />
+                {errors.last_maintenance && (
+                  <p className="error">{errors.last_maintenance}</p>
+                )}
+              </div>
             </div>
             <div className="flex end gap btn-con">
               <Button
