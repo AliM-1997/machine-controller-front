@@ -26,6 +26,47 @@ const BarGraph = ({ datas = [], type, title, label }) => {
   let datasets = [];
 
   switch (type) {
+    case "Predictions Probability":
+      datasets.push(
+        {
+          label: "Heat",
+          data: data.map(
+            (item) => parseFloat(item.Heat_Dissipation_Failure) || 0
+          ),
+          backgroundColor: "rgba(255, 0, 0, 1)",
+          borderRadius: 6,
+          barThickness: 12,
+        },
+        {
+          label: "Strain",
+          data: data.map((item) => parseFloat(item.Overstrain_Failure) || 0),
+          backgroundColor: "rgba(255, 255, 0, 1)",
+          borderRadius: 6,
+          barThickness: 12,
+        },
+        {
+          label: "Power",
+          data: data.map((item) => parseFloat(item.Power_Failure) || 0),
+          backgroundColor: "rgba(0, 0, 255, 1)",
+          borderRadius: 6,
+          barThickness: 12,
+        },
+        {
+          label: "Tool Wear",
+          data: data.map((item) => parseFloat(item.Tool_Wear_Failure) || 0),
+          backgroundColor: "rgba( 0, 0, 0)",
+          borderRadius: 6,
+          barThickness: 12,
+        },
+        {
+          label: "No Failure",
+          data: data.map((item) => parseFloat(item.No_Failure) || 0),
+          backgroundColor: "rgba(0, 255, 0, 1)",
+          borderRadius: 6,
+          barThickness: 12,
+        }
+      );
+      break;
     case "uptime_downtime":
       datasets.push(
         {
@@ -151,4 +192,5 @@ const BarGraph = ({ datas = [], type, title, label }) => {
     </div>
   );
 };
+
 export default BarGraph;
