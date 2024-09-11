@@ -49,4 +49,18 @@ export const MachineStatistics = {
       alert("No statistics found between given dates.");
     }
   },
+  CreateMachineStatisticCalculation: async (formData) => {
+    console.log("formdata", formData);
+    try {
+      const data = await requestApi({
+        route: "machineStatistics/calculations",
+        requestMethod: RequestMethods.POST,
+        body: formData[0],
+      });
+      console.log("data", data);
+      return data;
+    } catch (error) {
+      alert("Statistic Note Created Try again");
+    }
+  },
 };
