@@ -4,12 +4,15 @@ import SpareParts from "../../data/remote/spareParts";
 import SparePartCard from "../SparePartCard";
 import Label from "../../base/Label";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
+import { useNavigate } from "react-router-dom";
 
 const SparePartFilter = () => {
   const { darkMode } = useDarkMode();
   const [spareParts, setSpareParts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
   const [choosenItem, setChoosenItem] = useState({
     Electrical: false,
     Mechanical: false,
@@ -25,6 +28,10 @@ const SparePartFilter = () => {
       All: false,
       [key]: value,
     });
+  };
+
+  const handleEdite = (id) => {
+    navigate(`/addSparepart/${id}`);
   };
 
   const handleGetAllSpareParts = async () => {
@@ -74,7 +81,23 @@ const SparePartFilter = () => {
     <div>
       <table>
         <tbody>
-          <tr className="flex gap">
+          <tr className="flex gap sparepart-filter">
+            <th
+              className={
+                choosenItem.All
+                  ? darkMode
+                    ? "underline-dark"
+                    : "underline-light"
+                  : ""
+              }
+              onClick={() => itemChange("All", true)}
+            >
+              <Label
+                placeholder={"All"}
+                backgroundColor={darkMode ? "tertiary-bg" : "secondary"}
+                textColor={darkMode ? "white" : "black"}
+              />
+            </th>
             <th
               className={
                 choosenItem.Electrical
@@ -123,22 +146,6 @@ const SparePartFilter = () => {
                 textColor={darkMode ? "white" : "black"}
               />
             </th>
-            <th
-              className={
-                choosenItem.All
-                  ? darkMode
-                    ? "underline-dark"
-                    : "underline-light"
-                  : ""
-              }
-              onClick={() => itemChange("All", true)}
-            >
-              <Label
-                placeholder={"All"}
-                backgroundColor={darkMode ? "tertiary-bg" : "secondary"}
-                textColor={darkMode ? "white" : "black"}
-              />
-            </th>
           </tr>
         </tbody>
       </table>
@@ -152,6 +159,7 @@ const SparePartFilter = () => {
               className="sparepart-card"
               key={sparePart.id}
               sparePart={sparePart}
+              onEdit={() => handleEdite(sparePart.id)}
             />
           ))}
       </div>
