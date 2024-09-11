@@ -44,17 +44,23 @@ const NavBar = ({ onNavigate, isClick }) => {
         ? "primary"
         : "secondary"
       : isClick === name
-      ? "tertiary"
-      : "white",
+      ? "primary"
+      : "tertiary",
     iconColor: !darkMode
       ? isClick === name
         ? "white"
         : "black"
       : isClick === name
-      ? "black"
-      : "primary",
+      ? "white"
+      : "white",
     rightIcon: isClick === name ? faChevronRight : null,
-    textColor: isClick === name ? "white" : "black",
+    textColor: !darkMode
+      ? isClick === name
+        ? "white"
+        : "black"
+      : isClick === name
+      ? "white"
+      : "white",
     onClick: () => {
       handleClickedButton(name, path);
     },
@@ -88,17 +94,21 @@ const NavBar = ({ onNavigate, isClick }) => {
       <div className="flex column center gap">
         <Button
           placeHolder="Dark Mode"
-          backgroundColor={!darkMode ? "secondary" : "white"}
+          backgroundColor={!darkMode ? "secondary" : "tertiary"}
           width="12vw"
           leftIcon={faMoon}
           iconColor={!darkMode ? "black" : "white"}
           mode
+          textColor={!darkMode ? "black" : "white"}
         />
         <Button
           placeHolder="Logout"
+          backgroundColor={!darkMode ? "secondary" : "tertiary"}
           width="12vw"
           leftIcon={faRightFromBracket}
+          iconColor={!darkMode ? "black" : "white"}
           onClick={handleLogout}
+          textColor={!darkMode ? "black" : "white"}
         />
       </div>
     </div>
