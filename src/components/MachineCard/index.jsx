@@ -8,6 +8,7 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import HighlightLabel from "../../base/HighlightLable";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 
 const MachineCard = ({
   label = null,
@@ -19,6 +20,13 @@ const MachineCard = ({
   onPreview,
   selected = false,
 }) => {
+  const { darkMode } = useDarkMode();
+  React.useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-theme",
+      darkMode ? "dark" : "light"
+    );
+  }, [darkMode]);
   return (
     <div className="machine-card flex column white-bg ">
       <DisplayImage
@@ -28,18 +36,34 @@ const MachineCard = ({
         height={height}
         className="only-image"
       />
-      <div className="flex column machine-info ">
+      <div
+        className={`flex column machine-info ${
+          darkMode ? "black-bg" : "white-bg"
+        }`}
+      >
         <div>
           <h1>{label}</h1>
         </div>
         <div className=" flex space-btw">
-          <div>
+          <div className={`${darkMode ? "white-txt" : "black-txt"}`}>
             <h2>{machineData.name}</h2>
           </div>
           <div className="flex gap-btn ">
-            <Icon icon={faEdit} color={"black"} onClick={onEdit} />
-            <Icon icon={faTrashCan} color={"black"} onClick={onDelete} />
-            <Icon icon={faAngleRight} onClick={onPreview} />
+            <Icon
+              icon={faEdit}
+              color={!darkMode ? "black" : "white"}
+              onClick={onEdit}
+            />
+            <Icon
+              icon={faTrashCan}
+              color={!darkMode ? "black" : "white"}
+              onClick={onDelete}
+            />
+            <Icon
+              icon={faAngleRight}
+              onClick={onPreview}
+              color={!darkMode ? "black" : "white"}
+            />
           </div>
         </div>
         <div className="info-table">
