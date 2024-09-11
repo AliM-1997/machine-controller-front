@@ -8,7 +8,10 @@ import ChooseOption from "../../base/ChooseOption";
 import { useSelector } from "react-redux";
 import DashboardFilter from "../../components/DashboardFilter";
 import "./style.css";
+import Label from "../../base/Label";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 const Dashboard = () => {
+  const { darkMode } = useDarkMode();
   const response = useSelector((global) => global);
   const [showFilter, setShowFilter] = useState(false);
   const [formData, setFormData] = useState({
@@ -107,7 +110,13 @@ const Dashboard = () => {
       <Header pageName={"Dashboard"} />
       <div className="flex center column gap dashboard-container">
         <div className="stat-title">
-          <h2>Machine Statistics</h2>
+          <h2>
+            <Label
+              placeholder={"Machine Statistics"}
+              backgroundColor={darkMode ? "tertiary-bg" : "secondary"}
+              textColor={darkMode ? "white" : "black"}
+            />
+          </h2>
         </div>
         <div className="flex row space-btw stat-input gap">
           <div className="flex gap">

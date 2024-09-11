@@ -14,6 +14,9 @@ const Login = () => {
   const handleSwitch = () => {
     navigate("/signup");
   };
+  const handleUser = () => {
+    navigate("/userlogin");
+  };
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -94,6 +97,7 @@ const Login = () => {
                 textColor="White"
                 placeHolder="Switch to Employee"
                 border={true}
+                onClick={handleUser}
               />
             </div>
           </div>
