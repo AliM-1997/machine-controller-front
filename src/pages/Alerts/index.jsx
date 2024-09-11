@@ -47,22 +47,34 @@ const Alerts = () => {
         >
           <h3>Notifications</h3>
         </div>
-        <div className="flex column center gap padding-30px full-width white-bg notification-box">
+        <div
+          className={`flex column center gap padding-30px full-width ${
+            darkMode ? "black-bg" : "white-bg"
+          } notification-box`}
+        >
           <div className="flex column  gap full-width notification-info">
             {nonRead.length > 0 ? (
               nonRead.map((alert) => (
                 <div
                   key={alert.id}
-                  className="flex full-width Lprimary-bg padding-30px space-btw center"
+                  className={`flex full-width ${
+                    !darkMode ? "Lprimary-bg" : "tertiary-bg"
+                  } padding-30px space-btw center info-notification`}
                 >
-                  <p>{alert.data.user_id}</p>
-                  <p>{alert.data.machine_name}</p>
-                  <p>{alert.data.status}</p>
+                  <p className={darkMode ? "white-txt" : "black-txt"}>
+                    {alert.data.user_id}
+                  </p>
+                  <p className={darkMode ? "white-txt" : "black-txt"}>
+                    {alert.data.machine_name}
+                  </p>
+                  <p className={darkMode ? "white-txt" : "black-txt"}>
+                    {alert.data.status}
+                  </p>
 
                   <div>
                     <Button
                       placeHolder="mark as read"
-                      backgroundColor="Lprimary"
+                      backgroundColor={darkMode ? "tertiary" : "Lprimary"}
                       textColor="blue"
                       onClick={() => handleMarkNotificationAsRead(alert.id)}
                       className="mark-read"
