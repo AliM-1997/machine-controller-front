@@ -5,7 +5,7 @@ import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Predictions from "./pages/Predictions";
 import Alerts from "./pages/Alerts";
 import AllUsers from "./pages/AllUsers";
@@ -20,6 +20,7 @@ import SelectedMachine from "./pages/SelectedMachine";
 import { DarkModeProvider } from "./data/constext/DarkModeContext";
 import AllSpareParts from "./pages/AllSparePart";
 import AddSparePart from "./pages/AddSparePart";
+import UserLogin from "./pages/UserLogin";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
         <DarkModeProvider>
           <BrowserRouter>
             <Routes>
+              <Route path="/" element={<Navigate to="/login" replace />} />
+              <Route path="userlogin" element={<UserLogin />} />
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<Signup />} />
               <Route path="/" element={<Layout />}>
@@ -47,6 +50,7 @@ function App() {
                 <Route path="addTask/:id" element={<AddTask />} />
                 <Route path="allsparepart" element={<AllSpareParts />} />
                 <Route path="addsparepart" element={<AddSparePart />} />
+                <Route path="addsparepart/:id" element={<AddSparePart />} />
               </Route>
             </Routes>
           </BrowserRouter>
