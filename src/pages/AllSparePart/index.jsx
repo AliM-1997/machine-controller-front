@@ -4,8 +4,10 @@ import Header from "../../components/Header";
 import Label from "../../base/Label";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
 import SparePartFilter from "../../components/SparePartFilter";
+import { useNavigate } from "react-router-dom";
 const AllSpareParts = () => {
   const { darkMode } = useDarkMode();
+
   const options = [
     { label: "All SparePrts", url: "allsparepart" },
     { label: "Add SparePart", url: "addsparepart" },
@@ -24,7 +26,7 @@ const AllSpareParts = () => {
           </h2>
         </div>
         <div>
-          <div className=" flex column gap  sparepart-box">
+          <div className=" flex column gap sparepart-box">
             <SparePartFilter />
           </div>
         </div>

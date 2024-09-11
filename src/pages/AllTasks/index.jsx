@@ -187,9 +187,13 @@ const AllTasks = () => {
           </h2>
         </div>
         <div></div>
-        <div className="flex column white-bg alltask">
+        <div
+          className={`flex column  alltask ${
+            darkMode ? "black-bg" : "white-bg"
+          }`}
+        >
           <div className="flex column gap">
-            <div className="flex space-btw white-bg center">
+            <div className="flex space-btw center">
               <div>
                 <Input
                   placeHolder="Ticket ID"

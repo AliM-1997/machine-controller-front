@@ -108,9 +108,13 @@ const AllUsers = () => {
             />
           </div>
         </div>
-        <div className=" user-table padding-30px white-bg">
+        <div
+          className={`user-table padding-30px ${
+            darkMode ? "black-bg" : "white-bg"
+          }`}
+        >
           <table>
-            <thead>
+            <thead className={darkMode ? "black" : "white"}>
               <tr>
                 <th>Employee Name</th>
                 <th>Employee Id</th>
