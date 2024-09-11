@@ -1,0 +1,14 @@
+.spare-part-status {
+  display: flex;
+  gap: 24px;
+  border-radius: 24px;
+}
+.spare-part-card-prediction {
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.assign-task {
+  color: blue;
+  text-decoration: underline;
+}
