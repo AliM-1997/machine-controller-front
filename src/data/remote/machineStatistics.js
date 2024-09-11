@@ -1,3 +1,4 @@
+import axios from "axios";
 import { requestApi } from "../../utils/request";
 import { RequestMethods } from "../../utils/request_methods";
 
@@ -50,17 +51,39 @@ export const MachineStatistics = {
     }
   },
   CreateMachineStatisticCalculation: async (formData) => {
-    console.log("formdata", formData);
+    const data = formData[0];
+
     try {
-      const data = await requestApi({
+      const response = await requestApi({
         route: "machineStatistics/calculations",
         requestMethod: RequestMethods.POST,
-        body: formData[0],
+        body: data,
       });
-      console.log("data", data);
-      return data;
+      // console.log("data asdasdasdasdasd", data);
+      return response;
     } catch (error) {
       alert("Statistic Note Created Try again");
+    }
+  },
+  GetMachinePrediction: async (formData) => {
+    const data = formData[0];
+    const URL_BASE = process.env.REACT_APP_BASE_URL_PREDICTIONS;
+    console.log(URL_BASE);
+
+    if (!URL_BASE) {
+      console.error(
+        "Base URL is not defined. Make sure .env is configured correctly."
+      );
+      return;
+    }
+
+    try {
+      const response = await axios.post(`${URL_BASE}api/v1/predict`, data);
+      console.log("Prediction Data:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching prediction:", error);
+      alert("No Prediction Found");
     }
   },
 };
