@@ -28,6 +28,7 @@ import Icon from "../../base/Icon";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
 const AddMachine = () => {
   const { darkMode } = useDarkMode();
+
   const response = useSelector((global) => global);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
@@ -174,7 +175,10 @@ const AddMachine = () => {
       />
       <div className="flex column full-width addMachine-container gap center">
         <div className="flex column gap ">
-          <div className="flex space-btw title ">
+          <div className="flex gap title ">
+            <div className="flex center">
+              <Icon icon={faAngleRight} onClick={allmachineNavigaet} />
+            </div>
             <h2>
               {machine.id ? (
                 <Label
@@ -190,13 +194,14 @@ const AddMachine = () => {
                 />
               )}
             </h2>
-            <div className="flex center">
-              <Icon icon={faAngleRight} onClick={allmachineNavigaet} />
-            </div>
           </div>
         </div>
 
-        <div className="flex column gap full-height machine-inputs white-bg">
+        <div
+          className={`flex column gap full-height machine-inputs ${
+            darkMode ? "black-bg" : "white-bg"
+          }`}
+        >
           {machine.id ? (
             <div className="flex column center">
               <div className="machine-image flex center">
@@ -254,6 +259,8 @@ const AddMachine = () => {
                   width="24vw"
                   leftIcon={faUser}
                   type="text"
+                  backgroundColor="mode"
+                  iconColor="mode"
                   onChange={(e) => {
                     ChangingFormData("name", e.target.value);
                   }}
@@ -267,6 +274,8 @@ const AddMachine = () => {
                   name="Serial Number"
                   width="24vw"
                   type="text"
+                  backgroundColor="mode"
+                  iconColor="mode"
                   onChange={(e) => {
                     ChangingFormData("serial_number", e.target.value);
                   }}
