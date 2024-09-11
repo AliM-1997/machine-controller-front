@@ -13,7 +13,7 @@ import Input from "../../base/Input";
 import Button from "../../base/Button";
 import { useDispatch, useSelector } from "react-redux";
 import ReactDate from "../../base/ReactDate";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { clearTask } from "../../data/redux/taskSlice";
 import { Tasks } from "../../data/remote/Tasks";
 import Header from "../../components/Header";
@@ -23,6 +23,7 @@ import { incrementNotification } from "../../data/redux/notification";
 
 const AddTask = () => {
   const { darkMode } = useDarkMode();
+  const location = useLocation();
   const { id } = useParams();
   const task = useSelector((global) => global);
   const [formData, setFormData] = useState({
@@ -35,9 +36,10 @@ const AddTask = () => {
     status: "",
     location: "",
     username: "",
-    machine_serial_number: "",
-    spare_part_serial_number: "",
+    machine_serial_number: location.state?.machineSerialNumber || "",
+    spare_part_serial_number: location.state?.sparePartSerialNumber || "",
   });
+  console.log(formData);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
