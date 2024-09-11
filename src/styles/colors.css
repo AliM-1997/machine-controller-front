@@ -79,3 +79,25 @@
 .yellow-stat {
   color: #faff00;
 }
+:root {
+  --bg-light: white;
+  --bg-dark: black;
+  --bg-Ldark: #171a1d;
+  --bg-Llight: #f1f1f1;
+  --text-light: white;
+  --text-dark: black;
+  --border-light: #cccccc;
+  --border-dark: #666666;
+}
+
+[data-theme="light"] {
+  --bg-card: var(--bg-light);
+  --text-card: var(--text-dark);
+  --border-card: var(--border-light);
+}
+
+[data-theme="dark"] {
+  --bg-card: var(--bg-dark);
+  --text-card: var(--text-light);
+  --border-card: var(--border-dark);
+}
