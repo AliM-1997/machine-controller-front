@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.css";
 import Icon from "../Icon";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 
 const Input = ({
   placeHolder = "search ...",
@@ -16,16 +17,20 @@ const Input = ({
   hidden = false,
   error,
   required = true,
+  iconColor = "black",
 }) => {
-  const backgroundColorClass = `${backgroundColor}-bg`;
-  const textColorClass = `${textColor}-txt`;
+  const { darkMode } = useDarkMode();
+  const backgroundColorClass = darkMode ? "black-bg" : "white-bg";
+  const textColorClass = darkMode ? "white-txt" : "black-txt";
+  const iconColorClass = darkMode ? "white" : "black";
+
   if (hidden) {
     return null;
   }
   return (
-    <div className="flex column input-lable">
+    <div className="flex column input-lable ">
       <div>
-        <label className=" black-txt " style={{ width: width }}>
+        <label className={textColorClass} style={{ width: width }}>
           {name}
           {required && <span className="required">*</span>}
         </label>
@@ -35,7 +40,7 @@ const Input = ({
         style={{ width: width }}
         onClick={onClick}
       >
-        <Icon icon={leftIcon} />
+        <Icon icon={leftIcon} color={iconColorClass} />
         <input
           type={type}
           className={` input-field ${textColorClass}`}
