@@ -16,19 +16,21 @@ const Predictions = () => {
   return (
     <div>
       <Header showChooseInput={false} pageName={"Predictions"} />
-      <div>
+      <div className="flex column gap padding-30px">
         <ChooseOption
           name={"Machine "}
           placeholder="Serial Number"
           options={machine.MachineSerialNumber}
           backgroundColor="white"
-          width="12vw"
+          width="20vw"
           leftIcon={faSearch}
           iconColor="white"
           required={false}
           onSelect={(option) => handleOptionSelect(option.label)}
         />
-        <PredictionCard serial_number={serialNumber} />
+        <div className=" flex column">
+          <PredictionCard serial_number={serialNumber} />
+        </div>
       </div>
     </div>
   );
