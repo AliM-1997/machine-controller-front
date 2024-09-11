@@ -125,7 +125,12 @@ const UserProfile = () => {
       <Header pageName={"User Management"} options={options} />
       <div className="flex column full-width  center">
         <div className="flex column gap title userProfile-container">
-          <div className="flex  space-btw full-width gap ">
+          <div className="flex   full-width gap ">
+            <Icon
+              icon={faAngleRight}
+              onClick={handleCancel}
+              color={darkMode ? "white" : "black"}
+            />
             <h2>
               <Label
                 placeholder={user.id ? "Edite User Profile" : "Add User"}
@@ -134,14 +139,15 @@ const UserProfile = () => {
                 textColor={darkMode ? "white" : "black"}
               />
             </h2>
-            <Icon
-              icon={faAngleRight}
-              onClick={handleCancel}
-              color={darkMode ? "white" : "black"}
-            />
           </div>
         </div>
-        <div className="flex column gap full-height addtask-inputs white-bg center">
+        <div
+          className={`flex column gap full-height addtask-inputs ${
+            darkMode ? "black-bg" : "white-bg"
+          } \
+          
+          center`}
+        >
           {user.id ? (
             <div className="flex gap ">
               <div className="flex space-btw over">
@@ -165,19 +171,35 @@ const UserProfile = () => {
               </div>
               <div className="flex column center">
                 <div className="flex column ">
-                  <Label placeholder={user.name || "Name"} />
-                  <Label placeholder={user.role || "Role"} />
-                  <Label placeholder={user.email || "email"} />
+                  <Label
+                    placeholder={user.name || "Name"}
+                    backgroundColor={darkMode ? "black-bg" : "white-bg"}
+                    textColor={darkMode ? "white" : "black"}
+                  />
+                  <Label
+                    placeholder={user.role || "Role"}
+                    backgroundColor={darkMode ? "black-bg" : "white-bg"}
+                    textColor={darkMode ? "white" : "black"}
+                  />
+                  <Label
+                    placeholder={user.email || "email"}
+                    backgroundColor={darkMode ? "black-bg" : "white-bg"}
+                    textColor={darkMode ? "white" : "black"}
+                  />
                 </div>
                 <div className="flex gap  image-actions">
                   <Button
                     placeHolder="Upload Image"
-                    backgroundColor="white"
+                    backgroundColor={darkMode ? "black" : "white"}
                     textColor="blue"
                     className="mark-read"
                     onClick={handleUploadImage}
                   />
-                  <Icon icon={faTrashCan} onClick={handleDeleteImage} />
+                  <Icon
+                    icon={faTrashCan}
+                    onClick={handleDeleteImage}
+                    color={darkMode ? "white" : "black"}
+                  />
                 </div>
               </div>
             </div>
