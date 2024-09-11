@@ -1,5 +1,5 @@
 .users-container {
-  padding: 30px;
+  padding: 030px;
   overflow: auto;
 }
 
@@ -41,5 +41,19 @@ tr:not(:last-child) td {
   position: sticky;
   top: 0;
   z-index: 1;
+}
+.light-mode .user-table thead {
   background-color: white;
+}
+.dark-mode .user-table thead {
+  background-color: black;
+}
+.dark-mode .user-table {
+  background-color: black;
+  color: white;
+}
+
+.dark-mode .user-table th,
+.dark-mode .user-table td {
+  color: white;
 }

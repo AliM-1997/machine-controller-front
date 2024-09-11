@@ -23,7 +23,6 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: white;
 }
 
 .filter-btn-container {
@@ -39,4 +38,14 @@
   top: 50%;
 
   z-index: 1000;
+}
+
+.dark-mode .tasks-table th,
+.dark-mode .tasks-table td {
+  color: white;
+}
+
+.light-mode .tasks-table th,
+.light-mode .tasks-table td {
+  color: black;
 }

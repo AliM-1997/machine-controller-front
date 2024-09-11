@@ -38,3 +38,7 @@
   top: 21.5vh;
   left: 53vw;
 }
+
+.fill-card {
+  background-color: var(--bg-card);
+}
