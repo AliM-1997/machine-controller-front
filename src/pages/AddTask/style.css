@@ -9,3 +9,7 @@
 .error {
   color: red;
 }
+
+.title {
+  align-items: center;
+}

@@ -126,7 +126,12 @@ const AddTask = () => {
     <div>
       <Header pageName="Tasks" showChooseInput={true} options={options} />
       <div className="flex column gap addTask-container center">
-        <div className="flex full-width space-btw title ">
+        <div className="flex gap start title ">
+          <Icon
+            icon={faAngleRight}
+            onClick={navigateBack}
+            color={darkMode ? "white" : "black"}
+          />
           <h2>
             <Label
               placeholder={id ? "Edit Task" : "Add Task"}
@@ -135,13 +140,12 @@ const AddTask = () => {
               textColor={darkMode ? "white" : "black"}
             />
           </h2>
-          <Icon
-            icon={faAngleRight}
-            onClick={navigateBack}
-            color={darkMode ? "white" : "black"}
-          />
         </div>
-        <div className="flex column gap full-height addtask-inputs white-bg ">
+        <div
+          className={`flex column gap full-height addtask-inputs ${
+            darkMode ? "black-bg" : "white-bg"
+          }`}
+        >
           <div className="flex row center space-btw full-width">
             <div className="flex column">
               <ChooseOption
@@ -228,6 +232,7 @@ const AddTask = () => {
                 onChange={(e) => ChangingFormIput("dueDate", e)}
                 required={true}
               />
+
               {errors.dueDate && <div className="error">{errors.dueDate}</div>}
             </div>
           </div>
