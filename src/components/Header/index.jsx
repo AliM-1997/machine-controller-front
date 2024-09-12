@@ -20,7 +20,7 @@ const Header = ({
   options = [],
   backgroundColor_btn = "white",
   border = true,
-  textColor_btn = "black",
+  textColor_btn,
 }) => {
   const state = useSelector((state) => state.data);
   const { darkMode } = useDarkMode();
@@ -58,7 +58,9 @@ const Header = ({
             hidden={!showChooseInput}
             backgroundColor={backgroundColor_btn}
             border={border}
-            textColor={textColor_btn}
+            textColor={
+              textColor_btn ? textColor_btn : darkMode ? "white" : "black"
+            }
           />
         )}
         {showIcons && (

@@ -237,12 +237,16 @@ const AddMachine = () => {
               <div className="flex space-btw center" style={{ width: "150px" }}>
                 <Button
                   placeHolder="Upload Image"
-                  backgroundColor="white"
+                  backgroundColor={darkMode ? "black" : "white"}
                   textColor="blue"
                   className="mark-read"
                   onClick={handleUploadImage}
                 />
-                <Icon icon={faTrashCan} onClick={handleDeleteImage} />
+                <Icon
+                  icon={faTrashCan}
+                  onClick={handleDeleteImage}
+                  color={darkMode ? "white" : "black"}
+                />
               </div>
             </div>
           ) : (

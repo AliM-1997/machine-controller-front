@@ -162,11 +162,19 @@ const AddSparePart = () => {
               color={darkMode ? "white" : "black"}
             />
             <h2>
-              <Label
-                placeholder={"Add Machine"}
-                backgroundColor={darkMode ? "tertiary-bg" : "secondary"}
-                textColor={darkMode ? "white" : "black"}
-              />
+              {id ? (
+                <Label
+                  placeholder={"Edit SparePart"}
+                  backgroundColor={darkMode ? "tertiary-bg" : "secondary"}
+                  textColor={darkMode ? "white" : "black"}
+                />
+              ) : (
+                <Label
+                  placeholder={"Add SparePart"}
+                  backgroundColor={darkMode ? "tertiary-bg" : "secondary"}
+                  textColor={darkMode ? "white" : "black"}
+                />
+              )}
             </h2>
             <div className="flex center"></div>
           </div>

@@ -8,7 +8,7 @@ const Input = ({
   leftIcon = null,
   rightIcon = null,
   backgroundColor = "white",
-  textColor = "black",
+  textColor,
   type = "text",
   width = "",
   onChange,
@@ -21,7 +21,7 @@ const Input = ({
 }) => {
   const { darkMode } = useDarkMode();
   const backgroundColorClass = darkMode ? "black-bg" : "white-bg";
-  const textColorClass = darkMode ? "white-txt" : "black-txt";
+  const textColorClass = darkMode ? "#fff" : "#fff";
   const iconColorClass = darkMode ? "white" : "black";
 
   if (hidden) {
@@ -30,7 +30,10 @@ const Input = ({
   return (
     <div className="flex column input-lable ">
       <div>
-        <label className={textColorClass} style={{ width: width }}>
+        <label
+          className={textColorClass}
+          style={{ width, color: darkMode ? "white" : "black" }}
+        >
           {name}
           {required && <span className="required">*</span>}
         </label>
@@ -43,9 +46,9 @@ const Input = ({
         <Icon icon={leftIcon} color={iconColorClass} />
         <input
           type={type}
-          className={` input-field ${textColorClass}`}
+          className={` input-field `}
+          style={{ color: darkMode ? "white" : "black" }}
           placeholder={placeHolder}
-          // value={value}
           onChange={onChange}
         />
         <Icon icon={rightIcon} />

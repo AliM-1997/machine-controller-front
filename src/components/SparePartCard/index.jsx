@@ -33,7 +33,11 @@ const SparePartCard = ({ sparePart, onEdit }) => {
           }}
         />
       )}
-      <div className="flex column sparepart-info">
+      <div
+        className={`flex column sparepart-info ${
+          darkMode ? "tertiary-bg" : "white-bg"
+        }`}
+      >
         <div className=" flex   space-btw   ">
           <Label
             placeholder={sparePart.name}

@@ -13,7 +13,7 @@ const SelectedMachineSparePart = ({ onselect, onExit, onAdd }) => {
   return (
     <div
       className={`flex column gap end padding-30px add-spare-part ${
-        darkMode ? "tertiary-bg" : "white"
+        darkMode ? "tertiary-bg" : "white-bg"
       }`}
     >
       <dic className="flex space-btw full-width">

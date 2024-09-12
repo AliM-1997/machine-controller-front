@@ -197,10 +197,8 @@ const AllTasks = () => {
               <div>
                 <Input
                   placeHolder="Ticket ID"
-                  backgroundColor="white"
                   width="12vw"
                   leftIcon={faSearch}
-                  iconColor="white"
                   required={false}
                   onChange={(e) => handleGetTaskbyID(e.target.value)}
                 />

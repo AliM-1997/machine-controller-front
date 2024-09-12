@@ -7,12 +7,14 @@ import { useDarkMode } from "../../data/constext/DarkModeContext";
 import Label from "../../base/Label";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
+import PredictionMachineCard from "../PredictionMachineCard";
 const PredictionCard = ({ serial_number }) => {
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
   const [csvData, setCsvData] = useState(null);
   const [displaySparepart, setDisplaySparePart] = useState([]);
-  console.log(displaySparepart);
+  const [prediction, setPrediction] = useState([]);
+  // console.log("prediction state", prediction);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -66,8 +68,14 @@ const PredictionCard = ({ serial_number }) => {
 
   const handleAssignedTask = () => {};
 
+  const handleMachinePredictionFailure = async () => {
+    const data = await MachineStatistics.GetMachinePrediction(csvData);
+    setPrediction([data.probabilities]);
+  };
+
   useEffect(() => {
     if (csvData) {
+      handleMachinePredictionFailure();
       handleCreateStatistic();
     }
   }, [csvData]);
@@ -130,9 +138,14 @@ const PredictionCard = ({ serial_number }) => {
               ))}
             </ul>
           ) : (
-            <p>No spare parts available.</p>
+            <p>
+              {serial_number ? "No spare parts available." : "Choose machine"}
+            </p>
           )}
         </div>
+      </div>
+      <div className="flex full-width">
+        <PredictionMachineCard statistics={prediction} />
       </div>
     </div>
   );
