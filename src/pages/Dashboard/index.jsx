@@ -107,8 +107,8 @@ const Dashboard = () => {
 
   return (
     <div className="dash-cont">
-      <Header pageName={"Dashboard"} />
-      <div className="flex center column gap dashboard-container">
+      <Header pageName={"Dashboard"} showChooseInput={false} />
+      <div className="flex center column gap dashboard-container padding-30px">
         <div className="stat-title">
           <h2>
             <Label
@@ -155,8 +155,8 @@ const Dashboard = () => {
         {loading ? (
           <div>Loading...</div>
         ) : (
-          <>
-            <div className="flex  gap">
+          <div className="flex column gap full-width">
+            <div className="flex full-width space-btw stat-input">
               <BarGraph
                 datas={statistics}
                 type="uptime_downtime"
@@ -168,7 +168,7 @@ const Dashboard = () => {
                 title="Operation Time"
               />
             </div>
-            <div className="flex  gap">
+            <div className="flex space-btw">
               <BarGraph
                 datas={statistics}
                 type="MTBF_MTTR_MTTD"
@@ -180,7 +180,7 @@ const Dashboard = () => {
                 title="Efficiency and Availability"
               />
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>
