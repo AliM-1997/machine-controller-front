@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./style.css";
 import Icon from "../Icon";
 import { format, parse } from "date-fns";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 
 const ReactDate = ({
   placeHolder = "dd/MM/yyyy",
@@ -19,10 +20,11 @@ const ReactDate = ({
   mindata = true,
 }) => {
   const [date, setDate] = useState(null);
-
+  const { darkMode } = useDarkMode();
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
   const borderClass = border ? "border" : "";
+  const datePickerClass = darkMode ? "date-picker-dark" : "date-picker-light";
 
   const handleDateChange = (selectedDate) => {
     setDate(selectedDate);
@@ -39,26 +41,31 @@ const ReactDate = ({
     <div className="flex column input-lable">
       {name && (
         <div>
-          <label className={` ${textColorClass}`} style={{ width: width }}>
+          <label
+            className={` ${textColorClass}`}
+            style={{ width, color: darkMode ? "white" : "black" }}
+          >
             {name}
             {required && <span className="required">*</span>}
           </label>
         </div>
       )}
       <div
-        className={`input-container ${backgroundColorClass} ${borderClass}`}
+        className={`input-container ${
+          darkMode ? "black" : "white"
+        } ${borderClass}`}
         style={{ width: width }}
       >
-        <Icon icon={leftIcon} />
+        <Icon icon={leftIcon} color={darkMode ? "white" : "black"} />
         <DatePicker
-          className={`input-field ${textColorClass}`}
+          className={`input-field ${datePickerClass}`}
           selected={date}
           onChange={handleDateChange}
           dateFormat="yyyy-MM-dd"
           placeholderText={placeHolder}
           minDate={mindata ? new Date() : null}
         />
-        <Icon icon={rightIcon} />
+        <Icon icon={rightIcon} color={darkMode ? "white" : "black"} />
       </div>
     </div>
   );
