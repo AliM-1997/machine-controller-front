@@ -1,6 +1,6 @@
 .toggle-option {
   position: absolute;
-  background-color: #fff;
+  /* background-color: #fff; */
   z-index: 1000;
   max-height: 200px;
   overflow: auto;
@@ -16,7 +16,7 @@
 }
 
 .selected-option:last-child {
-  border-bottom: 1px solid #c7c7c7;
+  /* border-bottom: 1px solid #c7c7c7; */
   border-radius: 0 0 12px 12px;
 }
 
