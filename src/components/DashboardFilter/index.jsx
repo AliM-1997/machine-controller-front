@@ -5,6 +5,7 @@ import { faCalendarAlt, faX } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../base/Button";
 import Label from "../../base/Label";
 import Icon from "../../base/Icon";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 const DashboardFilter = ({
   onExit,
   dateChange,
@@ -13,15 +14,28 @@ const DashboardFilter = ({
   filter1,
   filter2,
 }) => {
+  const { darkMode } = useDarkMode();
   return (
-    <div className="flex column white-bg gap filter-cont">
+    <div
+      className="flex column  gap filter-cont "
+      style={{ backgroundColor: darkMode ? "#171a1d" : "#f1f1f1" }}
+    >
       <div className="flex end">
-        <Icon icon={faX} onClick={onExit} />
+        <Icon
+          icon={faX}
+          onClick={onExit}
+          color={darkMode ? "white" : "black"}
+        />
       </div>
       <div className=" gap">
         <div className=" flex column start gap">
           <h3>
-            <Label placeholder="Date" className=" flex start" />
+            <Label
+              placeholder="Date"
+              className={` flex start `}
+              backgroundColor={darkMode ? "teriary-bg" : "secondary-bg"}
+              textColor={darkMode ? "white" : "black"}
+            />
           </h3>
           <div className="date_1">
             <ReactDate
