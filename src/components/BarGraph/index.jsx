@@ -9,7 +9,9 @@ import {
   Title,
   Tooltip,
   Legend,
+  Colors,
 } from "chart.js";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 
 ChartJS.register(
   CategoryScale,
@@ -21,6 +23,7 @@ ChartJS.register(
 );
 
 const BarGraph = ({ datas = [], type, title, label }) => {
+  const { darkMode } = useDarkMode();
   const data = Array.isArray(datas[0]) ? datas[0] : datas;
   const labels = data.map((item) => item.date);
   let datasets = [];
@@ -54,7 +57,7 @@ const BarGraph = ({ datas = [], type, title, label }) => {
         {
           label: "Tool Wear",
           data: data.map((item) => parseFloat(item.Tool_Wear_Failure) || 0),
-          backgroundColor: "rgba( 0, 0, 0)",
+          backgroundColor: "rgba( 0, 255, 255, )",
           borderRadius: 6,
           barThickness: 12,
         },
@@ -148,9 +151,13 @@ const BarGraph = ({ datas = [], type, title, label }) => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",
+        labels: {
+          color: darkMode ? "#ffffff" : "#000000",
+        },
       },
       title: {
         display: true,
@@ -159,6 +166,7 @@ const BarGraph = ({ datas = [], type, title, label }) => {
           top: 10,
           bottom: 30,
         },
+        color: darkMode ? "#ffffff" : "#000000",
         position: "top",
         align: "start",
         font: {
@@ -167,6 +175,7 @@ const BarGraph = ({ datas = [], type, title, label }) => {
         },
       },
     },
+
     scales: {
       x: {
         grid: {
@@ -174,21 +183,24 @@ const BarGraph = ({ datas = [], type, title, label }) => {
         },
         ticks: {
           display: true,
+          color: darkMode ? "#ffffff" : "#000000",
         },
       },
       y: {
         grid: {
           display: true,
-          borderColor: "rgba(0, 0, 0, 0.2)",
+          color: darkMode ? "#ffffff" : "#000000",
         },
       },
     },
   };
 
   return (
-    <div className="stat-container">
+    <div
+      className={`stat-container ${darkMode ? "dark-graph" : "light-graph"}`}
+    >
       <h3>{label}</h3>
-      <Bar data={chartData} options={options} />
+      <Bar data={chartData} options={options} className="bargraph" />
     </div>
   );
 };
