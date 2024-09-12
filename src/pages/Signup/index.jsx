@@ -59,7 +59,7 @@ const Signup = () => {
                 onClick={handleswitch}
               />
               <Button
-                placeHolder="Signup"
+                placeHolder="Sign Up"
                 backgroundColor="primary"
                 width="125px"
                 textColor="white"

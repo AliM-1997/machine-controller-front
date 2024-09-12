@@ -123,7 +123,7 @@ const UserProfile = () => {
   return (
     <div>
       <Header pageName={"User Management"} options={options} />
-      <div className="flex column full-width  center">
+      <div className="flex column full-width  center ">
         <div className="flex column gap title userProfile-container">
           <div className="flex   full-width gap ">
             <Icon
@@ -133,7 +133,7 @@ const UserProfile = () => {
             />
             <h2>
               <Label
-                placeholder={user.id ? "Edite User Profile" : "Add User"}
+                placeholder={user.id ? "Edite User" : "Add User"}
                 fontWeight="bold"
                 backgroundColor={darkMode ? "tertiary-bg" : "secondary"}
                 textColor={darkMode ? "white" : "black"}
@@ -142,11 +142,9 @@ const UserProfile = () => {
           </div>
         </div>
         <div
-          className={`flex column gap full-height addtask-inputs ${
+          className={`flex column gap-btn  addtask-inputs ${
             darkMode ? "black-bg" : "white-bg"
-          } \
-          
-          center`}
+          } center`}
         >
           {user.id ? (
             <div className="flex gap ">
@@ -220,7 +218,7 @@ const UserProfile = () => {
             <Input
               width="24vw"
               placeHolder={user.username || "@username"}
-              name="username"
+              name="Username"
               type="text"
               leftIcon={faUser}
               required={false}
@@ -306,7 +304,7 @@ const UserProfile = () => {
             )}
 
             <Button
-              placeHolder={user.name ? "save" : "create"}
+              placeHolder={user.name ? "Save" : "Create"}
               backgroundColor="primary"
               width="7vw"
               textColor="white"
