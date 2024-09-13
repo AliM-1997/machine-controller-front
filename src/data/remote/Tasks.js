@@ -98,7 +98,6 @@ export const Tasks = {
         requestMethod: RequestMethods.POST,
         body: formData,
       });
-      console.log(data);
       return data;
     } catch (error) {
       console.error(error);
@@ -108,6 +107,15 @@ export const Tasks = {
   GetAllTaskDetailsById: async (id) => {
     try {
       const data = await requestApi({ route: `task/all/details/${id}` });
+      return data;
+    } catch (error) {
+      console.error(error);
+      alert("No task found for the given id");
+    }
+  },
+  GetAllTaskDetails: async () => {
+    try {
+      const data = await requestApi({ route: `task/all/details/` });
       console.log(data);
       return data;
     } catch (error) {
