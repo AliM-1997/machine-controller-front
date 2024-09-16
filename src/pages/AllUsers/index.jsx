@@ -26,7 +26,6 @@ const AllUsers = () => {
   const handleCreate = () => {
     navigate("/userProfile");
   };
-  console.log(allUsers);
   const handleEdit = async (id) => {
     const user = allUsers.find((user) => user.id === id);
     console.log("alluser->user", user.image_path);
