@@ -14,7 +14,9 @@ const userSlice = createSlice({
   initialState,
   name: "user",
   reducers: {
-    loadUser: (state, action) => {},
+    loadUser: (state, action) => {
+      return { ...state, ...action.payload };
+    },
     updateUser: (state, action) => {
       return { ...state, ...action.payload };
     },

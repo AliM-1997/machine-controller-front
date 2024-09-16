@@ -1,3 +1,4 @@
+// src/redux/notificationSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const notificationSlice = createSlice({
@@ -6,7 +7,7 @@ const notificationSlice = createSlice({
     count: 0,
   },
   reducers: {
-    incrementNotification(state) {
+    incrementNotification(state, action) {
       state.count += 1;
     },
     decrementNotification(state) {
@@ -23,4 +24,5 @@ export const {
   decrementNotification,
   resetNotificationCount,
 } = notificationSlice.actions;
+
 export const notificationReducer = notificationSlice.reducer;
