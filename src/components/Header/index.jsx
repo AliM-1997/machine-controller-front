@@ -7,11 +7,13 @@ import {
   faUser,
   faBell,
   faAngleDown,
+  faL,
 } from "@fortawesome/free-solid-svg-icons";
 import Icon from "../../base/Icon";
 import DropButton from "../../base/DropButton";
 import "./style.css";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
+import ProfileUser from "../ProfileUser";
 
 const Header = ({
   pageName,
@@ -22,6 +24,7 @@ const Header = ({
   border = true,
   textColor_btn,
 }) => {
+  const [profileIcon, setprofileIcon] = useState(false);
   const state = useSelector((state) => state.data);
   const { darkMode } = useDarkMode();
   const navigate = useNavigate();
@@ -43,40 +46,57 @@ const Header = ({
     navigate("/alerts");
   };
 
+  const handleExitProfile = () => {
+    setprofileIcon(false);
+  };
+  const handleOpenProfile = () => {
+    setprofileIcon(true);
+  };
   return (
     <div className={`header-container ${darkMode ? "black-bg" : "white-bg"}`}>
       <div className="flex row gap">
         <h1 className={darkMode ? "white-txt" : "black-txt"}>{pageName}</h1>
       </div>
       <div className="flex header-left">
-        {showChooseInput && (
-          <DropButton
-            options={options}
-            onSelect={handleSelect}
-            width="15vw"
-            rightIcon={faAngleDown}
-            hidden={!showChooseInput}
-            backgroundColor={backgroundColor_btn}
-            border={border}
-            textColor={
-              textColor_btn ? textColor_btn : darkMode ? "white" : "black"
-            }
-          />
-        )}
-        {showIcons && (
-          <div className="flex center h-icon">
-            <Icon
-              icon={faBell}
-              color="primary"
-              className=""
-              onClick={handleNavigateAlerts}
+        <div className="flex ">
+          {showChooseInput && (
+            <DropButton
+              options={options}
+              onSelect={handleSelect}
+              width="15vw"
+              rightIcon={faAngleDown}
+              hidden={!showChooseInput}
+              backgroundColor={backgroundColor_btn}
+              border={border}
+              textColor={
+                textColor_btn ? textColor_btn : darkMode ? "white" : "black"
+              }
             />
-            {notificationCount > 0 && (
-              <div className="flex center notification-count">
+          )}
+        </div>
+        {showIcons && (
+          <div className="header-container flex gpa">
+            <div className="h-icon flex gap">
+              <Icon
+                icon={faBell}
+                color="primary"
+                onClick={handleNavigateAlerts}
+              />
+              {/* notificationCount > 0 && ( */}
+              <div className="notification-count flex center">
                 {notificationCount}
               </div>
-            )}
-            <Icon icon={faUser} color="primary" />
+
+              <Icon
+                icon={faUser}
+                color="primary"
+                className="profile-icon"
+                onClick={handleOpenProfile}
+              />
+              <div className="profile-box">
+                {profileIcon && <ProfileUser onclick={handleExitProfile} />}
+              </div>
+            </div>
           </div>
         )}
       </div>
