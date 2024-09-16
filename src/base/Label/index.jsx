@@ -7,12 +7,14 @@ const Label = ({
   width,
   backgroundColor = "secondary",
   fontWeight,
+  onclick,
 }) => {
   const backgroundColorClass = `${backgroundColor}-bg`;
   const textColorClass = `${textColor}-txt`;
   return (
     <div>
       <label
+        onclick={onclick}
         className={`${backgroundColorClass} ${textColorClass} ${
           fontWeight === "bold" ? "bold" : ""
         }`}
