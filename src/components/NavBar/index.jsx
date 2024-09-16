@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import logoLight from "../../assets/images/logoLight.png";
 import logoDark from "../../assets/images/LogoDark.png";
 import "./style.css";
@@ -15,14 +16,15 @@ import {
   faCalendarTimes,
   faToolbox,
 } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
 import { authRemote } from "../../data/remote/Auth_user";
 import { authLocal } from "../../data/local/Auth_local";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
 
-const NavBar = ({ onNavigate, isClick }) => {
+const NavBar = ({ onNavigate }) => {
   const { darkMode } = useDarkMode();
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const handleLogout = async () => {
     await authRemote.Logout();
@@ -40,25 +42,25 @@ const NavBar = ({ onNavigate, isClick }) => {
     width: "12vw",
     leftIcon: icon,
     backgroundColor: !darkMode
-      ? isClick === name
+      ? currentPath === path
         ? "primary"
         : "secondary"
-      : isClick === name
+      : currentPath === path
       ? "primary"
       : "tertiary",
     iconColor: !darkMode
-      ? isClick === name
+      ? currentPath === path
         ? "white"
         : "black"
-      : isClick === name
+      : currentPath === path
       ? "white"
       : "white",
-    rightIcon: isClick === name ? faChevronRight : null,
+    rightIcon: currentPath === path ? faChevronRight : null,
     textColor: !darkMode
-      ? isClick === name
+      ? currentPath === path
         ? "white"
         : "black"
-      : isClick === name
+      : currentPath === path
       ? "white"
       : "white",
     onClick: () => {
@@ -82,13 +84,46 @@ const NavBar = ({ onNavigate, isClick }) => {
         </div>
 
         <div className="flex column center gap">
-          <Button {...navButton("Dashboard", faTh, "/dashboard")} />
-          <Button {...navButton("Machines", faGear, "/allmachines")} />
-          <Button {...navButton("Tasks", faClipboard, "/tasks")} />
-          <Button {...navButton("Predictions", faChartLine, "/predictions")} />
-          <Button {...navButton("User Management", faUsers, "/allusers")} />
-          <Button {...navButton("Alerts", faCalendarTimes, "/alerts")} />
-          <Button {...navButton("Spare Parts", faToolbox, "/allsparepart")} />
+          <Button
+            {...navButton("Dashboard", faTh, "/dashboard")}
+            className={`button ${currentPath === "/dashboard" ? "active" : ""}`}
+          />
+          <Button
+            {...navButton("Machines", faGear, "/allmachines")}
+            className={`button ${
+              currentPath === "/allmachines" ? "active" : ""
+            }`}
+          />
+          <Button
+            {...navButton("Tasks", faClipboard, "/tasks")}
+            className={`button ${currentPath === "/tasks" ? "active" : ""}`}
+          />
+          <Button
+            {...navButton("Predictions", faChartLine, "/predictions")}
+            className={`button ${
+              currentPath === "/predictions" ? "active" : ""
+            }`}
+          />
+          <Button
+            {...navButton("User Management", faUsers, "/allusers")}
+            className={`button ${currentPath === "/allusers" ? "active" : ""}`}
+          />
+          <Button
+            {...navButton("Alerts", faCalendarTimes, "/alerts")}
+            className={`button ${currentPath === "/alerts" ? "active" : ""}`}
+          />
+          <Button
+            {...navButton("Spare Parts", faToolbox, "/allsparepart")}
+            className={`button ${
+              currentPath === "/allsparepart" ? "active" : ""
+            }`}
+          />
+          <Button
+            {...navButton("Task Preview", faToolbox, "/taskpreview")}
+            className={`button ${
+              currentPath === "/taskpreview" ? "active" : ""
+            }`}
+          />
         </div>
       </div>
       <div className="flex column center gap">
