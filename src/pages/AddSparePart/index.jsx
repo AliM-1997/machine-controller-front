@@ -33,13 +33,11 @@ const AddSparePart = () => {
     name: "",
     serial_number: "",
     life_cylce: "",
-    standard_temperature: 0,
+    standard_temperature: "",
     image_path: "",
     description: "",
     type: "",
   });
-
-  console.log(formData);
 
   const handleSparePartByID = async () => {
     if (id) {
@@ -147,8 +145,8 @@ const AddSparePart = () => {
   ];
 
   const options = [
-    { label: "All SparePrts", url: "allsparepart" },
     { label: "Add SparePart", url: "addsparepart" },
+    { label: "All SparePrts", url: "allsparepart" },
   ];
   return (
     <div>
