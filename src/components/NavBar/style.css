@@ -11,3 +11,8 @@
   flex-direction: column;
   gap: 90px;
 }
+
+.button.active {
+  background-color: var(--active-bg-color);
+  color: var(--active-text-color);
+}
