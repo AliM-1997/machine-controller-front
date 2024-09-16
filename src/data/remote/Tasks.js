@@ -73,6 +73,18 @@ export const Tasks = {
       alert("No task found for the given machine");
     }
   },
+  GetByMachineSerialNumber: async (serial_number) => {
+    try {
+      const data = await requestApi({
+        route: `/task/machineserialnumber/${serial_number}`,
+      });
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error);
+      alert("No task found for the given machine");
+    }
+  },
   GetTaskByStatus: async (status) => {
     try {
       const data = await requestApi({ route: `/task/status/${status}` });
@@ -104,6 +116,18 @@ export const Tasks = {
       alert("No task found for the given user");
     }
   },
+  GetTaskByUsername: async (username) => {
+    try {
+      const data = await requestApi({
+        route: `/task/username/${username}`,
+      });
+      return data;
+    } catch (error) {
+      console.error(error);
+      alert("No task found for the given user");
+    }
+  },
+
   GetAllTaskDetailsById: async (id) => {
     try {
       const data = await requestApi({ route: `task/all/details/${id}` });
