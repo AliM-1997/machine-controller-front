@@ -28,7 +28,6 @@ import Icon from "../../base/Icon";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
 const AddMachine = () => {
   const { darkMode } = useDarkMode();
-
   const response = useSelector((global) => global);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
@@ -41,7 +40,6 @@ const AddMachine = () => {
     last_maintenance: "",
     unit_per_hour: "",
   });
-  console.log("formdata add machine", formData);
   const machine = useSelector((global) => global.machine);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
@@ -65,14 +63,13 @@ const AddMachine = () => {
     if (machine.id) {
       const updateDate = await Machines.UpadateMachine(machine.id, formData);
       if (updateDate) {
-        dispatch(LoadMachine(updateDate));
         alert("Machine Updated Successfully");
       }
     } else {
       if (validateForm()) {
         const createData = await Machines.CreateMachine(formData);
         if (createData) {
-          handleUploadImage();
+          dispatch(ClearMachine());
           alert("Machine Created Successfullty");
           allmachineNavigaet();
         }
@@ -111,13 +108,17 @@ const AddMachine = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
+
+    if (file && file.type.startsWith("image/")) {
       setSelectedImage(file);
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
+    } else {
+      alert("Please select a valid image file.");
     }
   };
   const handleUploadImage = async () => {
@@ -146,7 +147,10 @@ const AddMachine = () => {
   const handleOptionSelect = (name, option) => {
     ChangingFormData(name, option.label);
   };
-  const allmachineNavigaet = () => navigate("/allmachines");
+  const allmachineNavigaet = () => {
+    navigate("/allmachines");
+    dispatch(ClearMachine());
+  };
   const validateForm = () => {
     const newErrors = {};
 
@@ -177,7 +181,11 @@ const AddMachine = () => {
         <div className="flex column gap ">
           <div className="flex gap title ">
             <div className="flex center">
-              <Icon icon={faAngleRight} onClick={allmachineNavigaet} />
+              <Icon
+                icon={faAngleRight}
+                onClick={allmachineNavigaet}
+                color={darkMode ? "white" : "black"}
+              />
             </div>
             <h2>
               {machine.id ? (
@@ -227,11 +235,11 @@ const AddMachine = () => {
                   )}
                 </>
               </div>
-              <div>
+              <div className="machine-upload">
                 <input
                   type="file"
                   onChange={handleFileChange}
-                  className="machine-upload1"
+                  accept="image/*"
                 />
               </div>
               <div className="flex space-btw center" style={{ width: "150px" }}>
@@ -351,7 +359,7 @@ const AddMachine = () => {
                   leftIcon={faCalendarDays}
                   name="Last Maintenance"
                   width="calc(48vw + 24px)"
-                  placeHolder={"dd/MM/yyyy"}
+                  placeHolder={machine.last_maintenance || "dd/MM/yyyy"}
                   onChange={(e) => ChangingFormData("last_maintenance", e)}
                 />
                 {errors.last_maintenance && (

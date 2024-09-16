@@ -10,13 +10,14 @@
   max-width: 70vw;
   padding: 24px 24px 12px 24px;
   border-radius: 12px;
+  position: relative;
 }
 
 .machineImage {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  position: relative;
+  z-index: 10;
   display: inline-block;
 }
 
@@ -27,16 +28,15 @@
   width: calc(48vw + 48px);
 }
 
-.machine-upload1 {
+.machine-upload {
   position: absolute;
-  border-radius: 50%;
   width: 150px;
   height: 150px;
   opacity: 0;
   cursor: pointer;
-  z-index: 1;
-  top: 21.5vh;
-  left: 53vw;
+  z-index: 1000;
+  top: 0;
+  left: 42.5%;
 }
 
 .fill-card {
