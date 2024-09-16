@@ -10,6 +10,7 @@ import DashboardFilter from "../../components/DashboardFilter";
 import "./style.css";
 import Label from "../../base/Label";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
+import { authLocal } from "../../data/local/Auth_local";
 const Dashboard = () => {
   const { darkMode } = useDarkMode();
   const response = useSelector((global) => global);
@@ -21,6 +22,7 @@ const Dashboard = () => {
     endDate: null,
   });
   const [statistics, setStatistics] = useState([]);
+  const [inputs, setInputs] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -30,6 +32,7 @@ const Dashboard = () => {
       formData.machine_name
     );
     if (response && response.statistics) {
+      setInputs([response.machineInput]);
       setStatistics([response.statistics]);
     } else {
       setStatistics([]);
@@ -104,7 +107,6 @@ const Dashboard = () => {
     });
     setError("");
   };
-
   return (
     <div className="dash-cont">
       <Header pageName={"Dashboard"} showChooseInput={false} />
@@ -163,8 +165,8 @@ const Dashboard = () => {
                 title="Uptime and Downtime Hours"
               />
               <BarGraph
-                datas={statistics}
-                type="operationalTime"
+                datas={inputs}
+                type="operational_Time_failure"
                 title="Operation Time"
               />
             </div>

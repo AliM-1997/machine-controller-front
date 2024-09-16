@@ -23,7 +23,6 @@ const SelectedMachine = () => {
   const { id } = useParams();
   const [selectedMachine, setSelectedMachine] = useState(null);
   const [showFilter, setShowFilter] = useState(false);
-  // console.log(addedSparepart);
   const handleOptionSelect = (option) => {
     setSparePartSerialnumber(option.label);
   };
@@ -77,13 +76,13 @@ const SelectedMachine = () => {
   };
 
   const handleAddSparePart = async () => {
-    console.log("from handles", addedSparepart);
-    console.log("from handles", selectedMachine.serial_number);
     const data = await Machines.AddSparePartToMachine(
       selectedMachine.serial_number,
       addedSparepart
     );
-    console.log(data);
+    if (data) {
+      handleAddSparePart();
+    }
   };
   useEffect(() => {
     handleMachineById();
