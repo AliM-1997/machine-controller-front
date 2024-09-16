@@ -26,6 +26,7 @@ const AllUsers = () => {
   const handleCreate = () => {
     navigate("/userProfile");
   };
+  console.log(allUsers);
   const handleEdit = async (id) => {
     const user = allUsers.find((user) => user.id === id);
     console.log("alluser->user", user.image_path);
@@ -121,7 +122,7 @@ const AllUsers = () => {
                 <th>Username</th>
                 <th>Role</th>
                 <th>Done Task</th>
-                <th>Pending Task</th>
+                <th>Not Done Task</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -142,8 +143,8 @@ const AllUsers = () => {
                     <td>{user.id}</td>
                     <td>{user.username}</td>
                     <td>{user.role}</td>
-                    <td>{user.doneTask}</td>
-                    <td>{user.pendingTask}</td>
+                    <td>{user.completed_tasks_count}</td>
+                    <td>{user.non_completed_tasks_count}</td>
                     <td className="flex  gap icons-de">
                       <Icon
                         icon={faPenToSquare}

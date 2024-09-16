@@ -27,18 +27,19 @@ const AllTasks = () => {
     date: "",
     status: "",
     username: "",
+    machine_Serial_number: "",
   });
-
   const ChangingFormat = (key, value) => {
     setFormData({
       machine_name: "",
       date: "",
       status: "",
       username: "",
+      machine_Serial_number: "",
       [key]: value,
     });
   };
-
+  console.log(formData);
   const navigate = useNavigate();
 
   const handleEditNavigate = async (id) => {
@@ -47,11 +48,11 @@ const AllTasks = () => {
     navigate(`/addTask/${id}`);
   };
 
-  const handleGetAllTasks = async () => {
+  const handleGetAllTasksDetails = async () => {
     setLoading(true);
     try {
-      const data = await Tasks.GetAllTasks();
-      setAllTasks(data.task || []);
+      const data = await Tasks.GetAllTaskDetails();
+      setAllTasks(data.tasks || []);
     } catch (error) {
       console.error("Error fetching all tasks:", error);
       setAllTasks([]);
@@ -60,10 +61,12 @@ const AllTasks = () => {
     }
   };
 
-  const handleTaskByMachineName = async () => {
+  const handleTaskByMachineSerialNumber = async () => {
     setLoading(true);
     try {
-      const response = await Tasks.GetByMachineName(formData.machine_name);
+      const response = await Tasks.GetByMachineSerialNumber(
+        formData.machine_Serial_number
+      );
       if (response && response.tasks.length > 0) {
         setAllTasks(response.tasks);
       } else {
@@ -97,11 +100,11 @@ const AllTasks = () => {
     setLoading(true);
     try {
       if (id) {
-        const data = await Tasks.GetTaskByID(id);
+        const data = await Tasks.GetAllTaskDetailsById(id);
         setAllTasks([data.task]);
         setSearchId(id);
       } else {
-        await handleGetAllTasks();
+        await handleGetAllTasksDetails();
       }
     } catch (error) {
     } finally {
@@ -128,7 +131,7 @@ const AllTasks = () => {
   const handleTaskByUsername = async () => {
     setLoading(true);
     try {
-      const data = await Tasks.GetTaskByUsername("hansen.eva");
+      const data = await Tasks.GetTaskByUsername(formData.username);
       if (data && data.tasks.length > 0) {
         setAllTasks(data.tasks);
       } else {
@@ -165,7 +168,7 @@ const AllTasks = () => {
   };
 
   useEffect(() => {
-    handleGetAllTasks();
+    handleGetAllTasksDetails();
   }, []);
 
   const headerOptions = [
@@ -209,7 +212,7 @@ const AllTasks = () => {
                   width="7vw"
                   backgroundColor="primary"
                   textColor="white"
-                  onClick={handleGetAllTasks}
+                  onClick={handleGetAllTasksDetails}
                 />
 
                 <Button
@@ -226,9 +229,9 @@ const AllTasks = () => {
                     <TaskFilter
                       Exitfilter={handleExitFilter}
                       selectMachine={(option) =>
-                        handleOptionSelect("machine_name", option)
+                        handleOptionSelect("machine_Serial_number", option)
                       }
-                      machineChange={handleTaskByMachineName}
+                      machineChange={handleTaskByMachineSerialNumber}
                       selectStatus={(option) =>
                         handleOptionSelect("status", option)
                       }
@@ -236,7 +239,7 @@ const AllTasks = () => {
                       selectDate={(e) => ChangingFormat("date", e)}
                       DateChange={handleTaskByDate}
                       selectUsername={(option) =>
-                        ChangingFormat("username", option)
+                        ChangingFormat("username", option.label)
                       }
                       UsernameChange={handleTaskByUsername}
                     />
@@ -249,7 +252,7 @@ const AllTasks = () => {
                 <thead>
                   <tr>
                     <th>Ticket ID</th>
-                    <th>Machine ID</th>
+                    <th>Machine</th>
                     <th>Employee</th>
                     <th>Assigned Date</th>
                     <th>Due Date</th>
@@ -264,8 +267,8 @@ const AllTasks = () => {
                         <td onClick={() => handleEditNavigate(task.id)}>
                           {task.id}
                         </td>
-                        <td>{task.machine_id}</td>
-                        <td>{task.user_id}</td>
+                        <td>{task.machine_serial_number}</td>
+                        <td>{task.username}</td>
                         <td>{task.assignedDate}</td>
                         <td>{task.dueDate}</td>
                         <td className="flex center">
