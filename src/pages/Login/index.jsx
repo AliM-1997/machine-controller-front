@@ -32,6 +32,12 @@ const Login = () => {
     }
     const data = await authRemote.Login(email, password);
     authLocal.saveToken(data.authorisation.token);
+    const userData = {
+      username: data.user.username,
+      email: data.user.email,
+      name: data.user.name,
+    };
+    localStorage.setItem("user", JSON.stringify(userData));
     navigate("/dashboard");
   };
 

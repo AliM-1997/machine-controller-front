@@ -14,16 +14,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Users } from "../../data/remote/User";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DisplayImage from "../../base/DisplayImage";
 import Header from "../../components/Header";
 import whiteImage from "../../assets/images/white-bg.png";
 import whiteImge from "../../assets/images/white-bg.png";
 import Icon from "../../base/Icon";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
+import { clearUser } from "../../data/redux/userSlice";
 
 const UserProfile = () => {
   const { darkMode } = useDarkMode();
+  const dispatch = useDispatch();
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -70,6 +72,7 @@ const UserProfile = () => {
     if (user.id) {
       const updatedData = await Users.UpdateUser(user.id, formData);
       if (updatedData) {
+        dispatch(clearUser());
         alert("update user successfully");
       }
     } else {
@@ -82,13 +85,17 @@ const UserProfile = () => {
   };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
+
+    if (file && file.type.startsWith("image/")) {
       setSelectedImage(file);
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result);
       };
       reader.readAsDataURL(file);
+    } else {
+      alert("Please select a valid image file.");
     }
   };
 
@@ -133,7 +140,7 @@ const UserProfile = () => {
             />
             <h2>
               <Label
-                placeholder={user.id ? "Edite User" : "Add User"}
+                placeholder={user.id ? "Edit User" : "Add User"}
                 fontWeight="bold"
                 backgroundColor={darkMode ? "tertiary-bg" : "secondary"}
                 textColor={darkMode ? "white" : "black"}
@@ -163,6 +170,7 @@ const UserProfile = () => {
                 <input
                   className="choose-file"
                   type="file"
+                  accept="image/*"
                   onChange={handleFileChange}
                   style={{ display: "" }}
                 />
