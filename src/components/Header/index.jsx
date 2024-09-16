@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Input from "../../base/Input";
 import {
-  faSearch,
   faUser,
   faBell,
   faAngleDown,
@@ -82,7 +80,6 @@ const Header = ({
                 color="primary"
                 onClick={handleNavigateAlerts}
               />
-              {/* notificationCount > 0 && ( */}
               <div className="notification-count flex center">
                 {notificationCount}
               </div>

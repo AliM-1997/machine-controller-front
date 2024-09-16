@@ -7,24 +7,38 @@
 }
 
 .h-icon {
-  gap: 30px;
+  display: flex;
+  align-items: center;
   position: relative;
+}
+
+.notification-count {
+  background-color: red;
+  position: absolute;
+  top: -12px;
+  right: 24px;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+.profile-icon {
+  z-index: 10;
 }
 
 .header-left {
   gap: 70px;
+  align-items: center;
 }
-.notification-count {
-  background-color: red;
+.profile-box {
   position: absolute;
-  top: -8px;
-  right: 34px;
-  color: white;
-  padding: 2px;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-}
-.notification-icon {
-  position: relative;
+  top: 100%;
+  right: 0;
+  z-index: 1000;
 }
