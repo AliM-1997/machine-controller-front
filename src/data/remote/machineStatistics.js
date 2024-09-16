@@ -6,7 +6,6 @@ export const MachineStatistics = {
   GetALLStatistics: async () => {
     try {
       const data = await requestApi({ route: "/machineStatistic" });
-      console.log("all statistics form remote", data);
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
@@ -14,12 +13,10 @@ export const MachineStatistics = {
     }
   },
   GetStatisticByMachineName: async (name) => {
-    console.log("machine name testing", name);
     try {
       const data = await requestApi({
         route: `/machineStatistics/${name}`,
       });
-      console.log("all statistics form remote", data);
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
@@ -27,7 +24,6 @@ export const MachineStatistics = {
     }
   },
   GetStatisticByNameAndDate: async (name, date) => {
-    console.log(date);
     try {
       const data = await requestApi({
         route: `/machineStatistics/byName/byDate/?machine_name=${name}&date=${date}`,
@@ -59,7 +55,6 @@ export const MachineStatistics = {
         requestMethod: RequestMethods.POST,
         body: data,
       });
-      // console.log("data asdasdasdasdasd", data);
       return response;
     } catch (error) {
       alert("Statistic Note Created Try again");
@@ -68,7 +63,6 @@ export const MachineStatistics = {
   GetMachinePrediction: async (formData) => {
     const data = formData[0];
     const URL_BASE = process.env.REACT_APP_BASE_URL_PREDICTIONS;
-    console.log(URL_BASE);
 
     if (!URL_BASE) {
       console.error(
@@ -79,7 +73,6 @@ export const MachineStatistics = {
 
     try {
       const response = await axios.post(`${URL_BASE}api/v1/predict`, data);
-      console.log("Prediction Data:", response.data);
       return response.data;
     } catch (error) {
       console.error("Error fetching prediction:", error);
