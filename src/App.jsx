@@ -21,6 +21,7 @@ import { DarkModeProvider } from "./data/constext/DarkModeContext";
 import AllSpareParts from "./pages/AllSparePart";
 import AddSparePart from "./pages/AddSparePart";
 import UserLogin from "./pages/UserLogin";
+import TaskPreview from "./pages/TaskPreview";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
                 <Route path="allsparepart" element={<AllSpareParts />} />
                 <Route path="addsparepart" element={<AddSparePart />} />
                 <Route path="addsparepart/:id" element={<AddSparePart />} />
+                <Route path="taskpreview" element={<TaskPreview />} />
               </Route>
             </Routes>
           </BrowserRouter>
