@@ -1,0 +1,37 @@
+.input-user-task-preview {
+  align-items: center;
+  width: calc(48vw + 24px);
+  position: relative;
+}
+.view-btn {
+  z-index: 10;
+}
+.view-box {
+  position: absolute;
+  z-index: 100;
+  top: 50%;
+  right: 8%;
+}
+
+.task-details-table {
+  border-radius: 12px;
+}
+
+.task-details-table td.left-column {
+  width: 25%;
+}
+
+.task-details-table td.right-column {
+  width: 75%;
+}
+.task-details-table td.left-column > p {
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.task-details-table td.right-column > p {
+  width: 100%;
+  font-size: 16px;
+  line-height: 1.5;
+}
