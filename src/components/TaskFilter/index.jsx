@@ -10,6 +10,7 @@ import ReactDate from "../../base/ReactDate";
 import Button from "../../base/Button";
 import ChooseOption from "../../base/ChooseOption";
 import { useSelector } from "react-redux";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 const TaskFilter = ({
   Exitfilter,
   selectMachine,
@@ -21,10 +22,11 @@ const TaskFilter = ({
   machineChange,
   UsernameChange,
 }) => {
+  const { darkMode } = useDarkMode();
   const state = useSelector((global) => global);
 
   const [choosenItem, setChoosenItem] = useState({
-    Date: false,
+    Date: true,
     UserName: false,
     Machine: false,
     Status: false,
@@ -46,8 +48,17 @@ const TaskFilter = ({
     { label: "In Progress" },
   ];
   return (
-    <div className="flex column taskFilter-wrapper gap end">
-      <Icon icon={faX} onClick={Exitfilter} />
+    <div
+      className={`flex column taskFilter-wrapper gap end ${
+        darkMode ? "#0000" : "secondary-bg"
+      }`}
+      style={{ backgroundColor: darkMode ? "tertiary-bg" : "secondary-bg" }}
+    >
+      <Icon
+        icon={faX}
+        onClick={Exitfilter}
+        color={darkMode ? "white" : "black"}
+      />
       <table>
         <tr className="flex gap">
           <th
@@ -98,9 +109,9 @@ const TaskFilter = ({
       {choosenItem.Machine && (
         <div className="flex column end gap-btn">
           <ChooseOption
-            name="Machine Name"
+            name="Machine Serial Number"
             placeholder="machine "
-            options={state.data.MachineNames}
+            options={state.data.MachineSerialNumber}
             onSelect={selectMachine}
             width="25vw"
             textColor="black"
