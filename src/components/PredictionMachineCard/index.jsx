@@ -3,6 +3,7 @@ import "./style.css";
 import BarGraph from "../BarGraph";
 import { constructNow } from "date-fns";
 import { format } from "date-fns";
+import StatisticsTable from "../StatisticTable";
 
 const PredictionMachineCard = ({ statistics }) => {
   const stats =
@@ -26,8 +27,10 @@ const PredictionMachineCard = ({ statistics }) => {
   console.log("Data prepared for BarGraph:", data);
 
   return (
-    <div>
-      <div></div>
+    <div className="flex">
+      <div>
+        <StatisticsTable data={data} />
+      </div>
       <BarGraph
         datas={data}
         type="Predictions Probability"

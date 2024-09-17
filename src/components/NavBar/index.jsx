@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import logoLight from "../../assets/images/logoLight.png";
 import logoDark from "../../assets/images/LogoDark.png";
@@ -21,11 +21,20 @@ import { authLocal } from "../../data/local/Auth_local";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
 
 const NavBar = ({ onNavigate }) => {
+  const [userInfo, setUserInfo] = useState({});
   const { darkMode } = useDarkMode();
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
 
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      const parsedUserData = JSON.parse(userData);
+      setUserInfo(parsedUserData);
+    }
+  }, []);
+  console.log(userInfo.role);
   const handleLogout = async () => {
     await authRemote.Logout();
     authLocal.clearToken();
@@ -84,46 +93,62 @@ const NavBar = ({ onNavigate }) => {
         </div>
 
         <div className="flex column center gap">
-          <Button
-            {...navButton("Dashboard", faTh, "/dashboard")}
-            className={`button ${currentPath === "/dashboard" ? "active" : ""}`}
-          />
-          <Button
-            {...navButton("Machines", faGear, "/allmachines")}
-            className={`button ${
-              currentPath === "/allmachines" ? "active" : ""
-            }`}
-          />
+          {userInfo.role === "admin" && (
+            <>
+              <Button
+                {...navButton("Dashboard", faTh, "/dashboard")}
+                className={`button ${
+                  currentPath === "/dashboard" ? "active" : ""
+                }`}
+              />
+              <Button
+                {...navButton("Machines", faGear, "/allmachines")}
+                className={`button ${
+                  currentPath === "/allmachines" ? "active" : ""
+                }`}
+              />
+              <Button
+                {...navButton("Tasks", faClipboard, "/tasks")}
+                className={`button ${currentPath === "/tasks" ? "active" : ""}`}
+              />
+              <Button
+                {...navButton("Predictions", faChartLine, "/predictions")}
+                className={`button ${
+                  currentPath === "/predictions" ? "active" : ""
+                }`}
+              />
+              <Button
+                {...navButton("Spare Parts", faToolbox, "/allsparepart")}
+                className={`button ${
+                  currentPath === "/allsparepart" ? "active" : ""
+                }`}
+              />
+            </>
+          )}
           <Button
             {...navButton("Tasks", faClipboard, "/tasks")}
             className={`button ${currentPath === "/tasks" ? "active" : ""}`}
           />
           <Button
-            {...navButton("Predictions", faChartLine, "/predictions")}
-            className={`button ${
-              currentPath === "/predictions" ? "active" : ""
-            }`}
-          />
-          <Button
             {...navButton("User Management", faUsers, "/allusers")}
             className={`button ${currentPath === "/allusers" ? "active" : ""}`}
           />
-          <Button
-            {...navButton("Alerts", faCalendarTimes, "/alerts")}
-            className={`button ${currentPath === "/alerts" ? "active" : ""}`}
-          />
-          <Button
-            {...navButton("Spare Parts", faToolbox, "/allsparepart")}
-            className={`button ${
-              currentPath === "/allsparepart" ? "active" : ""
-            }`}
-          />
-          <Button
-            {...navButton("Task Preview", faToolbox, "/taskpreview")}
-            className={`button ${
-              currentPath === "/taskpreview" ? "active" : ""
-            }`}
-          />
+          {userInfo.role === "user" && (
+            <>
+              <Button
+                {...navButton("Alerts", faCalendarTimes, "/alerts")}
+                className={`button ${
+                  currentPath === "/alerts" ? "active" : ""
+                }`}
+              />
+              <Button
+                {...navButton("Task Preview", faToolbox, "/taskpreview")}
+                className={`button ${
+                  currentPath === "/taskpreview" ? "active" : ""
+                }`}
+              />
+            </>
+          )}
         </div>
       </div>
       <div className="flex column center gap">

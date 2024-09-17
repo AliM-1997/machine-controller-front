@@ -14,7 +14,6 @@ const PredictionCard = ({ serial_number }) => {
   const [csvData, setCsvData] = useState(null);
   const [displaySparepart, setDisplaySparePart] = useState([]);
   const [prediction, setPrediction] = useState([]);
-  // console.log("prediction state", prediction);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -31,7 +30,6 @@ const PredictionCard = ({ serial_number }) => {
     if (serial_number) {
       try {
         const data = await Machines.GetallSparepartForMachine(serial_number);
-        console.log(data);
         setDisplaySparePart(data);
       } catch (error) {
         console.error("Error fetching all spare parts:", error.message);
@@ -54,7 +52,7 @@ const PredictionCard = ({ serial_number }) => {
 
       if (lifecycle) {
         const differencePercentage =
-          ((operatingTime - lifecycle) / lifecycle) * 100;
+          ((-operatingTime + lifecycle) / lifecycle) * 100;
 
         if (differencePercentage >= 90) {
           return "Risk: Exceed Life Time";
@@ -69,8 +67,13 @@ const PredictionCard = ({ serial_number }) => {
   const handleAssignedTask = () => {};
 
   const handleMachinePredictionFailure = async () => {
-    const data = await MachineStatistics.GetMachinePrediction(csvData);
-    setPrediction([data.probabilities]);
+    try {
+      const data = await MachineStatistics.GetMachinePrediction(csvData);
+      setPrediction([data.probabilities]);
+      console.log("from predictoin", data);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   useEffect(() => {
