@@ -5,11 +5,12 @@ import { Notifications } from "../../data/remote/notification";
 import Button from "../../base/Button";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
 import echo from "../../utils/echo";
+import { useNavigate } from "react-router-dom";
 
 const Alerts = () => {
   const { darkMode } = useDarkMode();
   const [nonRead, setNoneRead] = useState([]);
-
+  const navigate = useNavigate();
   const handleUnReadNotification = async () => {
     try {
       const response = await Notifications.UnReadNotification();
@@ -20,12 +21,14 @@ const Alerts = () => {
     }
   };
 
-  const handleMarkNotificationAsRead = async (notificationId) => {
+  const handleMarkNotificationAsRead = async (notificationId, id) => {
     try {
       await Notifications.MarkNottificationAsRead(notificationId);
       setNoneRead(
         nonRead.filter((notification) => notification.id !== notificationId)
       );
+
+      navigate(`/taskpreview/${id}`);
     } catch (error) {
       console.error("Error marking notification as read:", error);
     }
@@ -33,7 +36,6 @@ const Alerts = () => {
 
   useEffect(() => {
     handleUnReadNotification();
-
     const channel = echo.channel("notifications");
     channel.listen(".NotificationCountEvent", (event) => {
       console.log("New Notification:", event.notification);
@@ -87,7 +89,7 @@ const Alerts = () => {
                     {alert.data.user_id}
                   </p>
                   <p className={darkMode ? "white-txt" : "black-txt"}>
-                    {alert.data.machine_name}
+                    {alert.data.jobDescription}
                   </p>
                   <p className={darkMode ? "white-txt" : "black-txt"}>
                     {alert.data.status}
@@ -97,14 +99,19 @@ const Alerts = () => {
                       placeHolder="mark as read"
                       backgroundColor={darkMode ? "tertiary" : "Lprimary"}
                       textColor="blue"
-                      onClick={() => handleMarkNotificationAsRead(alert.id)}
+                      onClick={() =>
+                        handleMarkNotificationAsRead(
+                          alert.id,
+                          alert.data.task_id
+                        )
+                      }
                       className="mark-read"
                     />
                   </div>
                 </div>
               ))
             ) : (
-              <p>No unread notifications</p>
+              <p className=" padding-30px error-message">No notifications</p>
             )}
           </div>
         </div>

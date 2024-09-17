@@ -11,8 +11,7 @@ const Predictions = () => {
   const { darkMode } = useDarkMode();
   const machine = useSelector((global) => global.data);
   const [serialNumber, setSerialnumber] = useState("");
-  // console.log(serialNumber);
-  // console.log(machine);
+
   const handleOptionSelect = (option) => {
     setSerialnumber(option);
   };

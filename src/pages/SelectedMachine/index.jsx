@@ -81,7 +81,7 @@ const SelectedMachine = () => {
       addedSparepart
     );
     if (data) {
-      handleAddSparePart();
+      handleAllSparePart();
     }
   };
   useEffect(() => {
