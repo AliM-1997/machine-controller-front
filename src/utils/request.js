@@ -50,13 +50,13 @@ export const requestApi = async ({
       }
     }
 
-    throw new Error("Failed to fetch data", {
-      cause:
-        error.response?.data?.message ||
-        error?.response?.data ||
-        error?.message ||
-        error.response ||
-        error,
-    });
+    // throw new Error("Failed to fetch data", {
+    //   cause:
+    //     error.response?.data?.message ||
+    //     error?.response?.data ||
+    //     error?.message ||
+    //     error.response ||
+    //     error,
+    // });
   }
 };

@@ -41,7 +41,6 @@ const UserProfile = () => {
     location: "",
     image_path: "",
   });
-  console.log(user);
   useEffect(() => {
     if (user) {
       setFormData({

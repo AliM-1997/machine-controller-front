@@ -21,10 +21,18 @@ const TaskPreview = () => {
   const { darkMode } = useDarkMode();
   const [viewTasks, setViewTasks] = useState(false);
   const [task, setTask] = useState([]);
+  const [error, setError] = useState(null);
   const [formdata, setFormData] = useState({
     userReport: "",
     task_id: id || "",
   });
+  const storedUser = localStorage.getItem("user");
+  let username = null;
+  if (storedUser) {
+    username = JSON.parse(storedUser).username;
+  } else {
+    console.log("No username found");
+  }
   const navigateBack = () => {
     navigate("/alerts");
   };
@@ -33,12 +41,24 @@ const TaskPreview = () => {
       ...formdata,
       [key]: value,
     });
+    setError(null);
   };
-  console.log(task);
   const handleTask = async () => {
-    const data = await Tasks.GetAllTaskDetailsById(formdata.task_id);
-    setTask(data.task);
+    try {
+      const data = await Tasks.GetAllTaskDetailsById(formdata.task_id);
+      if (data && data.task) {
+        setTask(data.task);
+        setError(null);
+      } else {
+        setTask([]);
+        setError("Task not found for the given Task ID.");
+      }
+    } catch (error) {
+      console.error("An error occurred while fetching task details:", error);
+      setError("An error occurred while fetching task details.");
+    }
   };
+
   const viewOn = () => {
     setViewTasks(true);
   };
@@ -55,7 +75,21 @@ const TaskPreview = () => {
   useEffect(() => {
     handleTask();
   }, [formdata.task_id]);
-  const handleSubmitTask = async () => {};
+
+  const handleSubmitTask = async () => {
+    if (!formdata.userReport.trim()) {
+      setError("Please provide a report before submitting.");
+      return;
+    }
+
+    try {
+      await Tasks.AddUserReport(formdata.task_id, formdata.userReport);
+      alert("Task report submitted and marked as done.");
+    } catch (error) {
+      console.error("Error submitting task report:", error);
+      setError("Failed to submit task report.");
+    }
+  };
   return (
     <div>
       <Header pageName="Tasks" showChooseInput={false} />
@@ -101,7 +135,7 @@ const TaskPreview = () => {
               {viewTasks && (
                 <ViewUserTask
                   className="view-box"
-                  username={"leffler.paris"}
+                  username={username}
                   onexit={viewOff}
                   onchoose={handleTaskChoose}
                 />
@@ -170,6 +204,9 @@ const TaskPreview = () => {
                 </tbody>
               </table>
               <div className="flex column gap-btn">
+                {error && (
+                  <p style={{ color: "red", margin: "10px 0" }}>{error}</p>
+                )}
                 <Input
                   placeHolder={"Report Details"}
                   name="Report"
@@ -186,13 +223,13 @@ const TaskPreview = () => {
                     width="7vw"
                     backgroundColor="primary"
                     textColor="white"
-                    onchoose={handleSubmitTask}
+                    onClick={handleSubmitTask}
                   />
                 </div>
               </div>
             </div>
           ) : (
-            <div className=" flex start error-message">Search For task</div>
+            <div className=" flex start error-message ">Search For task</div>
           )}
         </div>
       </div>
