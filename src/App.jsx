@@ -53,6 +53,7 @@ function App() {
                 <Route path="addsparepart" element={<AddSparePart />} />
                 <Route path="addsparepart/:id" element={<AddSparePart />} />
                 <Route path="taskpreview" element={<TaskPreview />} />
+                <Route path="taskpreview/:id" element={<TaskPreview />} />
               </Route>
             </Routes>
           </BrowserRouter>
