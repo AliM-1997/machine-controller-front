@@ -25,17 +25,25 @@ const ProfileUser = ({ onclick }) => {
         />
       </div>
       <div>
-        <div className="flex align-start gap">
-          <h4>Name:</h4>
-          <p className="right-side">{parsedProfile.name || "N/A"}</p>
-        </div>
-        <div className="flex align-start gap">
-          <h4>Username:</h4>
-          <p className="right-side">{parsedProfile.username || "N/A"}</p>
-        </div>
-        <div className="flex space-btw align-start">
-          <h4>Email:</h4>
-          <p className="right-side">{parsedProfile.email || "N/A"}</p>
+        <div className="profile-table">
+          <div className="profile-row">
+            <div className="profile-label">Name:</div>
+            <div className="profile-value">{parsedProfile.name || "N/A"}</div>
+          </div>
+          <div className="profile-row">
+            <div className="profile-label">Username:</div>
+            <div className="profile-value">
+              {parsedProfile.username || "N/A"}
+            </div>
+          </div>
+          <div className="profile-row">
+            <div className="profile-label">Role:</div>
+            <div className="profile-value">{parsedProfile.role || "N/A"}</div>
+          </div>
+          <div className="profile-row">
+            <div className="profile-label">Email:</div>
+            <div className="profile-value">{parsedProfile.email || "N/A"}</div>
+          </div>
         </div>
       </div>
     </div>
