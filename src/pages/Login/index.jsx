@@ -36,6 +36,7 @@ const Login = () => {
       username: data.user.username,
       email: data.user.email,
       name: data.user.name,
+      role: data.user.role,
     };
     localStorage.setItem("user", JSON.stringify(userData));
     navigate("/dashboard");
