@@ -147,4 +147,17 @@ export const Tasks = {
       alert("No task found for the given id");
     }
   },
+  AddUserReport: async (taskId, userReport) => {
+    try {
+      const data = await requestApi({
+        route: `task/user/report/${taskId}`,
+        body: { user_report: userReport },
+        requestMethod: RequestMethods.POST,
+      });
+      console.log("Task report added:", data);
+      return data;
+    } catch (error) {
+      console.error("Error adding task report:", error);
+    }
+  },
 };
