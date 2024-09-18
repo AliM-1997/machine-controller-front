@@ -35,17 +35,16 @@ const ViewUserTask = ({ username, onexit, onchoose }) => {
       {userTasks.length > 0 ? (
         userTasks.map((task) => (
           <div key={task.id} className="flex center gap">
-            <h3>
-              <p
-                style={{
-                  backgroundColor: darkMode ? "tertiary-bg" : "secondary-bg",
-                  color: darkMode ? "white" : "black",
-                }}
-                onClick={() => handleTaskSelection(task)}
-              >
-                Task ID:{" "}
-              </p>
-            </h3>
+            <p
+              className="choose-task-id"
+              style={{
+                backgroundColor: darkMode ? "tertiary-bg" : "secondary-bg",
+                color: darkMode ? "white" : "black",
+              }}
+              onClick={() => handleTaskSelection(task)}
+            >
+              Task ID:{" "}
+            </p>
             <p>{task.id}</p>
           </div>
         ))

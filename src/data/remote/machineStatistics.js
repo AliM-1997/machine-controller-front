@@ -79,4 +79,12 @@ export const MachineStatistics = {
       alert("No Prediction Found");
     }
   },
+  GetSensorData: async () => {
+    try {
+      const data = await requestApi({ route: "sensordata/last" });
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
