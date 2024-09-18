@@ -18,7 +18,7 @@ const ChooseOption = ({
   required = true,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState();
   const { darkMode } = useDarkMode();
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -35,11 +35,7 @@ const ChooseOption = ({
     setIsOpen(true);
   };
 
-  const filteredOptions = options.filter(
-    (option) =>
-      option.label &&
-      option.label.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredOptions = options.filter((option) => option.label);
   const containerStyles = {
     width,
     backgroundColor: darkMode ? "#333" : "#fff", // Dark mode background and light mode background
