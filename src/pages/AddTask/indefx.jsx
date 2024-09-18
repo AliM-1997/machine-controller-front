@@ -23,7 +23,9 @@ import { incrementNotification } from "../../data/redux/notification";
 
 const AddTask = () => {
   const { darkMode } = useDarkMode();
+
   const location = useLocation();
+
   const { id } = useParams();
   const task = useSelector((global) => global);
   const [formData, setFormData] = useState({
@@ -36,10 +38,10 @@ const AddTask = () => {
     status: "",
     location: "",
     username: "",
-    machine_serial_number: location.state?.machineSerialNumber || "",
-    spare_part_serial_number: location.state?.sparePartSerialNumber || "",
+    machine_serial_number: location.state?.machine_serial_number || "",
+    spare_part_serial_number: location.state?.spare_part_serial_number || "",
   });
-  console.log(formData);
+  console.log(formData.machine_serial_number);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -74,7 +76,6 @@ const AddTask = () => {
         if (createData) {
           alert("Task Created Successfully");
           dispatch(incrementNotification());
-          console.log(dispatch(incrementNotification()));
         }
       }
     }
@@ -146,11 +147,11 @@ const AddTask = () => {
             darkMode ? "black-bg" : "white-bg"
           }`}
         >
-          <div className="flex row center space-btw full-width">
+          <div className="flex gap full-width start">
             <div className="flex column">
               <ChooseOption
                 name="Machine Serial Number"
-                placeHolder={
+                placeholder={
                   formData.machine_serial_number || "choose machine "
                 }
                 options={task.data.MachineSerialNumber}
@@ -168,7 +169,7 @@ const AddTask = () => {
             <div className="flex column">
               <ChooseOption
                 name="Username"
-                placeholder={"choose user"}
+                placeholder={formData.username || "choose user"}
                 options={task.data.UserNames}
                 onSelect={(e) => ChangingFormIput("username", e.label)}
                 width="24vw"
@@ -181,26 +182,28 @@ const AddTask = () => {
               )}
             </div>
           </div>
-          <div className="flex row center space-btw full-width">
-            <ChooseOption
-              options={task.data.SparePartSerialNumber}
-              name="Spare Part Serial Number"
-              placeHolder={
-                formData.spare_part_serial_number || "choose sparePart "
-              }
-              leftIcon={faSearch}
-              width="24vw"
-              type="text"
-              required={false}
-              onSelect={(e) =>
-                ChangingFormIput("spare_part_serial_number", e.label)
-              }
-            />
+          <div className="flex gap full-width start">
+            <div className="flex column">
+              <ChooseOption
+                options={task.data.SparePartSerialNumber}
+                name="Spare Part Serial Number"
+                placeholder={
+                  formData.spare_part_serial_number || "choose sparePart "
+                }
+                leftIcon={faSearch}
+                width="24vw"
+                type="text"
+                required={false}
+                onSelect={(e) =>
+                  ChangingFormIput("spare_part_serial_number", e.label)
+                }
+              />
+            </div>
             <div className="flex column">
               <ChooseOption
                 options={Taskstatus}
                 name="Status"
-                placeHolder={formData.status || "pending"}
+                placeholder={formData.status || "pending"}
                 leftIcon={faSearch}
                 width="24vw"
                 type="text"
@@ -209,9 +212,10 @@ const AddTask = () => {
               {errors.status && <div className="error">{errors.status}</div>}
             </div>
           </div>
-          <div className="flex row center space-btw full-width">
+          <div className="flex gap full-width start">
             <div className="flex column">
               <ReactDate
+                placeHolder={formData.assignedDate || "yyyy-MM-dd"}
                 leftIcon={faCalendarAlt}
                 mindata={true}
                 name="Assigned Date"

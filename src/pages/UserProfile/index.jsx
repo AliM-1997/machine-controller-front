@@ -56,8 +56,22 @@ const UserProfile = () => {
       });
     }
   }, [user]);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.name) newErrors.name = "Name is required.";
+    if (!formData.username) newErrors.username = "Username is required.";
+    if (!formData.email) newErrors.email = "Email is required.";
+    if (formData.password && formData.password.length < 8)
+      newErrors.password = "Password must be at least 8 characters.";
+    if (formData.password !== formData.password_confirmation)
+      newErrors.password_confirmation = "Passwords do not match.";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
   const handleCancel = () => {
     navigate("/allUsers");
   };
@@ -72,15 +86,22 @@ const UserProfile = () => {
       const updatedData = await Users.UpdateUser(user.id, formData);
       if (updatedData) {
         dispatch(clearUser());
-        alert("update user successfully");
+        alert("User updated successfully");
       }
     } else {
-      const createdData = await Users.CreateUser(formData);
-      if (createdData) {
-        alert("create user successfully");
+      if (validateForm()) {
+        try {
+          const createdData = await Users.CreateUser(formData);
+          if (createdData) {
+            alert("User created successfully");
+            navigate("/allusers");
+          }
+        } catch (error) {
+          console.error("Error creating user:", error);
+          alert("Failed to create user");
+        }
       }
     }
-    navigate("/allUsers");
   };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -214,23 +235,32 @@ const UserProfile = () => {
             </div>
           )}
           <div className="flex row center gap full-width">
-            <Input
-              width="24vw"
-              placeHolder={user.name || "Name"}
-              name="Name"
-              type="text"
-              leftIcon={faUser}
-              onChange={(e) => handleFormData("name", e.target.value)}
-            />
-            <Input
-              width="24vw"
-              placeHolder={user.username || "@username"}
-              name="Username"
-              type="text"
-              leftIcon={faUser}
-              required={false}
-              onChange={(e) => handleFormData("username", e.target.value)}
-            />
+            <div className="flex column">
+              <Input
+                width="24vw"
+                placeHolder={formData.name || "Name"}
+                name="Name"
+                type="text"
+                leftIcon={faUser}
+                onChange={(e) => handleFormData("name", e.target.value)}
+              />
+              {errors.name && <div className="error">{errors.name}</div>}
+            </div>
+
+            <div className="flex column">
+              <Input
+                width="24vw"
+                placeHolder={user.username || "@username"}
+                name="Username"
+                type="text"
+                leftIcon={faUser}
+                required={false}
+                onChange={(e) => handleFormData("username", e.target.value)}
+              />
+              {errors.username && (
+                <div className="error">{errors.username}</div>
+              )}
+            </div>
           </div>
           <div className="flex row center gap full-width">
             <Input
@@ -254,34 +284,48 @@ const UserProfile = () => {
           </div>
           <div className="flex full-width gap column center">
             <div>
-              <Input
-                placeHolder={user.email || "example@gamil.com"}
-                name="Email"
-                type="email"
-                leftIcon={faEnvelope}
-                width="calc(48vw + 24px)"
-                onChange={(e) => handleFormData("email", e.target.value)}
-              />
+              <div className="flex column">
+                <Input
+                  placeHolder={formData.email || "example@gamil.com"}
+                  name="Email"
+                  type="email"
+                  leftIcon={faEnvelope}
+                  width="calc(48vw + 24px)"
+                  onChange={(e) => handleFormData("email", e.target.value)}
+                />
+                {errors.email && <div className="error">{errors.email}</div>}
+              </div>
             </div>
             <div className="flex row center gap full-width">
-              <Input
-                width="24vw"
-                placeHolder={user.password || "password"}
-                name="Password"
-                type="password"
-                leftIcon={faKey}
-                onChange={(e) => handleFormData("password", e.target.value)}
-              />
-              <Input
-                width="24vw"
-                placeHolder={user.password || "password"}
-                name="Confirmed-Password"
-                type="password"
-                leftIcon={faKey}
-                onChange={(e) =>
-                  handleFormData("password_confirmation", e.target.value)
-                }
-              />
+              <div className="flex column">
+                <Input
+                  width="24vw"
+                  placeHolder="Password"
+                  name="Password"
+                  type="password"
+                  leftIcon={faKey}
+                  onChange={(e) => handleFormData("password", e.target.value)}
+                />
+                {errors.password && (
+                  <div className="error">{errors.password}</div>
+                )}
+              </div>
+
+              <div className="flex column">
+                <Input
+                  width="24vw"
+                  placeHolder="Confirm Password"
+                  name="Confirmed-Password"
+                  type="password"
+                  leftIcon={faKey}
+                  onChange={(e) =>
+                    handleFormData("password_confirmation", e.target.value)
+                  }
+                />
+                {errors.password_confirmation && (
+                  <div className="error">{errors.password_confirmation}</div>
+                )}
+              </div>
             </div>
           </div>
           <div className="flex center">

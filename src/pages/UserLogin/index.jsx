@@ -37,7 +37,7 @@ const UserLogin = () => {
       role: data.user.role,
     };
     localStorage.setItem("user", JSON.stringify(userData));
-    navigate("/dashboard");
+    navigate("/taskpreview");
   };
 
   return (
