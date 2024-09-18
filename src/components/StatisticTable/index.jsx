@@ -1,7 +1,9 @@
 import React from "react";
-import "./style.css"; // Optional, for custom styling
+import "./style.css";
+import { useDarkMode } from "../../data/constext/DarkModeContext";
 
 const StatisticsTable = ({ data }) => {
+  const { darkMode } = useDarkMode();
   const maxValue = Math.max(
     data.Heat_Dissipation_Failure,
     data.No_Failure,
@@ -9,12 +11,19 @@ const StatisticsTable = ({ data }) => {
     data.Power_Failure,
     data.Tool_Wear_Failure
   );
-
   return (
-    <div className="table-container">
+    <div
+      className={`table-container ${
+        darkMode ? "black-bg" : "white-bg"
+      } full-height`}
+    >
       <table
         className="statistics-table"
-        style={{ width: "100%", textAlign: "center" }}
+        style={{
+          width: "100%",
+          textAlign: "center",
+          color: darkMode ? "white" : "black",
+        }}
       >
         <thead>
           <tr>
@@ -33,7 +42,7 @@ const StatisticsTable = ({ data }) => {
                     : "normal",
               }}
             >
-              {data.Heat_Dissipation_Failure}
+              {data[0].Heat_Dissipation_Failure}
             </td>
           </tr>
           <tr>
@@ -43,7 +52,7 @@ const StatisticsTable = ({ data }) => {
                 fontWeight: data.No_Failure === maxValue ? "bold" : "normal",
               }}
             >
-              {data.No_Failure}
+              {data[0].No_Failure}
             </td>
           </tr>
           <tr>
@@ -51,10 +60,10 @@ const StatisticsTable = ({ data }) => {
             <td
               style={{
                 fontWeight:
-                  data.Overstrain_Failure === maxValue ? "bold" : "normal",
+                  data[0].Overstrain_Failure === maxValue ? "bold" : "normal",
               }}
             >
-              {data.Overstrain_Failure}
+              {data[0].Overstrain_Failure}
             </td>
           </tr>
           <tr>
@@ -64,7 +73,7 @@ const StatisticsTable = ({ data }) => {
                 fontWeight: data.Power_Failure === maxValue ? "bold" : "normal",
               }}
             >
-              {data.Power_Failure}
+              {data[0].Power_Failure}
             </td>
           </tr>
           <tr>
@@ -75,13 +84,13 @@ const StatisticsTable = ({ data }) => {
                   data.Tool_Wear_Failure === maxValue ? "bold" : "normal",
               }}
             >
-              {data.Tool_Wear_Failure}
+              {data[0].Tool_Wear_Failure}
             </td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan="2">Date: {data.date}</td>
+            <td colSpan="2">Date: {data[0].date}</td>
           </tr>
         </tfoot>
       </table>
