@@ -123,16 +123,15 @@ const NavBar = ({ onNavigate }) => {
                   currentPath === "/allsparepart" ? "active" : ""
                 }`}
               />
+              <Button
+                {...navButton("User Management", faUsers, "/allusers")}
+                className={`button ${
+                  currentPath === "/allusers" ? "active" : ""
+                }`}
+              />
             </>
           )}
-          <Button
-            {...navButton("Tasks", faClipboard, "/tasks")}
-            className={`button ${currentPath === "/tasks" ? "active" : ""}`}
-          />
-          <Button
-            {...navButton("User Management", faUsers, "/allusers")}
-            className={`button ${currentPath === "/allusers" ? "active" : ""}`}
-          />
+
           {userInfo.role === "user" && (
             <>
               <Button

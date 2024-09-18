@@ -14,18 +14,28 @@ const PredictionCard = ({ serial_number }) => {
   const [csvData, setCsvData] = useState(null);
   const [displaySparepart, setDisplaySparePart] = useState([]);
   const [prediction, setPrediction] = useState([]);
+
+  const [sensor, setSensor] = useState({});
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    if (file) {
+    const allowedExtensions = [
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xlsx
+      "application/vnd.ms-excel",
+      "text/csv",
+    ];
+
+    if (file && allowedExtensions.includes(file.type)) {
       Papa.parse(file, {
         complete: (results) => {
           setCsvData(results.data);
         },
         header: true,
       });
+    } else {
+      alert("Please upload a valid Excel or CSV file (.xls, .xlsx, or .csv)");
     }
   };
-
+  console.log("data deom askdjhasd", sensor);
   const handleAllSparePart = async () => {
     if (serial_number) {
       try {
@@ -52,19 +62,28 @@ const PredictionCard = ({ serial_number }) => {
 
       if (lifecycle) {
         const differencePercentage =
-          ((-operatingTime + lifecycle) / lifecycle) * 100;
+          ((operatingTime - lifecycle) / lifecycle) * 100;
 
         if (differencePercentage >= 90) {
           return "Risk: Exceed Life Time";
         } else if (differencePercentage >= 50) {
           return "Preventive maintenance required.";
+        } else {
+          return `Health: ${(-differencePercentage).toFixed(2)}`;
         }
       }
     }
     return "";
   };
 
-  const handleAssignedTask = () => {};
+  const handleAssignedTask = (sparePartSerialNumber) => {
+    navigate("/addTask", {
+      state: {
+        spare_part_serial_number: sparePartSerialNumber,
+        machine_serial_number: serial_number,
+      },
+    });
+  };
 
   const handleMachinePredictionFailure = async () => {
     try {
@@ -74,6 +93,12 @@ const PredictionCard = ({ serial_number }) => {
     } catch (error) {
       console.error(error.message);
     }
+  };
+
+  const handleSensorData = async () => {
+    const response = await MachineStatistics.GetSensorData();
+    console.log(response);
+    setSensor(response.data);
   };
 
   useEffect(() => {
@@ -87,8 +112,9 @@ const PredictionCard = ({ serial_number }) => {
     handleAllSparePart();
   }, [serial_number]);
   return (
-    <div className=" flex column gap end">
-      <div>
+    <div className=" flex column gap end top-sparepart-prediction">
+      <div className="flex full-width space-btw">
+        <div className="flex gap"></div>
         <Button
           placeHolder="Statistics"
           backgroundColor="primary"
@@ -116,7 +142,7 @@ const PredictionCard = ({ serial_number }) => {
           />
         </h3>
         <div
-          className={`flex column `}
+          className={`flex column  wrap`}
           style={{
             color: darkMode ? "white" : "black",
             backgroundColor: darkMode ? "black" : "white",
@@ -134,7 +160,14 @@ const PredictionCard = ({ serial_number }) => {
                 >
                   <div className="flex space-btw">
                     {sparePart.serial_number}
-                    <div className="assign-task"> Task</div>
+                    <p
+                      className="assign-task"
+                      onClick={() =>
+                        handleAssignedTask(sparePart.serial_number)
+                      }
+                    >
+                      Task
+                    </p>
                   </div>
                   <div>{getMaintenanceStatus(sparePart)}</div>
                 </li>
@@ -148,7 +181,28 @@ const PredictionCard = ({ serial_number }) => {
         </div>
       </div>
       <div className="flex full-width">
-        <PredictionMachineCard statistics={prediction} />
+        <PredictionMachineCard statistics={prediction} className="full-width" />
+      </div>
+      <div className="flex gap">
+        <Button
+          placeHolder={
+            sensor.Temperature !== undefined
+              ? `${sensor.Temperature} C at ${new Date(
+                  sensor.created_at
+                ).toLocaleString()}`
+              : "Sensor Reading"
+          }
+          backgroundColor={darkMode ? "black" : "white"}
+          textColor={darkMode ? "white" : "black"}
+          width="20vw"
+        />
+        <Button
+          placeHolder="Sensor"
+          onClick={handleSensorData}
+          backgroundColor="primary"
+          textColor="white"
+          width="5vw"
+        />
       </div>
     </div>
   );
