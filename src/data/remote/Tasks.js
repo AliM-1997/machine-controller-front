@@ -113,7 +113,6 @@ export const Tasks = {
       return data;
     } catch (error) {
       console.error(error);
-      alert("No task found for the given user");
     }
   },
   GetTaskByUsername: async (username) => {
