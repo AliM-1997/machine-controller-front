@@ -21,12 +21,22 @@ const Header = ({
   backgroundColor_btn = "white",
   border = true,
   textColor_btn,
+  count = 0,
 }) => {
   const [profileIcon, setprofileIcon] = useState(false);
   const state = useSelector((state) => state.data);
   const { darkMode } = useDarkMode();
   const navigate = useNavigate();
   const [notificationCount, setNotificationCount] = useState(0);
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      const parsedUserData = JSON.parse(userData);
+      setUserInfo(parsedUserData);
+    }
+  }, []);
 
   useEffect(() => {
     setNotificationCount(state.UnReadNotification);
@@ -75,14 +85,16 @@ const Header = ({
         {showIcons && (
           <div className="header-container flex gpa">
             <div className="h-icon flex gap">
-              <Icon
-                icon={faBell}
-                color="primary"
-                onClick={handleNavigateAlerts}
-              />
-              <div className="notification-count flex center">
-                {notificationCount}
-              </div>
+              {userInfo.role === "user" && (
+                <>
+                  <Icon
+                    icon={faBell}
+                    color="primary"
+                    onClick={handleNavigateAlerts}
+                  />
+                  <div className="notification-count flex center">{count}</div>
+                </>
+              )}
 
               <Icon
                 icon={faUser}
