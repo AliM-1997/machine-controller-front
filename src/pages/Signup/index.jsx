@@ -5,6 +5,7 @@ import Button from "../../base/Button";
 import { useNavigate } from "react-router-dom";
 import { authRemote } from "../../data/remote/Auth_user";
 import loginImage from "../../assets/images/Admin-Login.png";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -23,21 +24,27 @@ const Signup = () => {
   };
   const handelSignup = async () => {
     if (!name || !email || !password || !confirmedPassword) {
-      alert("All fields are required.");
+      toast.error("All fields are required.");
       return;
     }
     if (!validateEmail(email)) {
-      alert("Please enter a valid email address.");
+      toast.error("Please enter a valid email address.");
       return;
     }
     if (password !== confirmedPassword) {
-      alert("Passwords do not match.");
+      toast.error("Passwords do not match.");
       return;
     }
-
-    const data = await authRemote.Signup(email, password, name);
-    console.log(data);
-    navigate("/login");
+    try {
+      const data = await authRemote.Signup(email, password, name);
+      console.log(data);
+      if (data) {
+        toast.success("Resiting successfully");
+        navigate("/userlogin");
+      }
+    } catch (error) {
+      toast.error("Unable registering");
+    }
   };
 
   return (
