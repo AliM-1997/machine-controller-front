@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { requestApi } from "../../utils/request";
 import { RequestMethods } from "../../utils/request_methods";
 
@@ -7,8 +8,7 @@ export const Tasks = {
       const data = await requestApi({ route: "/task" });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
-      throw error;
+      toast.error("Error creating user:", error.message);
     }
   },
   CreateTask: async (formData) => {
@@ -18,11 +18,9 @@ export const Tasks = {
         requestMethod: RequestMethods.POST,
         body: formData,
       });
-      console.log("data from task remote", data);
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
-      throw error;
+      toast.error("Error creating user:", error.message);
     }
   },
   UpdateTask: async (id, formData) => {
@@ -34,8 +32,7 @@ export const Tasks = {
       });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
-      throw error;
+      toast.error("Error creating user:", error.message);
     }
   },
   DeleteTask: async (id) => {
@@ -46,8 +43,7 @@ export const Tasks = {
       });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
-      throw error;
+      toast.error("Error creating user:", error.message);
     }
   },
   GetTaskByID: async (id) => {
@@ -56,11 +52,9 @@ export const Tasks = {
         route: `/task/${id}`,
         requestMethod: RequestMethods.GET,
       });
-      console.log(data);
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
-      throw error;
+      toast.error("Error creating user:", error.message);
     }
   },
   GetByMachineName: async (name) => {
@@ -69,8 +63,8 @@ export const Tasks = {
       console.log(data);
       return data;
     } catch (error) {
-      console.error(error);
-      alert("No task found for the given machine");
+      toast.error(error);
+      toast.error("No task found for the given machine");
     }
   },
   GetByMachineSerialNumber: async (serial_number) => {
@@ -81,8 +75,8 @@ export const Tasks = {
       console.log(data);
       return data;
     } catch (error) {
-      console.error(error);
-      alert("No task found for the given machine");
+      toast.error(error);
+      toast.error("No task found for the given machine");
     }
   },
   GetTaskByStatus: async (status) => {
@@ -90,8 +84,8 @@ export const Tasks = {
       const data = await requestApi({ route: `/task/status/${status}` });
       return data;
     } catch (error) {
-      console.error(error);
-      alert("No task found for the given status");
+      toast.error(error);
+      toast.error("No task found for the given status");
     }
   },
   GetTaskByDate: async (date) => {
@@ -99,8 +93,8 @@ export const Tasks = {
       const data = await requestApi({ route: `/task/date/${date}` });
       return data;
     } catch (error) {
-      console.error(error);
-      alert("No task found for the given date");
+      toast.error(error);
+      toast.error("No task found for the given date");
     }
   },
   CreateTaskByUsername: async (formData) => {
@@ -112,7 +106,7 @@ export const Tasks = {
       });
       return data;
     } catch (error) {
-      console.error(error);
+      toast.error(error);
     }
   },
   GetTaskByUsername: async (username) => {
@@ -122,8 +116,8 @@ export const Tasks = {
       });
       return data;
     } catch (error) {
-      console.error(error);
-      alert("No task found for the given user");
+      toast.error(error);
+      toast.error("No task found for the given user");
     }
   },
 
@@ -132,18 +126,17 @@ export const Tasks = {
       const data = await requestApi({ route: `task/all/details/${id}` });
       return data;
     } catch (error) {
-      console.error(error);
-      alert("No task found for the given id");
+      toast.error(error);
+      toast("No task found for the given id");
     }
   },
   GetAllTaskDetails: async () => {
     try {
       const data = await requestApi({ route: `task/all/details/` });
-      console.log(data);
       return data;
     } catch (error) {
-      console.error(error);
-      alert("No task found for the given id");
+      toast.error(error);
+      toast.error("No task found for the given id");
     }
   },
   AddUserReport: async (taskId, userReport) => {
@@ -153,10 +146,9 @@ export const Tasks = {
         body: { user_report: userReport },
         requestMethod: RequestMethods.POST,
       });
-      console.log("Task report added:", data);
       return data;
     } catch (error) {
-      console.error("Error adding task report:", error);
+      toast.error("Error adding task report:", error);
     }
   },
 };
