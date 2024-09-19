@@ -15,6 +15,7 @@ import Input from "../../base/Input";
 import Button from "../../base/Button";
 import ViewUserTask from "../../components/ViewUserTask";
 import { toast } from "react-toastify";
+import { Notifications } from "../../data/remote/notification";
 
 const TaskPreview = () => {
   const { id } = useParams();
@@ -23,6 +24,7 @@ const TaskPreview = () => {
   const [viewTasks, setViewTasks] = useState(false);
   const [task, setTask] = useState([]);
   const [error, setError] = useState(null);
+  const [count, setCount] = useState("");
   const [formdata, setFormData] = useState({
     userReport: "",
     task_id: id || "",
@@ -43,6 +45,17 @@ const TaskPreview = () => {
       [key]: value,
     });
     setError(null);
+  };
+  useEffect(() => {
+    handleUnReadNotificationcount();
+  });
+  const handleUnReadNotificationcount = async () => {
+    try {
+      const response = await Notifications.UnReadNotification();
+      setCount(response.count);
+    } catch (error) {
+      console.error(error);
+    }
   };
   const handleTask = async () => {
     try {
@@ -93,7 +106,7 @@ const TaskPreview = () => {
   };
   return (
     <div>
-      <Header pageName="Tasks" showChooseInput={false} />
+      <Header pageName="Tasks" showChooseInput={false} count={count} />
 
       <div className="flex column gap addTask-container center">
         <div className="flex gap start title ">

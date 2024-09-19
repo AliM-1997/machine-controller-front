@@ -34,7 +34,6 @@ const NavBar = ({ onNavigate }) => {
       setUserInfo(parsedUserData);
     }
   }, []);
-  console.log(userInfo.role);
   const handleLogout = async () => {
     await authRemote.Logout();
     authLocal.clearToken();

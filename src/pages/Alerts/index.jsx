@@ -4,18 +4,20 @@ import Header from "../../components/Header";
 import { Notifications } from "../../data/remote/notification";
 import Button from "../../base/Button";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
-import echo from "../../utils/echo";
 import { useNavigate } from "react-router-dom";
 
 const Alerts = () => {
   const { darkMode } = useDarkMode();
   const [nonRead, setNoneRead] = useState([]);
   const navigate = useNavigate();
+  const [count, setCount] = useState("");
+
   const handleUnReadNotification = async () => {
     try {
       const response = await Notifications.UnReadNotification();
       console.log("unread notifications in alerts", response);
       setNoneRead(response.notifications || []);
+      setCount(response.count);
     } catch (error) {
       console.error("Error fetching unread notifications:", error);
     }
@@ -36,19 +38,7 @@ const Alerts = () => {
 
   useEffect(() => {
     handleUnReadNotification();
-    const channel = echo.channel("notifications");
-    channel.listen(".NotificationCountEvent", (event) => {
-      console.log("New Notification:", event.notification);
-      setNoneRead((prevNotifications) => [
-        event.notification,
-        ...prevNotifications,
-      ]);
-    });
-
-    return () => {
-      channel.stopListening(".NotificationCountEvent");
-    };
-  }, []);
+  }, [count]);
 
   return (
     <div>
@@ -58,6 +48,7 @@ const Alerts = () => {
         backgroundColor_btn={darkMode ? "black" : "white"}
         border={false}
         textColor_btn={darkMode ? "black" : "white"}
+        count={count}
       />
       <div
         className={`flex column notification-outer ${

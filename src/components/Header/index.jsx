@@ -27,7 +27,6 @@ const Header = ({
   const state = useSelector((state) => state.data);
   const { darkMode } = useDarkMode();
   const navigate = useNavigate();
-  const [notificationCount, setNotificationCount] = useState(0);
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
@@ -37,10 +36,6 @@ const Header = ({
       setUserInfo(parsedUserData);
     }
   }, []);
-
-  useEffect(() => {
-    setNotificationCount(state.UnReadNotification);
-  }, [state.UnReadNotification]);
 
   const handleSelect = (option) => {
     if (option.url) {
