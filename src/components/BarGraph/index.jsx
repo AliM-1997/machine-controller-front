@@ -72,14 +72,23 @@ const BarGraph = ({ datas = [], type, title, label }) => {
         }
       );
       break;
-    case "uptime_downtime":
-      datasets.push({
-        label: "Uptime",
-        data: data.map((item) => parseFloat(item.upTime) || 0),
-        backgroundColor: "rgba(0, 255, 0, 1)",
-        borderRadius: 6,
-        barThickness: 6,
-      });
+    case "uptime_availability":
+      datasets.push(
+        {
+          label: "Uptime",
+          data: data.map((item) => parseFloat(item.upTime) || 0),
+          backgroundColor: "rgba(0, 255, 0, 1)",
+          borderRadius: 6,
+          barThickness: 6,
+        },
+        {
+          label: "Availability",
+          data: data.map((item) => parseFloat(item.availability) || 0),
+          backgroundColor: "rgba(255, 255, 0, 1)",
+          borderRadius: 6,
+          barThickness: 6,
+        }
+      );
       break;
     case "operational_Time_failure":
       datasets.push(
@@ -125,22 +134,13 @@ const BarGraph = ({ datas = [], type, title, label }) => {
       );
       break;
     case "efficiency_availability":
-      datasets.push(
-        {
-          label: "Efficiency",
-          data: data.map((item) => parseFloat(item.efficiency) || 0),
-          backgroundColor: "rgba(255, 0, 0, 1)",
-          borderRadius: 6,
-          barThickness: 6,
-        },
-        {
-          label: "Availability",
-          data: data.map((item) => parseFloat(item.availability) || 0),
-          backgroundColor: "rgba(0, 255, 0, 1)",
-          borderRadius: 6,
-          barThickness: 6,
-        }
-      );
+      datasets.push({
+        label: "Efficiency",
+        data: data.map((item) => parseFloat(item.efficiency) || 0),
+        backgroundColor: "rgba(255, 0, 0, 1)",
+        borderRadius: 6,
+        barThickness: 6,
+      });
       break;
     default:
       break;

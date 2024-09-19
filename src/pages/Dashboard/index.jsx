@@ -161,8 +161,8 @@ const Dashboard = () => {
             <div className="flex full-width space-btw stat-input">
               <BarGraph
                 datas={statistics}
-                type="uptime_downtime"
-                title="Uptime and Downtime Hours"
+                type="uptime_availability"
+                title="Uptime Hours and Availability"
               />
               <BarGraph
                 datas={inputs}
