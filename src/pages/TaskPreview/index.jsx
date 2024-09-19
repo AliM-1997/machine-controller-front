@@ -14,6 +14,7 @@ import { Tasks } from "../../data/remote/Tasks";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 import ViewUserTask from "../../components/ViewUserTask";
+import { toast } from "react-toastify";
 
 const TaskPreview = () => {
   const { id } = useParams();
@@ -54,7 +55,7 @@ const TaskPreview = () => {
         setError("Task not found for the given Task ID.");
       }
     } catch (error) {
-      console.error("An error occurred while fetching task details:", error);
+      toast.error("An error occurred while fetching task details:", error);
       setError("An error occurred while fetching task details.");
     }
   };

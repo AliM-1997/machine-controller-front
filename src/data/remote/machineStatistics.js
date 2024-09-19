@@ -1,6 +1,7 @@
 import axios from "axios";
 import { requestApi } from "../../utils/request";
 import { RequestMethods } from "../../utils/request_methods";
+import { toast } from "react-toastify";
 
 export const MachineStatistics = {
   GetALLStatistics: async () => {
@@ -8,8 +9,7 @@ export const MachineStatistics = {
       const data = await requestApi({ route: "/machineStatistic" });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
-      throw error;
+      toast.error("Error creating user:", error.message);
     }
   },
   GetStatisticByMachineName: async (name) => {
@@ -19,8 +19,8 @@ export const MachineStatistics = {
       });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
-      alert("No statistics found for this machine.");
+      toast.error("Error creating user:", error.message);
+      toast.error("No statistics found for this machine.");
     }
   },
   GetStatisticByNameAndDate: async (name, date) => {
@@ -28,11 +28,10 @@ export const MachineStatistics = {
       const data = await requestApi({
         route: `/machineStatistics/byName/byDate/?machine_name=${name}&date=${date}`,
       });
-      console.log("all statistics form remote", data);
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
-      alert("No statistics found at this date.");
+      toast.error("Error creating user:", error.message);
+      toast.error("No statistics found at this date.");
     }
   },
   GetStatisticBetweenDate: async (name, startDate, endDate) => {
@@ -42,8 +41,8 @@ export const MachineStatistics = {
       });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
-      alert("No statistics found between given dates.");
+      toast.error("Error creating user:", error.message);
+      toast.error("No statistics found between given dates.");
     }
   },
   CreateMachineStatisticCalculation: async (formData) => {
@@ -57,7 +56,7 @@ export const MachineStatistics = {
       });
       return response;
     } catch (error) {
-      alert("Statistic Note Created Try again");
+      toast.error("Statistic Note Created Try again");
     }
   },
   GetMachinePrediction: async (formData) => {
@@ -75,8 +74,8 @@ export const MachineStatistics = {
       const response = await axios.post(`${URL_BASE}api/v1/predict`, data);
       return response.data;
     } catch (error) {
-      console.error("Error fetching prediction:", error);
-      alert("No Prediction Found");
+      toast.error("Error fetching prediction:", error);
+      toast.error("No Prediction Found");
     }
   },
   GetSensorData: async () => {
@@ -84,7 +83,7 @@ export const MachineStatistics = {
       const data = await requestApi({ route: "sensordata/last" });
       return data;
     } catch (error) {
-      console.error(error);
+      toast.error(error);
     }
   },
 };
