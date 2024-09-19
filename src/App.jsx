@@ -22,6 +22,8 @@ import AllSpareParts from "./pages/AllSparePart";
 import AddSparePart from "./pages/AddSparePart";
 import UserLogin from "./pages/UserLogin";
 import TaskPreview from "./pages/TaskPreview";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -57,6 +59,18 @@ function App() {
               </Route>
             </Routes>
           </BrowserRouter>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </DarkModeProvider>
       </Provider>
     </div>
