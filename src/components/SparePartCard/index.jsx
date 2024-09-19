@@ -14,6 +14,7 @@ const SparePartCard = ({ sparePart, onEdit }) => {
       darkMode ? "dark" : "light"
     );
   }, [darkMode]);
+
   return (
     <div className="flex column white-bg sparepart-card">
       {sparePart.image_path ? (

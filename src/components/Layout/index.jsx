@@ -24,21 +24,6 @@ const Layout = () => {
   const handlePageChange = (newPageName) => {
     setClickedPage(newPageName);
   };
-  // echo.channel("notifications").listen("NotificationCountEvent", (event) => {
-  //   console.log("Unread Count:", event.unreadCount);
-  //   document.getElementById("unread-count").innerText = event.unreadCount;
-  // });
-  // useEffect(() => {
-  //   Pusher.logToConsole = true;
-  //   const pusher = new Pusher("dd8ec4453a99fc7c6507", {
-  //     cluster: "ap2",
-  //   });
-
-  //   const channel = pusher.subscribe("notification");
-  //   channel.bind("my-event", function (data) {
-  //     alert(JSON.stringify(data));
-  //   });
-  // }, []);
   return (
     <div className={`flex row  ${darkMode ? "dark-mode" : "light-mode"}`}>
       <div className="container-1">

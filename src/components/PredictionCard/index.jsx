@@ -8,6 +8,7 @@ import Label from "../../base/Label";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import PredictionMachineCard from "../PredictionMachineCard";
+import { toast } from "react-toastify";
 const PredictionCard = ({ serial_number }) => {
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
@@ -19,7 +20,7 @@ const PredictionCard = ({ serial_number }) => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     const allowedExtensions = [
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xlsx
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       "application/vnd.ms-excel",
       "text/csv",
     ];
@@ -32,7 +33,9 @@ const PredictionCard = ({ serial_number }) => {
         header: true,
       });
     } else {
-      alert("Please upload a valid Excel or CSV file (.xls, .xlsx, or .csv)");
+      toast.error(
+        "Please upload a valid Excel or CSV file (.xls, .xlsx, or .csv)"
+      );
     }
   };
   console.log("data deom askdjhasd", sensor);
@@ -42,7 +45,7 @@ const PredictionCard = ({ serial_number }) => {
         const data = await Machines.GetallSparepartForMachine(serial_number);
         setDisplaySparePart(data);
       } catch (error) {
-        console.error("Error fetching all spare parts:", error.message);
+        toast.error("Error fetching all spare parts:", error.message);
       }
     }
   };
@@ -50,7 +53,6 @@ const PredictionCard = ({ serial_number }) => {
     if (csvData !== "") {
       const response =
         await MachineStatistics.CreateMachineStatisticCalculation(csvData);
-      console.log("from component", response);
       setCsvData(null);
     }
   };
@@ -89,15 +91,13 @@ const PredictionCard = ({ serial_number }) => {
     try {
       const data = await MachineStatistics.GetMachinePrediction(csvData);
       setPrediction([data.probabilities]);
-      console.log("from predictoin", data);
     } catch (error) {
-      console.error(error.message);
+      toast.error(error.message);
     }
   };
 
   const handleSensorData = async () => {
     const response = await MachineStatistics.GetSensorData();
-    console.log(response);
     setSensor(response.data);
   };
 
@@ -111,6 +111,7 @@ const PredictionCard = ({ serial_number }) => {
   useEffect(() => {
     handleAllSparePart();
   }, [serial_number]);
+
   return (
     <div className=" flex column gap end top-sparepart-prediction">
       <div className="flex full-width space-btw">

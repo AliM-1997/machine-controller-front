@@ -100,7 +100,7 @@ const TaskPreview = () => {
       await Tasks.AddUserReport(formdata.task_id, formdata.userReport);
       toast.success("Task report submitted and marked as done.");
     } catch (error) {
-      console.error("Error submitting task report:", error);
+      toast.error("Error submitting task report:", error);
       setError("Failed to submit task report.");
     }
   };

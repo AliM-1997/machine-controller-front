@@ -13,6 +13,7 @@ import { LoadMachine, UpdateMachine } from "../../data/redux/machineSlice";
 import SelectedMachine from "../SelectedMachine";
 import ChooseOption from "../../base/ChooseOption";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
+import { toast } from "react-toastify";
 const AllMachines = () => {
   const { darkMode } = useDarkMode();
   const response = useSelector((global) => global);
@@ -54,10 +55,10 @@ const AllMachines = () => {
   const deleteMachine = async (id) => {
     const deleteData = await Machines.DeleteMachine(id);
     if (deleteData) {
-      alert("Machine Deleted Successfully");
+      toast.success("Machine Deleted Successfully");
       handleAllMachines();
     } else {
-      alert("Failed to delete machine. Please try again.");
+      toast.error("Failed to delete machine. Please try again.");
     }
   };
 

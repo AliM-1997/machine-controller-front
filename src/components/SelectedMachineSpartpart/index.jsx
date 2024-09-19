@@ -10,6 +10,7 @@ import Label from "../../base/Label";
 const SelectedMachineSparePart = ({ onselect, onExit, onAdd }) => {
   const spareParts = useSelector((global) => global.data);
   const { darkMode } = useDarkMode();
+
   return (
     <div
       className={`flex column gap end padding-30px add-spare-part ${

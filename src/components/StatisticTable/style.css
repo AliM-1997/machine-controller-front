@@ -13,7 +13,7 @@
 .statistics-table th,
 .statistics-table td {
   padding: 8px;
-  text-align: center;
+  text-align: start;
 }
 
 .statistics-table th {

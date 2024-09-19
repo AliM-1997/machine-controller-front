@@ -24,8 +24,6 @@ const PredictionMachineCard = ({ statistics }) => {
     },
   ];
 
-  console.log("Data prepared for BarGraph:", data);
-
   return (
     <div className="flex space-btw gap">
       <div>

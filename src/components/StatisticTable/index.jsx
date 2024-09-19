@@ -5,12 +5,15 @@ import { useDarkMode } from "../../data/constext/DarkModeContext";
 const StatisticsTable = ({ data }) => {
   const { darkMode } = useDarkMode();
   const maxValue = Math.max(
-    data.Heat_Dissipation_Failure,
-    data.No_Failure,
-    data.Overstrain_Failure,
-    data.Power_Failure,
-    data.Tool_Wear_Failure
+    data[0].Heat_Dissipation_Failure,
+    data[0].No_Failure,
+    data[0].Overstrain_Failure,
+    data[0].Power_Failure,
+    data[0].Tool_Wear_Failure
   );
+
+  const formatPercentage = (value) => (value * 100).toFixed(2) + "%";
+
   return (
     <div
       className={`table-container ${
@@ -37,22 +40,22 @@ const StatisticsTable = ({ data }) => {
             <td
               style={{
                 fontWeight:
-                  data.Heat_Dissipation_Failure === maxValue
+                  data[0].Heat_Dissipation_Failure === maxValue
                     ? "bold"
                     : "normal",
               }}
             >
-              {data[0].Heat_Dissipation_Failure}
+              {formatPercentage(data[0].Heat_Dissipation_Failure)}
             </td>
           </tr>
           <tr>
             <td>No Failure</td>
             <td
               style={{
-                fontWeight: data.No_Failure === maxValue ? "bold" : "normal",
+                fontWeight: data[0].No_Failure === maxValue ? "bold" : "normal",
               }}
             >
-              {data[0].No_Failure}
+              {formatPercentage(data[0].No_Failure)}
             </td>
           </tr>
           <tr>
@@ -63,17 +66,18 @@ const StatisticsTable = ({ data }) => {
                   data[0].Overstrain_Failure === maxValue ? "bold" : "normal",
               }}
             >
-              {data[0].Overstrain_Failure}
+              {formatPercentage(data[0].Overstrain_Failure)}
             </td>
           </tr>
           <tr>
             <td>Power Failure</td>
             <td
               style={{
-                fontWeight: data.Power_Failure === maxValue ? "bold" : "normal",
+                fontWeight:
+                  data[0].Power_Failure === maxValue ? "bold" : "normal",
               }}
             >
-              {data[0].Power_Failure}
+              {formatPercentage(data[0].Power_Failure)}
             </td>
           </tr>
           <tr>
@@ -81,10 +85,10 @@ const StatisticsTable = ({ data }) => {
             <td
               style={{
                 fontWeight:
-                  data.Tool_Wear_Failure === maxValue ? "bold" : "normal",
+                  data[0].Tool_Wear_Failure === maxValue ? "bold" : "normal",
               }}
             >
-              {data[0].Tool_Wear_Failure}
+              {formatPercentage(data[0].Tool_Wear_Failure)}
             </td>
           </tr>
         </tbody>

@@ -19,6 +19,7 @@ const MachineCard = ({
   onDelete,
   onPreview,
   selected = false,
+  showIcon = true,
 }) => {
   const { darkMode } = useDarkMode();
   React.useEffect(() => {
@@ -48,23 +49,25 @@ const MachineCard = ({
           <div className={`${darkMode ? "white-txt" : "black-txt"}`}>
             <h2>{machineData.name}</h2>
           </div>
-          <div className="flex gap-btn ">
-            <Icon
-              icon={faEdit}
-              color={!darkMode ? "black" : "white"}
-              onClick={onEdit}
-            />
-            <Icon
-              icon={faTrashCan}
-              color={!darkMode ? "black" : "white"}
-              onClick={onDelete}
-            />
-            <Icon
-              icon={faAngleRight}
-              onClick={onPreview}
-              color={!darkMode ? "black" : "white"}
-            />
-          </div>
+          {showIcon && (
+            <div className="flex gap-btn ">
+              <Icon
+                icon={faEdit}
+                color={!darkMode ? "black" : "white"}
+                onClick={onEdit}
+              />
+              <Icon
+                icon={faTrashCan}
+                color={!darkMode ? "black" : "white"}
+                onClick={onDelete}
+              />
+              <Icon
+                icon={faAngleRight}
+                onClick={onPreview}
+                color={!darkMode ? "black" : "white"}
+              />
+            </div>
+          )}
         </div>
         <div className="info-table">
           {/* <div className="info-row">

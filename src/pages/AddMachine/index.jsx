@@ -8,7 +8,6 @@ import Input from "../../base/Input";
 import ReactDate from "../../base/ReactDate";
 import whiteImge from "../../assets/images/white-bg.png";
 import { Machines } from "../../data/remote/Machine";
-import { Functions } from "../../utils/reusableFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { ClearMachine, LoadMachine } from "../../data/redux/machineSlice";
 import { useNavigate } from "react-router-dom";
@@ -64,7 +63,7 @@ const AddMachine = () => {
     if (machine.id) {
       const updateDate = await Machines.UpadateMachine(machine.id, formData);
       if (updateDate) {
-        alert("Machine Updated Successfully");
+        toast.success("Machine Updated Successfully");
       }
     } else {
       if (validateForm()) {

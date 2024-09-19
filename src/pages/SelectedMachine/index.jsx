@@ -13,6 +13,7 @@ import Button from "../../base/Button";
 import SparePartCard from "../../components/SparePartCard";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
 import SelectedMachineSparePart from "../../components/SelectedMachineSpartpart";
+import { toast } from "react-toastify";
 
 const SelectedMachine = () => {
   const { darkMode } = useDarkMode();
@@ -44,7 +45,7 @@ const SelectedMachine = () => {
       const data = await Machines.GetMachineById(id);
       setSelectedMachine(data.machine_input);
     } catch (error) {
-      console.error("Error fetching machine:", error.message);
+      toast.error("Error fetching machine:", error.message);
     }
   };
 
@@ -57,7 +58,7 @@ const SelectedMachine = () => {
         );
         setDisplaySparePart([data.spare_part]);
       } catch (error) {
-        console.error("Error fetching spare part for machine:", error.message);
+        toast.error("Error fetching spare part for machine:", error.message);
       }
     }
   };
@@ -70,7 +71,7 @@ const SelectedMachine = () => {
         );
         setDisplaySparePart(data.spare_parts);
       } catch (error) {
-        console.error("Error fetching all spare parts:", error.message);
+        toast.error("Error fetching all spare parts:", error.message);
       }
     }
   };
@@ -131,6 +132,7 @@ const SelectedMachine = () => {
               height="0"
               className=""
               selected={true}
+              showIcon={false}
             />
           </div>
         )}

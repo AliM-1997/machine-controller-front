@@ -54,7 +54,6 @@ const AllTasks = () => {
       const data = await Tasks.GetAllTaskDetails();
       setAllTasks(data.tasks || []);
     } catch (error) {
-      console.error("Error fetching all tasks:", error);
       setAllTasks([]);
     } finally {
       setLoading(false);
@@ -73,7 +72,6 @@ const AllTasks = () => {
         clearFilterState();
       }
     } catch (error) {
-      console.error("Error fetching tasks by machine name:", error);
     } finally {
       setLoading(false);
       handleExitFilter();

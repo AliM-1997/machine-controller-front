@@ -22,6 +22,7 @@ import whiteImge from "../../assets/images/white-bg.png";
 import Icon from "../../base/Icon";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
 import { clearUser } from "../../data/redux/userSlice";
+import { toast } from "react-toastify";
 
 const UserProfile = () => {
   const { darkMode } = useDarkMode();
@@ -86,19 +87,19 @@ const UserProfile = () => {
       const updatedData = await Users.UpdateUser(user.id, formData);
       if (updatedData) {
         dispatch(clearUser());
-        alert("User updated successfully");
+        toast.success("User updated successfully");
       }
     } else {
       if (validateForm()) {
         try {
           const createdData = await Users.CreateUser(formData);
           if (createdData) {
-            alert("User created successfully");
+            toast.success("User created successfully");
             navigate("/allusers");
           }
         } catch (error) {
           console.error("Error creating user:", error);
-          alert("Failed to create user");
+          toast.error("Failed to create user");
         }
       }
     }
@@ -115,7 +116,7 @@ const UserProfile = () => {
       };
       reader.readAsDataURL(file);
     } else {
-      alert("Please select a valid image file.");
+      toast.error("Please select a valid image file.");
     }
   };
 
@@ -123,10 +124,10 @@ const UserProfile = () => {
     if (selectedImage) {
       try {
         await Users.UploadImage(selectedImage, user.id);
-        alert("Image uploaded successfully!");
+        toast.success("Image uploaded successfully!");
       } catch (error) {
         console.error("Error uploading image:", error.message);
-        alert("Failed to upload image.");
+        toast.error("Failed to upload image.");
       }
     }
   };
@@ -135,12 +136,11 @@ const UserProfile = () => {
       await Users.DeleteImage(user.id);
       setFormData({ ...formData, image_path: "" });
       setImagePreview(null);
-      console.log("formdata after rendering", formData.image_path);
 
-      alert("Image deleted successfully!");
+      toast.success("Image deleted successfully!");
     } catch (error) {
       console.error("Error deleting image:", error.message);
-      alert("Failed to delete image.");
+      toast.error("Failed to delete image.");
     }
   };
   const options = [
