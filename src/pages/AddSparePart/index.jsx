@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DisplayImage from "../../base/DisplayImage";
 import { ClearSparePart, LoadSparePart } from "../../data/redux/sparePartSlice";
 import ChooseOption from "../../base/ChooseOption";
+import { toast } from "react-toastify";
 
 const AddSparePart = () => {
   const { id } = useParams();
@@ -43,7 +44,6 @@ const AddSparePart = () => {
     if (id) {
       const response = await SpareParts.GetSparePartByID(id);
       setFormData({ ...response.spare_part });
-      console.log(response);
     }
   };
   useEffect(() => {
@@ -72,12 +72,12 @@ const AddSparePart = () => {
       const updateDate = await SpareParts.UpdateSparePart(id, formData);
       if (updateDate) {
         dispatch(LoadSparePart(updateDate));
-        alert("Spare Part Updated Successfully");
+        toast.success("Spare Part Updated Successfully");
       }
     } else {
       const createData = await SpareParts.CreateSparePart(formData);
       if (createData) {
-        alert("Spare Part Created Successfullty");
+        toast.success("Spare Part Created Successfullty");
         handleNavigateAllSparePart();
       }
     }
@@ -87,14 +87,14 @@ const AddSparePart = () => {
     if (id) {
       const deleteData = await SpareParts.DeleteSparePart(id);
       if (deleteData) {
-        alert("Spare Part Deleted Successfully");
+        toast.success("Spare Part Deleted Successfully");
         dispatch(ClearSparePart());
         navigate("/allsparepart");
       } else {
-        alert("Failed to delete spare part. Please try again.");
+        toast.error("Failed to delete spare part. Please try again.");
       }
     } else {
-      alert("Spare Part Not Found!");
+      toast.error("Spare Part Not Found!");
     }
   };
   const handleFileChange = (e) => {
@@ -114,13 +114,13 @@ const AddSparePart = () => {
       try {
         await SpareParts.DeleteSparePartImage(id);
         setImagePreview(null);
-        alert("Image deleted successfully!");
+        toast.success("Image deleted successfully!");
       } catch (error) {
         console.error("Error deleting image:", error.message);
-        alert("Failed To Delete Image.");
+        toast.error("Failed To Delete Image.");
       }
     } else {
-      alert("No Image Found!");
+      toast.error("No Image Found!");
     }
   };
 
@@ -129,13 +129,13 @@ const AddSparePart = () => {
       try {
         const image = await SpareParts.UploadImage(selectedImage, id);
         dispatch(LoadSparePart({ ...sparepart, image_path: image }));
-        alert("Image uploaded successfully!");
+        toast.success("Image uploaded successfully!");
       } catch (error) {
         console.error("Error uploading image:", error.message);
-        alert("Failed to upload image.");
+        toast.error("Failed to upload image.");
       }
     } else {
-      alert("No Selected Image/ not created machine ");
+      toast.error("No Selected Image/ not created machine ");
     }
   };
   const sparepartOptions = [

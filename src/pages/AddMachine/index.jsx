@@ -26,6 +26,7 @@ import {
 import ChooseOption from "../../base/ChooseOption";
 import Icon from "../../base/Icon";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
+import { toast } from "react-toastify";
 const AddMachine = () => {
   const { darkMode } = useDarkMode();
   const response = useSelector((global) => global);
@@ -70,7 +71,7 @@ const AddMachine = () => {
         const createData = await Machines.CreateMachine(formData);
         if (createData) {
           dispatch(ClearMachine());
-          alert("Machine Created Successfullty");
+          toast.success("Machine Created Successfullty");
           allmachineNavigaet();
         }
       }
@@ -81,13 +82,13 @@ const AddMachine = () => {
     if (machine.id) {
       const deleteData = await Machines.DeleteMachine(machine.id);
       if (deleteData) {
-        alert("Machine Deleted Successfully");
+        toast.success("Machine Deleted Successfully");
         dispatch(ClearMachine());
       } else {
-        alert("Failed to delete machine. Please try again.");
+        toast.error("Failed to delete machine. Please try again.");
       }
     } else {
-      alert("Machine Not Created!");
+      toast.error("Machine Not Created!");
     }
   };
 
@@ -96,13 +97,13 @@ const AddMachine = () => {
       try {
         await Machines.DeleteImage(machine.id);
         setImagePreview(null);
-        alert("Image deleted successfully!");
+        toast.success("Image deleted successfully!");
       } catch (error) {
         console.error("Error deleting image:", error.message);
-        alert("Failed To Delete Image.");
+        toast.error("Failed To Delete Image.");
       }
     } else {
-      alert("No Image Found!");
+      toast.error("No Image Found!");
     }
   };
 
@@ -118,7 +119,7 @@ const AddMachine = () => {
       };
       reader.readAsDataURL(file);
     } else {
-      alert("Please select a valid image file.");
+      toast.error("Please select a valid image file.");
     }
   };
   const handleUploadImage = async () => {
@@ -126,13 +127,13 @@ const AddMachine = () => {
       try {
         const image = await Machines.UploadImage(selectedImage, machine.id);
         dispatch(LoadMachine({ ...machine, image_path: image }));
-        alert("Image uploaded successfully!");
+        toast.success("Image uploaded successfully!");
       } catch (error) {
         console.error("Error uploading image:", error.message);
-        alert("Failed to upload image.");
+        toast.error("Failed to upload image.");
       }
     } else {
-      alert("No Selected Image/ not created machine ");
+      toast.error("No Selected Image/ not created machine ");
     }
   };
   const HeaderOptions = [

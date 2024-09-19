@@ -20,6 +20,7 @@ import Header from "../../components/Header";
 import ChooseOption from "../../base/ChooseOption";
 import { useDarkMode } from "../../data/constext/DarkModeContext";
 import { incrementNotification } from "../../data/redux/notification";
+import { toast } from "react-toastify";
 
 const AddTask = () => {
   const { darkMode } = useDarkMode();
@@ -67,14 +68,14 @@ const AddTask = () => {
     if (id) {
       const updateDate = await Tasks.UpdateTask(id, formData);
       if (updateDate) {
-        alert("Task Updated Successfully");
+        toast.success("Task Updated Successfully");
       }
     } else {
       if (validateForm()) {
         const createData = await Tasks.CreateTaskByUsername(formData);
         console.log(createData);
         if (createData) {
-          alert("Task Created Successfully");
+          toast.success("Task Created Successfully");
           dispatch(incrementNotification());
         }
       }
@@ -85,7 +86,7 @@ const AddTask = () => {
     const data = await Tasks.DeleteTask(id);
     dispatch(clearTask());
     if (data === "") {
-      alert("Task Deleted Successfully");
+      toast.success("Task Deleted Successfully");
     }
     navigate("/tasks");
   };
