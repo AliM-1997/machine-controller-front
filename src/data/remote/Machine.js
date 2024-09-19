@@ -1,5 +1,6 @@
 import { requestApi } from "../../utils/request";
 import { RequestMethods } from "../../utils/request_methods";
+import { toast } from "react-toastify";
 
 export const Machines = {
   CreateMachine: async (formData) => {
@@ -11,7 +12,7 @@ export const Machines = {
       });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error(`Error creating machine: ${error.message}`);
     }
   },
   UpadateMachine: async (machine, formData) => {
@@ -23,7 +24,7 @@ export const Machines = {
       });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error(`Error updating machine: ${error.message}`);
     }
   },
   DeleteMachine: async (id) => {
@@ -32,10 +33,9 @@ export const Machines = {
         route: `/machine/${id}`,
         requestMethod: RequestMethods.DELETE,
       });
-      console.log("asdsadasdD", data);
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error(`Error deleting machine: ${error.message}`);
     }
   },
   GetMachineById: async (id) => {
@@ -43,7 +43,7 @@ export const Machines = {
       const data = await requestApi({ route: `machine/${id}` });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error(`Error fetching machine by ID: ${error.message}`);
     }
   },
   GetAllMachines: async () => {
@@ -51,7 +51,7 @@ export const Machines = {
       const data = await requestApi({ route: "/machine" });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error(`Error fetching machines: ${error.message}`);
     }
   },
   DeleteImage: async (id) => {
@@ -62,7 +62,7 @@ export const Machines = {
       });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error(`Error deleting image: ${error.message}`);
     }
   },
   UploadImage: async (file, id) => {
@@ -76,7 +76,7 @@ export const Machines = {
       });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error(`Error uploading image: ${error.message}`);
     }
   },
   GetMachineByName: async (name) => {
@@ -84,7 +84,7 @@ export const Machines = {
       const data = await requestApi({ route: `machine/name/${name}` });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error(`Error fetching machine by name: ${error.message}`);
     }
   },
   GetAllMachineSerialNumber: async () => {
@@ -92,7 +92,7 @@ export const Machines = {
       const data = await requestApi({ route: "/machine/serial/number" });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error(`Error fetching machine serial numbers: ${error.message}`);
     }
   },
   GetAllMachineAllNames: async () => {
@@ -100,7 +100,7 @@ export const Machines = {
       const data = await requestApi({ route: "/machine/all/name" });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error(`Error fetching machine names: ${error.message}`);
     }
   },
   AddSparePartToMachine: async (machineSerialNumber, sparePartSerialNumber) => {
@@ -115,15 +115,13 @@ export const Machines = {
       });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error(`Error adding spare part to machine: ${error.message}`);
     }
   },
   getsparePartforMachine: async (
     machineSerialNumber,
     sparePartSerialNumber
   ) => {
-    console.log(machineSerialNumber);
-    console.log(sparePartSerialNumber);
     try {
       const data = await requestApi({
         route: "machine-spare-part/relationship",
@@ -133,10 +131,9 @@ export const Machines = {
           spare_part_serial_number: sparePartSerialNumber,
         },
       });
-      // console.log("from remote", data);
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error(`Error fetching spare part for machine: ${error.message}`);
     }
   },
   GetallSparepartForMachine: async (machine_serial_number) => {
@@ -148,7 +145,7 @@ export const Machines = {
       });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error(`Error fetching spare parts for machine: ${error.message}`);
     }
   },
 };
