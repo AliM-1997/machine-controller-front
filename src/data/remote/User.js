@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { requestApi } from "../../utils/request";
 import { RequestMethods } from "../../utils/request_methods";
 
@@ -10,7 +11,7 @@ export const Users = {
       });
       return data;
     } catch (error) {
-      throw error;
+      toast.error(error);
     }
   },
   DeleteUser: async (user) => {
@@ -21,7 +22,7 @@ export const Users = {
       });
       return data;
     } catch (error) {
-      throw error;
+      toast.error(error);
     }
   },
   SearchId: async (id) => {
@@ -32,7 +33,7 @@ export const Users = {
       });
       return data;
     } catch (error) {
-      throw error;
+      toast.error(error);
     }
   },
   CreateUser: async (formData) => {
@@ -42,11 +43,10 @@ export const Users = {
         requestMethod: RequestMethods.POST,
         body: formData,
       });
-      console.log("User created:", data);
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
+      toast.error(error);
     }
   },
 
@@ -57,11 +57,10 @@ export const Users = {
         requestMethod: RequestMethods.PUT,
         body: formData,
       });
-      console.log("formuser apis", data);
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
+      toast.error(error);
     }
   },
   UploadImage: async (file, id) => {
@@ -76,7 +75,7 @@ export const Users = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
+      toast.error(error);
     }
   },
   DeleteImage: async (id) => {
@@ -88,7 +87,7 @@ export const Users = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
+      toast.error(error);
     }
   },
   GetAllUserName: async () => {
@@ -99,7 +98,7 @@ export const Users = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      throw error;
+      toast.error(error);
     }
   },
 };

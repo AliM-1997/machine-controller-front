@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { requestApi } from "../../utils/request";
 import { RequestMethods } from "../../utils/request_methods";
 const SpareParts = {
@@ -8,7 +9,7 @@ const SpareParts = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      alert("No SparePart Found");
+      toast.error("No SparePart Found");
     }
   },
   GetSparePartByID: async (id) => {
@@ -16,7 +17,7 @@ const SpareParts = {
       const data = await requestApi({ route: `/sparePart/${id}` });
       return data;
     } catch (error) {
-      console.error("Error creating user:", error.message);
+      toast.error("Error creating user:", error.message);
     }
   },
   GetByType: async (type) => {
@@ -25,7 +26,7 @@ const SpareParts = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      alert("No SparePart Found for the given type");
+      toast.error("No SparePart Found for the given type");
     }
   },
   GetAllSerialNumbers: async () => {
@@ -34,7 +35,7 @@ const SpareParts = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      alert("No SparePart Found ");
+      toast.error("No SparePart Found ");
     }
   },
   DeleteSparePartImage: async (id) => {
@@ -46,7 +47,7 @@ const SpareParts = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      alert("Cannot Delete Image");
+      toast.error("Cannot Delete Image");
     }
   },
 
@@ -73,7 +74,7 @@ const SpareParts = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      alert("SparePart not Found ");
+      toast.error("SparePart not Found ");
     }
   },
   CreateSparePart: async (form) => {
@@ -86,7 +87,7 @@ const SpareParts = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      alert("Spare Part Not Created ");
+      toast.error("Spare Part Not Created ");
     }
   },
   UpdateSparePart: async (id, form) => {
@@ -99,7 +100,7 @@ const SpareParts = {
       return data;
     } catch (error) {
       console.error("Error creating user:", error.message);
-      alert("Cannot Update Try again later");
+      toast.error("Cannot Update Try again later");
     }
   },
 };

@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { requestApi } from "../../utils/request";
 import { RequestMethods } from "../../utils/request_methods";
 export const Notifications = {
@@ -7,7 +8,7 @@ export const Notifications = {
       return data;
     } catch (error) {
       console.error(error);
-      throw error;
+      toast.error(error);
     }
   },
   MarkNottificationAsRead: async (notificationId) => {
@@ -19,7 +20,7 @@ export const Notifications = {
       return data;
     } catch (error) {
       console.error(error);
-      throw error;
+      toast.error(error);
     }
   },
 };
