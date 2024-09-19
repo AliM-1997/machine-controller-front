@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { authRemote } from "../../data/remote/Auth_user";
 import { authLocal } from "../../data/local/Auth_local";
 import loginImage from "../../assets/images/Admin-Login.png";
+import { toast } from "react-toastify";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,23 +24,31 @@ const Login = () => {
   };
   const LoginHandler = async () => {
     if (!email || !password) {
-      alert("All fields are required.");
+      toast.error("All fields are required.");
       return;
     }
     if (!validateEmail(email)) {
-      alert("Please enter a valid email address.");
+      toast.error("Please enter a valid email address.");
       return;
     }
-    const data = await authRemote.Login(email, password);
-    authLocal.saveToken(data.authorisation.token);
-    const userData = {
-      username: data.user.username,
-      email: data.user.email,
-      name: data.user.name,
-      role: data.user.role,
-    };
-    localStorage.setItem("user", JSON.stringify(userData));
-    navigate("/dashboard");
+    try {
+      const data = await authRemote.Login(email, password);
+      authLocal.saveToken(data.authorisation.token);
+      const userData = {
+        username: data.user.username,
+        email: data.user.email,
+        name: data.user.name,
+        role: data.user.role,
+      };
+      localStorage.setItem("user", JSON.stringify(userData));
+      if (data.user.role === "admin") {
+        navigate("/dashboard");
+      } else if (data.user.role === "user") {
+        toast.error("Switch to user");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
