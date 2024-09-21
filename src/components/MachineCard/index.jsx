@@ -20,6 +20,7 @@ const MachineCard = ({
   onPreview,
   selected = false,
   showIcon = true,
+  boderDown = false,
 }) => {
   const { darkMode } = useDarkMode();
   React.useEffect(() => {
@@ -29,7 +30,11 @@ const MachineCard = ({
     );
   }, [darkMode]);
   return (
-    <div className="machine-card flex column white-bg ">
+    <div
+      className={`machine-card flex column white-bg  ${
+        boderDown ? "border" : ""
+      }`}
+    >
       <DisplayImage
         url={machineData.image_path}
         borderRadius="24px 24px 0 0"

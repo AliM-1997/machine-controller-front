@@ -13,6 +13,7 @@ import { ClearMachine, LoadMachine } from "../../data/redux/machineSlice";
 import { useNavigate } from "react-router-dom";
 import {
   faAngleDown,
+  faAngleLeft,
   faAngleRight,
   faAt,
   faCalendarDays,
@@ -136,7 +137,7 @@ const AddMachine = () => {
     }
   };
   const HeaderOptions = [
-    { label: "Add Machine", url: "addmachine" },
+    { label: "Add Machine", url: "allmachines/addmachine" },
     { label: "All Machines", url: "allmachines" },
   ];
   const statusOption = [
@@ -182,7 +183,7 @@ const AddMachine = () => {
           <div className="flex gap title ">
             <div className="flex center">
               <Icon
-                icon={faAngleRight}
+                icon={faAngleLeft}
                 onClick={allmachineNavigaet}
                 color={darkMode ? "white" : "black"}
               />

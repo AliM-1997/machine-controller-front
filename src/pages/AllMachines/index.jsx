@@ -39,18 +39,18 @@ const AllMachines = () => {
     }
   };
   const navigateToAddMachine = () => {
-    navigate("/addmachine");
+    navigate("/allmachines/addmachine");
   };
   const previewMachine = (id) => {
     const selecedmachine = allMachines.find((machine) => machine.id === id);
     dispatch(LoadMachine(selecedmachine));
-    navigate(`/selectedmachine/${id}`);
+    navigate(`/allmachines/selectedmachine/${id}`);
   };
 
   const editMachine = (id) => {
     const machine = allMachines.find((machine) => machine.id === id);
     dispatch(UpdateMachine(machine));
-    navigate("/addmachine");
+    navigate("/allmachines/addmachine");
   };
   const deleteMachine = async (id) => {
     const deleteData = await Machines.DeleteMachine(id);
@@ -72,7 +72,7 @@ const AllMachines = () => {
 
   const options = [
     { label: "All Machines", url: "allmachines" },
-    { label: "Add Machine", url: "addmachine" },
+    { label: "Add Machine", url: "allmachines/addmachine" },
   ];
 
   return (
@@ -125,6 +125,7 @@ const AllMachines = () => {
                     height="20vw"
                     key={machine.id}
                     machineData={machine}
+                    boderDown={true}
                     onEdit={() => editMachine(machine.id)}
                     onPreview={() => {
                       previewMachine(machine.id);

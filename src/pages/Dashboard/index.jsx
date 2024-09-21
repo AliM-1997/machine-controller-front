@@ -27,6 +27,8 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
 
   const handleStatByMachineName = async () => {
+    setStatistics([]);
+    setInputs([]);
     setLoading(true);
     const response = await MachineStatistics.GetStatisticByMachineName(
       formData.machine_name
@@ -36,6 +38,7 @@ const Dashboard = () => {
       setStatistics([response.statistics]);
     } else {
       setStatistics([]);
+      setInputs([]);
     }
     setLoading(false);
   };

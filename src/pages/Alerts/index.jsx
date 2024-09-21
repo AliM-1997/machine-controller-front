@@ -77,7 +77,7 @@ const Alerts = () => {
                   } padding-30px space-btw center info-notification`}
                 >
                   <p className={darkMode ? "white-txt" : "black-txt"}>
-                    {alert.data.user_id}
+                    {`ID:${alert.data.task_id}`}
                   </p>
                   <p className={darkMode ? "white-txt" : "black-txt"}>
                     {alert.data.jobDescription}

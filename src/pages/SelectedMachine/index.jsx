@@ -35,8 +35,8 @@ const SelectedMachine = () => {
     setShowFilter(false);
   };
   const options = [
-    { label: "Selected Machine", url: `selectedmachine/${id}` },
-    { label: "Add Machine", url: "addmachine" },
+    { label: "Selected Machine", url: `allmachines/selectedmachine/${id}` },
+    { label: "Add Machine", url: "allmachines/addmachine" },
     { label: "All Machines", url: "allmachines" },
   ];
 

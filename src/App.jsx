@@ -24,6 +24,7 @@ import UserLogin from "./pages/UserLogin";
 import TaskPreview from "./pages/TaskPreview";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
   return (
@@ -36,26 +37,36 @@ function App() {
               <Route path="userlogin" element={<UserLogin />} />
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<Signup />} />
+
               <Route path="/" element={<Layout />}>
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="addmachine" element={<AddMachine />} />
-                <Route path="allmachines" element={<AllMachines />} />
-                <Route
-                  path="selectedmachine/:id"
-                  element={<SelectedMachine />}
-                />
-                <Route path="tasks" element={<AllTasks />} />
-                <Route path="predictions" element={<Predictions />} />
-                <Route path="alerts" element={<Alerts />} />
-                <Route path="allUsers" element={<AllUsers />} />
-                <Route path="userProfile" element={<UserProfile />} />
-                <Route path="addTask" element={<AddTask />} />
-                <Route path="addTask/:id" element={<AddTask />} />
-                <Route path="allsparepart" element={<AllSpareParts />} />
-                <Route path="addsparepart" element={<AddSparePart />} />
-                <Route path="addsparepart/:id" element={<AddSparePart />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route
+                    path="allmachines/addmachine"
+                    element={<AddMachine />}
+                  />
+                  <Route path="allmachines" element={<AllMachines />} />
+                  <Route
+                    path="allmachines/selectedmachine/:id"
+                    element={<SelectedMachine />}
+                  />
+                  <Route path="tasks" element={<AllTasks />} />
+                  <Route path="predictions" element={<Predictions />} />
+                  <Route path="allUsers" element={<AllUsers />} />
+                  <Route
+                    path="allusers/userProfile"
+                    element={<UserProfile />}
+                  />
+                  <Route path="tasks/addTask" element={<AddTask />} />
+                  <Route path="tasks/addTask/:id" element={<AddTask />} />
+                  <Route path="allsparepart" element={<AllSpareParts />} />
+                  <Route path="addsparepart" element={<AddSparePart />} />
+                  <Route path="addsparepart/:id" element={<AddSparePart />} />
+                </Route>
+
                 <Route path="taskpreview" element={<TaskPreview />} />
                 <Route path="taskpreview/:id" element={<TaskPreview />} />
+                <Route path="alerts" element={<Alerts />} />
               </Route>
             </Routes>
           </BrowserRouter>

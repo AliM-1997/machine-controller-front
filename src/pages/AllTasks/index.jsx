@@ -45,7 +45,7 @@ const AllTasks = () => {
   const handleEditNavigate = async (id) => {
     const task = allTasks.find((task) => task.id === id);
     dispatch(loadTask(task));
-    navigate(`/addTask/${id}`);
+    navigate(`/tasks/addTask/${id}`);
   };
 
   const handleGetAllTasksDetails = async () => {
@@ -171,7 +171,7 @@ const AllTasks = () => {
 
   const headerOptions = [
     { label: "All Tasks", url: "tasks" },
-    { label: "Add/Edit Task", url: "addTask" },
+    { label: "Add/Edit Task", url: "tasks/addTask" },
   ];
 
   return (

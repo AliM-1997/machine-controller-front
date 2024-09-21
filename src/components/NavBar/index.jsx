@@ -50,25 +50,25 @@ const NavBar = ({ onNavigate }) => {
     width: "12vw",
     leftIcon: icon,
     backgroundColor: !darkMode
-      ? currentPath === path
+      ? currentPath.startsWith(path)
         ? "primary"
         : "secondary"
-      : currentPath === path
+      : currentPath.startsWith(path)
       ? "primary"
       : "tertiary",
     iconColor: !darkMode
-      ? currentPath === path
+      ? currentPath.startsWith(path)
         ? "white"
         : "black"
-      : currentPath === path
+      : currentPath.startsWith(path)
       ? "white"
       : "white",
-    rightIcon: currentPath === path ? faChevronRight : null,
+    rightIcon: currentPath.startsWith(path) ? faChevronRight : null,
     textColor: !darkMode
-      ? currentPath === path
+      ? currentPath.startsWith(path)
         ? "white"
         : "black"
-      : currentPath === path
+      : currentPath.startsWith(path)
       ? "white"
       : "white",
     onClick: () => {
@@ -103,7 +103,7 @@ const NavBar = ({ onNavigate }) => {
               <Button
                 {...navButton("Machines", faGear, "/allmachines")}
                 className={`button ${
-                  currentPath === "/allmachines" ? "active" : ""
+                  currentPath.startsWith("/allmachines") ? "active" : ""
                 }`}
               />
               <Button

@@ -3,6 +3,7 @@ import "./style.css";
 import Label from "../../base/Label";
 import Icon from "../../base/Icon";
 import {
+  faAngleLeft,
   faAngleRight,
   faCalendarAlt,
   faClipboard,
@@ -98,7 +99,7 @@ const AddTask = () => {
   }, []);
 
   const options = [
-    { label: "Add/Edit Task", url: "addTask" },
+    { label: "Add/Edit Task", url: "tasks/addTask" },
     { label: "All Tasks", url: "tasks" },
   ];
   const Taskstatus = [
@@ -130,7 +131,7 @@ const AddTask = () => {
       <div className="flex column gap addTask-container center">
         <div className="flex gap start title ">
           <Icon
-            icon={faAngleRight}
+            icon={faAngleLeft}
             onClick={navigateBack}
             color={darkMode ? "white" : "black"}
           />
