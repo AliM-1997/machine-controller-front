@@ -75,7 +75,7 @@ const AllUsers = () => {
   }, [searchUserId]);
   const options = [
     { label: "All Users", url: "allusers" },
-    { label: "User Profile", url: "userProfile" },
+    { label: "User Profile", url: "allusers/userProfile" },
   ];
   return (
     <div>
