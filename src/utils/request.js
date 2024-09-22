@@ -1,5 +1,5 @@
 import axios from "axios";
-import { toast } from "react-toastify"; // Import toast
+import { toast } from "react-toastify";
 import { RequestMethods } from "./request_methods";
 import { authLocal } from "../data/local/Auth_local";
 
@@ -26,26 +26,23 @@ export const requestApi = async ({
 
     return data;
   } catch (error) {
-    // Log error details for debugging purposes
     console.error("Request Error:", {
       message: error.message,
       response: error.response?.data,
       status: error.response?.status,
     });
 
-    // Handle token-related errors (401 and 403) and force navigation if needed
     if (error.response?.status === 401 || error.response?.status === 403) {
-      authLocal.saveToken(null); // Clear token
-      toast.error("Session expired. Please log in again."); // Display error message
+      authLocal.saveToken(null);
+      toast.error("Session expired. Please log in again.");
 
       if (typeof navigationFunction === "function") {
-        navigationFunction(); // Redirect the user (e.g., to the login page)
+        navigationFunction();
       }
     } else {
-      // Handle other types of errors and display appropriate toast notifications
       const errorMessage =
         error.response?.data?.message || error.message || "An error occurred";
-      toast.error(`Error: ${errorMessage}`); // Show error message as toast
+      toast.error(`Error: ${errorMessage}`);
     }
   }
 };
