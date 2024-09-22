@@ -8,10 +8,11 @@ const DisplayImage = ({
   borderRadius = "50%",
 }) => {
   const baseUrl = process.env.REACT_APP_BASE_URL_IMAGE;
-  const fullUrl = url ? `${baseUrl}/storage/${url}` : white_bg;
+  const fullUrl = url && baseUrl ? `${baseUrl}/storage/${url}` : white_bg;
   const handleError = (e) => {
     e.target.src = white_bg;
   };
+
   return (
     <div>
       <img
