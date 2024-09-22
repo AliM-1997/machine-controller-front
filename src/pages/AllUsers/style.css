@@ -1,0 +1,59 @@
+.users-container {
+  padding: 030px;
+  overflow: auto;
+}
+
+.user-input-container {
+  justify-content: space-between;
+}
+
+table {
+  width: 100%;
+}
+th {
+  padding: 8px 0;
+  text-align: left;
+}
+th {
+  font-weight: bold;
+}
+
+td {
+  font-size: small;
+  padding: 8px;
+}
+tr:not(:last-child) td {
+  border-bottom: 1px solid #ddd;
+}
+
+.icons-de {
+  padding: auto;
+  height: 9vh;
+  align-items: center;
+}
+.user-table {
+  height: 650px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  border-radius: 24px;
+}
+.user-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.light-mode .user-table thead {
+  background-color: white;
+}
+.dark-mode .user-table thead {
+  background-color: black;
+}
+.dark-mode .user-table {
+  background-color: black;
+  color: white;
+}
+
+.dark-mode .user-table th,
+.dark-mode .user-table td {
+  color: white;
+}

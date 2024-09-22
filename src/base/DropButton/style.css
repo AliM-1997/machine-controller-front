@@ -1,0 +1,29 @@
+.dropbtn {
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.toggle-option-btn {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+
+.toggle-option-btn:last-child {
+  border-radius: 12px;
+}
+
+/* .selected-option-btn {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgb(230, 230, 230);
+  z-index: 1000;
+} */

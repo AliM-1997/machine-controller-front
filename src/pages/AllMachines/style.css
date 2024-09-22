@@ -1,0 +1,18 @@
+.machines-container {
+  width: 78.6vw+15px;
+}
+.search-bar {
+  align-items: center;
+}
+
+.scrollable-machine-table {
+  max-height: 60vw;
+  width: 70.6vw+10px;
+  row-gap: 32px;
+}
+
+.all-m-t {
+  height: 650px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}

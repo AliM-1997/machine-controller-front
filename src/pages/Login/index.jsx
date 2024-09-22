@@ -1,0 +1,126 @@
+import React, { useState } from "react";
+import "./style.css";
+import Input from "../../base/Input";
+import Button from "../../base/Button";
+import { useNavigate } from "react-router-dom";
+import { authRemote } from "../../data/remote/Auth_user";
+import { authLocal } from "../../data/local/Auth_local";
+import loginImage from "../../assets/images/Admin-Login.png";
+import { toast } from "react-toastify";
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+  const handleSwitch = () => {
+    navigate("/signup");
+  };
+  const handleUser = () => {
+    navigate("/userlogin");
+  };
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+  const LoginHandler = async () => {
+    if (!email || !password) {
+      toast.error("All fields are required.");
+      return;
+    }
+    if (!validateEmail(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    try {
+      const data = await authRemote.Login(email, password);
+      authLocal.saveToken(data.authorisation.token);
+      const userData = {
+        username: data.user.username,
+        email: data.user.email,
+        name: data.user.name,
+        role: data.user.role,
+      };
+      localStorage.setItem("user", JSON.stringify(userData));
+      if (data.user.role === "admin") {
+        navigate("/dashboard");
+      } else if (data.user.role === "user") {
+        toast.error("Switch to user");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  return (
+    <div>
+      <img src={loginImage} alt="admin" className="Admin-image" />
+      <div className="flex  Admin-container">
+        <div className=" flex  ">
+          <div className=" flex column  login-container gap ">
+            <div className=" flex column center gap">
+              <h1>
+                <span className="highlight">D</span>ustry
+              </h1>
+              <div className="switch flex black-bg">
+                <Button
+                  placeHolder="Login"
+                  backgroundColor="primary"
+                  width="125px"
+                  textColor="white"
+                />
+                <Button
+                  placeHolder="Register"
+                  backgroundColor="black"
+                  textColor="white"
+                  width="125px"
+                  onClick={handleSwitch}
+                />
+              </div>
+            </div>
+            <div className="flex column gap-btn ">
+              <Input
+                name="Email"
+                width="400px"
+                type="text"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                placeHolder="examle@gmail.com"
+              />
+              <Input
+                name="Password"
+                width="400px"
+                type="password"
+                placeHolder="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <p className="underline">Forgot Password?</p>
+              <Button
+                backgroundColor="primary"
+                width="400px"
+                textColor="white"
+                placeHolder="Login"
+                onClick={LoginHandler}
+              />
+              <Button
+                className="employee"
+                backgroundColor="secondary"
+                width="400px"
+                textColor="White"
+                placeHolder="Switch to Employee"
+                border={true}
+                onClick={handleUser}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

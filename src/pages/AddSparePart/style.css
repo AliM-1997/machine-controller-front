@@ -1,0 +1,21 @@
+.sparePart-image {
+  position: relative;
+}
+
+.sparepartImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  z-index: 1000;
+}
+
+.sparePart-upload {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 10000;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}

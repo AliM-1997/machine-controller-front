@@ -1,0 +1,26 @@
+.right-side {
+  margin-left: 20px;
+  min-width: 200px;
+}
+
+.profile-user {
+  border-radius: 12px;
+}
+.profile-table {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+}
+
+.profile-row {
+  display: contents;
+}
+
+.profile-label {
+  font-weight: bold;
+}
+
+.profile-value {
+  margin-left: 20px;
+  min-width: 200px;
+}

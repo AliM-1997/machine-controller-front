@@ -1,0 +1,36 @@
+.slider-mode-container {
+  background-color: rgb(197, 197, 197);
+  border-radius: 24px;
+  width: 48px;
+  height: 24px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.switch-mode {
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+.slider-on {
+  background-color: #00b7eb;
+}
+
+.switch-on {
+  left: 24px;
+}
+
+.slider-off {
+  background-color: rgb(197, 197, 197);
+}
+
+.switch-off {
+  left: 0;
+}

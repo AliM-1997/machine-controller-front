@@ -1,0 +1,18 @@
+.highlight {
+  color: #00b7eb;
+}
+.nav-container {
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.top-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 90px;
+}
+
+.button.active {
+  background-color: var(--active-bg-color);
+  color: var(--active-text-color);
+}

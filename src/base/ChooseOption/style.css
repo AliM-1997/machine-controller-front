@@ -1,0 +1,30 @@
+.toggle-option {
+  position: absolute;
+  /* background-color: #fff; */
+  z-index: 1000;
+  max-height: 200px;
+  overflow: auto;
+  scrollbar-width: none;
+  top: 100%;
+  left: 0;
+}
+
+.selected-option {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #c7c7c7;
+}
+
+.selected-option:last-child {
+  /* border-bottom: 1px solid #c7c7c7; */
+  border-radius: 0 0 12px 12px;
+}
+
+.input-container {
+  gap: 6px;
+  position: relative;
+}
+
+.selected-option:hover {
+  border: 1px solid #d3d3d3;
+}

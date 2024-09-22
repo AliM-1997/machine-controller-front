@@ -1,0 +1,25 @@
+.spare-part-status {
+  display: flex;
+  gap: 24px;
+  border-radius: 24px;
+}
+.spare-part-card-prediction {
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.assign-task {
+  cursor: pointer;
+  color: blue;
+}
+.assign-task:hover {
+  text-decoration: underline;
+}
+
+.top-sparepart-prediction {
+  width: calc(80vw + 24px);
+}
+
+.sensor-reading {
+  padding: 12px;
+}

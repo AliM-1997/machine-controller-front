@@ -1,0 +1,15 @@
+.addTask-container {
+  padding: 30px;
+}
+
+.addtask-inputs {
+  padding: 30px;
+  border-radius: 12px;
+}
+.error {
+  color: red;
+}
+
+.title {
+  align-items: center;
+}

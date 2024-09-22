@@ -1,0 +1,44 @@
+.header-container {
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.h-icon {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.notification-count {
+  background-color: red;
+  position: absolute;
+  top: -12px;
+  right: 24px;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+.profile-icon {
+  z-index: 10;
+}
+
+.header-left {
+  gap: 70px;
+  align-items: center;
+}
+.profile-box {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1000;
+}

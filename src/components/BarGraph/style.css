@@ -1,0 +1,18 @@
+.stat-container {
+  width: 40vw;
+  padding: 24px;
+  border-radius: 24px;
+  height: 35vh;
+}
+.dark-graph {
+  background-color: black;
+  color: white;
+}
+.light-graph {
+  background-color: white;
+  color: black;
+}
+
+.bargraph {
+  width: 100%;
+}

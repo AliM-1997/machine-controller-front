@@ -1,0 +1,29 @@
+.notification-outer {
+  padding: 30px;
+}
+
+.title-notification {
+  padding: 24px;
+  position: relative;
+}
+.mark-read {
+  cursor: pointer;
+}
+.blue-txt:hover {
+  text-decoration: underline;
+}
+
+.notification-info {
+  height: 70vh;
+  border-radius: 24px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  position: relative;
+}
+
+.notification-box {
+  border-radius: 24px;
+}
+.info-notification {
+  border-radius: 24px;
+}

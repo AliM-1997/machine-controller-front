@@ -1,0 +1,103 @@
+.primary-bg {
+  background-color: #00b7eb;
+}
+.secondary-bg {
+  background-color: #f1f1f1;
+}
+.tertiary-bg {
+  background-color: #171a1d;
+}
+.Lprimary-bg {
+  background-color: #ddf7ff;
+}
+
+.white-bg {
+  background-color: white;
+}
+
+.black-bg {
+  background-color: black;
+}
+.Lgreen-bg {
+  background-color: #d0ffbf;
+}
+.Lred-bg {
+  background-color: #fec9c2;
+}
+.Lyellow-bg {
+  background-color: #fffdbf;
+}
+.Lblue-bg {
+  background-color: #ccd2ff;
+}
+.Lorange-bg {
+  background-color: rgb(248, 217, 160);
+}
+
+.white-txt {
+  color: white;
+}
+.black-txt {
+  color: black;
+}
+.red-txt {
+  color: #fb4128ed;
+}
+.green-txt {
+  color: #34c600;
+}
+.yellow-txt {
+  color: #fff620;
+}
+.blue-txt {
+  color: #4d61fd;
+}
+.orange-txt {
+  color: rgb(255, 166, 0);
+}
+
+.primary-color {
+  color: #00b7eb;
+}
+.white-color {
+  color: white;
+}
+.black-color {
+  color: black;
+}
+.green-stat {
+  color: rgba(0, 255, 0, 1);
+}
+
+.red-stat {
+  color: rgba(255, 0, 0, 1);
+}
+
+.blue-stat {
+  color: #344bfd;
+}
+.yellow-stat {
+  color: #faff00;
+}
+:root {
+  --bg-light: white;
+  --bg-dark: black;
+  --bg-Ldark: #171a1d;
+  --bg-Llight: #f1f1f1;
+  --text-light: white;
+  --text-dark: black;
+  --border-light: #cccccc;
+  --border-dark: #666666;
+}
+
+[data-theme="light"] {
+  --bg-card: var(--bg-light);
+  --text-card: var(--text-dark);
+  --border-card: var(--border-light);
+}
+
+[data-theme="dark"] {
+  --bg-card: var(--bg-dark);
+  --text-card: var(--text-light);
+  --border-card: var(--border-dark);
+}

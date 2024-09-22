@@ -1,0 +1,38 @@
+.userProfile-container {
+  padding: 30px;
+  width: 66vw;
+}
+.image {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  justify-content: center;
+}
+
+.image-container {
+  display: inline-block;
+}
+
+.over {
+  position: relative;
+  z-index: 1;
+}
+
+.choose-file {
+  position: absolute;
+
+  width: 150px;
+  height: 150px;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.userImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.image-actions {
+  align-items: center;
+}

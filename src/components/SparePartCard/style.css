@@ -1,0 +1,17 @@
+.sparepart-card {
+  width: fit-content;
+}
+.sparepart-card {
+  background-color: var(--bg-card);
+  color: var(--text-card);
+  border-radius: 12px;
+}
+
+.mode {
+  background-color: var(--bg-card);
+  color: var(--text-card);
+}
+
+.sparepart-info {
+  padding: 0 12px 12px 12px;
+}

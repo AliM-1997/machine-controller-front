@@ -1,0 +1,44 @@
+.addMachine-container {
+  padding: 30px 30px 0 30px;
+}
+
+.machine-image-container {
+  align-items: center;
+  width: 62vw;
+}
+.machine-inputs {
+  max-width: 70vw;
+  padding: 24px 24px 12px 24px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.machineImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  z-index: 10;
+  display: inline-block;
+}
+
+.btn-con {
+  width: calc(48vw+24px);
+}
+.title {
+  width: calc(48vw + 48px);
+}
+
+.machine-upload {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1000;
+  top: 0;
+  left: 42.5%;
+}
+
+.fill-card {
+  background-color: var(--bg-card);
+}
