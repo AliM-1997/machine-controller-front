@@ -24,7 +24,7 @@ const AllUsers = () => {
   const [searchUserId, setUserSearchId] = useState("");
   const navigate = useNavigate();
   const handleCreate = () => {
-    navigate("/userProfile");
+    navigate("/allusers/userProfile");
   };
   const handleEdit = async (id) => {
     const user = allUsers.find((user) => user.id === id);
@@ -40,7 +40,7 @@ const AllUsers = () => {
         image_path: user.image_path,
       })
     );
-    navigate("/userprofile");
+    navigate("/allusers/userprofile");
   };
 
   useEffect(() => {
