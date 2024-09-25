@@ -5,6 +5,8 @@ import { authLocal } from "../data/local/Auth_local";
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
+let hasShownSessionExpired = false;
+
 export const requestApi = async ({
   includeToken = true,
   route,
@@ -14,9 +16,9 @@ export const requestApi = async ({
 }) => {
   try {
     const token = authLocal.getToken();
-    const headers = includeToken ? { Authorization: `Bearer ${token}` } : {};
+    const headers =
+      includeToken && token ? { Authorization: `Bearer ${token}` } : {};
 
-    // Make the API request
     const { data } = await axios.request({
       url: route,
       method: requestMethod,
@@ -24,17 +26,15 @@ export const requestApi = async ({
       headers: headers,
     });
 
+    hasShownSessionExpired = false;
     return data;
   } catch (error) {
-    console.error("Request Error:", {
-      message: error.message,
-      response: error.response?.data,
-      status: error.response?.status,
-    });
-
     if (error.response?.status === 401 || error.response?.status === 403) {
       authLocal.saveToken(null);
-      toast.error("Session expired. Please log in again.");
+      if (!hasShownSessionExpired) {
+        toast.error("Session expired. Please log in again.");
+        hasShownSessionExpired = true;
+      }
 
       if (typeof navigationFunction === "function") {
         navigationFunction();

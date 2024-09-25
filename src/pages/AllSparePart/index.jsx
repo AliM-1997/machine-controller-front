@@ -10,7 +10,7 @@ const AllSpareParts = () => {
 
   const options = [
     { label: "All SparePrts", url: "allsparepart" },
-    { label: "Add SparePart", url: "addsparepart" },
+    { label: "Add SparePart", url: "allsparepart/addsparepart" },
   ];
   return (
     <div>

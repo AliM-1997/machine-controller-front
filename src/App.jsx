@@ -25,65 +25,77 @@ import TaskPreview from "./pages/TaskPreview";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import { AuthProvider } from "./data/constext/authContext";
+import Unauthorized from "./pages/Unauthorized";
 
 function App() {
   return (
     <div className="App">
-      <Provider store={store}>
-        <DarkModeProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Navigate to="/login" replace />} />
-              <Route path="userlogin" element={<UserLogin />} />
-              <Route path="login" element={<Login />} />
-              <Route path="signup" element={<Signup />} />
+      <AuthProvider>
+        <Provider store={store}>
+          <DarkModeProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Navigate to="/login" replace />} />
+                <Route path="userlogin" element={<UserLogin />} />
+                <Route path="login" element={<Login />} />
+                <Route path="signup" element={<Signup />} />
+                <Route path="unauthorized" element={<Unauthorized />} />
 
-              <Route path="/" element={<Layout />}>
-                <Route element={<ProtectedRoute />}>
-                  <Route path="dashboard" element={<Dashboard />} />
-                  <Route
-                    path="allmachines/addmachine"
-                    element={<AddMachine />}
-                  />
-                  <Route path="allmachines" element={<AllMachines />} />
-                  <Route
-                    path="allmachines/selectedmachine/:id"
-                    element={<SelectedMachine />}
-                  />
-                  <Route path="tasks" element={<AllTasks />} />
-                  <Route path="predictions" element={<Predictions />} />
-                  <Route path="allUsers" element={<AllUsers />} />
-                  <Route
-                    path="allusers/userProfile"
-                    element={<UserProfile />}
-                  />
-                  <Route path="tasks/addTask" element={<AddTask />} />
-                  <Route path="tasks/addTask/:id" element={<AddTask />} />
-                  <Route path="allsparepart" element={<AllSpareParts />} />
-                  <Route path="addsparepart" element={<AddSparePart />} />
-                  <Route path="addsparepart/:id" element={<AddSparePart />} />
+                <Route path="/" element={<Layout />}>
+                  <Route element={<ProtectedRoute requiredRole="admin" />}>
+                    <Route path="dashboard" element={<Dashboard />} />
+                    <Route
+                      path="allmachines/addmachine"
+                      element={<AddMachine />}
+                    />
+                    <Route path="allmachines" element={<AllMachines />} />
+                    <Route
+                      path="allmachines/selectedmachine/:id"
+                      element={<SelectedMachine />}
+                    />
+                    <Route path="tasks" element={<AllTasks />} />
+                    <Route path="predictions" element={<Predictions />} />
+                    <Route path="allUsers" element={<AllUsers />} />
+                    <Route
+                      path="allusers/userProfile"
+                      element={<UserProfile />}
+                    />
+                    <Route path="tasks/addTask" element={<AddTask />} />
+                    <Route path="tasks/addTask/:id" element={<AddTask />} />
+                    <Route path="allsparepart" element={<AllSpareParts />} />
+                    <Route
+                      path="allsparepart/addsparepart"
+                      element={<AddSparePart />}
+                    />
+                    <Route
+                      path="allsparepart/addsparepart/:id"
+                      element={<AddSparePart />}
+                    />
+                  </Route>
+                  <Route element={<ProtectedRoute requiredRole="user" />}>
+                    <Route path="taskpreview" element={<TaskPreview />} />
+                    <Route path="taskpreview/:id" element={<TaskPreview />} />
+                    <Route path="alerts" element={<Alerts />} />
+                  </Route>
                 </Route>
-
-                <Route path="taskpreview" element={<TaskPreview />} />
-                <Route path="taskpreview/:id" element={<TaskPreview />} />
-                <Route path="alerts" element={<Alerts />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
-        </DarkModeProvider>
-      </Provider>
+              </Routes>
+            </BrowserRouter>
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
+          </DarkModeProvider>
+        </Provider>
+      </AuthProvider>
     </div>
   );
 }
