@@ -26,6 +26,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { AuthProvider } from "./data/constext/authContext";
+import Unauthorized from "./pages/Unauthorized";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
                 <Route path="userlogin" element={<UserLogin />} />
                 <Route path="login" element={<Login />} />
                 <Route path="signup" element={<Signup />} />
+                <Route path="unauthorized" element={<Unauthorized />} />
 
                 <Route path="/" element={<Layout />}>
                   <Route element={<ProtectedRoute requiredRole="admin" />}>
