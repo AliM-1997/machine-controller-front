@@ -31,7 +31,7 @@ const SparePartFilter = () => {
   };
 
   const handleEdite = (id) => {
-    navigate(`/addSparepart/${id}`);
+    navigate(`/allsparepart/addSparepart/${id}`);
   };
 
   const handleGetAllSpareParts = async () => {

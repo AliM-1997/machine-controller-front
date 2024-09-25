@@ -144,7 +144,7 @@ const UserProfile = () => {
     }
   };
   const options = [
-    { label: "User Profile", url: "userProfile" },
+    { label: "User Profile", url: "allusers/userProfile" },
     { label: "All Users", url: "allusers" },
   ];
   return (

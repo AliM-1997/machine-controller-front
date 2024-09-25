@@ -145,7 +145,7 @@ const AddSparePart = () => {
   ];
 
   const options = [
-    { label: "Add SparePart", url: "addsparepart" },
+    { label: "Add SparePart", url: "allsparepart/addsparepart" },
     { label: "All SparePrts", url: "allsparepart" },
   ];
   return (

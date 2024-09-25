@@ -24,7 +24,7 @@ const AllUsers = () => {
   const [searchUserId, setUserSearchId] = useState("");
   const navigate = useNavigate();
   const handleCreate = () => {
-    navigate("/userProfile");
+    navigate("/allusers/userProfile");
   };
   const handleEdit = async (id) => {
     const user = allUsers.find((user) => user.id === id);
@@ -75,7 +75,7 @@ const AllUsers = () => {
   }, [searchUserId]);
   const options = [
     { label: "All Users", url: "allusers" },
-    { label: "User Profile", url: "userProfile" },
+    { label: "User Profile", url: "allusers/userProfile" },
   ];
   return (
     <div>
