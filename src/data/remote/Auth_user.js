@@ -42,10 +42,20 @@ export const authRemote = {
         route: "/logout",
         requestMethod: RequestMethods.POST,
       });
-      authLocal.saveToken(null); // Remove token on logout
+      authLocal.saveToken(null);
       toast.success("Logged out successfully");
     } catch (error) {
       toast.error("Error logging out: " + error.message);
+    }
+  },
+  VerifyToken: async () => {
+    try {
+      const data = await requestApi({
+        route: "/verifyToken",
+      });
+      return data;
+    } catch (error) {
+      toast.error("Error varifying token" + error.message);
     }
   },
 };
