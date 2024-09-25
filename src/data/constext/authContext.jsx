@@ -1,46 +1,47 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { createContext, useState, useEffect } from "react";
+import { authRemote } from "../remote/Auth_user";
 
-// Create the Auth Context
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
-// Custom hook to use AuthContext
-export const useAuth = () => useContext(AuthContext);
-
-// AuthProvider component
 export const AuthProvider = ({ children }) => {
-  const [authState, setAuthState] = useState({
-    isAuthenticated: false,
-    user: null,
-  });
-
-  const navigate = useNavigate();
-
-  // Check for authentication token
-  const checkAuth = () => {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user"); // Optional: If you're storing user info in localStorage
-
-    if (token) {
-      setAuthState({
-        isAuthenticated: true,
-        user: JSON.parse(user), // Parse the user info if stored as a JSON string
-      });
-    } else {
-      setAuthState({
-        isAuthenticated: false,
-        user: null,
-      });
-      navigate("/login"); // Redirect to login if not authenticated
-    }
-  };
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const checkAuth = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const data = await authRemote.VerifyToken();
+          console.log("data from authcontext", data);
+          if (data.status === "success") {
+            setUser({ role: data.role });
+            setIsAuthenticated(true);
+          } else {
+            setIsAuthenticated(false);
+            localStorage.removeItem("token");
+          }
+        } catch (error) {
+          console.error("Error verifying token:", error);
+          setIsAuthenticated(false);
+          localStorage.removeItem("token");
+        }
+      }
+      setLoading(false);
+    };
+
     checkAuth();
   }, []);
 
+  const logout = () => {
+    setUser(null);
+    setIsAuthenticated(false);
+    localStorage.removeItem("token");
+  };
+
   return (
-    <AuthContext.Provider value={{ authState, checkAuth }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, loading, logout }}>
       {children}
     </AuthContext.Provider>
   );
